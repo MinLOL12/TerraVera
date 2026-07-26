@@ -39,7 +39,8 @@ import com.terravera.config.TerraVeraConfig;
  *     {@link com.terravera.common.knapping.KnapAnalysis}.</li>
  * </ol>
  * <p>
- * Note: Uses TFC's native knapping GUI - no custom screen is created.
+ * Note: Knapping uses a custom {@link com.terravera.client.ShapingScreen} that reuses TFC's native knapping GUI
+ * components (buttons, textures, sounds) but overlays TerraVera's function-based analysis of the shape being worked.
  */
 @Mod(TerraVera.MOD_ID)
 public final class TerraVera
