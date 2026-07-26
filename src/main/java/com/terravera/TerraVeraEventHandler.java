@@ -83,8 +83,9 @@ public final class TerraVeraEventHandler
 
     /**
      * Right clicking air while holding knappable stone opens the shaping screen. This deliberately shadows TFC's own
-     * knapping interaction for the same items - TerraVera's data pack removes TFC's {@code rock} knapping type, so
-     * there is no conflict, but we guard on the stone being registered on our side anyway.
+     * knapping interaction for the same items. The event is cancelled before TFC can open its knapping container, while
+     * the original TFC recipe definitions remain available to its recipe book and Patchouli integration. We also guard
+     * on the stone being registered on our side so unrelated items are unaffected.
      */
     @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event)
