@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
@@ -47,18 +48,46 @@ public class ShapingContainer extends KnappingContainer implements ButtonHandler
     public static final int SLOT_OUTPUT = 0;
 
     private final KnappableStone stone;
+    private final ItemStack originalStack;
     /** The reason the current shape is not usable, for feedback purposes. */
     @Nullable private String feedback;
 
     public static ShapingContainer create(ItemStack stack, KnappingType knappingType, KnappableStone stone, InteractionHand hand, int slot, Inventory inventory, int windowId)
     {
-        return new ShapingContainer(net.dries007.tfc.common.container.TFCContainerTypes.KNAPPING.get(), knappingType, stone, windowId, inventory, stack, hand, slot).init(inventory, 20);
+        return new ShapingContainer(TerraVeraContainers.SHAPING.get(), knappingType, stone, windowId, inventory, stack, hand, slot).init(inventory, 20);
+    }
+
+    /**
+     * Client-side network constructor.
+     */
+    public static ShapingContainer fromNetwork(int windowId, Inventory inventory, net.minecraft.network.RegistryFriendlyByteBuf buffer)
+    {
+        final net.minecraft.resources.ResourceLocation knapId = buffer.readResourceLocation();
+        final KnappingType knappingType = KnappingType.MANAGER.get(knapId);
+        final net.minecraft.resources.ResourceLocation stoneId = buffer.readResourceLocation();
+        final KnappableStone stone = KnappableStone.MANAGER.get(stoneId);
+        final InteractionHand hand = buffer.readEnum(InteractionHand.class);
+        final int slot = buffer.readVarInt();
+
+        if (knappingType == null || stone == null)
+        {
+            throw new IllegalStateException("Unknown knapping type or stone received on client: " + knapId + "/" + stoneId);
+        }
+
+        final ItemStack stack = inventory.player.getItemInHand(hand);
+        return new ShapingContainer(TerraVeraContainers.SHAPING.get(), knappingType, stone, windowId, inventory, stack, hand, slot).init(inventory, 20);
     }
 
     private ShapingContainer(MenuType<?> type, KnappingType knappingType, KnappableStone stone, int windowId, Inventory inventory, ItemStack stack, InteractionHand hand, int slot)
     {
         super(type, knappingType, windowId, inventory, stack, hand, slot);
         this.stone = stone;
+        this.originalStack = stack.copy();
+    }
+
+    public ItemStack getOriginalStack()
+    {
+        return originalStack;
     }
 
     public KnappableStone stone()
@@ -70,6 +99,23 @@ public class ShapingContainer extends KnappingContainer implements ButtonHandler
     public String feedback()
     {
         return feedback;
+    }
+
+    // Expose TFC knapping state to the screen (and anywhere else) as public API.
+    // These delegate to the protected/package methods in the KnappingContainer parent.
+    public net.dries007.tfc.util.data.KnappingPattern getPattern()
+    {
+        return super.getPattern();
+    }
+
+    public boolean requiresReset()
+    {
+        return super.requiresReset();
+    }
+
+    public void setRequiresReset(boolean reset)
+    {
+        super.setRequiresReset(reset);
     }
 
     @Override

@@ -102,13 +102,17 @@ public final class TerraVeraEventHandler
             if (knappingType == null) return;
             
             final InteractionHand hand = event.getHand();
-            // Open TerraVera's shaping container which uses TFC's GUI
+            final int slot = hand == InteractionHand.MAIN_HAND ? serverPlayer.getInventory().selected : 40;
+            // Open TerraVera's shaping container (our own menu type)
             new ItemStackContainerProvider(
-                (target, usedHand, slot, inventory, windowId) ->
-                    ShapingContainer.create(target, knappingType, stone, usedHand, slot, inventory, windowId),
+                (target, usedHand, usedSlot, inventory, windowId) ->
+                    ShapingContainer.create(target, knappingType, stone, usedHand, usedSlot, inventory, windowId),
                 Component.translatable("tfc.screen.knapping")
             ).openScreen(serverPlayer, hand, buffer -> {
                 buffer.writeResourceLocation(KnappingType.MANAGER.getIdOrThrow(knappingType));
+                buffer.writeResourceLocation(com.terravera.common.knapping.KnappableStone.MANAGER.getIdOrThrow(stone));
+                buffer.writeEnum(hand);
+                buffer.writeVarInt(slot);
             });
         }
         event.setCanceled(true);
