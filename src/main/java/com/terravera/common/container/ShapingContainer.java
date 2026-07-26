@@ -23,8 +23,10 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 
 import net.dries007.tfc.common.container.ButtonHandlerContainer;
 import net.dries007.tfc.common.container.ISlotCallback;
-import net.dries007.tfc.common.container.ItemStackContainer;
+import net.dries007.tfc.common.container.KnappingContainer;
 import net.dries007.tfc.common.container.slot.CallbackSlot;
+import net.dries007.tfc.util.data.KnappingPattern;
+import net.dries007.tfc.util.data.KnappingType;
 
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.component.KnappedHead;
@@ -35,55 +37,33 @@ import com.terravera.common.knapping.KnapGrid;
 import com.terravera.common.knapping.KnappableStone;
 
 /**
- * The TerraVera shaping (knapping) container.
+ * TerraVera shaping (knapping) container that extends TFC's KnappingContainer.
  * <p>
- * Structurally this mirrors TerraFirmaCraft's {@code KnappingContainer} - a 5x5 grid of buttons that start "on" and
- * are clicked "off" - but the matching step is completely different. TFC compares the grid to a stored picture; we
- * hand the grid to {@link KnapAnalysis}, which measures it and decides what sort of working end, if any, the player
- * has produced. The consequence is that there is no single correct axe-head pattern: any shape with a sturdy base and
- * a wedge-shaped tip is an axe head.
+ * This extends TFC's container to use its GUI system, but overrides the output calculation
+ * to use TerraVera's function-based knapping analysis instead of TFC's pattern matching.
  */
-public class ShapingContainer extends ItemStackContainer implements ButtonHandlerContainer, ISlotCallback
+public class ShapingContainer extends KnappingContainer implements ButtonHandlerContainer, ISlotCallback
 {
     public static final int SLOT_OUTPUT = 0;
-    public static final int GRID = 5;
-
-    public static ShapingContainer create(ItemStack stack, KnappableStone stone, InteractionHand hand, int slot, Inventory inventory, int windowId)
-    {
-        return new ShapingContainer(TerraVeraContainers.SHAPING.get(), stone, windowId, inventory, stack, hand, slot).init(inventory, 20);
-    }
 
     private final KnappableStone stone;
-    private final boolean[] cells = new boolean[GRID * GRID];
-    private final ItemStack originalStack;
-
-    private boolean requiresReset;
-    private boolean hasBeenModified;
-    /** The reason the current shape is not usable, for the "keep going" hint in the screen. */
+    /** The reason the current shape is not usable, for feedback purposes. */
     @Nullable private String feedback;
 
-    public ShapingContainer(MenuType<?> type, KnappableStone stone, int windowId, Inventory inventory, ItemStack stack, InteractionHand hand, int slot)
+    public static ShapingContainer create(ItemStack stack, KnappingType knappingType, KnappableStone stone, InteractionHand hand, int slot, Inventory inventory, int windowId)
     {
-        super(type, windowId, inventory, stack, hand, slot);
+        return new ShapingContainer(net.dries007.tfc.common.container.TFCContainerTypes.KNAPPING.get(), knappingType, stone, windowId, inventory, stack, hand, slot).init(inventory, 20);
+    }
+
+    private ShapingContainer(MenuType<?> type, KnappingType knappingType, KnappableStone stone, int windowId, Inventory inventory, ItemStack stack, InteractionHand hand, int slot)
+    {
+        super(type, knappingType, windowId, inventory, stack, hand, slot);
         this.stone = stone;
-        this.originalStack = stack.copy();
-        java.util.Arrays.fill(cells, true);
-        setRequiresReset(false);
     }
 
     public KnappableStone stone()
     {
         return stone;
-    }
-
-    public ItemStack originalStack()
-    {
-        return originalStack;
-    }
-
-    public boolean cell(int index)
-    {
-        return cells[index];
     }
 
     @Nullable
@@ -95,24 +75,15 @@ public class ShapingContainer extends ItemStackContainer implements ButtonHandle
     @Override
     public void onButtonPress(int buttonId, @Nullable CompoundTag extraNbt)
     {
-        if (buttonId < 0 || buttonId >= cells.length) return;
-        cells[buttonId] = false;
-
-        if (!hasBeenModified)
-        {
-            if (player != null && !player.isCreative())
-            {
-                stack.shrink(stone.consume());
-            }
-            hasBeenModified = true;
-        }
-
+        // Call parent to update the pattern
+        super.onButtonPress(buttonId, extraNbt);
+        
+        // Then recalculate output using TerraVera's analysis
         updateOutput();
     }
 
     /**
-     * Re-measure the grid and set the output slot. Called after every flake removed, which is what makes the process
-     * feel like knapping - you can watch the piece become an axe head as you work it.
+     * Re-measure the grid and set the output slot using TerraVera's function-based analysis.
      */
     private void updateOutput()
     {
@@ -126,9 +97,7 @@ public class ShapingContainer extends ItemStackContainer implements ButtonHandle
         final List<KnapAnalysis.Ranked> ranked = KnapAnalysis.rank(grid, candidates);
         final Slot slot = slots.get(SLOT_OUTPUT);
 
-        // Only update the slot on the server. The client is synced from the server,
-        // and updating it on the client can result in overriding the slot to EMPTY
-        // if HeadProfile.MANAGER elements haven't finished syncing to the client yet.
+        // Only update the slot on the server
         if (player == null || !player.level().isClientSide())
         {
             if (!ranked.isEmpty() && ranked.getFirst().outcome().success())
@@ -147,7 +116,7 @@ public class ShapingContainer extends ItemStackContainer implements ButtonHandle
             }
         }
 
-        // Feedback is safe to calculate on both sides (so the client UI gets the near-miss reason)
+        // Feedback is safe to calculate on both sides
         if (!ranked.isEmpty() && ranked.getFirst().outcome().success())
         {
             feedback = null;
@@ -161,62 +130,22 @@ public class ShapingContainer extends ItemStackContainer implements ButtonHandle
 
     private KnapGrid toGrid()
     {
-        final boolean[] copy = new boolean[cells.length];
-        System.arraycopy(cells, 0, copy, 0, cells.length);
-        return new KnapGrid(GRID, GRID, copy);
-    }
-
-    @Override
-    public boolean stillValid(Player player)
-    {
-        return !getTargetStack().isEmpty() || hasBeenModified;
-    }
-
-    @Override
-    public void removed(Player player)
-    {
-        final ItemStack output = slots.get(SLOT_OUTPUT).getItem();
-        if (!output.isEmpty() && !player.level().isClientSide())
+        final KnappingPattern pattern = getPattern();
+        final boolean[] cells = new boolean[5 * 5];
+        for (int i = 0; i < cells.length; i++)
         {
-            player.getInventory().placeItemBackInInventory(output);
+            cells[i] = pattern.get(i);
         }
-        super.removed(player);
+        return new KnapGrid(5, 5, cells);
     }
 
     @Override
     public void onSlotTake(Player player, int slot, ItemStack stack)
     {
-        // Taking the head resets the stone, ready for the next lump
-        java.util.Arrays.fill(cells, true);
+        // Taking the head resets the pattern, ready for the next knapping
+        getPattern().setAll(false);
         feedback = null;
         setRequiresReset(true);
-    }
-
-    @Override
-    public boolean isItemValid(int slot, ItemStack stack)
-    {
-        return false;
-    }
-
-    public boolean requiresReset()
-    {
-        return requiresReset;
-    }
-
-    public void setRequiresReset(boolean requiresReset)
-    {
-        this.requiresReset = requiresReset;
-    }
-
-    @Override
-    protected boolean moveStack(ItemStack stack, int slotIndex)
-    {
-        return switch (typeOf(slotIndex))
-        {
-            case CONTAINER -> !moveItemStackTo(stack, containerSlots, containerSlots + 36, true);
-            case HOTBAR -> !moveItemStackTo(stack, containerSlots, containerSlots + 27, false);
-            case MAIN_INVENTORY -> !moveItemStackTo(stack, containerSlots + 27, containerSlots + 36, false);
-        };
     }
 
     @Override

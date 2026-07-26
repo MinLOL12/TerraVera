@@ -25,11 +25,11 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.container.ItemStackContainerProvider;
+import net.dries007.tfc.util.data.KnappingType;
 
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.container.ShapingContainer;
-import com.terravera.common.items.TerraVeraItems;
 import com.terravera.common.knapping.KnappableStone;
 import com.terravera.common.recipes.FibreSource;
 import com.terravera.config.TerraVeraConfig;
@@ -73,19 +73,19 @@ public final class TerraVeraEventHandler
         final int amount = source.min() + random.nextInt(Math.max(1, source.max() - source.min() + 1));
         if (amount <= 0) return;
 
-        final ItemStack fibre = new ItemStack(TerraVeraItems.PLANT_FIBER.get(), amount);
+        final ItemStack fibre = new ItemStack(com.terravera.common.items.TerraVeraItems.PLANT_FIBER.get(), amount);
         // Carry the plant's fibre quality on the item, so that retting and twisting can preserve it
-        fibre.set(TerraVeraDataComponents.CORDAGE.get(), new Cordage(source.strength(), source.source()));
+        // Use short length since raw plant fiber is short strands
+        fibre.set(TerraVeraDataComponents.CORDAGE.get(), new Cordage(source.strength(), source.source(), 150));
 
         final BlockPos pos = event.getPos();
         Block.popResource(level, pos, fibre);
     }
 
     /**
-     * Right clicking air while holding knappable stone opens the shaping screen. This deliberately shadows TFC's own
-     * knapping interaction for the same items. The event is cancelled before TFC can open its knapping container, while
-     * the original TFC recipe definitions remain available to its recipe book and Patchouli integration. We also guard
-     * on the stone being registered on our side so unrelated items are unaffected.
+     * Right clicking air while holding knappable stone opens TerraVera's shaping screen.
+     * Uses TFC's native knapping GUI components (buttons, textures, sounds) but with
+     * TerraVera's function-based knapping analysis.
      */
     @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event)
@@ -97,13 +97,19 @@ public final class TerraVeraEventHandler
 
         if (player instanceof ServerPlayer serverPlayer)
         {
+            // Get the TFC KnappingType for this stone
+            final KnappingType knappingType = KnappingType.get(stack);
+            if (knappingType == null) return;
+            
             final InteractionHand hand = event.getHand();
+            // Open TerraVera's shaping container which uses TFC's GUI
             new ItemStackContainerProvider(
                 (target, usedHand, slot, inventory, windowId) ->
-                    ShapingContainer.create(target, stone, usedHand, slot, inventory, windowId),
-                Component.translatable("terravera.screen.shaping")
-            ).openScreen(serverPlayer, hand, buffer ->
-                buffer.writeResourceLocation(KnappableStone.MANAGER.getIdOrThrow(stone)));
+                    ShapingContainer.create(target, knappingType, stone, usedHand, slot, inventory, windowId),
+                Component.translatable("tfc.screen.knapping")
+            ).openScreen(serverPlayer, hand, buffer -> {
+                buffer.writeResourceLocation(KnappingType.MANAGER.getIdOrThrow(knappingType));
+            });
         }
         event.setCanceled(true);
         event.setCancellationResult(net.minecraft.world.InteractionResult.sidedSuccess(event.getLevel().isClientSide()));

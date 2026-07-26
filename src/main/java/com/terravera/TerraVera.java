@@ -21,7 +21,6 @@ import com.terravera.client.TerraVeraClient;
 import com.terravera.common.TerraVeraCreativeTab;
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.TerraVeraDataManagers;
-import com.terravera.common.container.TerraVeraContainers;
 import com.terravera.common.items.TerraVeraItems;
 import com.terravera.common.recipes.TerraVeraRecipes;
 import com.terravera.config.TerraVeraConfig;
@@ -38,6 +37,8 @@ import com.terravera.config.TerraVeraConfig;
  *     whether the stone in your hand has a sturdy base and a strong tip. See
  *     {@link com.terravera.common.knapping.KnapAnalysis}.</li>
  * </ol>
+ * <p>
+ * Note: Uses TFC's native knapping GUI - no custom screen is created.
  */
 @Mod(TerraVera.MOD_ID)
 public final class TerraVera
@@ -59,7 +60,6 @@ public final class TerraVera
 
         TerraVeraItems.ITEMS.register(bus);
         TerraVeraCreativeTab.CREATIVE_TABS.register(bus);
-        TerraVeraContainers.CONTAINERS.register(bus);
         TerraVeraRecipes.RECIPE_TYPES.register(bus);
         TerraVeraRecipes.RECIPE_SERIALIZERS.register(bus);
         TerraVeraDataComponents.COMPONENTS.register(bus);

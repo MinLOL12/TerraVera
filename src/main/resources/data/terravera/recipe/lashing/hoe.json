@@ -1,14 +1,17 @@
 {
-  "__comment__": "A hoe is the same broad head as a shovel, bound at an angle. Distinguished by using heavy cordage rather than a second plain cord.",
+  "__comment__": "A hoe is the same broad head as a shovel, bound at an angle. Uses heavy cordage.",
   "type": "terravera:lashing",
   "head_kind": "broad",
   "haft": {
     "tag": "c:rods/wooden"
   },
-  "cordage": {
-    "item": "terravera:heavy_cordage"
+  "cordage_normal": {
+    "tag": "terravera:normal_cordage"
   },
-  "cordage_count": 1,
+  "cordage_heavy": {
+    "tag": "terravera:heavy_cordage"
+  },
+  "cordage_count": 2,
   "results": [
     {
       "material": "igneous_intrusive",

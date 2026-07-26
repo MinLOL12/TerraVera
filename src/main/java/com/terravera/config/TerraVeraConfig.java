@@ -34,7 +34,7 @@ public final class TerraVeraConfig
         public final Supplier<Double> fibreDropChance;
         /** Extra chance per level of a knife-like tool. Cutting fibre with a blade is much more productive. */
         public final Supplier<Double> fibreKnifeBonus;
-        /** Whether stone tool durability is scaled by knapping quality and cordage strength. */
+        /** Whether stone tool durability is scaled by knapping quality, cordage strength, and binding quality. */
         public final Supplier<Boolean> scaleDurabilityByCraftsmanship;
         /** The lowest multiplier a truly awful head + lashing can produce. */
         public final Supplier<Double> minimumDurabilityMultiplier;
@@ -44,6 +44,10 @@ public final class TerraVeraConfig
         public final Supplier<Integer> rettingTicks;
         /** Whether the knapping screen tells you which property failed, rather than silently producing nothing. */
         public final Supplier<Boolean> showKnappingFeedback;
+        /** Whether cordage binding quality (based on length) affects tool speed. */
+        public final Supplier<Boolean> applyBindingBonusToSpeed;
+        /** Whether cordage binding quality (based on length) affects tool damage. */
+        public final Supplier<Boolean> applyBindingBonusToDamage;
 
         ServerConfig(ModConfigSpec.Builder builder)
         {
@@ -52,7 +56,7 @@ public final class TerraVeraConfig
                 .comment("If true, stone tool heads must be lashed to a haft with cordage. If false, TFC's vanilla stick-only hafting recipes apply.")
                 .define("requireCordageForHafting", true);
             scaleDurabilityByCraftsmanship = builder
-                .comment("If true, the durability of a hafted stone tool is scaled by how well the head was knapped and how strong the cordage is.")
+                .comment("If true, the durability of a hafted stone tool is scaled by how well the head was knapped, how strong the cordage is, and how good the binding quality is.")
                 .define("scaleDurabilityByCraftsmanship", true);
             minimumDurabilityMultiplier = builder
                 .comment("Durability multiplier for the worst possible head and lashing.")
@@ -60,6 +64,12 @@ public final class TerraVeraConfig
             maximumDurabilityMultiplier = builder
                 .comment("Durability multiplier for a masterful head and a strong lashing.")
                 .defineInRange("maximumDurabilityMultiplier", 1.35, 1.0, 4.0);
+            applyBindingBonusToSpeed = builder
+                .comment("If true, longer cordage (better binding quality) increases tool speed slightly.")
+                .define("applyBindingBonusToSpeed", true);
+            applyBindingBonusToDamage = builder
+                .comment("If true, longer cordage (better binding quality) increases tool damage slightly.")
+                .define("applyBindingBonusToDamage", true);
             builder.pop();
 
             builder.push("fibre");

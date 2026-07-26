@@ -7,6 +7,7 @@
 
 package com.terravera.common.recipes;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -24,6 +25,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import com.terravera.common.TerraVeraDataComponents;
+import com.terravera.common.TerraVeraDataComponents.BindingBonus;
+import com.terravera.common.TerraVeraDataComponents.DamageBonus;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.component.KnappedHead;
 import com.terravera.common.items.HeadItem;
@@ -34,19 +37,29 @@ import com.terravera.config.TerraVeraConfig;
  * <p>
  * This is a shapeless custom recipe rather than a JSON shaped recipe for two reasons. First, the output depends on the
  * <em>components</em> of the inputs - which stone the head is, how well it was knapped, what the cordage is twisted
- * from - and there is no way to express that in a vanilla recipe. Second, one recipe instance covers every
- * (stone x head kind) combination, which is what stops the mod from needing dozens of near-identical recipe files.
+ * from, and how long the cordage is - and there is no way to express that in a vanilla recipe. Second, one recipe 
+ * instance covers every (stone x head kind) combination, which is what stops the mod from needing dozens of near-identical 
+ * recipe files.
+ * <p>
+ * Cordage requirements: Either 2 normal cordage OR 2 heavy cordage. The length of each cordage piece affects:
+ * <ul>
+ *   <li><b>Durability</b>: Longer cordage creates a tighter binding, reducing wear on the tool head</li>
+ *   <li><b>Speed</b>: Better bindings reduce wobble, allowing for faster tool use</li>
+ *   <li><b>Damage</b>: Secure bindings transfer more force from the haft to the head</li>
+ * </ul>
  *
- * @param headKind which working end this recipe hafts, e.g. {@code wedge}
- * @param haft     what the head is mounted on, usually a stick
- * @param cordage  the required lashing
- * @param cordageCount how many lengths of cordage the lashing takes
- * @param results  candidate results, one per material; the first whose material matches the head's is used
+ * @param headKind      which working end this recipe hafts, e.g. {@code wedge}
+ * @param haft          what the head is mounted on, usually a stick
+ * @param cordageNormal ingredient for normal cordage
+ * @param cordageHeavy  ingredient for heavy cordage
+ * @param cordageCount  how many lengths of cordage the lashing takes (typically 2)
+ * @param results       candidate results, one per material; the first whose material matches the head's is used
  */
 public record LashingRecipe(
     String headKind,
     Ingredient haft,
-    Ingredient cordage,
+    Ingredient cordageNormal,
+    Ingredient cordageHeavy,
     int cordageCount,
     List<MaterialResult> results
 ) implements net.minecraft.world.item.crafting.CraftingRecipe
@@ -54,15 +67,17 @@ public record LashingRecipe(
     public static final MapCodec<LashingRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
         com.mojang.serialization.Codec.STRING.fieldOf("head_kind").forGetter(LashingRecipe::headKind),
         Ingredient.CODEC.fieldOf("haft").forGetter(LashingRecipe::haft),
-        Ingredient.CODEC.fieldOf("cordage").forGetter(LashingRecipe::cordage),
-        com.mojang.serialization.Codec.INT.optionalFieldOf("cordage_count", 1).forGetter(LashingRecipe::cordageCount),
+        Ingredient.CODEC.fieldOf("cordage_normal").forGetter(LashingRecipe::cordageNormal),
+        Ingredient.CODEC.fieldOf("cordage_heavy").forGetter(LashingRecipe::cordageHeavy),
+        com.mojang.serialization.Codec.INT.optionalFieldOf("cordage_count", 2).forGetter(LashingRecipe::cordageCount),
         MaterialResult.CODEC.listOf().fieldOf("results").forGetter(LashingRecipe::results)
     ).apply(i, LashingRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, LashingRecipe> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.stringUtf8(64), LashingRecipe::headKind,
         Ingredient.CONTENTS_STREAM_CODEC, LashingRecipe::haft,
-        Ingredient.CONTENTS_STREAM_CODEC, LashingRecipe::cordage,
+        Ingredient.CONTENTS_STREAM_CODEC, LashingRecipe::cordageNormal,
+        Ingredient.CONTENTS_STREAM_CODEC, LashingRecipe::cordageHeavy,
         ByteBufCodecs.VAR_INT, LashingRecipe::cordageCount,
         MaterialResult.STREAM_CODEC.apply(ByteBufCodecs.list()), LashingRecipe::results,
         LashingRecipe::new
@@ -100,14 +115,32 @@ public record LashingRecipe(
 
         final ItemStack result = match.result.copy();
 
-        // Durability is the product of the two things the player actually controlled: how well they knapped the head,
-        // and how good the cordage holding it on is. A masterful head lashed with grass twine is still a bad axe.
+        // Calculate combined cordage binding quality
+        float totalBindingQuality = 0f;
+        int cordageUsed = 0;
+        for (Cordage cordage : match.cordages)
+        {
+            totalBindingQuality += cordage.bindingQuality();
+            cordageUsed++;
+        }
+        float avgBindingQuality = cordageUsed > 0 ? totalBindingQuality / cordageUsed : 1f;
+
+        // Calculate combined cordage strength
+        float totalCordageStrength = 0f;
+        for (Cordage cordage : match.cordages)
+        {
+            totalCordageStrength += cordage.strength();
+        }
+        float avgCordageStrength = cordageUsed > 0 ? totalCordageStrength / cordageUsed : 0.5f;
+
+        // Durability is affected by knapping quality, cordage strength, and cordage binding quality
         if (TerraVeraConfig.SERVER.scaleDurabilityByCraftsmanship.get())
         {
             final int baseDurability = result.getMaxDamage();
             if (baseDurability > 0)
             {
-                final float craftsmanship = 0.6f * match.head.quality() + 0.4f * match.cordage.strength();
+                // Weights: 40% head quality, 30% cordage strength, 30% binding quality from length
+                final float craftsmanship = 0.4f * match.head.quality() + 0.3f * avgCordageStrength + 0.3f * avgBindingQuality;
                 final double min = TerraVeraConfig.SERVER.minimumDurabilityMultiplier.get();
                 final double max = TerraVeraConfig.SERVER.maximumDurabilityMultiplier.get();
                 final double multiplier = min + (max - min) * craftsmanship;
@@ -115,15 +148,43 @@ public record LashingRecipe(
             }
         }
 
+        // Apply speed modifier from binding quality
+        if (TerraVeraConfig.SERVER.applyBindingBonusToSpeed.get())
+        {
+            // Speed bonus: better binding = less wobble = faster tool
+            // Scale: avgBindingQuality ranges from 0.5 to 1.5
+            // Map to speed modifier: 0.9 to 1.1 (10% variation)
+            float speedModifier = 0.9f + (avgBindingQuality - 0.5f) * 0.2f;
+            speedModifier = Math.max(0.9f, Math.min(1.1f, speedModifier));
+            result.set(TerraVeraDataComponents.BINDING_SPEED_BONUS.get(), new BindingBonus(speedModifier, avgBindingQuality));
+        }
+
+        // Apply damage modifier from binding quality
+        if (TerraVeraConfig.SERVER.applyBindingBonusToDamage.get())
+        {
+            // Damage bonus: better binding = better force transfer = more damage
+            // Scale: avgBindingQuality ranges from 0.5 to 1.5
+            // Map to damage bonus: 0.85 to 1.15 (15% variation)
+            float damageModifier = 0.85f + (avgBindingQuality - 0.5f) * 0.3f;
+            damageModifier = Math.max(0.85f, Math.min(1.15f, damageModifier));
+            result.set(TerraVeraDataComponents.BINDING_DAMAGE_BONUS.get(), new DamageBonus(damageModifier, avgBindingQuality));
+        }
+
         // Remember what it was lashed with, so that a future re-lashing recipe (and the tooltip) can see it.
-        result.set(TerraVeraDataComponents.CORDAGE.get(), match.cordage);
+        // Use the average cordage properties for storage
+        Cordage avgCordage = new Cordage(
+            avgCordageStrength,
+            match.cordages.isEmpty() ? "mixed" : match.cordages.get(0).source(),
+            (int)(match.cordages.stream().mapToInt(Cordage::lengthMM).average().orElse(300))
+        );
+        result.set(TerraVeraDataComponents.CORDAGE.get(), avgCordage);
         return result;
     }
 
     @Override
     public boolean canCraftInDimensions(int width, int height)
     {
-        return width * height >= 2 + cordageCount;
+        return width * height >= 1 + cordageCount; // 1 haft + cordageCount cordage
     }
 
     @Override
@@ -137,7 +198,12 @@ public record LashingRecipe(
     {
         final NonNullList<Ingredient> list = NonNullList.create();
         list.add(haft);
-        for (int i = 0; i < cordageCount; i++) list.add(cordage);
+        for (int i = 0; i < cordageCount; i++) 
+        {
+            // Add both possibilities - the recipe system will handle matching
+            list.add(cordageNormal);
+            list.add(cordageHeavy);
+        }
         return list;
     }
 
@@ -166,12 +232,15 @@ public record LashingRecipe(
     /**
      * Walks the crafting grid looking for exactly one head of the right kind, one haft, and the required cordage.
      * Shapeless: it does not matter where in the grid the pieces are.
+     * Requires either 2 normal cordage OR 2 heavy cordage.
      */
     private Match find(CraftingInput input)
     {
         KnappedHead head = null;
-        Cordage cordage = null;
-        int hafts = 0, cords = 0, other = 0;
+        List<Cordage> cordages = new ArrayList<>();
+        int normalCordageCount = 0;
+        int heavyCordageCount = 0;
+        int hafts = 0, other = 0;
 
         for (int i = 0; i < input.size(); i++)
         {
@@ -181,13 +250,24 @@ public record LashingRecipe(
             final KnappedHead candidate = stack.get(TerraVeraDataComponents.KNAPPED_HEAD.get());
             if (candidate != null && stack.getItem() instanceof HeadItem item && item.kindPath().equals(headKind))
             {
-                if (head != null) return null; // Two heads, one haft - no
+                if (head != null) return null; // Two heads - no
                 head = candidate;
             }
-            else if (this.cordage.test(stack))
+            else if (this.cordageHeavy.test(stack))
             {
-                cords += stack.getCount();
-                if (cordage == null) cordage = stack.getOrDefault(TerraVeraDataComponents.CORDAGE.get(), Cordage.DEFAULT);
+                heavyCordageCount += stack.getCount();
+                final Cordage cordage = stack.getOrDefault(TerraVeraDataComponents.CORDAGE.get(), Cordage.DEFAULT);
+                for (int j = 0; j < stack.getCount(); j++) {
+                    cordages.add(cordage);
+                }
+            }
+            else if (this.cordageNormal.test(stack))
+            {
+                normalCordageCount += stack.getCount();
+                final Cordage cordage = stack.getOrDefault(TerraVeraDataComponents.CORDAGE.get(), Cordage.DEFAULT);
+                for (int j = 0; j < stack.getCount(); j++) {
+                    cordages.add(cordage);
+                }
             }
             else if (haft.test(stack))
             {
@@ -200,18 +280,26 @@ public record LashingRecipe(
         }
 
         if (head == null || hafts != 1 || other > 0) return null;
-        if (TerraVeraConfig.SERVER.requireCordageForHafting.get() && cords != cordageCount) return null;
-        if (cordage == null) cordage = Cordage.DEFAULT;
+        
+        // Check cordage requirements: need exactly cordageCount normal OR cordageCount heavy cordage
+        if (TerraVeraConfig.SERVER.requireCordageForHafting.get())
+        {
+            boolean hasCorrectNormal = normalCordageCount >= cordageCount;
+            boolean hasCorrectHeavy = heavyCordageCount >= cordageCount;
+            
+            if (!hasCorrectNormal && !hasCorrectHeavy) return null;
+            if (hasCorrectNormal && hasCorrectHeavy) return null; // Can't mix types
+        }
 
         for (MaterialResult result : results)
         {
             if (result.material().equals(head.material()))
             {
-                return new Match(head, cordage, result.result());
+                return new Match(head, cordages, result.result());
             }
         }
         return null;
     }
 
-    private record Match(KnappedHead head, Cordage cordage, ItemStack result) {}
+    private record Match(KnappedHead head, List<Cordage> cordages, ItemStack result) {}
 }

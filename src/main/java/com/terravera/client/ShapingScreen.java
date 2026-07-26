@@ -19,21 +19,19 @@ import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.client.screen.TFCContainerScreen;
 import net.dries007.tfc.client.screen.button.KnappingButton;
 
-import com.terravera.TerraVera;
 import com.terravera.common.container.ShapingContainer;
 import com.terravera.config.TerraVeraConfig;
 
 /**
- * The shaping screen. Visually near identical to TerraFirmaCraft's knapping screen - a 5x5 grid of stone tiles you
- * click away - but with one important addition: a live readout of what the piece currently <em>is</em>.
+ * The TerraVera shaping screen. Uses TFC's native knapping GUI components
+ * (buttons, textures, sounds) but displays TerraVera's function-based feedback.
  * <p>
- * Because there is no target pattern to compare against, the player needs feedback of a different sort. Instead of
- * "this does not match the picture", the screen says "the tip is too blunt" or "the base is too notched", which
- * teaches the underlying model rather than asking for rote memorisation.
+ * This gives players the familiar TFC knapping experience while using TerraVera's
+ * more flexible knapping system that doesn't require exact pattern matching.
  */
 public class ShapingScreen extends TFCContainerScreen<ShapingContainer>
 {
-    public static final ResourceLocation BACKGROUND = TerraVera.identifier("textures/gui/shaping.png");
+    public static final ResourceLocation BACKGROUND = net.dries007.tfc.client.screen.KnappingScreen.BACKGROUND;
 
     private final ResourceLocation buttonTexture;
 
@@ -44,8 +42,8 @@ public class ShapingScreen extends TFCContainerScreen<ShapingContainer>
         inventoryLabelY += 22;
         titleLabelY -= 2;
 
-        // Reuse TFC's per-rock knapping tile textures so that granite looks like granite
-        final ItemStack stack = container.originalStack();
+        // Use TFC's per-rock knapping tile textures (same as vanilla TFC)
+        final ItemStack stack = container.getOriginalStack();
         final ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
         this.buttonTexture = ResourceLocation.fromNamespaceAndPath(id.getNamespace(),
             "textures/gui/knapping/" + id.getPath() + ".png");
@@ -55,14 +53,15 @@ public class ShapingScreen extends TFCContainerScreen<ShapingContainer>
     protected void init()
     {
         super.init();
-        for (int x = 0; x < ShapingContainer.GRID; x++)
+        // Use TFC's grid size (5x5)
+        for (int x = 0; x < 5; x++)
         {
-            for (int y = 0; y < ShapingContainer.GRID; y++)
+            for (int y = 0; y < 5; y++)
             {
                 final int bx = (width - getXSize()) / 2 + 12 + 16 * x;
                 final int by = (height - getYSize()) / 2 + 12 + 16 * y;
-                // Reuse TerraFirmaCraft's stone knapping click, so the two systems sound identical
-                addRenderableWidget(new KnappingButton(x + ShapingContainer.GRID * y, bx, by, 16, 16,
+                // Reuse TerraFirmaCraft's stone knapping click sound
+                addRenderableWidget(new KnappingButton(x + 5 * y, bx, by, 16, 16,
                     buttonTexture, TFCSounds.KNAP_STONE.holder()));
             }
         }
@@ -76,7 +75,10 @@ public class ShapingScreen extends TFCContainerScreen<ShapingContainer>
         {
             for (Renderable widget : renderables)
             {
-                if (widget instanceof KnappingButton button) button.visible = menu.cell(button.id);
+                if (widget instanceof KnappingButton button)
+                {
+                    button.visible = menu.getPattern().get(button.id);
+                }
             }
             menu.setRequiresReset(false);
         }
@@ -97,6 +99,7 @@ public class ShapingScreen extends TFCContainerScreen<ShapingContainer>
     {
         super.render(graphics, mouseX, mouseY, partialTick);
 
+        // Show TerraVera's custom feedback if enabled
         final String feedback = menu.feedback();
         if (feedback != null && TerraVeraConfig.SERVER.showKnappingFeedback.get())
         {

@@ -12,6 +12,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -29,9 +30,17 @@ public final class TerraVeraDataComponents
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<KnappedHead>> KNAPPED_HEAD =
         register("knapped_head", builder -> builder.persistent(KnappedHead.CODEC).networkSynchronized(KnappedHead.STREAM_CODEC));
 
-    /** Attached to cordage, and to tools hafted with it. Determines how well the lashing holds. */
+    /** Attached to cordage, and to tools hafted with it. Determines how well the lashing holds and how long it is. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Cordage>> CORDAGE =
         register("cordage", builder -> builder.persistent(Cordage.CODEC).networkSynchronized(Cordage.STREAM_CODEC));
+
+    /** Attached to hafted tools. Stores the speed modifier from cordage binding quality. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BindingBonus>> BINDING_SPEED_BONUS =
+        register("binding_speed_bonus", builder -> builder.persistent(BindingBonus.CODEC).networkSynchronized(BindingBonus.STREAM_CODEC));
+
+    /** Attached to hafted tools. Stores the damage modifier from cordage binding quality. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<DamageBonus>> BINDING_DAMAGE_BONUS =
+        register("binding_damage_bonus", builder -> builder.persistent(DamageBonus.CODEC).networkSynchronized(DamageBonus.STREAM_CODEC));
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(
         String name, UnaryOperator<DataComponentType.Builder<T>> builder)
@@ -40,4 +49,38 @@ public final class TerraVeraDataComponents
     }
 
     private TerraVeraDataComponents() {}
+    
+    /**
+     * Data component for speed bonus from binding quality.
+     */
+    public record BindingBonus(float speedModifier, float bindingQuality)
+    {
+        public static final Codec<BindingBonus> CODEC = Codec.FLOAT.xmap(
+            f -> new BindingBonus(f, f),
+            b -> b.speedModifier()
+        );
+        
+        public static final StreamCodec<RegistryFriendlyByteBuf, BindingBonus> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.FLOAT, BindingBonus::speedModifier,
+            ByteBufCodecs.FLOAT, BindingBonus::bindingQuality,
+            BindingBonus::new
+        );
+    }
+    
+    /**
+     * Data component for damage bonus from binding quality.
+     */
+    public record DamageBonus(float damageModifier, float bindingQuality)
+    {
+        public static final Codec<DamageBonus> CODEC = Codec.FLOAT.xmap(
+            f -> new DamageBonus(f, f),
+            b -> b.damageModifier()
+        );
+        
+        public static final StreamCodec<RegistryFriendlyByteBuf, DamageBonus> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.FLOAT, DamageBonus::damageModifier,
+            ByteBufCodecs.FLOAT, DamageBonus::bindingQuality,
+            DamageBonus::new
+        );
+    }
 }

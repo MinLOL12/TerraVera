@@ -32,14 +32,16 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> RETTED_FIBER = ITEMS.registerSimpleItem("retted_fiber");
     /** Fibre stripped from bark, the strongest source available before agriculture. */
     public static final DeferredHolder<Item, Item> BAST_FIBER = ITEMS.registerSimpleItem("bast_fiber");
-    /** A twisted two-ply cord. The gate on every stone tool in the mod. */
+    /** A twisted two-ply cord. The gate on every stone tool in the mod. 
+     * Default length: 350mm (35cm) - standard twisted cordage */
     public static final DeferredHolder<Item, Item> CORDAGE = ITEMS.register("cordage",
         () -> new CordageItem(new Item.Properties()
-            .component(TerraVeraDataComponents.CORDAGE.get(), Cordage.DEFAULT)));
-    /** Several cords laid together. Used for the heaviest hafts, and for rope. */
+            .component(TerraVeraDataComponents.CORDAGE.get(), new Cordage(0.5f, "mixed", 350))));
+    /** Several cords laid together. Used for the heaviest hafts, and for rope.
+     * Default length: 550mm (55cm) - longer and stronger heavy cordage */
     public static final DeferredHolder<Item, Item> HEAVY_CORDAGE = ITEMS.register("heavy_cordage",
         () -> new CordageItem(new Item.Properties()
-            .component(TerraVeraDataComponents.CORDAGE.get(), new Cordage(0.85f, "mixed"))));
+            .component(TerraVeraDataComponents.CORDAGE.get(), new Cordage(0.85f, "mixed", 550))));
 
     // ----- Knapped heads -------------------------------------------------------------------------------------
     // One item per working end, not one per (rock category x tool). The stone is in the component.

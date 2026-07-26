@@ -1,6 +1,5 @@
 {
   "terravera.creative_tab.terravera": "TerraVera",
-  "terravera.screen.shaping": "Shaping Stone",
   "item.terravera.plant_fiber": "Plant Fiber",
   "item.terravera.retted_fiber": "Retted Fiber",
   "item.terravera.bast_fiber": "Bast Fiber",
@@ -33,6 +32,7 @@
   "terravera.tooltip.needs_lashing": "Must be lashed to a haft with cordage",
   "terravera.tooltip.cordage_source": "Fiber: %s",
   "terravera.tooltip.cordage_strength": "Strength: %s",
+  "terravera.tooltip.cordage_length": "Length: %s",
   "terravera.shaping.feedback.shattered": "The piece has broken apart",
   "terravera.shaping.feedback.too_little_stone": "Too little stone left to work",
   "terravera.shaping.feedback.too_much_stone": "Barely worked - keep flaking",

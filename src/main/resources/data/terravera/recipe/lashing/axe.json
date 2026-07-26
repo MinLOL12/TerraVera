@@ -1,12 +1,15 @@
 {
-  "__comment__": "An axe head is heavy and takes a swing shock every stroke - it needs two cords.",
+  "__comment__": "An axe head is heavy and takes a swing shock every stroke - it needs two cords. Either 2 normal cordage OR 2 heavy cordage.",
   "type": "terravera:lashing",
   "head_kind": "wedge",
   "haft": {
     "tag": "c:rods/wooden"
   },
-  "cordage": {
-    "tag": "terravera:cordage"
+  "cordage_normal": {
+    "tag": "terravera:normal_cordage"
+  },
+  "cordage_heavy": {
+    "tag": "terravera:heavy_cordage"
   },
   "cordage_count": 2,
   "results": [
