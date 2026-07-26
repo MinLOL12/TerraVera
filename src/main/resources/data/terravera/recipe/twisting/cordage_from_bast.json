@@ -3,5 +3,6 @@
   "fibre": { "item": "terravera:bast_fiber" },
   "count": 2,
   "result": { "id": "terravera:cordage", "count": 1 },
-  "base_strength": 0.8
+  "base_strength": 0.6,
+  "base_length_mm": 400
 }

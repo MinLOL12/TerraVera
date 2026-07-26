@@ -10,8 +10,16 @@ package com.terravera.client;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-import com.terravera.common.container.TerraVeraContainers;
+import net.dries007.tfc.common.container.TFCContainerTypes;
 
+import com.terravera.config.TerraVeraConfig;
+
+/**
+ * Client-side initialization for TerraVera.
+ * <p>
+ * Registers a custom knapping screen that uses TFC's native buttons and textures
+ * but displays TerraVera's function-based knapping feedback.
+ */
 public final class TerraVeraClient
 {
     public static void init(IEventBus bus)
@@ -21,7 +29,10 @@ public final class TerraVeraClient
 
     private static void registerScreens(RegisterMenuScreensEvent event)
     {
-        event.register(TerraVeraContainers.SHAPING.get(), ShapingScreen::new);
+        // Register custom screen for TerraVera's shaping container
+        // This screen uses TFC's native button textures and click sounds
+        // but provides TerraVera's custom feedback
+        event.register(TFCContainerTypes.KNAPPING.get(), ShapingScreen::new);
     }
 
     private TerraVeraClient() {}

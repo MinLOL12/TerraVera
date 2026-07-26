@@ -5,8 +5,11 @@
   "haft": {
     "tag": "c:rods/wooden"
   },
-  "cordage": {
-    "tag": "terravera:cordage"
+  "cordage_normal": {
+    "tag": "terravera:normal_cordage"
+  },
+  "cordage_heavy": {
+    "tag": "terravera:heavy_cordage"
   },
   "cordage_count": 2,
   "results": [

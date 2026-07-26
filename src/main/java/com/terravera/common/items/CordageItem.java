@@ -18,8 +18,9 @@ import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.component.Cordage;
 
 /**
- * Twisted plant cordage. Carries a {@link Cordage} component describing what it was twisted from and how strong the
- * result is, which flows through into the durability of anything lashed with it.
+ * Twisted plant cordage. Carries a {@link Cordage} component describing what it was twisted from, how strong the
+ * result is, and how long it is - all of which flow through into the durability, speed, and damage of anything 
+ * lashed with it.
  */
 public class CordageItem extends Item
 {
@@ -36,5 +37,10 @@ public class CordageItem extends Item
             Component.translatable("terravera.fibre." + cordage.source())).withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("terravera.tooltip.cordage_strength",
             Component.literal("%d%%".formatted(Math.round(cordage.strength() * 100)))).withStyle(ChatFormatting.GRAY));
+        
+        // Show length in cm for readability (divide mm by 10)
+        final int lengthCm = cordage.lengthMM() / 10;
+        tooltip.add(Component.translatable("terravera.tooltip.cordage_length",
+            Component.literal("%d cm".formatted(lengthCm))).withStyle(ChatFormatting.GRAY));
     }
 }
