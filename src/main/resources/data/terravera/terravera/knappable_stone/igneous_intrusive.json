@@ -1,0 +1,5 @@
+{
+  "ingredient": { "tag": "tfc:stones/loose/igneous_intrusive" },
+  "material": "igneous_intrusive",
+  "consume": 2
+}

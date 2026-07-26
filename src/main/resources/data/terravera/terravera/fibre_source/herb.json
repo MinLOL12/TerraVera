@@ -1,0 +1,9 @@
+{
+  "__comment__": "Broadleaf herbs and flowering plants. A step up from grass.",
+  "blocks": "terravera:fibre/herb",
+  "chance": 1.0,
+  "min": 1,
+  "max": 3,
+  "strength": 0.55,
+  "source": "herb"
+}

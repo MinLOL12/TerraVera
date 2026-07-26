@@ -1,0 +1,8 @@
+{
+  "__comment__": "Retting. Soaking the stems rots away the pectin holding the bast to the woody core. This is the real historical process, and it is the main time gate on the mod's early progression.",
+  "type": "tfc:barrel_sealed",
+  "duration": 24000,
+  "input_fluid": { "amount": 100, "fluid": "minecraft:water" },
+  "input_item": { "count": 1, "item": "terravera:plant_fiber" },
+  "output_item": { "count": 1, "id": "terravera:retted_fiber" }
+}

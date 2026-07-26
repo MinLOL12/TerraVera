@@ -1,0 +1,42 @@
+{
+  "__comment__": "A shovel blade levers against the haft, so it takes a heavy bind.",
+  "type": "terravera:lashing",
+  "head_kind": "broad",
+  "haft": {
+    "tag": "c:rods/wooden"
+  },
+  "cordage": {
+    "tag": "terravera:cordage"
+  },
+  "cordage_count": 2,
+  "results": [
+    {
+      "material": "igneous_intrusive",
+      "result": {
+        "id": "tfc:stone/shovel/igneous_intrusive",
+        "count": 1
+      }
+    },
+    {
+      "material": "igneous_extrusive",
+      "result": {
+        "id": "tfc:stone/shovel/igneous_extrusive",
+        "count": 1
+      }
+    },
+    {
+      "material": "sedimentary",
+      "result": {
+        "id": "tfc:stone/shovel/sedimentary",
+        "count": 1
+      }
+    },
+    {
+      "material": "metamorphic",
+      "result": {
+        "id": "tfc:stone/shovel/metamorphic",
+        "count": 1
+      }
+    }
+  ]
+}

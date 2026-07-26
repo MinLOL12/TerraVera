@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [ { "item": "terravera:heavy_cordage" } ],
+  "result": { "id": "tfc:rope", "count": 2 }
+}
