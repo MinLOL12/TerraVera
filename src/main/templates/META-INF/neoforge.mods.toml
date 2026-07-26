@@ -10,8 +10,8 @@ issueTrackerURL = "https://github.com/MinLOL12/TerraVera/issues"
     authors = "MinLOL12"
     description = '''
 TerraVera extends TerraFirmaCraft's stone age. Plant fibre must be gathered, retted and twisted into cordage before
-any stone tool can be hafted, and knapping is judged on whether the piece has a sturdy base and a strong tip rather
-than on reproducing an exact silhouette.
+any stone tool can be hafted - a knapped head and a bare stick are no longer enough. Knapping itself is unchanged,
+and uses TerraFirmaCraft's own knapping screen and recipes.
 '''
 
 [[dependencies.${modId}]]

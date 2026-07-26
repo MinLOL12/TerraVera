@@ -1,7 +1,0 @@
-{
-  "__comment__": "A long fine edge on a narrow body. Knives and scrapers. The defining feature is that the worked edge runs most of the length of the piece.",
-  "priority": 50,
-  "base": { "min_width": 1, "min_depth": 2, "min_solid": 0.75, "min_ratio": 0.55 },
-  "tip": { "min_width": 1, "max_width": 2, "min_edge_length": 1, "min_taper": 0.75 },
-  "body": { "min_mass": 5, "max_mass": 14, "min_aspect": 1.9 }
-}

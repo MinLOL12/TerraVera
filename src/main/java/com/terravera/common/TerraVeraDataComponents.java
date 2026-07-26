@@ -18,16 +18,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import com.terravera.TerraVera;
 import com.terravera.common.component.Cordage;
-import com.terravera.common.component.KnappedHead;
 
 public final class TerraVeraDataComponents
 {
     public static final DeferredRegister<DataComponentType<?>> COMPONENTS =
         DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, TerraVera.MOD_ID);
-
-    /** Attached to knapped tool heads. Describes what kind of working end was produced, and how well. */
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<KnappedHead>> KNAPPED_HEAD =
-        register("knapped_head", builder -> builder.persistent(KnappedHead.CODEC).networkSynchronized(KnappedHead.STREAM_CODEC));
 
     /** Attached to cordage, and to tools hafted with it. Determines how well the lashing holds. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Cordage>> CORDAGE =
