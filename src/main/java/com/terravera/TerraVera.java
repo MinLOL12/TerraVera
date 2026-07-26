@@ -21,6 +21,7 @@ import com.terravera.client.TerraVeraClient;
 import com.terravera.common.TerraVeraCreativeTab;
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.TerraVeraDataManagers;
+import com.terravera.common.container.TerraVeraContainers;
 import com.terravera.common.items.TerraVeraItems;
 import com.terravera.common.recipes.TerraVeraRecipes;
 import com.terravera.config.TerraVeraConfig;
@@ -64,6 +65,7 @@ public final class TerraVera
         TerraVeraRecipes.RECIPE_SERIALIZERS.register(bus);
         TerraVeraDataComponents.COMPONENTS.register(bus);
         TerraVeraDataManagers.MANAGERS.register(bus);
+        TerraVeraContainers.CONTAINERS.register(bus);
 
         bus.addListener(TerraVeraCreativeTab::onBuildTabContents);
 
