@@ -89,7 +89,6 @@ Then:
 - `requireCordageForHafting` — set `false` to restore TFC's stick-only hafting.
 - `scaleDurabilityByCraftsmanship`, `minimumDurabilityMultiplier`, `maximumDurabilityMultiplier`.
 - `plantsDropFibre`, `fibreDropChance`, `fibreKnifeBonus`, `rettingTicks`.
-- `showKnappingFeedback` — set `false` to hide the "why isn't this working" hints.
 
 ## Extending it
 
