@@ -1,0 +1,7 @@
+{
+  "__comment__": "A splitting edge backed by mass. Axes and adzes. Short worked edge, heavy shoulders behind it - that mass behind the bit is what splits wood rather than bouncing off it.",
+  "priority": 30,
+  "base": { "min_width": 3, "min_depth": 2, "min_solid": 0.6, "min_ratio": 0.55 },
+  "tip": { "min_width": 2, "max_width": 3, "min_edge_length": 1, "max_edge_length": 3, "min_taper": 0.55 },
+  "body": { "min_mass": 10, "max_mass": 22, "min_aspect": 0.7, "max_aspect": 1.9 }
+}

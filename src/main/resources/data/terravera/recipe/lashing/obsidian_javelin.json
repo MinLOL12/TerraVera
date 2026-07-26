@@ -1,0 +1,21 @@
+{
+  "__comment__": "Obsidian holds an edge nothing else can match, but only in the fine shapes.",
+  "type": "terravera:lashing",
+  "head_kind": "point",
+  "haft": {
+    "tag": "c:rods/wooden"
+  },
+  "cordage": {
+    "tag": "terravera:cordage"
+  },
+  "cordage_count": 1,
+  "results": [
+    {
+      "material": "obsidian",
+      "result": {
+        "id": "tfc:obsidian_javelin",
+        "count": 1
+      }
+    }
+  ]
+}

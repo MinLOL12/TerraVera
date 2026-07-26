@@ -1,0 +1,7 @@
+{
+  "__comment__": "A converging point on a symmetric body. Javelins, awls, picks. Symmetry matters here and nowhere else - a lopsided point tumbles in flight.",
+  "priority": 40,
+  "base": { "min_width": 3, "min_depth": 2, "min_solid": 0.6, "min_ratio": 0.55 },
+  "tip": { "min_width": 1, "max_width": 1, "min_edge_length": 1, "min_taper": 0.7 },
+  "body": { "min_mass": 8, "max_mass": 20, "min_aspect": 0.8, "max_aspect": 1.9, "min_symmetry": 0.6 }
+}

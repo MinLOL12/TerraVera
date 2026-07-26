@@ -1,0 +1,24 @@
+# Gradle
+.gradle/
+build/
+out/
+!gradle/wrapper/gradle-wrapper.jar
+
+# NeoForge dev runs
+run/
+runs/
+logs/
+
+# TerraFirmaCraft jar, supplied locally by the developer - not redistributable here
+libs/*.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.eclipse/
+.settings/
+.classpath
+.project

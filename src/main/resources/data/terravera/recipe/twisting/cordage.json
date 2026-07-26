@@ -1,0 +1,7 @@
+{
+  "type": "terravera:twisting",
+  "fibre": { "item": "terravera:retted_fiber" },
+  "count": 3,
+  "result": { "id": "terravera:cordage", "count": 1 },
+  "base_strength": 0.4
+}

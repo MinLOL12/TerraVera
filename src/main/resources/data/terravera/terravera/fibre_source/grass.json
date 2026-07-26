@@ -1,0 +1,9 @@
+{
+  "__comment__": "Common grasses. Everywhere, but the fibre is short and weak - fine for a first knife, poor for an axe.",
+  "blocks": "terravera:fibre/grass",
+  "chance": 1.0,
+  "min": 1,
+  "max": 2,
+  "strength": 0.35,
+  "source": "grass"
+}

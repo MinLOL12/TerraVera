@@ -1,0 +1,7 @@
+{
+  "__comment__": "A wide, shallow working edge. Shovels and hoes. Wants a solid, near-full-width base and only the slightest narrowing at the working end.",
+  "priority": 20,
+  "base": { "min_width": 4, "min_depth": 2, "min_solid": 0.8, "min_ratio": 0.8 },
+  "tip": { "min_width": 3, "max_width": 5, "max_edge_length": 1, "min_narrowing": 1, "min_taper": 0.6 },
+  "body": { "min_mass": 9, "max_mass": 24, "min_aspect": 0.3, "max_aspect": 1.4 }
+}

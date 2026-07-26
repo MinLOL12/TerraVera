@@ -1,0 +1,10 @@
+{
+  "__comment__": "Tall bast plants - nettle, dogbane, jute. The strongest fibre available before agriculture, but you need a blade to strip it.",
+  "blocks": "terravera:fibre/bast",
+  "chance": 1.0,
+  "min": 2,
+  "max": 4,
+  "strength": 0.9,
+  "source": "bast",
+  "requires_knife": true
+}

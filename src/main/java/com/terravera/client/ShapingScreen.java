@@ -1,0 +1,115 @@
+/*
+ * TerraVera - an addon for TerraFirmaCraft
+ * Licensed under the EUPL, Version 1.2.
+ * You may obtain a copy of the Licence at:
+ * https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ */
+
+package com.terravera.client;
+
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+
+import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.client.screen.TFCContainerScreen;
+import net.dries007.tfc.client.screen.button.KnappingButton;
+
+import com.terravera.TerraVera;
+import com.terravera.common.container.ShapingContainer;
+import com.terravera.config.TerraVeraConfig;
+
+/**
+ * The shaping screen. Visually near identical to TerraFirmaCraft's knapping screen - a 5x5 grid of stone tiles you
+ * click away - but with one important addition: a live readout of what the piece currently <em>is</em>.
+ * <p>
+ * Because there is no target pattern to compare against, the player needs feedback of a different sort. Instead of
+ * "this does not match the picture", the screen says "the tip is too blunt" or "the base is too notched", which
+ * teaches the underlying model rather than asking for rote memorisation.
+ */
+public class ShapingScreen extends TFCContainerScreen<ShapingContainer>
+{
+    public static final ResourceLocation BACKGROUND = TerraVera.identifier("textures/gui/shaping.png");
+
+    private final ResourceLocation buttonTexture;
+
+    public ShapingScreen(ShapingContainer container, Inventory inventory, Component name)
+    {
+        super(container, inventory, name, BACKGROUND);
+        imageHeight = 186;
+        inventoryLabelY += 22;
+        titleLabelY -= 2;
+
+        // Reuse TFC's per-rock knapping tile textures so that granite looks like granite
+        final ItemStack stack = container.originalStack();
+        final ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        this.buttonTexture = ResourceLocation.fromNamespaceAndPath(id.getNamespace(),
+            "textures/gui/knapping/" + id.getPath() + ".png");
+    }
+
+    @Override
+    protected void init()
+    {
+        super.init();
+        for (int x = 0; x < ShapingContainer.GRID; x++)
+        {
+            for (int y = 0; y < ShapingContainer.GRID; y++)
+            {
+                final int bx = (width - getXSize()) / 2 + 12 + 16 * x;
+                final int by = (height - getYSize()) / 2 + 12 + 16 * y;
+                // Reuse TerraFirmaCraft's stone knapping click, so the two systems sound identical
+                addRenderableWidget(new KnappingButton(x + ShapingContainer.GRID * y, bx, by, 16, 16,
+                    buttonTexture, TFCSounds.KNAP_STONE.holder()));
+            }
+        }
+        menu.setRequiresReset(true);
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY)
+    {
+        if (menu.requiresReset())
+        {
+            for (Renderable widget : renderables)
+            {
+                if (widget instanceof KnappingButton button) button.visible = menu.cell(button.id);
+            }
+            menu.setRequiresReset(false);
+        }
+
+        super.renderBg(graphics, partialTicks, mouseX, mouseY);
+
+        for (Renderable widget : renderables)
+        {
+            if (widget instanceof KnappingButton button && button.visible)
+            {
+                graphics.blit(buttonTexture, button.getX(), button.getY(), 0, 0, 16, 16, 16, 16);
+            }
+        }
+    }
+
+    @Override
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick)
+    {
+        super.render(graphics, mouseX, mouseY, partialTick);
+
+        final String feedback = menu.feedback();
+        if (feedback != null && TerraVeraConfig.SERVER.showKnappingFeedback.get())
+        {
+            final Component text = Component.translatable("terravera.shaping.feedback." + feedback);
+            graphics.drawCenteredString(font, text, width / 2, topPos + imageHeight - 96, 0xFF7F6A55);
+        }
+    }
+
+    @Override
+    public boolean mouseDragged(double x, double y, int clickType, double dragX, double dragY)
+    {
+        // Dragging across tiles knaps them, as in TFC
+        if (clickType == 0) mouseClicked(x, y, clickType);
+        return super.mouseDragged(x, y, clickType, dragX, dragY);
+    }
+}

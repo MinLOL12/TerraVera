@@ -1,0 +1,7 @@
+{
+  "__comment__": "Blunt mass with no working edge whatsoever. Hammers. This is the one profile that requires the absence of a tip - max_narrowing 0 means the working end is exactly as wide as the widest part of the piece.",
+  "priority": 60,
+  "base": { "min_width": 4, "min_depth": 3, "min_solid": 0.92, "min_ratio": 1.0 },
+  "tip": { "min_width": 4, "max_width": 5, "max_edge_length": 0, "min_narrowing": 0, "max_narrowing": 0 },
+  "body": { "min_mass": 14, "max_mass": 24, "min_aspect": 0.5, "max_aspect": 1.6 }
+}
