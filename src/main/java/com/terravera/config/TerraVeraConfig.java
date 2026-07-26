@@ -34,16 +34,14 @@ public final class TerraVeraConfig
         public final Supplier<Double> fibreDropChance;
         /** Extra chance per level of a knife-like tool. Cutting fibre with a blade is much more productive. */
         public final Supplier<Double> fibreKnifeBonus;
-        /** Whether stone tool durability is scaled by knapping quality and cordage strength. */
-        public final Supplier<Boolean> scaleDurabilityByCraftsmanship;
-        /** The lowest multiplier a truly awful head + lashing can produce. */
+        /** Whether stone tool durability is scaled by the strength of the cordage it was lashed with. */
+        public final Supplier<Boolean> scaleDurabilityByCordage;
+        /** The lowest multiplier the weakest lashing can produce. */
         public final Supplier<Double> minimumDurabilityMultiplier;
-        /** The highest multiplier a masterful head + strong lashing can produce. */
+        /** The highest multiplier the strongest lashing can produce. */
         public final Supplier<Double> maximumDurabilityMultiplier;
         /** How many ticks a bundle of fibre takes to ret in a barrel of water. Default is one in-game day. */
         public final Supplier<Integer> rettingTicks;
-        /** Whether the knapping screen tells you which property failed, rather than silently producing nothing. */
-        public final Supplier<Boolean> showKnappingFeedback;
 
         ServerConfig(ModConfigSpec.Builder builder)
         {
@@ -51,14 +49,14 @@ public final class TerraVeraConfig
             requireCordageForHafting = builder
                 .comment("If true, stone tool heads must be lashed to a haft with cordage. If false, TFC's vanilla stick-only hafting recipes apply.")
                 .define("requireCordageForHafting", true);
-            scaleDurabilityByCraftsmanship = builder
-                .comment("If true, the durability of a hafted stone tool is scaled by how well the head was knapped and how strong the cordage is.")
-                .define("scaleDurabilityByCraftsmanship", true);
+            scaleDurabilityByCordage = builder
+                .comment("If true, the durability of a hafted stone tool is scaled by how strong the cordage it was lashed with is.")
+                .define("scaleDurabilityByCordage", true);
             minimumDurabilityMultiplier = builder
-                .comment("Durability multiplier for the worst possible head and lashing.")
+                .comment("Durability multiplier for the weakest possible lashing.")
                 .defineInRange("minimumDurabilityMultiplier", 0.45, 0.05, 1.0);
             maximumDurabilityMultiplier = builder
-                .comment("Durability multiplier for a masterful head and a strong lashing.")
+                .comment("Durability multiplier for the strongest possible lashing.")
                 .defineInRange("maximumDurabilityMultiplier", 1.35, 1.0, 4.0);
             builder.pop();
 
@@ -75,12 +73,6 @@ public final class TerraVeraConfig
             rettingTicks = builder
                 .comment("How long a bundle of fibre takes to ret in a sealed barrel of water, in ticks.")
                 .defineInRange("rettingTicks", 24000, 1, Integer.MAX_VALUE);
-            builder.pop();
-
-            builder.push("knapping");
-            showKnappingFeedback = builder
-                .comment("If true, the knapping screen explains why the current shape is not usable yet, e.g. 'the tip is too blunt'.")
-                .define("showKnappingFeedback", true);
             builder.pop();
         }
 

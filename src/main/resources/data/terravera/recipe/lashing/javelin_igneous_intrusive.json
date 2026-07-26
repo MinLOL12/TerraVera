@@ -1,0 +1,18 @@
+{
+  "__comment__": "A javelin point is light and is meant to be thrown - one cord, bound tight.",
+  "type": "terravera:lashing",
+  "head": {
+    "item": "tfc:stone/javelin_head/igneous_intrusive"
+  },
+  "haft": {
+    "tag": "c:rods/wooden"
+  },
+  "cordage": {
+    "tag": "terravera:cordage"
+  },
+  "cordage_count": 1,
+  "result": {
+    "id": "tfc:stone/javelin/igneous_intrusive",
+    "count": 1
+  }
+}

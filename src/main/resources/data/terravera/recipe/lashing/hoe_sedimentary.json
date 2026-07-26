@@ -1,0 +1,18 @@
+{
+  "__comment__": "A hoe head is offset from the haft, so it wants a proper bound lashing.",
+  "type": "terravera:lashing",
+  "head": {
+    "item": "tfc:stone/hoe_head/sedimentary"
+  },
+  "haft": {
+    "tag": "c:rods/wooden"
+  },
+  "cordage": {
+    "tag": "terravera:cordage"
+  },
+  "cordage_count": 2,
+  "result": {
+    "id": "tfc:stone/hoe/sedimentary",
+    "count": 1
+  }
+}

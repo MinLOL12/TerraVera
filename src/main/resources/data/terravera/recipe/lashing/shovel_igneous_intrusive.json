@@ -1,0 +1,18 @@
+{
+  "__comment__": "A shovel head takes a push, not a swing - one cord holds it.",
+  "type": "terravera:lashing",
+  "head": {
+    "item": "tfc:stone/shovel_head/igneous_intrusive"
+  },
+  "haft": {
+    "tag": "c:rods/wooden"
+  },
+  "cordage": {
+    "tag": "terravera:cordage"
+  },
+  "cordage_count": 1,
+  "result": {
+    "id": "tfc:stone/shovel/igneous_intrusive",
+    "count": 1
+  }
+}

@@ -13,8 +13,6 @@ import net.dries007.tfc.util.data.DataManager;
 import net.dries007.tfc.util.data.DataManagers;
 
 import com.terravera.TerraVera;
-import com.terravera.common.knapping.HeadProfile;
-import com.terravera.common.knapping.KnappableStone;
 import com.terravera.common.recipes.FibreSource;
 
 /**
@@ -28,8 +26,6 @@ public final class TerraVeraDataManagers
 
     static
     {
-        register(HeadProfile.MANAGER);
-        register(KnappableStone.MANAGER);
         register(FibreSource.MANAGER);
     }
 

@@ -1,7 +1,0 @@
-{
-  "__comment__": "Obsidian takes a far finer edge than any rock, but is brittle - one lump is enough, and it shatters if worked too hard.",
-  "ingredient": { "item": "tfc:obsidian_shard" },
-  "material": "obsidian",
-  "consume": 1,
-  "brittle": true
-}

@@ -7,10 +7,6 @@
 
 package com.terravera.common.items;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -40,34 +36,6 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> HEAVY_CORDAGE = ITEMS.register("heavy_cordage",
         () -> new CordageItem(new Item.Properties()
             .component(TerraVeraDataComponents.CORDAGE.get(), new Cordage(0.85f, "mixed"))));
-
-    // ----- Knapped heads -------------------------------------------------------------------------------------
-    // One item per working end, not one per (rock category x tool). The stone is in the component.
-
-    public static final Map<String, DeferredHolder<Item, Item>> HEADS = registerHeads(
-        "wedge",  // splitting edge, backed by mass - axes, adzes
-        "point",  // narrow converging point - javelins, awls, picks
-        "blade",  // long straight edge - knives, scrapers
-        "broad",  // wide flat edge - shovels, hoes
-        "maul"    // blunt mass, no working edge at all - hammers
-    );
-
-    private static Map<String, DeferredHolder<Item, Item>> registerHeads(String... kinds)
-    {
-        final Map<String, DeferredHolder<Item, Item>> map = new LinkedHashMap<>();
-        for (String kind : kinds)
-        {
-            map.put(kind, ITEMS.register("head/" + kind, () -> new HeadItem(kind, new Item.Properties().stacksTo(16))));
-        }
-        return Map.copyOf(map);
-    }
-
-    public static Supplier<Item> head(String kind)
-    {
-        final DeferredHolder<Item, Item> holder = HEADS.get(kind);
-        if (holder == null) throw new IllegalArgumentException("Unknown head kind: " + kind);
-        return holder;
-    }
 
     private TerraVeraItems() {}
 }

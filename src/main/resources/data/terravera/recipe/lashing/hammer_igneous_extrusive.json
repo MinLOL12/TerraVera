@@ -1,0 +1,18 @@
+{
+  "__comment__": "A hammer head is nothing but mass. Two cords, or it flies off the haft.",
+  "type": "terravera:lashing",
+  "head": {
+    "item": "tfc:stone/hammer_head/igneous_extrusive"
+  },
+  "haft": {
+    "tag": "c:rods/wooden"
+  },
+  "cordage": {
+    "tag": "terravera:cordage"
+  },
+  "cordage_count": 2,
+  "result": {
+    "id": "tfc:stone/hammer/igneous_extrusive",
+    "count": 1
+  }
+}
