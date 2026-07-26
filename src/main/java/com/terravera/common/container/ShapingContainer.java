@@ -126,21 +126,34 @@ public class ShapingContainer extends ItemStackContainer implements ButtonHandle
         final List<KnapAnalysis.Ranked> ranked = KnapAnalysis.rank(grid, candidates);
         final Slot slot = slots.get(SLOT_OUTPUT);
 
+        // Only update the slot on the server. The client is synced from the server,
+        // and updating it on the client can result in overriding the slot to EMPTY
+        // if HeadProfile.MANAGER elements haven't finished syncing to the client yet.
+        if (player == null || !player.level().isClientSide())
+        {
+            if (!ranked.isEmpty() && ranked.getFirst().outcome().success())
+            {
+                final KnapAnalysis.Ranked best = ranked.getFirst();
+                final ResourceLocation id = (ResourceLocation) best.candidate().owner();
+                final String kind = id.getPath();
+                final ItemStack head = new ItemStack(TerraVeraItems.head(kind).get());
+                head.set(TerraVeraDataComponents.KNAPPED_HEAD.get(),
+                    new KnappedHead(id, stone.material(), best.outcome().quality()));
+                slot.set(head);
+            }
+            else
+            {
+                slot.set(ItemStack.EMPTY);
+            }
+        }
+
+        // Feedback is safe to calculate on both sides (so the client UI gets the near-miss reason)
         if (!ranked.isEmpty() && ranked.getFirst().outcome().success())
         {
-            final KnapAnalysis.Ranked best = ranked.getFirst();
-            final ResourceLocation id = (ResourceLocation) best.candidate().owner();
-            final String kind = id.getPath();
-            final ItemStack head = new ItemStack(TerraVeraItems.head(kind).get());
-            head.set(TerraVeraDataComponents.KNAPPED_HEAD.get(),
-                new KnappedHead(id, stone.material(), best.outcome().quality()));
-            slot.set(head);
             feedback = null;
         }
         else
         {
-            slot.set(ItemStack.EMPTY);
-            // Report the near miss the player is closest to fixing
             feedback = ranked.isEmpty() ? null : ranked.getFirst().outcome().reason();
         }
         setRequiresReset(true);
