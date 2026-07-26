@@ -73,10 +73,14 @@ public record KnapMetrics(
 
         int baseDepth = 0;
         int baseFilled = 0, baseCells = 0;
+        // A one-cell butt is not a meaningful "width" to hold constant: only the butt row itself
+        // belongs to that base.  With a one-wide base the normal width - 1 rule becomes one, which
+        // would make every non-empty row qualify; stop after counting the butt row.
+        final int minimumBaseRun = Math.max(1, baseWidth - 1);
         for (int y = h - 1; y >= 0; y--)
         {
-            // Note the max(1, ...): without it a 1-wide base would accept literally any row below it
-            if (longestRun(grid, y) < Math.max(1, baseWidth - 1)) break;
+            if (baseWidth == 1 && baseDepth > 0) break;
+            if (longestRun(grid, y) < minimumBaseRun) break;
             baseDepth++;
             for (int x = 0; x < w; x++)
             {

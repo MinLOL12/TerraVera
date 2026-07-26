@@ -53,11 +53,36 @@ public final class KnapAnalysis
         }
         results.sort((a, b) -> {
             if (a.outcome().success() != b.outcome().success()) return a.outcome().success() ? -1 : 1;
+
+            // A failed high-priority profile is not automatically the best explanation.  For example, a
+            // 12-square piece is below the maul's minimum mass, but it may still be an otherwise plausible
+            // blade whose base is too narrow.  Prefer a geometric diagnosis from a profile whose mass range
+            // contains the piece.  If no profile can contain the mass, retain the useful mass diagnostic
+            // (too_little/too_much), and keep shattered as the fundamental failure.
+            if (!a.outcome().success() && !b.outcome().success())
+            {
+                final boolean aStructural = isStructuralFailure(a);
+                final boolean bStructural = isStructuralFailure(b);
+                if (aStructural != bStructural) return aStructural ? -1 : 1;
+            }
+
             final int byPriority = Integer.compare(b.candidate().profile().priority(), a.candidate().profile().priority());
             if (byPriority != 0) return byPriority;
             return Float.compare(b.outcome().quality(), a.outcome().quality());
         });
         return results;
+    }
+
+    private static boolean isStructuralFailure(Ranked ranked)
+    {
+        final Outcome outcome = ranked.outcome();
+        final KnapMetrics metrics = outcome.metrics();
+        if (metrics == null || !metrics.connected()) return false;
+        final String reason = outcome.reason();
+        if ("too_little_stone".equals(reason) || "too_much_stone".equals(reason)
+            || "shattered".equals(reason)) return false;
+        final HeadProfile.Body body = ranked.candidate().profile().body();
+        return metrics.mass() >= body.minMass() && metrics.mass() <= body.maxMass();
     }
 
     public record Ranked(Candidate candidate, Outcome outcome)
