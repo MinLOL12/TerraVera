@@ -42,8 +42,6 @@ public final class TerraVeraConfig
         public final Supplier<Double> maximumDurabilityMultiplier;
         /** How many ticks a bundle of fibre takes to ret in a barrel of water. Default is one in-game day. */
         public final Supplier<Integer> rettingTicks;
-        /** Whether the knapping screen tells you which property failed, rather than silently producing nothing. */
-        public final Supplier<Boolean> showKnappingFeedback;
 
         ServerConfig(ModConfigSpec.Builder builder)
         {
@@ -75,12 +73,6 @@ public final class TerraVeraConfig
             rettingTicks = builder
                 .comment("How long a bundle of fibre takes to ret in a sealed barrel of water, in ticks.")
                 .defineInRange("rettingTicks", 24000, 1, Integer.MAX_VALUE);
-            builder.pop();
-
-            builder.push("knapping");
-            showKnappingFeedback = builder
-                .comment("If true, the knapping screen explains why the current shape is not usable yet, e.g. 'the tip is too blunt'.")
-                .define("showKnappingFeedback", true);
             builder.pop();
         }
 

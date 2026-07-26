@@ -10,21 +10,18 @@ package com.terravera.common.container;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
-import net.dries007.tfc.common.container.ButtonHandlerContainer;
-import net.dries007.tfc.common.container.ISlotCallback;
-import net.dries007.tfc.common.container.ItemStackContainer;
-import net.dries007.tfc.common.container.slot.CallbackSlot;
+import net.dries007.tfc.common.container.KnappingContainer;
+import net.dries007.tfc.util.data.KnappingPattern;
+import net.dries007.tfc.util.data.KnappingType;
 
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.component.KnappedHead;
@@ -35,40 +32,39 @@ import com.terravera.common.knapping.KnapGrid;
 import com.terravera.common.knapping.KnappableStone;
 
 /**
- * The TerraVera shaping (knapping) container.
- * <p>
- * Structurally this mirrors TerraFirmaCraft's {@code KnappingContainer} - a 5x5 grid of buttons that start "on" and
- * are clicked "off" - but the matching step is completely different. TFC compares the grid to a stored picture; we
- * hand the grid to {@link KnapAnalysis}, which measures it and decides what sort of working end, if any, the player
- * has produced. The consequence is that there is no single correct axe-head pattern: any shape with a sturdy base and
- * a wedge-shaped tip is an axe head.
+ * TerraVera's function-based knapping menu.
+ *
+ * <p>The menu deliberately extends TFC's {@link KnappingContainer}, rather than duplicating its button and pattern
+ * handling. That lets it use TFC's stock {@code KnappingScreen}; only the result calculation differs. Instead of
+ * matching a recipe pattern, the retained tiles are evaluated as a potential tool head.</p>
  */
-public class ShapingContainer extends ItemStackContainer implements ButtonHandlerContainer, ISlotCallback
+public class ShapingContainer extends KnappingContainer
 {
-    public static final int SLOT_OUTPUT = 0;
-    public static final int GRID = 5;
+    public static final int SLOT_OUTPUT = KnappingContainer.SLOT_OUTPUT;
+    public static final int GRID = KnappingPattern.MAX_WIDTH;
+
+    private static final ResourceLocation ROCK_KNAPPING_TYPE = ResourceLocation.fromNamespaceAndPath("tfc", "rock");
 
     public static ShapingContainer create(ItemStack stack, KnappableStone stone, InteractionHand hand, int slot, Inventory inventory, int windowId)
     {
-        return new ShapingContainer(TerraVeraContainers.SHAPING.get(), stone, windowId, inventory, stack, hand, slot).init(inventory, 20);
+        return new ShapingContainer(TerraVeraContainers.SHAPING.get(), stone, rockKnappingType(), windowId, inventory, stack, hand, slot)
+            .init(inventory, 20);
+    }
+
+    private static KnappingType rockKnappingType()
+    {
+        // Reuse TFC's rock type for its sounds, textures, particles, and base consumption behaviour.
+        return KnappingType.MANAGER.getOrThrow(ROCK_KNAPPING_TYPE);
     }
 
     private final KnappableStone stone;
-    private final boolean[] cells = new boolean[GRID * GRID];
-    private final ItemStack originalStack;
+    private boolean hasAdjustedConsumption;
 
-    private boolean requiresReset;
-    private boolean hasBeenModified;
-    /** The reason the current shape is not usable, for the "keep going" hint in the screen. */
-    @Nullable private String feedback;
-
-    public ShapingContainer(MenuType<?> type, KnappableStone stone, int windowId, Inventory inventory, ItemStack stack, InteractionHand hand, int slot)
+    public ShapingContainer(MenuType<?> type, KnappableStone stone, KnappingType knappingType, int windowId, Inventory inventory,
+        ItemStack stack, InteractionHand hand, int slot)
     {
-        super(type, windowId, inventory, stack, hand, slot);
+        super(type, knappingType, windowId, inventory, stack, hand, slot);
         this.stone = stone;
-        this.originalStack = stack.copy();
-        java.util.Arrays.fill(cells, true);
-        setRequiresReset(false);
     }
 
     public KnappableStone stone()
@@ -76,67 +72,45 @@ public class ShapingContainer extends ItemStackContainer implements ButtonHandle
         return stone;
     }
 
-    public ItemStack originalStack()
-    {
-        return originalStack;
-    }
-
-    public boolean cell(int index)
-    {
-        return cells[index];
-    }
-
-    @Nullable
-    public String feedback()
-    {
-        return feedback;
-    }
-
     @Override
     public void onButtonPress(int buttonId, @Nullable CompoundTag extraNbt)
     {
-        if (buttonId < 0 || buttonId >= cells.length) return;
-        cells[buttonId] = false;
+        // This performs all of TFC's normal pattern, consumption, and reset synchronization work. TFC's stone
+        // knapping recipes are disabled by TerraVera's data pack, so replace its recipe result below.
+        super.onButtonPress(buttonId, extraNbt);
 
-        if (!hasBeenModified)
+        // The stock rock type consumes one loose rock. TerraVera's data can require more, so consume the remainder
+        // on the same first modification that the parent consumes its one rock.
+        if (!hasAdjustedConsumption)
         {
-            if (player != null && !player.isCreative())
+            if (!player.isCreative())
             {
-                stack.shrink(stone.consume());
+                stack.shrink(Math.max(0, stone.consume() - getKnappingType().amountToConsume()));
             }
-            hasBeenModified = true;
+            hasAdjustedConsumption = true;
         }
-
         updateOutput();
     }
 
-    /**
-     * Re-measure the grid and set the output slot. Called after every flake removed, which is what makes the process
-     * feel like knapping - you can watch the piece become an axe head as you work it.
-     */
+    /** Re-evaluate the TFC pattern using TerraVera's function-based head profiles. */
     private void updateOutput()
     {
-        final KnapGrid grid = toGrid();
         final List<KnapAnalysis.Ranked.Candidate> candidates = new ArrayList<>();
         for (Map.Entry<ResourceLocation, HeadProfile> entry : HeadProfile.MANAGER.getElements().entrySet())
         {
             candidates.add(new KnapAnalysis.Ranked.Candidate(entry.getValue(), entry.getKey()));
         }
 
-        final List<KnapAnalysis.Ranked> ranked = KnapAnalysis.rank(grid, candidates);
-        final Slot slot = slots.get(SLOT_OUTPUT);
-
-        // Only update the slot on the server. The client is synced from the server,
-        // and updating it on the client can result in overriding the slot to EMPTY
-        // if HeadProfile.MANAGER elements haven't finished syncing to the client yet.
-        if (player == null || !player.level().isClientSide())
+        final List<KnapAnalysis.Ranked> ranked = KnapAnalysis.rank(toGrid(), candidates);
+        // The parent container has already synchronised the normal TFC result. Replace it only on the server.
+        if (player != null && !player.level().isClientSide())
         {
+            final Slot slot = slots.get(SLOT_OUTPUT);
             if (!ranked.isEmpty() && ranked.getFirst().outcome().success())
             {
                 final KnapAnalysis.Ranked best = ranked.getFirst();
                 final ResourceLocation id = (ResourceLocation) best.candidate().owner();
-                final String kind = id.getPath();
-                final ItemStack head = new ItemStack(TerraVeraItems.head(kind).get());
+                final ItemStack head = new ItemStack(TerraVeraItems.head(id.getPath()).get());
                 head.set(TerraVeraDataComponents.KNAPPED_HEAD.get(),
                     new KnappedHead(id, stone.material(), best.outcome().quality()));
                 slot.set(head);
@@ -146,82 +120,16 @@ public class ShapingContainer extends ItemStackContainer implements ButtonHandle
                 slot.set(ItemStack.EMPTY);
             }
         }
-
-        // Feedback is safe to calculate on both sides (so the client UI gets the near-miss reason)
-        if (!ranked.isEmpty() && ranked.getFirst().outcome().success())
-        {
-            feedback = null;
-        }
-        else
-        {
-            feedback = ranked.isEmpty() ? null : ranked.getFirst().outcome().reason();
-        }
-        setRequiresReset(true);
     }
 
     private KnapGrid toGrid()
     {
-        final boolean[] copy = new boolean[cells.length];
-        System.arraycopy(cells, 0, copy, 0, cells.length);
-        return new KnapGrid(GRID, GRID, copy);
-    }
-
-    @Override
-    public boolean stillValid(Player player)
-    {
-        return !getTargetStack().isEmpty() || hasBeenModified;
-    }
-
-    @Override
-    public void removed(Player player)
-    {
-        final ItemStack output = slots.get(SLOT_OUTPUT).getItem();
-        if (!output.isEmpty() && !player.level().isClientSide())
+        final KnappingPattern pattern = getPattern();
+        final boolean[] cells = new boolean[GRID * KnappingPattern.MAX_HEIGHT];
+        for (int index = 0; index < cells.length; index++)
         {
-            player.getInventory().placeItemBackInInventory(output);
+            cells[index] = pattern.get(index);
         }
-        super.removed(player);
-    }
-
-    @Override
-    public void onSlotTake(Player player, int slot, ItemStack stack)
-    {
-        // Taking the head resets the stone, ready for the next lump
-        java.util.Arrays.fill(cells, true);
-        feedback = null;
-        setRequiresReset(true);
-    }
-
-    @Override
-    public boolean isItemValid(int slot, ItemStack stack)
-    {
-        return false;
-    }
-
-    public boolean requiresReset()
-    {
-        return requiresReset;
-    }
-
-    public void setRequiresReset(boolean requiresReset)
-    {
-        this.requiresReset = requiresReset;
-    }
-
-    @Override
-    protected boolean moveStack(ItemStack stack, int slotIndex)
-    {
-        return switch (typeOf(slotIndex))
-        {
-            case CONTAINER -> !moveItemStackTo(stack, containerSlots, containerSlots + 36, true);
-            case HOTBAR -> !moveItemStackTo(stack, containerSlots, containerSlots + 27, false);
-            case MAIN_INVENTORY -> !moveItemStackTo(stack, containerSlots + 27, containerSlots + 36, false);
-        };
-    }
-
-    @Override
-    protected void addContainerSlots()
-    {
-        addSlot(new CallbackSlot(this, new ItemStackHandler(1), 0, 128, 46));
+        return new KnapGrid(GRID, KnappingPattern.MAX_HEIGHT, cells);
     }
 }

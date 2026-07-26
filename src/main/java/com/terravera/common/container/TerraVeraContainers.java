@@ -15,6 +15,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import net.dries007.tfc.common.container.ItemStackContainerProvider;
+import net.dries007.tfc.common.container.KnappingContainer;
 
 import com.terravera.TerraVera;
 import com.terravera.common.knapping.KnappableStone;
@@ -24,9 +25,10 @@ public final class TerraVeraContainers
     public static final DeferredRegister<MenuType<?>> CONTAINERS =
         DeferredRegister.create(Registries.MENU, TerraVera.MOD_ID);
 
-    public static final DeferredHolder<MenuType<?>, MenuType<ShapingContainer>> SHAPING =
+    // Expose the menu as TFC's base type so it can be registered with TFC's KnappingScreen.
+    public static final DeferredHolder<MenuType<?>, MenuType<KnappingContainer>> SHAPING =
         CONTAINERS.register("shaping", () -> new MenuType<>(
-            (IContainerFactory<ShapingContainer>) (windowId, inventory, buffer) -> {
+            (IContainerFactory<KnappingContainer>) (windowId, inventory, buffer) -> {
                 final KnappableStone stone = KnappableStone.MANAGER.getOrThrow(buffer.readResourceLocation());
                 final ItemStackContainerProvider.Info info = ItemStackContainerProvider.read(buffer, inventory);
                 return ShapingContainer.create(info.stack(), stone, info.hand(), info.slot(), inventory, windowId);
