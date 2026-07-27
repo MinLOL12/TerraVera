@@ -15,6 +15,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import com.terravera.TerraVera;
 import com.terravera.common.health.PlayerHealth;
+import com.terravera.common.skill.PlayerSkills;
 
 /**
  * Data attachments TerraVera puts on the player.
@@ -36,6 +37,14 @@ public final class TerraVeraAttachments
         register("player_health", () -> AttachmentType
             .builder(() -> PlayerHealth.EMPTY)
             .serialize(PlayerHealth.CODEC)
+            .copyOnDeath()
+            .build());
+
+    /** Practical knowledge gained by doing work. It is copied on death because knowledge is not a body stat. */
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<PlayerSkills>> PLAYER_SKILLS =
+        register("player_skills", () -> AttachmentType
+            .builder(() -> PlayerSkills.EMPTY)
+            .serialize(PlayerSkills.CODEC)
             .copyOnDeath()
             .build());
 

@@ -31,6 +31,8 @@ import com.terravera.TerraVera;
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.blocks.TerraVeraBlocks;
 import com.terravera.common.component.ToolMetalState;
+import com.terravera.common.skill.SkillSystem;
+import com.terravera.common.skill.SkillType;
 
 public final class ToolSmithing
 {
@@ -103,7 +105,7 @@ public final class ToolSmithing
                 tell(player, Component.translatable("terravera.smithing.no_heat_data"));
                 return InteractionResult.CONSUME;
             }
-            if (heat == null || !heat.canWeld())
+            if (!canWeld(player, heat, weldingTemperature))
             {
                 tell(player, Component.translatable("terravera.smithing.too_cold_weld",
                     Math.round(temperature(heat)), Math.round(weldingTemperature)));
@@ -123,15 +125,16 @@ public final class ToolSmithing
             }
             consumeSlot(player, fluxSlot);
             consumeSlot(player, stockSlot);
-            final ToolMetalState after = weld(tool, state, surface.is(TFCTags.Blocks.ANVILS));
+            final ToolMetalState after = weld(player, tool, state, surface.is(TFCTags.Blocks.ANVILS));
             damageHammer(player, hammer);
+            SkillSystem.award(player, SkillType.SMITHING, 2.0f);
             tell(player, Component.translatable("terravera.smithing.welded",
                 Math.round(after.remainingMassFraction() * 100f))
                 .withStyle(ChatFormatting.GOLD));
             return InteractionResult.CONSUME;
         }
 
-        if (heat == null || !heat.canWork())
+        if (!canWork(player, heat, workingTemperature))
         {
             tell(player, Component.translatable("terravera.smithing.too_cold_work",
                 Math.round(temperature(heat)), Math.round(workingTemperature)));
@@ -144,8 +147,9 @@ public final class ToolSmithing
             return InteractionResult.CONSUME;
         }
 
-        final ToolMetalState after = work(tool, state, operation, surface.is(TFCTags.Blocks.ANVILS));
+        final ToolMetalState after = work(player, tool, state, operation, surface.is(TFCTags.Blocks.ANVILS));
         damageHammer(player, hammer);
+        SkillSystem.award(player, SkillType.SMITHING, 0.75f);
 
         tell(player, Component.translatable("terravera.smithing.worked",
             operation.displayName(),
@@ -199,17 +203,36 @@ public final class ToolSmithing
         return heat != null ? heat.getTemperature() : 0f;
     }
 
-    private static ToolMetalState work(ItemStack tool, ToolMetalState state, SmithingOperation operation, boolean anvil)
+    /** Skilled temperature control slightly widens the working window; it never makes cold metal forgeable. */
+    private static boolean canWork(Player player, IHeatView heat, float workingTemperature)
+    {
+        final float threshold = workingTemperature * (1f - SkillSystem.proficiency(player, SkillType.SMITHING) * 0.08f);
+        return heat != null && temperature(heat) >= threshold;
+    }
+
+    /** Welding is less forgiving than ordinary work, so experience only reduces its threshold by four percent. */
+    private static boolean canWeld(Player player, IHeatView heat, float weldingTemperature)
+    {
+        final float threshold = weldingTemperature * (1f - SkillSystem.proficiency(player, SkillType.SMITHING) * 0.04f);
+        return heat != null && temperature(heat) >= threshold;
+    }
+
+    private static ToolMetalState work(Player player, ItemStack tool, ToolMetalState state, SmithingOperation operation, boolean anvil)
     {
         final int maxDamage = tool.getMaxDamage();
-        final int repair = Math.max(1, Math.round(maxDamage * operation.repairPercent() / 100f * (anvil ? ANVIL_REPAIR_MULTIPLIER : 1f)));
+        // Practice makes a smith's blows more measured, not superhuman. The bonus is deliberately capped below 20%.
+        final float quality = 1f + SkillSystem.proficiency(player, SkillType.SMITHING) * 0.18f;
+        final int repair = Math.max(1, Math.round(maxDamage * operation.repairPercent() / 100f
+            * (anvil ? ANVIL_REPAIR_MULTIPLIER : 1f) * quality));
 
         final int bendCorrection = operation == SmithingOperation.STRAIGHTENING
             ? -Integer.signum(state.bend()) * Math.min(2, Math.abs(state.bend()))
             : operation.bendChange();
 
-        final ToolMetalState after = state.worked(operation.id(), operation.massLoss(), operation.lengthChange(),
-            operation.widthChange(), operation.thicknessChange(), bendCorrection, operation.edgeChange(), operation.strainChange());
+        final ToolMetalState after = state.worked(operation.id(),
+            operation.massLoss() * (1f - SkillSystem.proficiency(player, SkillType.SMITHING) * 0.20f),
+            operation.lengthChange(), operation.widthChange(), operation.thicknessChange(), bendCorrection,
+            operation.edgeChange(), operation.strainChange());
         tool.set(TerraVeraDataComponents.TOOL_METAL_STATE.get(), after);
 
         final int limitDamage = repairLimitDamage(tool, after);
@@ -217,11 +240,12 @@ public final class ToolSmithing
         return after;
     }
 
-    private static ToolMetalState weld(ItemStack tool, ToolMetalState state, boolean anvil)
+    private static ToolMetalState weld(Player player, ItemStack tool, ToolMetalState state, boolean anvil)
     {
-        final ToolMetalState after = state.welded(anvil ? 5f : 3f);
+        final float quality = 1f + SkillSystem.proficiency(player, SkillType.SMITHING) * 0.15f;
+        final ToolMetalState after = state.welded((anvil ? 5f : 3f) * quality);
         tool.set(TerraVeraDataComponents.TOOL_METAL_STATE.get(), after);
-        final int repair = Math.max(1, Math.round(tool.getMaxDamage() * (anvil ? 0.18f : 0.12f)));
+        final int repair = Math.max(1, Math.round(tool.getMaxDamage() * (anvil ? 0.18f : 0.12f) * quality));
         tool.setDamageValue(Math.max(repairLimitDamage(tool, after), tool.getDamageValue() - repair));
         return after;
     }

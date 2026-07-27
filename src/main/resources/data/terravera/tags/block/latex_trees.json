@@ -1,0 +1,4 @@
+{
+  "__comment__": "Minecraft's jungle log is the early-world stand-in for a latex-bearing tropical tree. Packs should replace or extend this with their actual rubber species.",
+  "values": ["minecraft:jungle_log", "minecraft:jungle_wood", { "id": "tfc:wood/log/kapok", "required": false }]
+}

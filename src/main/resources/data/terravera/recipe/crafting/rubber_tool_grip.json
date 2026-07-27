@@ -1,0 +1,13 @@
+{
+  "__comment__": "Natural latex is compounded with sulfur-bearing powder and charcoal, then wrapped around a leather backing. The costly recipe represents curing/vulcanising a durable shock-absorbing grip.",
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": ["LSL", "CRC", "LSL"],
+  "key": {
+    "L": { "item": "terravera:raw_latex" },
+    "S": { "item": "minecraft:gunpowder" },
+    "C": { "item": "minecraft:charcoal" },
+    "R": { "item": "terravera:leather_tool_grip" }
+  },
+  "result": { "id": "terravera:rubber_tool_grip", "count": 1 }
+}

@@ -33,5 +33,30 @@ public final class TerraVeraBlocks
             .sound(SoundType.METAL)
             .noOcclusion()));
 
+    /** Compact laid-stone footing. It distributes a column's load into soil or rock beneath it. */
+    public static final DeferredHolder<Block, Block> RUBBLE_FOUNDATION = BLOCKS.register("rubble_foundation",
+        () -> new Block(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0f, 9.0f)
+            .sound(SoundType.STONE)));
+
+    /** A pegged timber post or lintel. Flexible and forgiving, but not suitable for long spans of masonry. */
+    public static final DeferredHolder<Block, SupportBeamBlock> WOODEN_SUPPORT_BEAM = BLOCKS.register("wooden_support_beam",
+        () -> new SupportBeamBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD)
+            .strength(2.5f, 4.0f)
+            .sound(SoundType.WOOD)
+            .noOcclusion()));
+
+    /** Forge-welded wrought-iron I-section. It carries much heavier masonry and roof spans than timber. */
+    public static final DeferredHolder<Block, SupportBeamBlock> WROUGHT_IRON_SUPPORT_BEAM = BLOCKS.register("wrought_iron_support_beam",
+        () -> new SupportBeamBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(5.0f, 12.0f)
+            .sound(SoundType.METAL)
+            .noOcclusion()));
+
     private TerraVeraBlocks() {}
 }

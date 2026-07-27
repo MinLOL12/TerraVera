@@ -1,0 +1,8 @@
+{
+  "__comment__": "A load-bearing wrought-iron beam is a fabricated section: two double sheets become flanges and a rod becomes the web. TFC welding enforces welding heat, matching metal, a hammer, an anvil, and flux.",
+  "type": "tfc:welding",
+  "first_input": { "tag": "c:double_sheets/wrought_iron" },
+  "second_input": { "tag": "c:rods/wrought_iron" },
+  "result": { "id": "terravera:wrought_iron_support_beam", "count": 2 },
+  "tier": 2
+}

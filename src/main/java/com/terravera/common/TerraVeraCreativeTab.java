@@ -41,6 +41,13 @@ public final class TerraVeraCreativeTab
         if (event.getTabKey() != TAB.getKey()) return;
 
         event.accept(TerraVeraItems.WORKPLATE.get());
+        event.accept(TerraVeraItems.RUBBLE_FOUNDATION.get());
+        event.accept(TerraVeraItems.WOODEN_SUPPORT_BEAM.get());
+        event.accept(TerraVeraItems.WROUGHT_IRON_SUPPORT_BEAM.get());
+        event.accept(TerraVeraItems.FIELD_NOTES.get());
+        event.accept(TerraVeraItems.LEATHER_TOOL_GRIP.get());
+        event.accept(TerraVeraItems.RAW_LATEX.get());
+        event.accept(TerraVeraItems.RUBBER_TOOL_GRIP.get());
 
         event.accept(TerraVeraItems.PLANT_FIBER.get());
         event.accept(TerraVeraItems.RETTED_FIBER.get());

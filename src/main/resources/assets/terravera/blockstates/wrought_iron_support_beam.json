@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "terravera:block/wrought_iron_support_beam" },
+    "axis=z": { "model": "terravera:block/wrought_iron_support_beam", "x": 90 },
+    "axis=x": { "model": "terravera:block/wrought_iron_support_beam", "x": 90, "y": 90 }
+  }
+}

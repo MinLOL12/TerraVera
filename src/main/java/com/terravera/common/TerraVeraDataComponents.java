@@ -21,6 +21,7 @@ import com.terravera.TerraVera;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.component.KnappedHead;
 import com.terravera.common.component.ToolMetalState;
+import com.terravera.common.component.ToolGrip;
 
 public final class TerraVeraDataComponents
 {
@@ -38,6 +39,10 @@ public final class TerraVeraDataComponents
     /** Attached to repaired metal tools. Tracks remaining metal mass and the current smithing operation. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ToolMetalState>> TOOL_METAL_STATE =
         register("tool_metal_state", builder -> builder.persistent(ToolMetalState.CODEC).networkSynchronized(ToolMetalState.STREAM_CODEC));
+
+    /** Attached to a hafted tool after leather or rubber has been fitted over its wooden handle. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ToolGrip>> TOOL_GRIP =
+        register("tool_grip", builder -> builder.persistent(ToolGrip.CODEC).networkSynchronized(ToolGrip.STREAM_CODEC));
 
     /** Attached to hafted tools. Stores the speed modifier from cordage binding quality. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BindingBonus>> BINDING_SPEED_BONUS =

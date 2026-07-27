@@ -1,0 +1,11 @@
+{
+  "__comment__": "Six planks are laminated into a beam and bound through the middle with heavy cordage. It is intentionally more than a stick: this is a load-bearing timber member.",
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": ["PPP", "PHP", "PPP"],
+  "key": {
+    "P": { "tag": "minecraft:planks" },
+    "H": { "item": "terravera:heavy_cordage" }
+  },
+  "result": { "id": "terravera:wooden_support_beam", "count": 2 }
+}

@@ -27,6 +27,8 @@ import net.dries007.tfc.util.calendar.Calendars;
 import com.terravera.TerraVera;
 import com.terravera.common.TerraVeraAttachments;
 import com.terravera.common.health.effect.TerraVeraEffects;
+import com.terravera.common.skill.SkillSystem;
+import com.terravera.common.skill.SkillType;
 import com.terravera.config.TerraVeraConfig;
 
 /**
@@ -280,7 +282,12 @@ public final class IllnessTracker
             }
             else
             {
-                next.add(infection.treated(remedy.shortenTicks(), remedy.severityReduction()));
+                // Diagnosis and dosing improve gradually with experience, but a novice's correctly matched remedy
+                // still works. This makes medicine learned knowledge, not a hard level gate on treatment.
+                final float knowledge = SkillSystem.proficiency(player, SkillType.MEDICINE);
+                final int shortened = Math.round(remedy.shortenTicks() * (1f + knowledge * 0.20f));
+                final float relief = Math.min(0.95f, remedy.severityReduction() * (1f + knowledge * 0.15f));
+                next.add(infection.treated(shortened, relief));
                 player.displayClientMessage(Component.translatable("terravera.illness.treated",
                     Component.translatable(nameKey(infection.illnessId()))).withStyle(ChatFormatting.YELLOW), true);
             }
@@ -289,6 +296,7 @@ public final class IllnessTracker
         if (treated)
         {
             set(player, health.withInfections(next));
+            SkillSystem.award(player, SkillType.MEDICINE, 1.25f);
         }
         return treated;
     }

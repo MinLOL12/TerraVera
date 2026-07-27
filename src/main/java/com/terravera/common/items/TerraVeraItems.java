@@ -31,6 +31,29 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, BlockItem> WORKPLATE = ITEMS.register("workplate",
         () -> new BlockItem(TerraVeraBlocks.WORKPLATE.get(), new Item.Properties()));
 
+    // ----- Structural construction ---------------------------------------------------------------------------
+
+    public static final DeferredHolder<Item, BlockItem> RUBBLE_FOUNDATION = ITEMS.register("rubble_foundation",
+        () -> new BlockItem(TerraVeraBlocks.RUBBLE_FOUNDATION.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> WOODEN_SUPPORT_BEAM = ITEMS.register("wooden_support_beam",
+        () -> new BlockItem(TerraVeraBlocks.WOODEN_SUPPORT_BEAM.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> WROUGHT_IRON_SUPPORT_BEAM = ITEMS.register("wrought_iron_support_beam",
+        () -> new BlockItem(TerraVeraBlocks.WROUGHT_IRON_SUPPORT_BEAM.get(), new Item.Properties()));
+
+    // ----- Handles, grips, and field knowledge ---------------------------------------------------------------
+
+    /** Thick strips cut and laced around an existing wooden handle; reliable in wet work. */
+    public static final DeferredHolder<Item, Item> LEATHER_TOOL_GRIP = ITEMS.register("leather_tool_grip",
+        () -> new GripItem("leather", new Item.Properties()));
+    /** Natural latex, collected by tapping a latex-bearing tree before it is compounded and cured. */
+    public static final DeferredHolder<Item, Item> RAW_LATEX = ITEMS.registerSimpleItem("raw_latex");
+    /** Sulfur-cured rubber wrap; costs more to make, but damps shock and improves tool control. */
+    public static final DeferredHolder<Item, Item> RUBBER_TOOL_GRIP = ITEMS.register("rubber_tool_grip",
+        () -> new GripItem("rubber", new Item.Properties()));
+    /** A pocket field notebook used to review the practical knowledge learned through play. */
+    public static final DeferredHolder<Item, Item> FIELD_NOTES = ITEMS.register("field_notes",
+        () -> new FieldNotesItem(new Item.Properties().stacksTo(1)));
+
     // ----- Cordage chain -------------------------------------------------------------------------------------
     // Raw fibre -> retted fibre -> cordage -> lashing on a tool.
 

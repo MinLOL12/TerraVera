@@ -34,6 +34,10 @@ public final class TerraVeraRecipes
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<TwistingRecipe>> TWISTING =
         register("twisting", TwistingRecipe.CODEC, TwistingRecipe.STREAM_CODEC);
 
+    /** Fitting a leather or rubber wrap to an existing cordage-hafted wooden handle. */
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<GripAssemblyRecipe>> GRIP_ASSEMBLY =
+        register("grip_assembly", GripAssemblyRecipe.CODEC, GripAssemblyRecipe.STREAM_CODEC);
+
     private static <R extends Recipe<?>> DeferredHolder<RecipeSerializer<?>, RecipeSerializer<R>> register(
         String name, MapCodec<R> codec, StreamCodec<RegistryFriendlyByteBuf, R> streamCodec)
     {

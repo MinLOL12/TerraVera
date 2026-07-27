@@ -12,6 +12,8 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
 import com.terravera.TerraVera;
+import com.terravera.common.skill.SkillSystem;
+import com.terravera.common.skill.SkillType;
 import com.terravera.config.TerraVeraConfig;
 
 /**
@@ -84,8 +86,11 @@ public final class TasteEventHandler {
         // Vanilla formula for added saturation from this food: nutrition * satMod * 2
         float baseSaturation = Math.max(0, nutrition * satModifier * 2.0f);
 
-        // Compute what the taste system wants the effective saturation gain to be
+        // Compute what the taste system wants the effective saturation gain to be. Cooking knowledge is a small
+        // quality multiplier: experienced cooks waste less and make the same ingredients more satisfying, rather
+        // than conjuring extra hunger bars out of a recipe.
         float effectiveSaturation = TasteSystem.onFoodEaten(player, stack, baseSaturation);
+        effectiveSaturation *= 1f + SkillSystem.proficiency(player, SkillType.COOKING) * 0.10f;
 
         FoodData foodData = player.getFoodData();
         float currentSat = foodData.getSaturationLevel();

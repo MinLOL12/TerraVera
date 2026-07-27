@@ -192,50 +192,39 @@ public class WorkplateContainer extends AbstractContainerMenu
 
         // Delegate to the existing battle-tested smithing logic. It handles all validation,
         // heat checks, mass loss, durability repair, and chat feedback.
-        final net.minecraft.world.InteractionResult result;
-
         if (operation == SmithingOperation.FORGE_WELD && hasFluxInSlot)
         {
-            // Temporarily put flux in a dummy inventory position so ToolSmithing.findFlux can locate it.
-            // We do this by injecting the flux into a free inventory slot, calling useSurface, then cleaning up.
+            // ToolSmithing deliberately owns all welding validation/consumption. Lend it exactly ONE flux item,
+            // not the whole stack, and return that same item in a finally-style path if the strike is rejected. The
+            // old implementation moved the full stack through a transient inventory slot; a failed repair/close could
+            // leave items only in that temporary handler and make them appear to vanish.
             final int freeSlot = findFreeInventorySlot(player);
-            if (freeSlot >= 0)
-            {
-                final ItemStack displaced = player.getInventory().getItem(freeSlot);
-                player.getInventory().setItem(freeSlot, fluxStack.copy());
-                workplateSlots.extractItem(SLOT_FLUX, fluxStack.getCount(), false);
-
-                result = ToolSmithing.useSurface(player.level(), player, hammer, tool, surface);
-
-                // If the flux was not consumed by the weld, it was already removed from the slot.
-                // Put any remaining back into the flux slot if possible.
-                final ItemStack leftInInv = player.getInventory().getItem(freeSlot);
-                if (!leftInInv.isEmpty() && leftInInv.is(TFCTags.Items.WELDING_FLUX))
-                {
-                    final int inserted = insertIntoFluxSlot(leftInInv);
-                    if (inserted < leftInInv.getCount())
-                    {
-                        player.getInventory().setItem(freeSlot, leftInInv.copyWithCount(leftInInv.getCount() - inserted));
-                    }
-                    else
-                    {
-                        player.getInventory().setItem(freeSlot, displaced);
-                    }
-                }
-                else
-                {
-                    player.getInventory().setItem(freeSlot, displaced);
-                }
-            }
-            else
+            if (freeSlot < 0)
             {
                 player.displayClientMessage(Component.translatable("terravera.workplate.gui.inventory_full"), true);
                 return;
             }
+
+            final ItemStack oneFlux = workplateSlots.extractItem(SLOT_FLUX, 1, false);
+            player.getInventory().setItem(freeSlot, oneFlux);
+            try
+            {
+                ToolSmithing.useSurface(player.level(), player, hammer, tool, surface);
+            }
+            finally
+            {
+                final ItemStack unconsumed = player.getInventory().getItem(freeSlot);
+                player.getInventory().setItem(freeSlot, ItemStack.EMPTY);
+                if (!unconsumed.isEmpty())
+                {
+                    final ItemStack remainder = workplateSlots.insertItem(SLOT_FLUX, unconsumed, false);
+                    if (!remainder.isEmpty()) player.getInventory().placeItemBackInInventory(remainder);
+                }
+            }
         }
         else
         {
-            result = ToolSmithing.useSurface(player.level(), player, hammer, tool, surface);
+            ToolSmithing.useSurface(player.level(), player, hammer, tool, surface);
         }
 
         // Sync the operation ordinal after the strike (the tool's component may have changed).
@@ -254,14 +243,6 @@ public class WorkplateContainer extends AbstractContainerMenu
             if (inv.getItem(i).isEmpty()) return i;
         }
         return -1;
-    }
-
-    private int insertIntoFluxSlot(ItemStack stack)
-    {
-        final int max = workplateSlots.getSlotLimit(SLOT_FLUX);
-        final int insertable = Math.min(stack.getCount(), max);
-        workplateSlots.insertItem(SLOT_FLUX, stack.copyWithCount(insertable), false);
-        return insertable;
     }
 
     // ───────────────────────────────── slot setup ─────────────────────────────────
@@ -320,6 +301,24 @@ public class WorkplateContainer extends AbstractContainerMenu
     public boolean stillValid(Player player)
     {
         return stillValid(access, player, TerraVeraBlocks.WORKPLATE.get());
+    }
+
+    /**
+     * Workplate slots are intentionally ephemeral, rather than an inventory stored in the block. Always hand their
+     * contents back when the menu closes (including range-close, death, disconnect, and a rejected repair) so a tool,
+     * hammer, or flux stack can never be stranded in the container's private ItemStackHandler.
+     */
+    @Override
+    public void removed(Player player)
+    {
+        super.removed(player);
+        if (player.level().isClientSide()) return;
+
+        for (int slot = 0; slot < WORKPLATE_SLOTS; slot++)
+        {
+            final ItemStack stack = workplateSlots.extractItem(slot, Integer.MAX_VALUE, false);
+            if (!stack.isEmpty()) player.getInventory().placeItemBackInInventory(stack);
+        }
     }
 
     @Override
