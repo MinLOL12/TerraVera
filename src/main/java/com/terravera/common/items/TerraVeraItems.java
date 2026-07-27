@@ -62,8 +62,20 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> WORMWOOD = ITEMS.registerSimpleItem("wormwood");
     /** Clean cloth boiled and kept dry, for dressing a wound before it turns. */
     public static final DeferredHolder<Item, Item> CLEAN_DRESSING = ITEMS.registerSimpleItem("clean_dressing");
-    /** Tallow and lye, boiled. The single largest hygiene improvement available, and a real chemical process. */
+    /** Caustic potash lye leached from wood ash and concentrated in a pot; the real alkali behind ash washing. */
+    public static final DeferredHolder<Item, Item> LYE_CONCENTRATE = ITEMS.registerSimpleItem("lye_concentrate");
+    /** Fresh soap curd straight out of the kettle. It still needs salting out / curing before it is a usable bar. */
+    public static final DeferredHolder<Item, Item> SOAP_CURD = ITEMS.registerSimpleItem("soap_curd");
+    /** Tallow or olive oil and lye, boiled and cured. The single largest hygiene improvement available. */
     public static final DeferredHolder<Item, Item> SOAP = ITEMS.registerSimpleItem("soap");
+    /** Finely washed charcoal, used as a real adsorbent for gut poisons and as a filter medium. */
+    public static final DeferredHolder<Item, Item> ACTIVATED_CHARCOAL = ITEMS.registerSimpleItem("activated_charcoal");
+    /** Willow bark decoction reduced into a salicylate-rich extract: fever and pain medicine before aspirin. */
+    public static final DeferredHolder<Item, Item> SALICYLATE_EXTRACT = ITEMS.registerSimpleItem("salicylate_extract");
+    /** Wormwood steeped in alcohol: a prepared anthelmintic rather than a raw handful of leaves. */
+    public static final DeferredHolder<Item, Item> WORMWOOD_TINCTURE = ITEMS.registerSimpleItem("wormwood_tincture");
+    /** Alcohol, salt, and honey reduced into a wound wash; not sterile magic, but a real antiseptic preparation. */
+    public static final DeferredHolder<Item, Item> ANTISEPTIC_TINCTURE = ITEMS.registerSimpleItem("antiseptic_tincture");
     /**
      * Sand, charcoal, and cloth in a frame. Removes the protozoa and most of the load from a container of water, but
      * deliberately not the bacteria - that still needs boiling.
@@ -72,7 +84,7 @@ public final class TerraVeraItems
         () -> new WaterFilterItem(new Item.Properties().durability(64)));
     /** Boiled water, salt, and a sweetener. Oral rehydration therapy; the thing that stops cholera killing you. */
     public static final DeferredHolder<Item, Item> REHYDRATION_SALTS = ITEMS.registerSimpleItem("rehydration_salts");
-    /** Distilled, concentrated medicine. The end of the line: cures essentially anything. */
+    /** A full apothecary kit made from prepared extracts. The end of the line: cures essentially anything. */
     public static final DeferredHolder<Item, Item> MEDICINE = ITEMS.registerSimpleItem("medicine");
 
     // ----- Knapped heads -------------------------------------------------------------------------------------

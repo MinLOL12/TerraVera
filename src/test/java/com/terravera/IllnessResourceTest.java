@@ -44,6 +44,7 @@ public class IllnessResourceTest
 
     private static final List<String> REMEDIES = List.of(
         "herbal_decoction", "willow_bark", "wormwood",
+        "prepared_salicylate", "prepared_antiparasitic",
         "wound_dressing", "rehydration_solution", "medicine"
     );
 

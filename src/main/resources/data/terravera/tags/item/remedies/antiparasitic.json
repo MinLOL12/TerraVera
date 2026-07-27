@@ -1,5 +1,5 @@
 {
-  "__comment__": "Anthelmintics. Wormwood is the named one; garlic and pumpkin seed were both genuinely used against intestinal worms.",
+  "__comment__": "Raw anthelmintics. Wormwood is the named one; garlic and pumpkin seed were both genuinely used against intestinal worms.",
   "values": [
     "terravera:wormwood",
     { "id": "tfc:food/garlic", "required": false },

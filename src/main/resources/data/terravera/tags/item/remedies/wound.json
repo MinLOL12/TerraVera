@@ -1,7 +1,8 @@
 {
-  "__comment__": "Wound care. Clean dressings, plus honey and strong alcohol, both of which are real topical antibacterials.",
+  "__comment__": "Wound care. Clean dressings, honey, and prepared antiseptic tincture; all are real topical wound-care tools.",
   "values": [
     "terravera:clean_dressing",
+    "terravera:antiseptic_tincture",
     { "id": "minecraft:honey_bottle", "required": false }
   ]
 }

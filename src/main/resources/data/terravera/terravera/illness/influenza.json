@@ -9,5 +9,5 @@
   "contagious": true,
   "immunity_ticks": 720000,
   "lethal": false,
-  "remedies": ["terravera:remedies/antipyretic", "terravera:remedies/herbal", "terravera:remedies/medicine"]
+  "remedies": ["terravera:remedies/prepared_antipyretic", "terravera:remedies/antipyretic", "terravera:remedies/herbal", "terravera:remedies/medicine"]
 }

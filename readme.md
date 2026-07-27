@@ -180,7 +180,8 @@ nutrition system while you eat exactly as much as you always did.
 
 - **Hygiene** is available from the first minute and is a sliding multiplier on every food- and wound-borne infection,
   not a checkbox. You get filthy butchering, working in mud, and simply living; you wash with water, better with wood
-  ash or lye, best with soap (tallow or olive oil + lye, boiled — real saponification).
+  ash or lye, best with soap. Soap is now a real chain: leach and boil wood ash into concentrated lye, saponify tallow
+  or olive oil into soap curd, then salt/cure it into hard bars.
 - **Boiling** needs only a firepit and a clay pot. Hold a filled container to a hot pot and the water is safe. Total,
   permanent, and costs fuel every single time.
 - **Filtration** (sand, charcoal, cordage) is portable and fire-free. It removes the *parasites* and most of the load,
@@ -188,9 +189,11 @@ nutrition system while you eat exactly as much as you always did.
 - **Herbal remedies** are gathered as you travel: bitter herbs from the same plants that give herb fibre, wormwood from
   dry shrubs, willow bark stripped from willow with a knife (salicin — genuine antipyretic chemistry). They shorten and
   blunt; they never cure.
-- **Prepared remedies** need a pot or salt: clean dressings, and rehydration salts — oral rehydration therapy, which is
-  the real-world answer to cholera and is the difference between surviving it and not.
-- **Medicine** is the endgame: a concentrated extract distilled in strong alcohol, which cures essentially anything.
+- **Prepared remedies** need a pot or salt: clean dressings, salicylate extract from willow, wormwood tincture,
+  antiseptic tincture, activated charcoal, and rehydration salts — oral rehydration therapy, which is the real-world
+  answer to cholera and is the difference between surviving it and not.
+- **Medicine** is the endgame: an apothecary kit built from those prepared extracts in strong alcohol, rather than raw
+  herbs dumped in a pot. It cures essentially anything because reaching it now means you have the whole treatment chain.
 
 Nutrition feeds back into all of it — a well-fed player is meaningfully harder to infect than a starving one, so the
 disease system compounds with the food system rather than sitting beside it.

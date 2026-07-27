@@ -1,18 +1,17 @@
 {
-  "__comment__": "Castile soap: olive oil and lye. The inland route to soap, for players who never see a coast - and historically the finer of the two.",
+  "__comment__": "Castile soap, step 2. Olive oil can replace tallow, but it still needs concentrated lye and a long hot cook before it becomes soap curd.",
   "type": "tfc:pot",
-  "duration": 2000,
+  "duration": 4200,
   "fluid_ingredient": {
     "amount": 1000,
     "fluid": "tfc:olive_oil"
   },
   "ingredients": [
-    { "item": "tfc:powder/wood_ash" },
-    { "item": "tfc:powder/wood_ash" },
-    { "item": "tfc:powder/wood_ash" }
+    { "item": "terravera:lye_concentrate" },
+    { "item": "terravera:lye_concentrate" }
   ],
   "item_output": [
-    { "count": 4, "id": "terravera:soap" }
+    { "count": 4, "id": "terravera:soap_curd" }
   ],
-  "temperature": 480.0
+  "temperature": 460.0
 }
