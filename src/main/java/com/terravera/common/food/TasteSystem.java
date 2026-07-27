@@ -102,7 +102,7 @@ public class TasteSystem {
      * Example taste values (can be loaded from JSON later).
      * Keys can be full "namespace:path" or just "path".
      */
-    public static final Map<String, Integer> DEFAULT_TASTES = Map.ofEntries(
+    public static final Map<String, Integer> DEFAULT_TASTES = new HashMap<>(Map.ofEntries(
             // Bad / survival foods
             Map.entry("minecraft:grass", -80),
             Map.entry("minecraft:tall_grass", -80),
@@ -166,7 +166,7 @@ public class TasteSystem {
             Map.entry("burnt_steak", 5),
             Map.entry("properly_cooked_steak", 70),
             Map.entry("raw_steak", -15)
-    );
+    ));
 
     /**
      * Gets base taste for an item. Extend this to read from data packs / JSON.
