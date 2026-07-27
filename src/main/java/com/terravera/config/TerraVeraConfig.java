@@ -81,6 +81,8 @@ public final class TerraVeraConfig
         public final Supplier<Double> hygieneDecayMultiplier;
         /** Whether item tooltips show water quality and treatment state. */
         public final Supplier<Boolean> showWaterTooltip;
+        /** Whether player-built masonry, roofs, foundations, and support beams are checked for structural support. */
+        public final Supplier<Boolean> enableStructuralIntegrity;
         /** Whether eating undercooked meat can transmit parasites. */
         public final Supplier<Boolean> enableFoodborneIllness;
         /** Whether dirty wounds can become infected. */
@@ -143,6 +145,12 @@ public final class TerraVeraConfig
             showFlavorTooltip = builder
                 .comment("If true, food item tooltips show a flavor line (e.g. 'Delicious.') based on the taste system.")
                 .define("showFlavorTooltip", true);
+            builder.pop();
+
+            builder.push("building");
+            enableStructuralIntegrity = builder
+                .comment("If true, player-built masonry, roofs, foundations, and support beams need a valid load path. Invalid work has a short grace period so it can be braced before it fails.")
+                .define("enableStructuralIntegrity", true);
             builder.pop();
 
             builder.push("disease");

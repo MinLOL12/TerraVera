@@ -87,6 +87,50 @@ Then:
 ./gradlew runClient      # launch a dev client
 ```
 
+## Building with load paths
+
+TerraVera now treats player-built construction as **structure**, without turning every hut into a finite-element
+engineering exam. The system watches the structural blocks a player places and gives an unsafe member a brief grace
+period to be braced before it sheds as dropped material. Natural caves and worldgen are deliberately left alone.
+
+- **Rubble Foundation** is a compact laid-stone footing. Start posts and heavy walls on it (or on tagged ground/rock),
+  not in mid-air.
+- **Wooden Support Beams** can be placed vertically as posts or horizontally as lintels/purlins. They are light,
+  flexible and forgiving, but their safe span and carrying capacity are modest.
+- **Wrought-Iron Support Beams** are forge-welded fabricated sections. Their recipe uses wrought-iron double sheets
+  and rods at TFC welding heat; they carry much heavier stone and brick roof work, and span roughly twice as far as
+  timber.
+- Masonry is strong under compression but heavy. Timber is much lighter but weaker. Roof slabs/stairs must rest on a
+  beam, and horizontal beams need anchored posts under both ends. A line of stone blocks can make a wall, but a broad,
+  heavy roof needs posts, lintels, and a real foundation.
+
+The material categories are datapack tags under `data/terravera/tags/block/structural/`, so packs can classify their
+own TFC stones, bricks, thatch, and lumber. `enableStructuralIntegrity` turns the mechanic off for worlds that prefer
+free placement.
+
+## Learned knowledge and fitted handles
+
+Characters begin inexperienced rather than uniformly competent. TerraVera records separate practical experience for
+**mining, smithing, building, cooking, and medicine**. Experience has a diminishing curve and conservative,
+field-specific effects: mining improves exposed-ore recognition and work efficiency; smithing improves temperature
+control, repair quality and metal economy; building slightly improves safe beam layout; cooking improves the quality
+of food made; medicine improves diagnosis/dosing of a correctly matched remedy. None of these replace the underlying
+material, heat, support, or treatment requirement.
+
+Craft a **Field Notes** book with a book and charcoal, then use it to review each field and its accumulated experience.
+
+The handle path also continues after the first stick haft:
+
+1. Make and lash the wooden handle as normal.
+2. Cut and lace leather with cordage into a **Leather Tool Grip**, then bind it over the existing handle with a fresh
+   cord. It gives modest control and useful-yield improvements.
+3. Tap a tagged tropical latex tree with a knife for **Raw Latex**. Compound it with charcoal, sulfur-bearing powder,
+   and a leather backing into a **Rubber Tool Grip**, then bind that over an already-lashed handle with heavy cordage.
+   Rubber costs more but better damps shock and improves task control.
+
+The grip assembly recipe copies the exact tool stack, so its existing durability, knapping, lashing and repair history
+are preserved rather than reset.
+
 ## Configuration
 
 `config/terravera-server.toml`, all hot-reloadable:
@@ -98,6 +142,7 @@ Then:
 - `scaleFoodEatTimeBySize` — set `false` to go back to vanilla's flat 1.6 second eat time for every food.
 - `foodEatTimeMultiplier` — global multiplier on top of the size-derived eat time, for tuning pace without retuning every band.
 - `showFlavorTooltip` — set `false` to hide the "Flavor: ..." line on food tooltips.
+- `[building].enableStructuralIntegrity` — set `false` to disable load-path checks and structural failures.
 - `[disease]` — `enableDisease`, `diseaseChanceMultiplier`, `diseaseDurationMultiplier`, `enableContagion`,
   `contagionRange`, `enableFoodborneIllness`, `enableWoundInfection`.
 - `[water]` — `enableWaterContamination`, `waterContaminationMultiplier`, `warnBeforeDrinkingUnsafeWater`,

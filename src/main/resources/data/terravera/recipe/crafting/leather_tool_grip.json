@@ -1,0 +1,11 @@
+{
+  "__comment__": "Leather is cut into overlapping strips and stitched/laced into a handle wrap. It is a grip component, not a whole new tool.",
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": ["LC", "CL", "LC"],
+  "key": {
+    "L": { "item": "minecraft:leather" },
+    "C": { "item": "terravera:cordage" }
+  },
+  "result": { "id": "terravera:leather_tool_grip", "count": 1 }
+}

@@ -1,0 +1,12 @@
+{
+  "__comment__": "Timber walls and logs. Wood tolerates modest spans and light roofs, but has much less compressive strength than stone.",
+  "values": [
+    "#minecraft:logs",
+    "#minecraft:planks",
+    "minecraft:bookshelf",
+    {
+      "id": "#tfc:wood",
+      "required": false
+    }
+  ]
+}

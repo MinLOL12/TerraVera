@@ -1,5 +1,7 @@
 {
   "values": [
-    "terravera:workplate"
+    "terravera:workplate",
+    "terravera:rubble_foundation",
+    "terravera:wrought_iron_support_beam"
   ]
 }

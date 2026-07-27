@@ -1,0 +1,16 @@
+{
+  "__comment__": "Materials that can spread a building load into the ground. Packs should add their compacted soil and local rock blocks here.",
+  "values": [
+    "terravera:rubble_foundation",
+    "#minecraft:base_stone_overworld",
+    "minecraft:dirt",
+    "minecraft:coarse_dirt",
+    "minecraft:rooted_dirt",
+    "minecraft:packed_mud",
+    "minecraft:bedrock",
+    {
+      "id": "#tfc:rock",
+      "required": false
+    }
+  ]
+}

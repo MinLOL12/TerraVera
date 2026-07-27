@@ -8,7 +8,10 @@
 package com.terravera;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -32,15 +35,21 @@ import net.dries007.tfc.util.data.KnappingType;
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.component.ToolMetalState;
+import com.terravera.common.component.ToolGrip;
 import com.terravera.common.container.ShapingContainer;
 import com.terravera.common.knapping.KnappableStone;
 import com.terravera.common.recipes.FibreSource;
 import com.terravera.common.smithing.SmithingOperation;
 import com.terravera.common.smithing.ToolSmithing;
+import com.terravera.common.structure.StructuralIntegrity;
 import com.terravera.config.TerraVeraConfig;
 
 public final class TerraVeraEventHandler
 {
+    /** Trees that can be tapped for natural latex. Packs can add their own true rubber species to this tag. */
+    private static final TagKey<Block> LATEX_TREES = TagKey.create(Registries.BLOCK,
+        ResourceLocation.fromNamespaceAndPath(TerraVera.MOD_ID, "latex_trees"));
+
     public static void init()
     {
         NeoForge.EVENT_BUS.addListener(TerraVeraEventHandler::onBlockBroken);
@@ -58,9 +67,10 @@ public final class TerraVeraEventHandler
     @SubscribeEvent
     public static void onBlockBroken(BlockEvent.BreakEvent event)
     {
-        if (!TerraVeraConfig.SERVER.plantsDropFibre.get()) return;
         if (!(event.getLevel() instanceof Level level) || level.isClientSide()) return;
+        StructuralIntegrity.onBroken(level, event.getPos());
 
+        if (!TerraVeraConfig.SERVER.plantsDropFibre.get()) return;
         final Player player = event.getPlayer();
         if (player.isCreative()) return;
 
@@ -76,7 +86,11 @@ public final class TerraVeraEventHandler
         final RandomSource random = level.getRandom();
         double chance = source.chance() * TerraVeraConfig.SERVER.fibreDropChance.get();
         if (bladed) chance += TerraVeraConfig.SERVER.fibreKnifeBonus.get();
-        if (random.nextDouble() > chance) return;
+        // A wrapped handle reduces hand slip while stripping and gathering; it improves useful yield rather than
+        // creating extra material from nowhere.
+        final ToolGrip grip = tool.get(TerraVeraDataComponents.TOOL_GRIP.get());
+        if (grip != null) chance *= grip.efficiencyMultiplier();
+        if (random.nextDouble() > Math.min(1d, chance)) return;
 
         final int amount = source.min() + random.nextInt(Math.max(1, source.max() - source.min() + 1));
         if (amount <= 0) return;
@@ -158,9 +172,23 @@ public final class TerraVeraEventHandler
 
         final Level level = event.getLevel();
         final BlockState state = level.getBlockState(event.getPos());
+        final Player player = event.getEntity();
+
+        // Tap a living rubber/latex tree with a knife. This is deliberately a small, repeatable field yield rather
+        // than a magical recipe: natural rubber begins as sap, then still needs charcoal and sulfur to become a grip.
+        if (state.is(LATEX_TREES) && player.getMainHandItem().is(TFCTags.Items.TOOLS_KNIFE))
+        {
+            if (!level.isClientSide() && level.getRandom().nextFloat() < 0.35f)
+            {
+                Block.popResource(level, event.getPos(), new ItemStack(com.terravera.common.items.TerraVeraItems.RAW_LATEX.get()));
+            }
+            event.setCanceled(true);
+            event.setCancellationResult(net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide()));
+            return;
+        }
+
         if (!ToolSmithing.isSmithingSurface(state)) return;
 
-        final Player player = event.getEntity();
         final ItemStack hammer = player.getMainHandItem();
         final ItemStack tool = player.getOffhandItem();
         if (!ToolSmithing.isMetalHammer(hammer)) return;
@@ -182,14 +210,24 @@ public final class TerraVeraEventHandler
     public static void onItemTooltip(ItemTooltipEvent event)
     {
         final ToolMetalState state = event.getItemStack().get(TerraVeraDataComponents.TOOL_METAL_STATE.get());
-        if (state == null) return;
+        if (state != null)
+        {
+            event.getToolTip().add(Component.translatable("terravera.tooltip.metal_mass",
+                Math.round(state.remainingMassFraction() * 100f)));
+            event.getToolTip().add(Component.translatable("terravera.tooltip.smithing_operation",
+                SmithingOperation.byId(state.operation()).displayName()));
+            event.getToolTip().add(Component.translatable("terravera.tooltip.smithing_shape",
+                state.length(), state.width(), state.thickness(), state.bend(), state.edge(), state.strain()));
+        }
 
-        event.getToolTip().add(Component.translatable("terravera.tooltip.metal_mass",
-            Math.round(state.remainingMassFraction() * 100f)));
-        event.getToolTip().add(Component.translatable("terravera.tooltip.smithing_operation",
-            SmithingOperation.byId(state.operation()).displayName()));
-        event.getToolTip().add(Component.translatable("terravera.tooltip.smithing_shape",
-            state.length(), state.width(), state.thickness(), state.bend(), state.edge(), state.strain()));
+        final ToolGrip grip = event.getItemStack().get(TerraVeraDataComponents.TOOL_GRIP.get());
+        if (grip != null)
+        {
+            event.getToolTip().add(Component.translatable("terravera.tooltip.tool_grip",
+                Component.translatable("terravera.grip." + grip.material()),
+                Math.round((grip.speedMultiplier() - 1f) * 100f),
+                Math.round((grip.efficiencyMultiplier() - 1f) * 100f)));
+        }
     }
 
     private TerraVeraEventHandler() {}

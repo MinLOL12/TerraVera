@@ -31,6 +31,8 @@ import com.terravera.common.health.HerbGathering;
 import com.terravera.common.health.effect.TerraVeraEffects;
 import com.terravera.common.items.TerraVeraItems;
 import com.terravera.common.recipes.TerraVeraRecipes;
+import com.terravera.common.skill.SkillSystem;
+import com.terravera.common.structure.StructuralIntegrity;
 import com.terravera.config.TerraVeraConfig;
 
 /**
@@ -82,6 +84,9 @@ public final class TerraVera
 
         TerraVeraEventHandler.init();
         TasteEventHandler.init();   // Register the tasting system
+        SkillSystem.init();
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(StructuralIntegrity::onPlaced);
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(StructuralIntegrity::onLevelTick);
 
         // Disease, water sanitation, and hygiene. See com.terravera.common.health.
         HealthEventHandler.init();

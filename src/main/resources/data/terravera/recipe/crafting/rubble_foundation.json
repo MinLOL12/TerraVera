@@ -1,0 +1,8 @@
+{
+  "__comment__": "Four rough stones bedded together make a real spread footing rather than a decorative single stone.",
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": ["SS", "SS"],
+  "key": { "S": { "tag": "minecraft:stone_crafting_materials" } },
+  "result": { "id": "terravera:rubble_foundation", "count": 1 }
+}

@@ -1,0 +1,7 @@
+{
+  "__comment__": "A cured rubber sleeve is still tied over a real wooden handle; it is not a shortcut around making the handle in the first place.",
+  "type": "terravera:grip_assembly",
+  "material": "rubber",
+  "grip": { "item": "terravera:rubber_tool_grip" },
+  "binding": { "item": "terravera:heavy_cordage" }
+}

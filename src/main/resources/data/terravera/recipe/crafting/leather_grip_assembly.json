@@ -1,0 +1,7 @@
+{
+  "__comment__": "Fit this only after a stick/rod has been lashed into a tool handle. One fresh cord ties the overlapping leather wrap in place.",
+  "type": "terravera:grip_assembly",
+  "material": "leather",
+  "grip": { "item": "terravera:leather_tool_grip" },
+  "binding": { "item": "terravera:cordage" }
+}
