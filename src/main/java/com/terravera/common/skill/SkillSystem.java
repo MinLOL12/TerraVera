@@ -10,6 +10,7 @@ package com.terravera.common.skill;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
@@ -113,7 +114,7 @@ public final class SkillSystem
 
         final PlayerSkills skills = get(player);
         final float familiarity = skills.proficiency(SkillType.MINING);
-        final Component insight = familiarity < 0.12f
+        final MutableComponent insight = familiarity < 0.12f
             ? Component.translatable("terravera.skill.ore.untrained")
             : familiarity < 0.45f
                 ? Component.translatable("terravera.skill.ore.familiar")
