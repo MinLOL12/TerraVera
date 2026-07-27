@@ -1,0 +1,9 @@
+{
+  "__comment__": "Primitive hand-twisting: raw plant fibre can be made into crude cord without retting or a barrel.",
+  "type": "terravera:twisting",
+  "fibre": { "item": "terravera:plant_fiber" },
+  "count": 3,
+  "result": { "id": "terravera:primitive_cordage", "count": 1 },
+  "base_strength": 0.2,
+  "base_length_mm": 250
+}

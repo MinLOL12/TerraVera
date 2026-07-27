@@ -32,6 +32,10 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> RETTED_FIBER = ITEMS.registerSimpleItem("retted_fiber");
     /** Fibre stripped from bark, the strongest source available before agriculture. */
     public static final DeferredHolder<Item, Item> BAST_FIBER = ITEMS.registerSimpleItem("bast_fiber");
+    /** A crude, hand-twisted grass cord made directly from gathered plant fibre. */
+    public static final DeferredHolder<Item, Item> PRIMITIVE_CORDAGE = ITEMS.register("primitive_cordage",
+        () -> new CordageItem(new Item.Properties()
+            .component(TerraVeraDataComponents.CORDAGE.get(), new Cordage(0.25f, "mixed", 250))));
     /** A twisted two-ply cord. The gate on every stone tool in the mod. 
      * Default length: 350mm (35cm) - standard twisted cordage */
     public static final DeferredHolder<Item, Item> CORDAGE = ITEMS.register("cordage",

@@ -10,6 +10,7 @@ adds the step that is actually missing: **something to hold the head on**.
 
 ```
 grass / plants  ──break──►  plant fiber
+plant fiber     ──twist x3 by hand──►  primitive cordage
 plant fiber     ──ret in a sealed barrel of water──►  retted fiber
 retted fiber    ──twist x3──►  cordage
 cordage + stick + knapped head  ──►  a stone tool
