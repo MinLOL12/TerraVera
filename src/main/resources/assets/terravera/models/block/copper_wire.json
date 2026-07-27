@@ -1,1 +1,46 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"terravera:block/copper_wire"}}
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "terravera:block/copper_wire",
+    "wire": "terravera:block/copper_wire",
+    "connector": "terravera:block/generator_side"
+  },
+  "elements": [
+    {
+      "name": "wire_ns",
+      "from": [ 7, 0, 0 ],
+      "to": [ 9, 2, 16 ],
+      "faces": {
+        "north": { "uv": [ 7, 14, 9, 16 ], "texture": "#wire" },
+        "south": { "uv": [ 7, 14, 9, 16 ], "texture": "#wire" },
+        "east":  { "uv": [ 0, 14, 16, 16 ], "texture": "#wire" },
+        "west":  { "uv": [ 0, 14, 16, 16 ], "texture": "#wire" },
+        "up":    { "uv": [ 7, 0, 9, 16 ], "texture": "#wire" }
+      }
+    },
+    {
+      "name": "wire_ew",
+      "from": [ 0, 0, 7 ],
+      "to": [ 16, 2, 9 ],
+      "faces": {
+        "east":  { "uv": [ 14, 7, 16, 9 ], "texture": "#wire" },
+        "west":  { "uv": [ 0, 7, 2, 9 ], "texture": "#wire" },
+        "north": { "uv": [ 0, 14, 16, 16 ], "texture": "#wire" },
+        "south": { "uv": [ 0, 14, 16, 16 ], "texture": "#wire" },
+        "up":    { "uv": [ 0, 7, 16, 9 ], "texture": "#wire" }
+      }
+    },
+    {
+      "name": "bracket_center",
+      "from": [ 6, 0, 6 ],
+      "to": [ 10, 3, 10 ],
+      "faces": {
+        "north": { "uv": [ 6, 6, 10, 9 ], "texture": "#connector" },
+        "south": { "uv": [ 6, 6, 10, 9 ], "texture": "#connector" },
+        "east":  { "uv": [ 6, 6, 10, 9 ], "texture": "#connector" },
+        "west":  { "uv": [ 6, 6, 10, 9 ], "texture": "#connector" },
+        "up":    { "uv": [ 6, 6, 10, 10 ], "texture": "#connector" }
+      }
+    }
+  ]
+}
