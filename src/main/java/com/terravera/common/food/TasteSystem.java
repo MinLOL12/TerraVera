@@ -1,5 +1,6 @@
 package com.terravera.common.food;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -87,6 +88,18 @@ public class TasteSystem {
     }
 
     /**
+     * Non-mutating preview of what {@link #applyMonotonyPenalty} would currently return for this player/food,
+     * for use in tooltips where we don't want looking at an item to count as "eating" it again.
+     */
+    public static int peekMonotonyAdjustedTaste(Player player, String foodId, int baseTaste) {
+        Map<String, Integer> history = playerFoodHistory.get(player.getUUID());
+        int count = history == null ? 0 : history.getOrDefault(foodId, 0);
+        int penalty = Math.min((count / 3) * 8, MAX_MONOTONY_DROP);
+        return Math.max(baseTaste - penalty, TASTE_DISGUSTING);
+    }
+
+
+    /**
      * Reset monotony when eating a different food
      */
     public static void resetMonotonyForNewFood(Player player, String foodId) {
@@ -169,6 +182,35 @@ public class TasteSystem {
     ));
 
     /**
+     * Coarse, human readable descriptor for a taste value, used to show flavor on food item tooltips without
+     * exposing the raw number. Mirrors the bands implied by the {@code TASTE_*} constants.
+     * @return a translation key under {@code terravera.taste.*}
+     */
+    public static String getTasteDescriptorKey(int taste)
+    {
+        if (taste >= TASTE_EXCEPTIONAL - 5) return "terravera.taste.exceptional";
+        if (taste >= TASTE_DELICIOUS) return "terravera.taste.delicious";
+        if (taste >= TASTE_GOOD) return "terravera.taste.good";
+        if (taste >= TASTE_PRETTY_GOOD) return "terravera.taste.pretty_good";
+        if (taste <= TASTE_DISGUSTING + 10) return "terravera.taste.disgusting";
+        if (taste <= TASTE_BAD) return "terravera.taste.bad";
+        return "terravera.taste.okay";
+    }
+
+    /**
+     * Colour to render a taste descriptor in, so good and bad flavors are visually distinct at a glance.
+     */
+    public static ChatFormatting getTasteColor(int taste)
+    {
+        if (taste >= TASTE_EXCEPTIONAL - 5) return ChatFormatting.GOLD;
+        if (taste >= TASTE_GOOD) return ChatFormatting.GREEN;
+        if (taste >= TASTE_PRETTY_GOOD) return ChatFormatting.DARK_GREEN;
+        if (taste <= TASTE_DISGUSTING + 10) return ChatFormatting.RED;
+        if (taste <= TASTE_BAD) return ChatFormatting.GRAY;
+        return ChatFormatting.WHITE;
+    }
+
+    /**
      * Gets base taste for an item. Extend this to read from data packs / JSON.
      * Uses the item's registry ID (e.g. "minecraft:apple" or "terravera:roasted_meat").
      */
@@ -204,7 +246,7 @@ public class TasteSystem {
         return calculateSatisfaction(baseSaturation, finalTaste, hungerPercent, starving);
     }
 
-    private static String getFoodId(ItemStack stack) {
+    public static String getFoodId(ItemStack stack) {
         if (stack.isEmpty()) return "empty";
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
         return (id != null) ? id.toString() : stack.getItem().toString();
