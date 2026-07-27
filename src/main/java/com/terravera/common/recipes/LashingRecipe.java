@@ -184,7 +184,8 @@ public record LashingRecipe(
     @Override
     public boolean canCraftInDimensions(int width, int height)
     {
-        return width * height >= 1 + cordageCount; // 1 haft + cordageCount cordage
+        // One head, one haft, and every length of cordage need their own crafting slot.
+        return width * height >= 2 + cordageCount;
     }
 
     @Override
@@ -238,8 +239,8 @@ public record LashingRecipe(
     {
         KnappedHead head = null;
         List<Cordage> cordages = new ArrayList<>();
-        int normalCordageCount = 0;
-        int heavyCordageCount = 0;
+        int normalCordageSlots = 0;
+        int heavyCordageSlots = 0;
         int hafts = 0, other = 0;
 
         for (int i = 0; i < input.size(); i++)
@@ -255,19 +256,15 @@ public record LashingRecipe(
             }
             else if (this.cordageHeavy.test(stack))
             {
-                heavyCordageCount += stack.getCount();
-                final Cordage cordage = stack.getOrDefault(TerraVeraDataComponents.CORDAGE.get(), Cordage.DEFAULT);
-                for (int j = 0; j < stack.getCount(); j++) {
-                    cordages.add(cordage);
-                }
+                // Crafting consumes one item per occupied slot. Count slots rather than stack sizes so a stack of
+                // cordage cannot satisfy a two-cord lashing while only one length is actually consumed.
+                heavyCordageSlots++;
+                cordages.add(stack.getOrDefault(TerraVeraDataComponents.CORDAGE.get(), Cordage.DEFAULT));
             }
             else if (this.cordageNormal.test(stack))
             {
-                normalCordageCount += stack.getCount();
-                final Cordage cordage = stack.getOrDefault(TerraVeraDataComponents.CORDAGE.get(), Cordage.DEFAULT);
-                for (int j = 0; j < stack.getCount(); j++) {
-                    cordages.add(cordage);
-                }
+                normalCordageSlots++;
+                cordages.add(stack.getOrDefault(TerraVeraDataComponents.CORDAGE.get(), Cordage.DEFAULT));
             }
             else if (haft.test(stack))
             {
@@ -281,14 +278,14 @@ public record LashingRecipe(
 
         if (head == null || hafts != 1 || other > 0) return null;
         
-        // Check cordage requirements: need exactly cordageCount normal OR cordageCount heavy cordage
+        // Check cordage requirements: the occupied cordage slots must be exactly the required number of one type.
+        // This both prevents mixing types and guarantees every required length is consumed by the crafting grid.
         if (TerraVeraConfig.SERVER.requireCordageForHafting.get())
         {
-            boolean hasCorrectNormal = normalCordageCount >= cordageCount;
-            boolean hasCorrectHeavy = heavyCordageCount >= cordageCount;
-            
+            final boolean hasCorrectNormal = normalCordageSlots == cordageCount && heavyCordageSlots == 0;
+            final boolean hasCorrectHeavy = heavyCordageSlots == cordageCount && normalCordageSlots == 0;
+
             if (!hasCorrectNormal && !hasCorrectHeavy) return null;
-            if (hasCorrectNormal && hasCorrectHeavy) return null; // Can't mix types
         }
 
         for (MaterialResult result : results)

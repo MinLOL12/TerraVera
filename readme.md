@@ -9,7 +9,7 @@ In TerraFirmaCraft you knap a stone head, put a stick under it in a crafting gri
 adds the step that is actually missing: **something to hold the head on**.
 
 ```
-grass / plants  ──break──►  plant fiber
+grass / plants  ──pull by hand / cut──►  plant fiber
 plant fiber     ──twist x3 by hand──►  primitive cordage
 plant fiber     ──ret in a sealed barrel of water──►  retted fiber
 retted fiber    ──twist x3──►  cordage
@@ -20,7 +20,7 @@ Fibre comes in three grades, and where you can get it is gated on what you alrea
 
 | Fibre | Source | Strength | Notes |
 | --- | --- | --- | --- |
-| Grass | Common grasses, ferns | 0.35 | Everywhere. Weak. |
+| Grass | Common grasses, ferns | 0.35 | Everywhere. Weak. Pull it out bare-handed (slowly), or cut it with a blade. |
 | Herb | Broadleaf herbs, goldenrod, yucca | 0.55 | A step up. |
 | Bast | Cattail, reed, pampas, wild jute | 0.90 | **Needs a blade to strip.** |
 
@@ -91,9 +91,9 @@ Then:
 
 `config/terravera-server.toml`, all hot-reloadable:
 
-- `requireCordageForHafting` — set `false` to restore TFC's stick-only hafting.
+- `requireCordageForHafting` — set `false` to allow stick-only hafting for TerraVera heads.
 - `scaleDurabilityByCraftsmanship`, `minimumDurabilityMultiplier`, `maximumDurabilityMultiplier`.
-- `plantsDropFibre`, `fibreDropChance`, `fibreKnifeBonus`, `rettingTicks`.
+- `plantsDropFibre`, `fibreDropChance`, `fibreKnifeBonus`, `handGatheringSpeed`, `rettingTicks`.
 - `showKnappingFeedback` — set `false` to hide the "why isn't this working" hints.
 
 ## Extending it

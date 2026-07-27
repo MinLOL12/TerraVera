@@ -1,0 +1,20 @@
+{
+  "__comment__": "TerraVera override: an obsidian knife must be lashed with cordage, not merely placed on a stick.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tfc:groundcover/obsidian_shard"
+    },
+    {
+      "tag": "c:rods/wooden"
+    },
+    {
+      "tag": "terravera:normal_cordage"
+    }
+  ],
+  "result": {
+    "id": "tfc:obsidian_knife",
+    "count": 1
+  }
+}
