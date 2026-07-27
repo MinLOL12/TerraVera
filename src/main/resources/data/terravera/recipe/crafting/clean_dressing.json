@@ -1,0 +1,13 @@
+{
+  "__comment__": "Boiled cloth kept dry. Wound care that predates any understanding of why it works.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "tfc:burlap_cloth" },
+    { "item": "tfc:powder/wood_ash" }
+  ],
+  "result": {
+    "count": 2,
+    "id": "terravera:clean_dressing"
+  }
+}

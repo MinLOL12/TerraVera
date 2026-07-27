@@ -1,0 +1,13 @@
+{
+  "__comment__": "Typhoid fever (Salmonella typhi). Faecal-oral: a contaminated well, a latrine uphill of the water. Notoriously slow to show - one to three weeks - and then a sustained high fever lasting weeks. Boiling prevents it outright; filtration does NOT, which is the whole reason both treatment tiers exist.",
+  "vectors": ["water", "sanitation"],
+  "base_chance": 0.10,
+  "incubation_ticks": 264000,
+  "duration_ticks": 336000,
+  "severity": "severe",
+  "symptoms": ["fever", "fatigue", "malabsorption", "muscle_pain"],
+  "contagious": false,
+  "immunity_ticks": 1200000,
+  "lethal": true,
+  "remedies": ["terravera:remedies/antipyretic", "terravera:remedies/medicine"]
+}

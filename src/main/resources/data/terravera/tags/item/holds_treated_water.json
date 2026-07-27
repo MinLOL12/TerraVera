@@ -1,0 +1,13 @@
+{
+  "__comment__": "Containers whose water TerraVera tracks the treatment state of.",
+  "values": [
+    { "id": "tfc:ceramic_jug", "required": false },
+    { "id": "tfc:jug", "required": false },
+    { "id": "tfc:silica_glass_bottle", "required": false },
+    { "id": "tfc:hematitic_glass_bottle", "required": false },
+    { "id": "tfc:volcanic_glass_bottle", "required": false },
+    { "id": "tfc:olivine_glass_bottle", "required": false },
+    { "id": "tfc:wooden_bucket", "required": false },
+    { "id": "minecraft:bucket", "required": false }
+  ]
+}

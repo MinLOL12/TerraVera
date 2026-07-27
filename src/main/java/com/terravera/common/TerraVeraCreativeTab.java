@@ -47,6 +47,16 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.CORDAGE.get());
         event.accept(TerraVeraItems.HEAVY_CORDAGE.get());
 
+        // Health, hygiene, and water treatment, in rough progression order.
+        event.accept(TerraVeraItems.BITTER_HERBS.get());
+        event.accept(TerraVeraItems.WILLOW_BARK.get());
+        event.accept(TerraVeraItems.WORMWOOD.get());
+        event.accept(TerraVeraItems.WATER_FILTER.get());
+        event.accept(TerraVeraItems.CLEAN_DRESSING.get());
+        event.accept(TerraVeraItems.SOAP.get());
+        event.accept(TerraVeraItems.REHYDRATION_SALTS.get());
+        event.accept(TerraVeraItems.MEDICINE.get());
+
         // One entry per (head kind x stone), with the component filled in, so that creative and JEI show real heads
         // rather than blank ones that no lashing recipe will accept.
         TerraVeraItems.HEADS.forEach((kind, holder) -> {

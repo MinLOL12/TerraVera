@@ -42,6 +42,15 @@ public final class TerraVeraDataComponents
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<DamageBonus>> BINDING_DAMAGE_BONUS =
         register("binding_damage_bonus", builder -> builder.persistent(DamageBonus.CODEC).networkSynchronized(DamageBonus.STREAM_CODEC));
 
+    /**
+     * Attached to anything that holds drinking water. Records where the water came from and what has since been done
+     * to it, so that a jug of boiled spring water and a jug of swamp water are not the same item.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<com.terravera.common.health.WaterTreatment>> WATER_TREATMENT =
+        register("water_treatment", builder -> builder
+            .persistent(com.terravera.common.health.WaterTreatment.CODEC)
+            .networkSynchronized(com.terravera.common.health.WaterTreatment.STREAM_CODEC));
+
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(
         String name, UnaryOperator<DataComponentType.Builder<T>> builder)
     {

@@ -1,0 +1,19 @@
+{
+  "__comment__": "Tier 3. A concentrated extract, boiled down in strong alcohol from the full herbal roster. This is the payoff for reaching alcohol distillation and glassware, and it cures essentially anything.",
+  "type": "tfc:pot",
+  "duration": 4800,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "tfc:vodka"
+  },
+  "ingredients": [
+    { "item": "terravera:willow_bark" },
+    { "item": "terravera:wormwood" },
+    { "item": "terravera:bitter_herbs" },
+    { "item": "tfc:powder/salt" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:medicine" }
+  ],
+  "temperature": 400.0
+}

@@ -1,0 +1,13 @@
+{
+  "__comment__": "Influenza. Also airborne, but abrupt in onset and genuinely debilitating - fever, aching, exhaustion - for about a week. The reason a base full of people is a liability in winter.",
+  "vectors": ["contact"],
+  "base_chance": 0.07,
+  "incubation_ticks": 30000,
+  "duration_ticks": 144000,
+  "severity": "moderate",
+  "symptoms": ["fever", "fatigue", "muscle_pain", "chills", "cough"],
+  "contagious": true,
+  "immunity_ticks": 720000,
+  "lethal": false,
+  "remedies": ["terravera:remedies/antipyretic", "terravera:remedies/herbal", "terravera:remedies/medicine"]
+}

@@ -1,0 +1,13 @@
+{
+  "__comment__": "Cryptosporidium. The other untreated-surface-water protozoan, and notably tougher than Giardia - its oocysts shrug off most treatment short of boiling or a real filter. Shorter incubation than Giardia, similar misery.",
+  "vectors": ["water"],
+  "base_chance": 0.14,
+  "incubation_ticks": 144000,
+  "duration_ticks": 240000,
+  "severity": "moderate",
+  "symptoms": ["malabsorption", "dehydration", "fatigue"],
+  "contagious": false,
+  "immunity_ticks": 0,
+  "lethal": false,
+  "remedies": ["terravera:remedies/antiparasitic", "terravera:remedies/rehydration", "terravera:remedies/medicine"]
+}

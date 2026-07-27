@@ -1,0 +1,13 @@
+{
+  "__comment__": "Clostridium tetani. Soil-borne, entering through a dirty wound - which is why the roll is gated on being hurt while standing in muck. Roughly a week to onset and then rigid, spasming muscles. Rare, critical, lethal, and effectively untreatable without real medicine. The strongest argument the mod makes for hygiene.",
+  "vectors": ["wound"],
+  "base_chance": 0.035,
+  "incubation_ticks": 168000,
+  "duration_ticks": 168000,
+  "severity": "critical",
+  "symptoms": ["spasms", "muscle_pain", "fever", "fatigue"],
+  "contagious": false,
+  "immunity_ticks": 0,
+  "lethal": true,
+  "remedies": ["terravera:remedies/medicine"]
+}

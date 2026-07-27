@@ -1,0 +1,9 @@
+{
+  "__comment__": "Tier 2. Clean cloth, honey, or alcohol on a wound. Honey is a real antibacterial and was used for exactly this. Cures an ordinary wound infection outright if applied while it is still developing.",
+  "ingredient": "terravera:remedies/wound",
+  "treats": ["terravera:wound_infection"],
+  "shorten_ticks": 72000,
+  "severity_reduction": 0.5,
+  "cures": true,
+  "tier": "prepared"
+}

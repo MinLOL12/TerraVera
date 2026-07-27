@@ -1,0 +1,15 @@
+{
+  "__comment__": "Tier 2. Boiled water, salt, and a sweetener. Oral rehydration therapy is one of the highest-impact medical interventions ever devised and it is this simple. Does not kill the pathogen - it just keeps you alive while your body does, which for cholera is the entire game.",
+  "ingredient": "terravera:remedies/rehydration",
+  "treats": [
+    "terravera:cholera",
+    "terravera:dysentery",
+    "terravera:norovirus",
+    "terravera:cryptosporidiosis"
+  ],
+  "treats_symptoms": ["dehydration", "nausea"],
+  "shorten_ticks": 36000,
+  "severity_reduction": 0.6,
+  "cures": false,
+  "tier": "prepared"
+}

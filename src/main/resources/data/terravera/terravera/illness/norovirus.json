@@ -1,0 +1,13 @@
+{
+  "__comment__": "Norovirus. Contaminated food and filthy hands. Very short incubation (12-48h) and a short, violent course - nausea and fluid loss for a day or two. The fastest lesson in the mod about washing before you eat.",
+  "vectors": ["food", "sanitation"],
+  "base_chance": 0.16,
+  "incubation_ticks": 18000,
+  "duration_ticks": 48000,
+  "severity": "moderate",
+  "symptoms": ["nausea", "dehydration", "fatigue"],
+  "contagious": true,
+  "immunity_ticks": 240000,
+  "lethal": false,
+  "remedies": ["terravera:remedies/rehydration", "terravera:remedies/herbal", "terravera:remedies/medicine"]
+}

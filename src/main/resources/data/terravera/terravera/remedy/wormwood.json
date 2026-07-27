@@ -1,0 +1,13 @@
+{
+  "__comment__": "Tier 1-2. Anthelmintic plants: wormwood, garlic, pumpkin seed. Genuinely effective against intestinal worms, and the only pre-modern answer to a tapeworm.",
+  "ingredient": "terravera:remedies/antiparasitic",
+  "treats": [
+    "terravera:tapeworm",
+    "terravera:giardiasis",
+    "terravera:cryptosporidiosis"
+  ],
+  "shorten_ticks": 96000,
+  "severity_reduction": 0.4,
+  "cures": false,
+  "tier": "herbal"
+}

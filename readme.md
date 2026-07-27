@@ -98,6 +98,11 @@ Then:
 - `scaleFoodEatTimeBySize` — set `false` to go back to vanilla's flat 1.6 second eat time for every food.
 - `foodEatTimeMultiplier` — global multiplier on top of the size-derived eat time, for tuning pace without retuning every band.
 - `showFlavorTooltip` — set `false` to hide the "Flavor: ..." line on food tooltips.
+- `[disease]` — `enableDisease`, `diseaseChanceMultiplier`, `diseaseDurationMultiplier`, `enableContagion`,
+  `contagionRange`, `enableFoodborneIllness`, `enableWoundInfection`.
+- `[water]` — `enableWaterContamination`, `waterContaminationMultiplier`, `warnBeforeDrinkingUnsafeWater`,
+  `showWaterTooltip`.
+- `[hygiene]` — `enableHygiene`, `hygieneDecayMultiplier`.
 
 ### Food: flavor and eating time
 
@@ -128,6 +133,71 @@ Two small, TFC-flavoured changes to eating:
   `Very Light` one), except for `Tiny`/`Very Small` items, where any weight is still a single mouthful. See
   [`FoodEatTime`](src/main/java/com/terravera/common/food/FoodEatTime.java) for the exact bands.
 
+### Disease, water, and sanitation
+
+TerraFirmaCraft splits the world's water into "fresh" and "salt", and every fresh block is equally safe to drink. That
+is the thing this system replaces. Water now has a **contamination** value you can read off the landscape before you
+drink it, illnesses are **real diseases with real incubation periods**, and the ways out of them unlock gradually.
+
+**Water sources are not interchangeable.** Contamination is computed from flow, the size and depth of the body of
+water, the mud and muck around it, and the climate:
+
+| Source | Risk | Why |
+| --- | --- | --- |
+| Cold, fast, high-altitude runoff | Very low | Flow and cold both suppress pathogen load |
+| Rivers and flowing water | Low | Moving and diluted, but drains everything upstream |
+| Lakes and deep pools | Moderate | Still, but large enough to stay reasonable |
+| Shallow ponds and puddles | High | Warm, still, small, and walked in |
+| Water over mud, swamps, lowlands | Very high | The worst natural water in the game |
+| Anything downhill of your own waste | Near-certain | This is how you give yourself cholera |
+
+Warm climates raise contamination and freezing ones suppress it. A jug remembers where it was filled, so a jug of
+boiled spring water and a jug of swamp water are no longer the same item.
+
+**Nothing makes you ill instantly.** Every illness has an incubation period, so you drink from the swamp on day three
+and fall ill on day five — the lesson has to be learned by reasoning about what you did, which is the entire point.
+
+| Illness | Caught from | Incubates | Signature |
+| --- | --- | --- | --- |
+| Common cold | Close contact | ~1.5 days | Fatigue, cough. Confers short immunity |
+| Influenza | Close contact | ~1.25 days | Fever, aching, exhaustion |
+| Norovirus | Contaminated food, filthy hands | ~0.75 days | Violent, short, dehydrating |
+| Giardiasis | Untreated surface water | ~9 days | Malabsorption. Lives in clear mountain streams |
+| Cryptosporidiosis | Untreated surface water | ~6 days | Malabsorption; resists most treatment but boiling |
+| Dysentery | Poor sanitation, dirty water | ~2 days | The everyday killer of pre-modern camps |
+| Typhoid | Fouled wells, poor sanitation | ~11 days | Weeks of sustained fever. **Filtration does not stop it** |
+| Cholera | Badly contaminated water | ~1 day | Kills by dehydration, fast |
+| Tapeworm | Undercooked meat | ~20 days | Constant hunger, nutrition that never adds up |
+| Trichinosis | Undercooked pork and bear | ~8 days | Larvae in muscle — fever plus severe muscle pain |
+| Infected wound | A cut taken while filthy | ~2.5 days | The most preventable illness in the mod |
+| Tetanus | A dirty wound in soil | ~7 days | Rigid spasms. Rare, critical, needs real medicine |
+
+Symptoms are the mundane, economic ones: fatigue, fever, chills, nausea, muscle pain, increased hunger, dehydration,
+and **malabsorption** — which takes back part of every meal, and so quietly shrinks your health bar through TFC's
+nutrition system while you eat exactly as much as you always did.
+
+**Prevention and treatment unlock in tiers.**
+
+- **Hygiene** is available from the first minute and is a sliding multiplier on every food- and wound-borne infection,
+  not a checkbox. You get filthy butchering, working in mud, and simply living; you wash with water, better with wood
+  ash or lye, best with soap (tallow or olive oil + lye, boiled — real saponification).
+- **Boiling** needs only a firepit and a clay pot. Hold a filled container to a hot pot and the water is safe. Total,
+  permanent, and costs fuel every single time.
+- **Filtration** (sand, charcoal, cordage) is portable and fire-free. It removes the *parasites* and most of the load,
+  but deliberately **not the bacteria** — so it never obsoletes boiling, and both stay worth carrying.
+- **Herbal remedies** are gathered as you travel: bitter herbs from the same plants that give herb fibre, wormwood from
+  dry shrubs, willow bark stripped from willow with a knife (salicin — genuine antipyretic chemistry). They shorten and
+  blunt; they never cure.
+- **Prepared remedies** need a pot or salt: clean dressings, and rehydration salts — oral rehydration therapy, which is
+  the real-world answer to cholera and is the difference between surviving it and not.
+- **Medicine** is the endgame: a concentrated extract distilled in strong alcohol, which cures essentially anything.
+
+Nutrition feeds back into all of it — a well-fed player is meaningfully harder to infect than a starving one, so the
+disease system compounds with the food system rather than sitting beside it.
+
+Everything above is data-driven and hot-reloadable. All of it can be turned off or retuned in
+`config/terravera-server.toml` under `[disease]`, `[water]`, and `[hygiene]`.
+
 ## Extending it
 
 Everything that defines the mod's behaviour is data, loaded through TerraFirmaCraft's own data manager system (so it
@@ -136,7 +206,14 @@ reloads with `/reload` and syncs to clients automatically):
 - `data/<ns>/terravera/head_profile/<kind>.json` — what counts as a given kind of head.
 - `data/<ns>/terravera/knappable_stone/<name>.json` — what you can sit down and knap.
 - `data/<ns>/terravera/fibre_source/<name>.json` — what yields fibre, how much, and how good.
+- `data/<ns>/terravera/illness/<name>.json` — a disease: its vectors, incubation, duration, symptoms, and remedies.
+- `data/<ns>/terravera/remedy/<name>.json` — what treats what, by how much, and at which progression tier.
 - `data/<ns>/recipe/…` — `terravera:lashing` and `terravera:twisting` recipes.
+
+Adding a disease is a single JSON file — pick its transmission vectors, an incubation period, a symptom list, and the
+remedy tags that treat it. The health system also reads a handful of tags (`terravera:fouls_water`,
+`terravera:soils_player`, `terravera:risky_raw_meat`, `terravera:remedies/*`, `terravera:herbs/*`), so a pack can point
+it at other mods' blocks and items without touching code.
 
 Adding a new stone, a new fibre plant, or retuning what counts as an axe bit is a single JSON file.
 

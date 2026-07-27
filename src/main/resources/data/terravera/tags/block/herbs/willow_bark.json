@@ -1,0 +1,7 @@
+{
+  "__comment__": "Willow. Salix bark is where salicin - aspirin - actually comes from. Needs a blade to strip, in the same spirit as bast fibre.",
+  "values": [
+    { "id": "tfc:wood/log/willow", "required": false },
+    { "id": "tfc:wood/wood/willow", "required": false }
+  ]
+}

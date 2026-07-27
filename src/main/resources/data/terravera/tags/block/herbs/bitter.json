@@ -1,0 +1,11 @@
+{
+  "__comment__": "Broadleaf herbs that yield bitter, tannin-rich leaves. Deliberately the same roster as the herb-grade fibre plants - you gather both off the same walk.",
+  "values": [
+    "#terravera:fibre/herb",
+    { "id": "tfc:plant/labrador_tea", "required": false },
+    { "id": "tfc:plant/heather", "required": false },
+    { "id": "tfc:plant/calendula", "required": false },
+    { "id": "tfc:plant/kinnikinnick", "required": false },
+    { "id": "tfc:plant/licorice_fern", "required": false }
+  ]
+}

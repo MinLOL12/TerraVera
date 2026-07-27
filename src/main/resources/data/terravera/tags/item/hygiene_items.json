@@ -1,0 +1,9 @@
+{
+  "__comment__": "Anything that will clean your hands. Soap is best; wood ash and lye are genuinely alkaline and genuinely work, which is why they were used for exactly this for millennia.",
+  "values": [
+    "#terravera:soap",
+    { "id": "tfc:powder/wood_ash", "required": false },
+    { "id": "tfc:powder/lime", "required": false },
+    { "id": "tfc:powder/soda_ash", "required": false }
+  ]
+}

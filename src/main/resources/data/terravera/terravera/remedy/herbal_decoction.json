@@ -1,0 +1,9 @@
+{
+  "__comment__": "Tier 1. Bitter, tannin-rich leaves chewed or steeped. Available from the first day. Takes the edge off almost anything and shortens it a little; cures nothing.",
+  "ingredient": "terravera:remedies/herbal",
+  "treats": [],
+  "shorten_ticks": 18000,
+  "severity_reduction": 0.15,
+  "cures": false,
+  "tier": "herbal"
+}

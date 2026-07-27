@@ -1,0 +1,13 @@
+{
+  "__comment__": "Bacillary dysentery (Shigella). Poor sanitation and dirty water. Short incubation, hard course, and the everyday killer of pre-modern camps - not dramatic like cholera, just relentless.",
+  "vectors": ["water", "sanitation", "food"],
+  "base_chance": 0.15,
+  "incubation_ticks": 48000,
+  "duration_ticks": 120000,
+  "severity": "severe",
+  "symptoms": ["dehydration", "fever", "malabsorption", "fatigue"],
+  "contagious": false,
+  "immunity_ticks": 120000,
+  "lethal": true,
+  "remedies": ["terravera:remedies/rehydration", "terravera:remedies/herbal", "terravera:remedies/medicine"]
+}

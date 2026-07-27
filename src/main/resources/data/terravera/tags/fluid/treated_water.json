@@ -1,0 +1,4 @@
+{
+  "__comment__": "Fluids that count as safe regardless of origin. Empty by default - TerraVera tracks treatment on the container, not the fluid - but here for packs that add a genuinely purified fluid.",
+  "values": []
+}

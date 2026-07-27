@@ -57,6 +57,35 @@ public final class TerraVeraConfig
         /** Whether food item tooltips show a flavor line (e.g. "Delicious.") derived from the taste system. */
         public final Supplier<Boolean> showFlavorTooltip;
 
+        // ----- Disease, water, and sanitation ---------------------------------------------------------------
+
+        /** Master switch for the whole disease system. */
+        public final Supplier<Boolean> enableDisease;
+        /** Global multiplier on every infection chance in the mod. */
+        public final Supplier<Double> diseaseChanceMultiplier;
+        /** Global multiplier on how long illnesses take to incubate and run their course. */
+        public final Supplier<Double> diseaseDurationMultiplier;
+        /** Whether contagious illnesses can spread between nearby players. */
+        public final Supplier<Boolean> enableContagion;
+        /** How far, in blocks, a contagious illness can spread by close contact. */
+        public final Supplier<Double> contagionRange;
+        /** Whether untreated water sources carry disease risk at all. */
+        public final Supplier<Boolean> enableWaterContamination;
+        /** Multiplier on the contamination of every natural water source. */
+        public final Supplier<Double> waterContaminationMultiplier;
+        /** Whether the player is warned before drinking from visibly risky water. */
+        public final Supplier<Boolean> warnBeforeDrinkingUnsafeWater;
+        /** Whether the hygiene system is active. */
+        public final Supplier<Boolean> enableHygiene;
+        /** Multiplier on how fast hygiene decays from work and filth. */
+        public final Supplier<Double> hygieneDecayMultiplier;
+        /** Whether item tooltips show water quality and treatment state. */
+        public final Supplier<Boolean> showWaterTooltip;
+        /** Whether eating undercooked meat can transmit parasites. */
+        public final Supplier<Boolean> enableFoodborneIllness;
+        /** Whether dirty wounds can become infected. */
+        public final Supplier<Boolean> enableWoundInfection;
+
         ServerConfig(ModConfigSpec.Builder builder)
         {
             builder.push("hafting");
@@ -114,6 +143,54 @@ public final class TerraVeraConfig
             showFlavorTooltip = builder
                 .comment("If true, food item tooltips show a flavor line (e.g. 'Delicious.') based on the taste system.")
                 .define("showFlavorTooltip", true);
+            builder.pop();
+
+            builder.push("disease");
+            enableDisease = builder
+                .comment("Master switch for the disease system. If false, no illness is ever contracted and existing infections stop progressing.")
+                .define("enableDisease", true);
+            diseaseChanceMultiplier = builder
+                .comment("Global multiplier on every infection chance. 0.5 halves how often you get ill, 2.0 doubles it.")
+                .defineInRange("diseaseChanceMultiplier", 1.0, 0.0, 10.0);
+            diseaseDurationMultiplier = builder
+                .comment("Global multiplier on incubation periods and illness durations. Raise for a slower, more drawn out disease game.")
+                .defineInRange("diseaseDurationMultiplier", 1.0, 0.1, 10.0);
+            enableContagion = builder
+                .comment("If true, colds and influenza can spread from an ill player to nearby healthy ones.")
+                .define("enableContagion", true);
+            contagionRange = builder
+                .comment("How close, in blocks, players have to be for a contagious illness to spread between them.")
+                .defineInRange("contagionRange", 4.0, 1.0, 32.0);
+            enableFoodborneIllness = builder
+                .comment("If true, rotten food, undercooked meat, and food handled with filthy hands can transmit illness.")
+                .define("enableFoodborneIllness", true);
+            enableWoundInfection = builder
+                .comment("If true, taking damage while filthy - or from something out of the soil - can cause an infected wound or tetanus.")
+                .define("enableWoundInfection", true);
+            builder.pop();
+
+            builder.push("water");
+            enableWaterContamination = builder
+                .comment("If true, natural water sources have varying contamination and drinking untreated water can make you ill.")
+                .define("enableWaterContamination", true);
+            waterContaminationMultiplier = builder
+                .comment("Multiplier on the contamination of every natural water source. Lower makes the world's water safer overall.")
+                .defineInRange("waterContaminationMultiplier", 1.0, 0.0, 5.0);
+            warnBeforeDrinkingUnsafeWater = builder
+                .comment("If true, a warning is shown when you are about to drink visibly risky water, and the first such drink each session asks for confirmation by drinking again.")
+                .define("warnBeforeDrinkingUnsafeWater", true);
+            showWaterTooltip = builder
+                .comment("If true, water containers show the quality and treatment state of the water they hold.")
+                .define("showWaterTooltip", true);
+            builder.pop();
+
+            builder.push("hygiene");
+            enableHygiene = builder
+                .comment("If true, the player accumulates grime from work and filth, which raises the chance of food- and wound-borne infection until they wash.")
+                .define("enableHygiene", true);
+            hygieneDecayMultiplier = builder
+                .comment("Multiplier on how fast hygiene is lost. Lower means you stay clean longer.")
+                .defineInRange("hygieneDecayMultiplier", 1.0, 0.0, 5.0);
             builder.pop();
         }
 

@@ -1,0 +1,13 @@
+{
+  "__comment__": "Giardia lamblia. The classic backpacker's parasite: it lives in cold, clear-looking mountain streams, which is exactly why 'the water looks clean' is not a safety test. Long incubation (1-2 weeks), long course, and its signature is malabsorption - you eat normally and waste away anyway. Filtration stops it; boiling stops it; looking at the water does not.",
+  "vectors": ["water"],
+  "base_chance": 0.20,
+  "incubation_ticks": 216000,
+  "duration_ticks": 360000,
+  "severity": "moderate",
+  "symptoms": ["malabsorption", "nausea", "fatigue", "increased_hunger"],
+  "contagious": false,
+  "immunity_ticks": 0,
+  "lethal": false,
+  "remedies": ["terravera:remedies/antiparasitic", "terravera:remedies/herbal", "terravera:remedies/medicine"]
+}

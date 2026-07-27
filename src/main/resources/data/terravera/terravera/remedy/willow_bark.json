@@ -1,0 +1,10 @@
+{
+  "__comment__": "Tier 1. Salicin-bearing bark - real aspirin, four thousand years early. Does nothing to the underlying infection but genuinely manages fever and aching, which is often the difference between working and not.",
+  "ingredient": "terravera:remedies/antipyretic",
+  "treats": [],
+  "treats_symptoms": ["fever", "muscle_pain", "chills"],
+  "shorten_ticks": 12000,
+  "severity_reduction": 0.35,
+  "cures": false,
+  "tier": "herbal"
+}

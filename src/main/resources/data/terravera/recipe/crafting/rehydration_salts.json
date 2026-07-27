@@ -1,0 +1,14 @@
+{
+  "__comment__": "Salt and a sweetener. Oral rehydration therapy is genuinely this simple, and genuinely one of the most effective medical interventions there is.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "tfc:powder/salt" },
+    { "item": "tfc:powder/salt" },
+    { "tag": "tfc:foods/sweeteners" }
+  ],
+  "result": {
+    "count": 2,
+    "id": "terravera:rehydration_salts"
+  }
+}
