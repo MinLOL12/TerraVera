@@ -26,7 +26,7 @@ public final class TerraVeraConfig
     {
         private ModConfigSpec spec;
 
-        /** Whether hafting a stone head requires cordage at all. Turning this off restores vanilla TFC hafting. */
+        /** Whether TerraVera's custom stone heads require cordage to be lashed to a haft. */
         public final Supplier<Boolean> requireCordageForHafting;
         /** Whether plants and grass drop fibre when broken by hand. */
         public final Supplier<Boolean> plantsDropFibre;
@@ -34,6 +34,8 @@ public final class TerraVeraConfig
         public final Supplier<Double> fibreDropChance;
         /** Extra chance per level of a knife-like tool. Cutting fibre with a blade is much more productive. */
         public final Supplier<Double> fibreKnifeBonus;
+        /** Mining-speed multiplier for grass pulled out with an empty hand. */
+        public final Supplier<Double> handGatheringSpeed;
         /** Whether stone tool durability is scaled by knapping quality, cordage strength, and binding quality. */
         public final Supplier<Boolean> scaleDurabilityByCraftsmanship;
         /** The lowest multiplier a truly awful head + lashing can produce. */
@@ -53,7 +55,7 @@ public final class TerraVeraConfig
         {
             builder.push("hafting");
             requireCordageForHafting = builder
-                .comment("If true, stone tool heads must be lashed to a haft with cordage. If false, TFC's vanilla stick-only hafting recipes apply.")
+                .comment("If true, TerraVera stone heads must be lashed to a haft with cordage. If false, only TerraVera heads may be hafted without it.")
                 .define("requireCordageForHafting", true);
             scaleDurabilityByCraftsmanship = builder
                 .comment("If true, the durability of a hafted stone tool is scaled by how well the head was knapped, how strong the cordage is, and how good the binding quality is.")
@@ -82,6 +84,9 @@ public final class TerraVeraConfig
             fibreKnifeBonus = builder
                 .comment("Additional fibre drop chance when harvesting with a knife or other bladed tool.")
                 .defineInRange("fibreKnifeBonus", 0.5, 0.0, 1.0);
+            handGatheringSpeed = builder
+                .comment("Mining-speed multiplier when pulling grass with an empty hand. Lower values make hand gathering take longer.")
+                .defineInRange("handGatheringSpeed", 0.2, 0.01, 1.0);
             rettingTicks = builder
                 .comment("How long a bundle of fibre takes to ret in a sealed barrel of water, in ticks.")
                 .defineInRange("rettingTicks", 24000, 1, Integer.MAX_VALUE);
