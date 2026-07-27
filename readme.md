@@ -107,6 +107,11 @@ Two small, TFC-flavoured changes to eating:
   (e.g. `Flavor: Delicious`), derived from the same [`TasteSystem`](src/main/java/com/terravera/common/food/TasteSystem.java)
   that already adjusted saturation gain. It reflects the current player's monotony penalty, so a food you've been
   living on will show as blander than the first bite did, without needing to actually eat it again to find out.
+- **Every food in TerraFirmaCraft has an assigned flavour.** The complete TFC roster — fruit, vegetables, grains at
+  every stage from raw ear to baked bread, raw and cooked meats, eggs, cheese, soups, salads, sandwiches and jarred
+  preserves — has a hand-set taste value in [`TasteSystem.DEFAULT_TASTES`](src/main/java/com/terravera/common/food/TasteSystem.java),
+  anchored to the vanilla foods, so nothing shows a generic `Plain` by accident. If something *does* read as Plain,
+  it genuinely is bland (looking at you, raw cabbage).
 - **How long a bite takes depends on how big the bite is.** Vanilla (and TFC, which doesn't touch this) eats every
   item in a flat 1.6 seconds, whether it's a single berry or a whole roast. TerraVera reads the item's TFC
   [size and weight](https://terrafirmacraft.github.io/Field-Guide/en_us/getting_started/size_and_weight.html) and
