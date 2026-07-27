@@ -43,6 +43,7 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.PLANT_FIBER.get());
         event.accept(TerraVeraItems.RETTED_FIBER.get());
         event.accept(TerraVeraItems.BAST_FIBER.get());
+        event.accept(TerraVeraItems.PRIMITIVE_CORDAGE.get());
         event.accept(TerraVeraItems.CORDAGE.get());
         event.accept(TerraVeraItems.HEAVY_CORDAGE.get());
 
