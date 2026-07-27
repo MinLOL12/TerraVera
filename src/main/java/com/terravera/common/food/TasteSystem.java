@@ -1,7 +1,8 @@
 package com.terravera.common.food;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.HashMap;
@@ -98,9 +99,61 @@ public class TasteSystem {
     }
 
     /**
-     * Example taste values (can be loaded from JSON later)
+     * Example taste values (can be loaded from JSON later).
+     * Keys can be full "namespace:path" or just "path".
      */
     public static final Map<String, Integer> DEFAULT_TASTES = Map.ofEntries(
+            // Bad / survival foods
+            Map.entry("minecraft:grass", -80),
+            Map.entry("minecraft:tall_grass", -80),
+            Map.entry("minecraft:fern", -70),
+            Map.entry("minecraft:dead_bush", -90),
+            Map.entry("minecraft:kelp", -30),
+            Map.entry("minecraft:dried_kelp", 10),
+            Map.entry("minecraft:rotten_flesh", -95),
+            Map.entry("minecraft:spider_eye", -70),
+            Map.entry("minecraft:poisonous_potato", -60),
+            Map.entry("minecraft:pufferfish", -100),
+
+            // Foraged / raw
+            Map.entry("minecraft:apple", 35),
+            Map.entry("minecraft:sweet_berries", 40),
+            Map.entry("minecraft:glow_berries", 45),
+            Map.entry("minecraft:melon_slice", 30),
+            Map.entry("minecraft:carrot", 25),
+            Map.entry("minecraft:potato", -10),
+            Map.entry("minecraft:beetroot", 20),
+            Map.entry("minecraft:brown_mushroom", -15),
+            Map.entry("minecraft:red_mushroom", -25),
+            Map.entry("minecraft:raw_beef", -20),
+            Map.entry("minecraft:raw_porkchop", -18),
+            Map.entry("minecraft:raw_chicken", -35),
+            Map.entry("minecraft:raw_mutton", -22),
+            Map.entry("minecraft:raw_cod", -15),
+            Map.entry("minecraft:raw_salmon", -12),
+
+            // Cooked / prepared (better taste)
+            Map.entry("minecraft:cooked_beef", 65),
+            Map.entry("minecraft:cooked_porkchop", 62),
+            Map.entry("minecraft:cooked_chicken", 55),
+            Map.entry("minecraft:cooked_mutton", 58),
+            Map.entry("minecraft:cooked_cod", 50),
+            Map.entry("minecraft:cooked_salmon", 52),
+            Map.entry("minecraft:baked_potato", 55),
+            Map.entry("minecraft:bread", 60),
+            Map.entry("minecraft:cookie", 45),
+            Map.entry("minecraft:pumpkin_pie", 75),
+            Map.entry("minecraft:mushroom_stew", 50),
+            Map.entry("minecraft:beetroot_soup", 48),
+            Map.entry("minecraft:rabbit_stew", 70),
+
+            // High end / rare
+            Map.entry("minecraft:golden_carrot", 85),
+            Map.entry("minecraft:golden_apple", 90),
+            Map.entry("minecraft:enchanted_golden_apple", 100),
+
+            // TerraVera / mod examples
+            Map.entry("terravera:plant_fiber", -50),   // not really food but if someone eats it
             Map.entry("leaves", -60),
             Map.entry("raw_grass", -100),
             Map.entry("raw_mushroom", -20),
@@ -116,28 +169,61 @@ public class TasteSystem {
     );
 
     /**
-     * Gets base taste for an item. Extend this to read from data packs.
+     * Gets base taste for an item. Extend this to read from data packs / JSON.
+     * Uses the item's registry ID (e.g. "minecraft:apple" or "terravera:roasted_meat").
      */
     public static int getBaseTaste(ItemStack stack) {
-        String id = stack.getItem().toString().toLowerCase();
-        return DEFAULT_TASTES.getOrDefault(id, TASTE_OKAY);
+        if (stack.isEmpty()) return TASTE_OKAY;
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (id == null) return TASTE_OKAY;
+        String key = id.toString().toLowerCase();
+        // Also try just the path for convenience (e.g. "apple")
+        String path = id.getPath().toLowerCase();
+        return DEFAULT_TASTES.getOrDefault(key,
+                DEFAULT_TASTES.getOrDefault(path, TASTE_OKAY));
     }
 
     /**
      * Main hook point for food consumption.
      * Call this from your food eating event handler.
+     * Returns the effective saturation that should be gained (taste + context adjusted).
      */
     public static float onFoodEaten(Player player, ItemStack food, float baseSaturation) {
         int baseTaste = getBaseTaste(food);
-        String foodId = food.getItem().toString();
+        String foodId = getFoodId(food);
 
-        // Apply monotony
+        // Apply monotony (tracks consecutive/repeated consumption of same food)
         int finalTaste = applyMonotonyPenalty(player, foodId, baseTaste);
+
+        // Only keep count for this food if it was the last one (simplified monotony)
         resetMonotonyForNewFood(player, foodId);
 
         float hungerPercent = player.getFoodData().getFoodLevel() / 20.0f;
         boolean starving = player.getFoodData().getFoodLevel() <= 4;
 
         return calculateSatisfaction(baseSaturation, finalTaste, hungerPercent, starving);
+    }
+
+    private static String getFoodId(ItemStack stack) {
+        if (stack.isEmpty()) return "empty";
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        return (id != null) ? id.toString() : stack.getItem().toString();
+    }
+
+    /**
+     * Allows other code (or future datapack loaders) to register additional taste values.
+     */
+    public static void registerTaste(String itemId, int tasteValue) {
+        // Normalize to lower case
+        DEFAULT_TASTES.put(itemId.toLowerCase(), tasteValue);
+    }
+
+    /**
+     * Allows registering taste by ResourceLocation.
+     */
+    public static void registerTaste(ResourceLocation id, int tasteValue) {
+        if (id != null) {
+            DEFAULT_TASTES.put(id.toString().toLowerCase(), tasteValue);
+        }
     }
 }

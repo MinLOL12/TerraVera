@@ -22,6 +22,7 @@ import com.terravera.common.TerraVeraCreativeTab;
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.TerraVeraDataManagers;
 import com.terravera.common.container.TerraVeraContainers;
+import com.terravera.common.food.TasteEventHandler;
 import com.terravera.common.items.TerraVeraItems;
 import com.terravera.common.recipes.TerraVeraRecipes;
 import com.terravera.config.TerraVeraConfig;
@@ -71,6 +72,7 @@ public final class TerraVera
         bus.addListener(TerraVeraCreativeTab::onBuildTabContents);
 
         TerraVeraEventHandler.init();
+        TasteEventHandler.init();   // Register the tasting system
 
         if (FMLEnvironment.dist == Dist.CLIENT)
         {
