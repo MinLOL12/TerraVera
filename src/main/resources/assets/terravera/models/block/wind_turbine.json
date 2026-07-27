@@ -1,1 +1,100 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"terravera:block/turbine"}}
+{
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "terravera:block/turbine",
+    "turbine": "terravera:block/turbine"
+  },
+  "elements": [
+    {
+      "name": "mast",
+      "from": [ 6, 0, 6 ],
+      "to": [ 10, 11, 10 ],
+      "faces": {
+        "north": { "uv": [ 8, 8, 12, 16 ], "texture": "#turbine" },
+        "south": { "uv": [ 8, 8, 12, 16 ], "texture": "#turbine" },
+        "east":  { "uv": [ 8, 8, 12, 16 ], "texture": "#turbine" },
+        "west":  { "uv": [ 8, 8, 12, 16 ], "texture": "#turbine" },
+        "up":    { "uv": [ 8, 8, 12, 12 ], "texture": "#turbine" },
+        "down":  { "uv": [ 8, 8, 12, 12 ], "texture": "#turbine" }
+      }
+    },
+    {
+      "name": "nacelle",
+      "from": [ 5, 11, 4 ],
+      "to": [ 11, 16, 15 ],
+      "faces": {
+        "north": { "uv": [ 8, 0, 14, 5 ], "texture": "#turbine" },
+        "south": { "uv": [ 8, 0, 14, 5 ], "texture": "#turbine" },
+        "east":  { "uv": [ 8, 0, 16, 5 ], "texture": "#turbine" },
+        "west":  { "uv": [ 8, 0, 16, 5 ], "texture": "#turbine" },
+        "up":    { "uv": [ 8, 0, 14, 8 ], "texture": "#turbine" },
+        "down":  { "uv": [ 8, 0, 14, 8 ], "texture": "#turbine" }
+      }
+    },
+    {
+      "name": "hub",
+      "from": [ 7, 12.5, 1 ],
+      "to": [ 9, 14.5, 4 ],
+      "faces": {
+        "north": { "uv": [ 8, 0, 10, 2 ], "texture": "#turbine" },
+        "south": { "uv": [ 8, 0, 10, 2 ], "texture": "#turbine" },
+        "east":  { "uv": [ 8, 0, 11, 2 ], "texture": "#turbine" },
+        "west":  { "uv": [ 8, 0, 11, 2 ], "texture": "#turbine" },
+        "up":    { "uv": [ 8, 0, 10, 3 ], "texture": "#turbine" },
+        "down":  { "uv": [ 8, 0, 10, 3 ], "texture": "#turbine" }
+      }
+    },
+    {
+      "name": "blade_up",
+      "from": [ 7, 14.5, 2 ],
+      "to": [ 9, 28, 3 ],
+      "faces": {
+        "north": { "uv": [ 0, 0, 2, 14 ], "texture": "#turbine" },
+        "south": { "uv": [ 0, 0, 2, 14 ], "texture": "#turbine" },
+        "east":  { "uv": [ 0, 0, 1, 14 ], "texture": "#turbine" },
+        "west":  { "uv": [ 0, 0, 1, 14 ], "texture": "#turbine" },
+        "up":    { "uv": [ 0, 0, 2, 1 ], "texture": "#turbine" },
+        "down":  { "uv": [ 0, 13, 2, 14 ], "texture": "#turbine" }
+      }
+    },
+    {
+      "name": "blade_down",
+      "from": [ 7, -1, 2 ],
+      "to": [ 9, 12.5, 3 ],
+      "faces": {
+        "north": { "uv": [ 2, 0, 4, 14 ], "texture": "#turbine" },
+        "south": { "uv": [ 2, 0, 4, 14 ], "texture": "#turbine" },
+        "east":  { "uv": [ 2, 0, 3, 14 ], "texture": "#turbine" },
+        "west":  { "uv": [ 2, 0, 3, 14 ], "texture": "#turbine" },
+        "up":    { "uv": [ 2, 0, 4, 1 ], "texture": "#turbine" },
+        "down":  { "uv": [ 2, 13, 4, 14 ], "texture": "#turbine" }
+      }
+    },
+    {
+      "name": "blade_left",
+      "from": [ -1, 12.5, 2 ],
+      "to": [ 7, 14.5, 3 ],
+      "faces": {
+        "north": { "uv": [ 0, 0, 8, 2 ], "texture": "#turbine" },
+        "south": { "uv": [ 0, 0, 8, 2 ], "texture": "#turbine" },
+        "east":  { "uv": [ 7, 0, 8, 2 ], "texture": "#turbine" },
+        "west":  { "uv": [ 0, 0, 1, 2 ], "texture": "#turbine" },
+        "up":    { "uv": [ 0, 0, 8, 1 ], "texture": "#turbine" },
+        "down":  { "uv": [ 0, 1, 8, 2 ], "texture": "#turbine" }
+      }
+    },
+    {
+      "name": "blade_right",
+      "from": [ 9, 12.5, 2 ],
+      "to": [ 25, 14.5, 3 ],
+      "faces": {
+        "north": { "uv": [ 0, 2, 8, 4 ], "texture": "#turbine" },
+        "south": { "uv": [ 0, 2, 8, 4 ], "texture": "#turbine" },
+        "east":  { "uv": [ 7, 2, 8, 4 ], "texture": "#turbine" },
+        "west":  { "uv": [ 0, 2, 1, 4 ], "texture": "#turbine" },
+        "up":    { "uv": [ 0, 2, 8, 3 ], "texture": "#turbine" },
+        "down":  { "uv": [ 0, 3, 8, 4 ], "texture": "#turbine" }
+      }
+    }
+  ]
+}

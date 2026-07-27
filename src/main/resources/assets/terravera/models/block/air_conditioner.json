@@ -1,1 +1,116 @@
-{"parent":"minecraft:block/cube","textures":{"down":"terravera:block/air_conditioner_top","up":"terravera:block/air_conditioner_top","north":"terravera:block/air_conditioner_side","south":"terravera:block/air_conditioner_side","east":"terravera:block/air_conditioner_side","west":"terravera:block/air_conditioner_side","particle":"terravera:block/air_conditioner_side"}}
+{
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "terravera:block/air_conditioner_side",
+    "case": "terravera:block/air_conditioner_top",
+    "side": "terravera:block/air_conditioner_side"
+  },
+  "elements": [
+    {
+      "name": "base_plate",
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 1.5, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#case" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#case" },
+        "north": { "uv": [ 0, 14, 16, 16 ], "texture": "#side" },
+        "south": { "uv": [ 0, 14, 16, 16 ], "texture": "#side" },
+        "east":  { "uv": [ 0, 14, 16, 16 ], "texture": "#side" },
+        "west":  { "uv": [ 0, 14, 16, 16 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "top_plate",
+      "from": [ 0, 14.5, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#case" },
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#case" },
+        "north": { "uv": [ 0, 0, 16, 2 ], "texture": "#side" },
+        "south": { "uv": [ 0, 0, 16, 2 ], "texture": "#side" },
+        "east":  { "uv": [ 0, 0, 16, 2 ], "texture": "#side" },
+        "west":  { "uv": [ 0, 0, 16, 2 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "pillar_nw",
+      "from": [ 0, 1.5, 0 ],
+      "to": [ 2, 14.5, 2 ],
+      "faces": {
+        "north": { "uv": [ 0, 1, 2, 15 ], "texture": "#side" },
+        "west":  { "uv": [ 14, 1, 16, 15 ], "texture": "#side" },
+        "south": { "uv": [ 0, 1, 2, 15 ], "texture": "#side" },
+        "east":  { "uv": [ 14, 1, 16, 15 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "pillar_ne",
+      "from": [ 14, 1.5, 0 ],
+      "to": [ 16, 14.5, 2 ],
+      "faces": {
+        "north": { "uv": [ 14, 1, 16, 15 ], "texture": "#side" },
+        "east":  { "uv": [ 0, 1, 2, 15 ], "texture": "#side" },
+        "south": { "uv": [ 14, 1, 16, 15 ], "texture": "#side" },
+        "west":  { "uv": [ 0, 1, 2, 15 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "pillar_se",
+      "from": [ 14, 1.5, 14 ],
+      "to": [ 16, 14.5, 16 ],
+      "faces": {
+        "south": { "uv": [ 14, 1, 16, 15 ], "texture": "#side" },
+        "east":  { "uv": [ 14, 1, 16, 15 ], "texture": "#side" },
+        "north": { "uv": [ 0, 1, 2, 15 ], "texture": "#side" },
+        "west":  { "uv": [ 0, 1, 2, 15 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "pillar_sw",
+      "from": [ 0, 1.5, 14 ],
+      "to": [ 2, 14.5, 16 ],
+      "faces": {
+        "south": { "uv": [ 0, 1, 2, 15 ], "texture": "#side" },
+        "west":  { "uv": [ 0, 1, 2, 15 ], "texture": "#side" },
+        "north": { "uv": [ 14, 1, 16, 15 ], "texture": "#side" },
+        "east":  { "uv": [ 14, 1, 16, 15 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "panel_n",
+      "from": [ 2, 1.5, 2 ],
+      "to": [ 14, 14.5, 2.5 ],
+      "faces": {
+        "north": { "uv": [ 2, 1, 14, 15 ], "texture": "#side" },
+        "south": { "uv": [ 2, 1, 14, 15 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "panel_s",
+      "from": [ 2, 1.5, 13.5 ],
+      "to": [ 14, 14.5, 14 ],
+      "faces": {
+        "south": { "uv": [ 2, 1, 14, 15 ], "texture": "#side" },
+        "north": { "uv": [ 2, 1, 14, 15 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "panel_e",
+      "from": [ 13.5, 1.5, 2 ],
+      "to": [ 14, 14.5, 14 ],
+      "faces": {
+        "east":  { "uv": [ 2, 1, 14, 15 ], "texture": "#side" },
+        "west":  { "uv": [ 2, 1, 14, 15 ], "texture": "#side" }
+      }
+    },
+    {
+      "name": "panel_w",
+      "from": [ 2, 1.5, 2 ],
+      "to": [ 2.5, 14.5, 14 ],
+      "faces": {
+        "west":  { "uv": [ 2, 1, 14, 15 ], "texture": "#side" },
+        "east":  { "uv": [ 2, 1, 14, 15 ], "texture": "#side" }
+      }
+    }
+  ]
+}
