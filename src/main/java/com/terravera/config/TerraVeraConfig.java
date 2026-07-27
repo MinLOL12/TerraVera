@@ -50,6 +50,12 @@ public final class TerraVeraConfig
         public final Supplier<Boolean> applyBindingBonusToSpeed;
         /** Whether cordage binding quality (based on length) affects tool damage. */
         public final Supplier<Boolean> applyBindingBonusToDamage;
+        /** Whether food eating time is scaled by the item's TFC size/weight, instead of vanilla's flat 1.6 seconds. */
+        public final Supplier<Boolean> scaleFoodEatTimeBySize;
+        /** Multiplier applied on top of the size-derived eating duration, to tune overall pacing without retuning every band. */
+        public final Supplier<Double> foodEatTimeMultiplier;
+        /** Whether food item tooltips show a flavor line (e.g. "Delicious.") derived from the taste system. */
+        public final Supplier<Boolean> showFlavorTooltip;
 
         ServerConfig(ModConfigSpec.Builder builder)
         {
@@ -96,6 +102,18 @@ public final class TerraVeraConfig
             showKnappingFeedback = builder
                 .comment("If true, the knapping screen explains why the current shape is not usable yet, e.g. 'the tip is too blunt'.")
                 .define("showKnappingFeedback", true);
+            builder.pop();
+
+            builder.push("food");
+            scaleFoodEatTimeBySize = builder
+                .comment("If true, how long it takes to eat a food item scales with its TFC size/weight (tiny bites are ~4s, huge portions ~35-50s) instead of vanilla's flat 1.6s.")
+                .define("scaleFoodEatTimeBySize", true);
+            foodEatTimeMultiplier = builder
+                .comment("Overall multiplier on the size-derived eating duration. 1.0 = the documented 4s/10-20s/20-50s bands. Lower to speed all eating up, raise to slow it down further.")
+                .defineInRange("foodEatTimeMultiplier", 1.0, 0.1, 5.0);
+            showFlavorTooltip = builder
+                .comment("If true, food item tooltips show a flavor line (e.g. 'Delicious.') based on the taste system.")
+                .define("showFlavorTooltip", true);
             builder.pop();
         }
 

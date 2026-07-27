@@ -1,19 +1,26 @@
 package com.terravera.common.food;
 
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
 import com.terravera.TerraVera;
+import com.terravera.config.TerraVeraConfig;
 
 /**
  * Handles food eating events and applies the taste system to modify effective saturation gained.
  * This actually modifies the player's FoodData (hunger + saturation) instead of just printing.
+ * <p>
+ * Also slows down (or speeds up) how long eating actually takes, based on the item's TFC size/weight - see
+ * {@link FoodEatTime} - and adds a "flavor" line to food tooltips, so the taste system is visible before you
+ * commit to eating something, not just felt afterwards.
  */
 public final class TasteEventHandler {
 
@@ -22,8 +29,46 @@ public final class TasteEventHandler {
         TerraVera.LOGGER.info("TasteSystem event handler registered");
     }
 
+    /**
+     * Stretches (or shrinks) the eating animation to match the size of what's being eaten. Fired on both sides,
+     * since the use-item duration drives client-side animation timing as well as the server-side completion tick.
+     */
+    @SubscribeEvent
+    public static void onItemUseStart(LivingEntityUseItemEvent.Start event) {
+        if (!TerraVeraConfig.SERVER.scaleFoodEatTimeBySize.get()) return;
+
+        ItemStack stack = event.getItem();
+        if (stack.isEmpty() || !stack.has(DataComponents.FOOD)) return;
+
+        event.setDuration(FoodEatTime.getEatDurationTicks(stack));
+    }
+
+    /**
+     * Adds a flavor line to food tooltips, e.g. "Flavor: Delicious.", so the taste system is visible on the item
+     * itself rather than only as an action-bar message after eating.
+     */
+    @SubscribeEvent
+    public static void onItemTooltip(ItemTooltipEvent event) {
+        if (!TerraVeraConfig.SERVER.showFlavorTooltip.get()) return;
+
+        ItemStack stack = event.getItemStack();
+        if (stack.isEmpty() || !stack.has(DataComponents.FOOD)) return;
+
+        int baseTaste = TasteSystem.getBaseTaste(stack);
+        int taste = baseTaste;
+        if (event.getEntity() != null) {
+            // Preview the monotony-adjusted taste for this player, without mutating their eating history.
+            taste = TasteSystem.peekMonotonyAdjustedTaste(event.getEntity(), TasteSystem.getFoodId(stack), baseTaste);
+        }
+
+        event.getToolTip().add(Component.translatable("terravera.tooltip.flavor",
+                Component.translatable(TasteSystem.getTasteDescriptorKey(taste)))
+            .withStyle(TasteSystem.getTasteColor(taste)));
+    }
+
     @SubscribeEvent
     public static void onItemUseFinish(LivingEntityUseItemEvent.Finish event) {
+
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.level().isClientSide()) return; // server only
 

@@ -95,6 +95,33 @@ Then:
 - `scaleDurabilityByCraftsmanship`, `minimumDurabilityMultiplier`, `maximumDurabilityMultiplier`.
 - `plantsDropFibre`, `fibreDropChance`, `fibreKnifeBonus`, `handGatheringSpeed`, `rettingTicks`.
 - `showKnappingFeedback` — set `false` to hide the "why isn't this working" hints.
+- `scaleFoodEatTimeBySize` — set `false` to go back to vanilla's flat 1.6 second eat time for every food.
+- `foodEatTimeMultiplier` — global multiplier on top of the size-derived eat time, for tuning pace without retuning every band.
+- `showFlavorTooltip` — set `false` to hide the "Flavor: ..." line on food tooltips.
+
+### Food: flavor and eating time
+
+Two small, TFC-flavoured changes to eating:
+
+- **Flavor is visible on the item, not just felt after eating.** Every food's tooltip now shows a `Flavor: ...` line
+  (e.g. `Flavor: Delicious`), derived from the same [`TasteSystem`](src/main/java/com/terravera/common/food/TasteSystem.java)
+  that already adjusted saturation gain. It reflects the current player's monotony penalty, so a food you've been
+  living on will show as blander than the first bite did, without needing to actually eat it again to find out.
+- **How long a bite takes depends on how big the bite is.** Vanilla (and TFC, which doesn't touch this) eats every
+  item in a flat 1.6 seconds, whether it's a single berry or a whole roast. TerraVera reads the item's TFC
+  [size and weight](https://terrafirmacraft.github.io/Field-Guide/en_us/getting_started/size_and_weight.html) and
+  scales the eating animation and completion time from it:
+
+  | TFC size | Eat time |
+  | --- | --- |
+  | Tiny / Very Small | ~4 seconds |
+  | Small | ~10–15 seconds |
+  | Normal | ~15–20 seconds |
+  | Large / Very Large / Huge | ~20–50 seconds |
+
+  Weight nudges the duration within its size's band (a `Heavy` item of the same size takes a bit longer than a
+  `Very Light` one), except for `Tiny`/`Very Small` items, where any weight is still a single mouthful. See
+  [`FoodEatTime`](src/main/java/com/terravera/common/food/FoodEatTime.java) for the exact bands.
 
 ## Extending it
 

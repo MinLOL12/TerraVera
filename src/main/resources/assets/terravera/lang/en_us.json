@@ -47,5 +47,13 @@
   "terravera.shaping.feedback.body_too_short": "The body is too short",
   "terravera.shaping.feedback.too_stubby": "The piece is too stubby",
   "terravera.shaping.feedback.too_slender": "The piece is too slender to hold together",
-  "terravera.shaping.feedback.lopsided": "The piece is too lopsided to fly true"
+  "terravera.shaping.feedback.lopsided": "The piece is too lopsided to fly true",
+  "terravera.tooltip.flavor": "Flavor: %s",
+  "terravera.taste.disgusting": "Disgusting",
+  "terravera.taste.bad": "Unpleasant",
+  "terravera.taste.okay": "Plain",
+  "terravera.taste.pretty_good": "Pleasant",
+  "terravera.taste.good": "Tasty",
+  "terravera.taste.delicious": "Delicious",
+  "terravera.taste.exceptional": "Exquisite"
 }
