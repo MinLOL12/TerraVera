@@ -1,5 +1,6 @@
 package com.terravera.common.food;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
@@ -27,13 +28,13 @@ public final class TasteEventHandler {
         if (player.level().isClientSide()) return; // server only
 
         ItemStack stack = event.getItem();
-        if (stack.isEmpty() || !stack.getItem().isEdible()) return;
+        if (stack.isEmpty() || !stack.has(DataComponents.FOOD)) return;
 
-        FoodProperties props = stack.getItem().getFoodProperties(stack, player);
+        FoodProperties props = stack.get(DataComponents.FOOD);
         if (props == null) return;
 
         int nutrition = props.nutrition();
-        float satModifier = props.saturationModifier();
+        float satModifier = props.saturation();
 
         // Vanilla formula for added saturation from this food: nutrition * satMod * 2
         float baseSaturation = Math.max(0, nutrition * satModifier * 2.0f);
@@ -49,7 +50,7 @@ public final class TasteEventHandler {
         float deltaSat = effectiveSaturation - baseSaturation;
         if (Math.abs(deltaSat) > 0.001f) {
             float newSat = Math.max(0.0f, Math.min(currentSat + deltaSat, (float) currentFood));
-            foodData.setSaturationLevel(newSat);
+            foodData.setSaturation(newSat);
         }
 
         // For very bad tasting food, reduce some of the hunger restored (makes "disgusting" food less filling)
