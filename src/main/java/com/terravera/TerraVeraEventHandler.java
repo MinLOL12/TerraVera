@@ -147,10 +147,9 @@ public final class TerraVeraEventHandler
     }
 
     /**
-     * Workplate/anvil repair is a real-world interaction rather than a crafting-grid recipe:
-     * place the hot, damaged metal tool in the off hand, hold a metal hammer in the main hand, and strike the surface.
-     * Sneak-right-click selects the next smithing operation. Flux is deliberately only consumed by the forge-weld
-     * operation, where separate hot metal is joined back on.
+     * Workplate/anvil quick-strike: if the player is holding a metal hammer in the main hand AND a tool in the off
+     * hand, a single right-click performs the currently selected smithing operation without opening the GUI. This is
+     * the power-user shortcut; the full GUI opens for every other right-click on the workplate.
      */
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
@@ -165,6 +164,11 @@ public final class TerraVeraEventHandler
         final ItemStack hammer = player.getMainHandItem();
         final ItemStack tool = player.getOffhandItem();
         if (!ToolSmithing.isMetalHammer(hammer)) return;
+
+        // Only intercept for quick-strike when both a hammer and a tool are in hand.
+        // With a hammer but no tool (or any other combination), fall through to the block's
+        // useWithoutItem, which opens the GUI.
+        if (tool.isEmpty()) return;
 
         final net.minecraft.world.InteractionResult result = ToolSmithing.useSurface(level, player, hammer, tool, state);
         if (result != net.minecraft.world.InteractionResult.PASS)

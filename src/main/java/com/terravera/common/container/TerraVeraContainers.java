@@ -24,5 +24,9 @@ public final class TerraVeraContainers
         CONTAINERS.register("shaping",
             () -> IMenuTypeExtension.create(ShapingContainer::fromNetwork));
 
+    public static final DeferredHolder<MenuType<?>, MenuType<WorkplateContainer>> WORKPLATE =
+        CONTAINERS.register("workplate",
+            () -> IMenuTypeExtension.create(WorkplateContainer::fromNetwork));
+
     private TerraVeraContainers() {}
 }
