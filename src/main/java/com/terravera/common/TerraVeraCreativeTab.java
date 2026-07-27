@@ -53,7 +53,13 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.WORMWOOD.get());
         event.accept(TerraVeraItems.WATER_FILTER.get());
         event.accept(TerraVeraItems.CLEAN_DRESSING.get());
+        event.accept(TerraVeraItems.LYE_CONCENTRATE.get());
+        event.accept(TerraVeraItems.SOAP_CURD.get());
         event.accept(TerraVeraItems.SOAP.get());
+        event.accept(TerraVeraItems.ACTIVATED_CHARCOAL.get());
+        event.accept(TerraVeraItems.SALICYLATE_EXTRACT.get());
+        event.accept(TerraVeraItems.WORMWOOD_TINCTURE.get());
+        event.accept(TerraVeraItems.ANTISEPTIC_TINCTURE.get());
         event.accept(TerraVeraItems.REHYDRATION_SALTS.get());
         event.accept(TerraVeraItems.MEDICINE.get());
 

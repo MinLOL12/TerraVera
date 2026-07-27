@@ -1,0 +1,10 @@
+{
+  "__comment__": "Tier 2. Willow salicylates extracted and concentrated into a measured dose. Still symptom relief, not an antibiotic, but stronger and more reliable than raw bark.",
+  "ingredient": "terravera:remedies/prepared_antipyretic",
+  "treats": [],
+  "treats_symptoms": ["fever", "muscle_pain", "chills"],
+  "shorten_ticks": 24000,
+  "severity_reduction": 0.45,
+  "cures": false,
+  "tier": "prepared"
+}

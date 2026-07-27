@@ -1,0 +1,13 @@
+{
+  "__comment__": "Tier 2. Wormwood tincture: a stronger prepared anthelmintic for intestinal parasites. It shortens the course substantially but still is not a magic cure.",
+  "ingredient": "terravera:remedies/prepared_antiparasitic",
+  "treats": [
+    "terravera:tapeworm",
+    "terravera:giardiasis",
+    "terravera:cryptosporidiosis"
+  ],
+  "shorten_ticks": 144000,
+  "severity_reduction": 0.55,
+  "cures": false,
+  "tier": "prepared"
+}

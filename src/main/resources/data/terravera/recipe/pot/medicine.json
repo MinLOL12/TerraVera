@@ -1,19 +1,20 @@
 {
-  "__comment__": "Tier 3. A concentrated extract, boiled down in strong alcohol from the full herbal roster. This is the payoff for reaching alcohol distillation and glassware, and it cures essentially anything.",
+  "__comment__": "Tier 3 apothecary medicine. This is no longer raw herbs dumped in vodka: it combines measured salicylate extract, wormwood tincture, antiseptic wound wash, medicinal charcoal, and oral rehydration salts into a late-game field medicine kit.",
   "type": "tfc:pot",
-  "duration": 4800,
+  "duration": 6000,
   "fluid_ingredient": {
     "amount": 1000,
     "fluid": "tfc:vodka"
   },
   "ingredients": [
-    { "item": "terravera:willow_bark" },
-    { "item": "terravera:wormwood" },
-    { "item": "terravera:bitter_herbs" },
-    { "item": "tfc:powder/salt" }
+    { "item": "terravera:salicylate_extract" },
+    { "item": "terravera:wormwood_tincture" },
+    { "item": "terravera:antiseptic_tincture" },
+    { "item": "terravera:activated_charcoal" },
+    { "item": "terravera:rehydration_salts" }
   ],
   "item_output": [
     { "count": 2, "id": "terravera:medicine" }
   ],
-  "temperature": 400.0
+  "temperature": 360.0
 }

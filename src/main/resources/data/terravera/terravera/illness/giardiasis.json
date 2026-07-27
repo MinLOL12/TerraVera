@@ -9,5 +9,5 @@
   "contagious": false,
   "immunity_ticks": 0,
   "lethal": false,
-  "remedies": ["terravera:remedies/antiparasitic", "terravera:remedies/herbal", "terravera:remedies/medicine"]
+  "remedies": ["terravera:remedies/prepared_antiparasitic", "terravera:remedies/antiparasitic", "terravera:remedies/herbal", "terravera:remedies/medicine"]
 }

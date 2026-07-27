@@ -1,18 +1,17 @@
 {
-  "__comment__": "Saponification: fat plus a strong alkali, boiled. Tallow rendered in a pot, then boiled again with wood ash - exactly how soap was made for four thousand years, and reachable by anyone with a firepit, a pot, and an animal.",
+  "__comment__": "Tallow soap, step 2. Rendered animal fat plus concentrated lye is true saponification: triglycerides split into glycerol and alkali salts of fatty acids. The result is fresh soap curd, not a magically finished bar.",
   "type": "tfc:pot",
-  "duration": 2000,
+  "duration": 3600,
   "fluid_ingredient": {
     "amount": 1000,
     "fluid": "tfc:tallow"
   },
   "ingredients": [
-    { "item": "tfc:powder/wood_ash" },
-    { "item": "tfc:powder/wood_ash" },
-    { "item": "tfc:powder/wood_ash" }
+    { "item": "terravera:lye_concentrate" },
+    { "item": "terravera:lye_concentrate" }
   ],
   "item_output": [
-    { "count": 4, "id": "terravera:soap" }
+    { "count": 4, "id": "terravera:soap_curd" }
   ],
   "temperature": 480.0
 }

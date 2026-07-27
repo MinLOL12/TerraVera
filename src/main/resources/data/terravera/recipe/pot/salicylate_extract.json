@@ -1,0 +1,19 @@
+{
+  "__comment__": "Willow bark decoction reduced to a salicylate-rich extract. This is the real path from chewing bark to something closer to a measured antipyretic dose.",
+  "type": "tfc:pot",
+  "duration": 3000,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    { "item": "terravera:willow_bark" },
+    { "item": "terravera:willow_bark" },
+    { "item": "terravera:willow_bark" },
+    { "item": "tfc:burlap_cloth" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:salicylate_extract" }
+  ],
+  "temperature": 330.0
+}

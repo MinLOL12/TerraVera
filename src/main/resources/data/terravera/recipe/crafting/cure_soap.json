@@ -1,0 +1,14 @@
+{
+  "__comment__": "Salting out and curing. Fresh lye soap has to be hardened and separated from excess water/glycerol before it is a durable bar. The salt represents brine graining; the time is abstracted into the recipe.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "terravera:soap_curd" },
+    { "item": "terravera:soap_curd" },
+    { "item": "tfc:powder/salt" }
+  ],
+  "result": {
+    "count": 2,
+    "id": "terravera:soap"
+  }
+}

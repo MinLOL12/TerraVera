@@ -1,5 +1,5 @@
 {
-  "__comment__": "Tier 3. Refined, distilled medicine - the end of the progression. Requires glassware, distillation, and concentrated extracts. Cures essentially anything outright, which is the correct payoff for reaching that stage.",
+  "__comment__": "Tier 3. A full apothecary kit made from concentrated extracts, antiseptic wash, charcoal, rehydration salts, and strong alcohol. This is the end of the progression and cures essentially anything outright.",
   "ingredient": "terravera:remedies/medicine",
   "treats": [],
   "shorten_ticks": 240000,

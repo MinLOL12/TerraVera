@@ -1,0 +1,19 @@
+{
+  "__comment__": "Topical wound wash: strong alcohol for disinfection, salt for a crude saline brine, honey for osmotic antibacterial action, and cloth to strain it. It is not modern sterility, but every part is real.",
+  "type": "tfc:pot",
+  "duration": 3000,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "tfc:vodka"
+  },
+  "ingredients": [
+    { "item": "minecraft:honey_bottle" },
+    { "item": "tfc:powder/salt" },
+    { "item": "tfc:powder/salt" },
+    { "item": "tfc:burlap_cloth" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:antiseptic_tincture" }
+  ],
+  "temperature": 300.0
+}

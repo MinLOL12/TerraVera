@@ -1,0 +1,19 @@
+{
+  "__comment__": "Alcohol tincture of wormwood and bitter herbs. Ethanol pulls out the volatile bitter compounds better than plain water, making this a prepared antiparasitic instead of raw forage.",
+  "type": "tfc:pot",
+  "duration": 3600,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "tfc:vodka"
+  },
+  "ingredients": [
+    { "item": "terravera:wormwood" },
+    { "item": "terravera:wormwood" },
+    { "item": "terravera:bitter_herbs" },
+    { "item": "tfc:burlap_cloth" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:wormwood_tincture" }
+  ],
+  "temperature": 300.0
+}
