@@ -165,5 +165,20 @@
   "terravera.smithing.need_welding_stock": "Forge welding also needs a separate, welding-hot sheet or rod of matching metal to join onto the tool.",
   "terravera.tooltip.metal_mass": "Metal remaining: %s%%",
   "terravera.tooltip.smithing_operation": "Selected operation: %s",
-  "terravera.tooltip.smithing_shape": "Shape L/W/T %s/%s/%s, bend %s, edge %s, strain %s"
+  "terravera.tooltip.smithing_shape": "Shape L/W/T %s/%s/%s, bend %s, edge %s, strain %s",
+  "terravera.workplate.gui.strike": "Strike",
+  "terravera.workplate.gui.need_hammer": "Place a metal hammer in the hammer slot.",
+  "terravera.workplate.gui.place_tool": "Place a hot, damaged metal tool in the tool slot.",
+  "terravera.workplate.gui.place_hammer_hint": "Place a metal hammer in the hammer slot.",
+  "terravera.workplate.gui.heat_in_forge": "Heat the tool in a charcoal forge before working it.",
+  "terravera.workplate.gui.durability": "Durability",
+  "terravera.workplate.gui.metal_mass": "Metal mass",
+  "terravera.workplate.gui.heat": "Heat",
+  "terravera.workplate.gui.shape": "Shape L/W/T %s/%s/%s, bend %s, edge %s, strain %s",
+  "terravera.workplate.gui.operation": "Operation",
+  "terravera.workplate.gui.repair_amount": "Restores %s%% durability per strike",
+  "terravera.workplate.gui.mass_loss": "Loses %s metal mass per strike",
+  "terravera.workplate.gui.weld_requires": "Requires welding heat, flux, and matching hot stock",
+  "terravera.workplate.gui.inventory_full": "Your inventory is full; make room for the flux.",
+  "terravera.workplate.gui.title": "Workplate"
 }
