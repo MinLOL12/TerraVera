@@ -20,6 +20,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import com.terravera.TerraVera;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.component.KnappedHead;
+import com.terravera.common.component.ToolMetalState;
 
 public final class TerraVeraDataComponents
 {
@@ -33,6 +34,10 @@ public final class TerraVeraDataComponents
     /** Attached to cordage, and to tools hafted with it. Determines how well the lashing holds and how long it is. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Cordage>> CORDAGE =
         register("cordage", builder -> builder.persistent(Cordage.CODEC).networkSynchronized(Cordage.STREAM_CODEC));
+
+    /** Attached to repaired metal tools. Tracks remaining metal mass and the current smithing operation. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ToolMetalState>> TOOL_METAL_STATE =
+        register("tool_metal_state", builder -> builder.persistent(ToolMetalState.CODEC).networkSynchronized(ToolMetalState.STREAM_CODEC));
 
     /** Attached to hafted tools. Stores the speed modifier from cordage binding quality. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BindingBonus>> BINDING_SPEED_BONUS =

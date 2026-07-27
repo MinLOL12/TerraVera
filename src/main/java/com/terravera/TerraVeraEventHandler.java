@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -30,9 +31,12 @@ import net.dries007.tfc.util.data.KnappingType;
 
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.component.Cordage;
+import com.terravera.common.component.ToolMetalState;
 import com.terravera.common.container.ShapingContainer;
 import com.terravera.common.knapping.KnappableStone;
 import com.terravera.common.recipes.FibreSource;
+import com.terravera.common.smithing.SmithingOperation;
+import com.terravera.common.smithing.ToolSmithing;
 import com.terravera.config.TerraVeraConfig;
 
 public final class TerraVeraEventHandler
@@ -42,6 +46,8 @@ public final class TerraVeraEventHandler
         NeoForge.EVENT_BUS.addListener(TerraVeraEventHandler::onBlockBroken);
         NeoForge.EVENT_BUS.addListener(TerraVeraEventHandler::onBreakSpeed);
         NeoForge.EVENT_BUS.addListener(TerraVeraEventHandler::onRightClickItem);
+        NeoForge.EVENT_BUS.addListener(TerraVeraEventHandler::onRightClickBlock);
+        NeoForge.EVENT_BUS.addListener(TerraVeraEventHandler::onItemTooltip);
     }
 
     /**
@@ -138,6 +144,48 @@ public final class TerraVeraEventHandler
         }
         event.setCanceled(true);
         event.setCancellationResult(net.minecraft.world.InteractionResult.sidedSuccess(event.getLevel().isClientSide()));
+    }
+
+    /**
+     * Workplate/anvil repair is a real-world interaction rather than a crafting-grid recipe:
+     * place the hot, damaged metal tool in the off hand, hold a metal hammer in the main hand, and strike the surface.
+     * Sneak-right-click selects the next smithing operation. Flux is deliberately only consumed by the forge-weld
+     * operation, where separate hot metal is joined back on.
+     */
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+    {
+        if (event.getHand() != InteractionHand.MAIN_HAND) return;
+
+        final Level level = event.getLevel();
+        final BlockState state = level.getBlockState(event.getPos());
+        if (!ToolSmithing.isSmithingSurface(state)) return;
+
+        final Player player = event.getEntity();
+        final ItemStack hammer = player.getMainHandItem();
+        final ItemStack tool = player.getOffhandItem();
+        if (!ToolSmithing.isMetalHammer(hammer)) return;
+
+        final net.minecraft.world.InteractionResult result = ToolSmithing.useSurface(level, player, hammer, tool, state);
+        if (result != net.minecraft.world.InteractionResult.PASS)
+        {
+            event.setCanceled(true);
+            event.setCancellationResult(net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide()));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemTooltip(ItemTooltipEvent event)
+    {
+        final ToolMetalState state = event.getItemStack().get(TerraVeraDataComponents.TOOL_METAL_STATE.get());
+        if (state == null) return;
+
+        event.getToolTip().add(Component.translatable("terravera.tooltip.metal_mass",
+            Math.round(state.remainingMassFraction() * 100f)));
+        event.getToolTip().add(Component.translatable("terravera.tooltip.smithing_operation",
+            SmithingOperation.byId(state.operation()).displayName()));
+        event.getToolTip().add(Component.translatable("terravera.tooltip.smithing_shape",
+            state.length(), state.width(), state.thickness(), state.bend(), state.edge(), state.strain()));
     }
 
     private TerraVeraEventHandler() {}

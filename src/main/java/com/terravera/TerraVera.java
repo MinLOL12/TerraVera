@@ -18,6 +18,7 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 import com.terravera.client.TerraVeraClient;
+import com.terravera.common.blocks.TerraVeraBlocks;
 import com.terravera.common.TerraVeraCreativeTab;
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.TerraVeraDataManagers;
@@ -66,6 +67,7 @@ public final class TerraVera
 
         mod.registerConfig(ModConfig.Type.SERVER, TerraVeraConfig.SERVER.spec());
 
+        TerraVeraBlocks.BLOCKS.register(bus);
         TerraVeraItems.ITEMS.register(bus);
         TerraVeraCreativeTab.CREATIVE_TABS.register(bus);
         TerraVeraRecipes.RECIPE_TYPES.register(bus);
