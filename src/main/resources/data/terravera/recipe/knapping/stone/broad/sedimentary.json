@@ -1,0 +1,25 @@
+{
+  "type": "tfc:knapping",
+  "ingredient": {
+    "tag": "tfc:stones/loose/sedimentary"
+  },
+  "knapping_type": "tfc:rock",
+  "pattern": [
+    "#####",
+    "#####",
+    "#####",
+    "#####",
+    " ### "
+  ],
+  "result": {
+    "id": "terravera:head/broad",
+    "count": 1,
+    "components": {
+      "terravera:knapped_head": {
+        "kind": "terravera:broad",
+        "material": "sedimentary",
+        "quality": 0.75
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "tfc:knapping",
+  "ingredient": {
+    "tag": "tfc:stones/loose/igneous_extrusive"
+  },
+  "knapping_type": "tfc:rock",
+  "pattern": [
+    "#####",
+    "#####",
+    "#####",
+    "#####",
+    "     "
+  ],
+  "result": {
+    "id": "terravera:head/maul",
+    "count": 1,
+    "components": {
+      "terravera:knapped_head": {
+        "kind": "terravera:maul",
+        "material": "igneous_extrusive",
+        "quality": 0.75
+      }
+    }
+  }
+}

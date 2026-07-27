@@ -1,0 +1,25 @@
+{
+  "type": "tfc:knapping",
+  "ingredient": {
+    "tag": "tfc:stones/loose/metamorphic"
+  },
+  "knapping_type": "tfc:rock",
+  "pattern": [
+    "#    ",
+    "##   ",
+    "##   ",
+    "##   ",
+    "##   "
+  ],
+  "result": {
+    "id": "terravera:head/blade",
+    "count": 1,
+    "components": {
+      "terravera:knapped_head": {
+        "kind": "terravera:blade",
+        "material": "metamorphic",
+        "quality": 0.75
+      }
+    }
+  }
+}
