@@ -34,6 +34,14 @@ public final class TerraVeraItems
     // ----- Industrial climate control ------------------------------------------------------------------------
     public static final DeferredHolder<Item, BlockItem> AIR_CONDITIONER = ITEMS.register("air_conditioner",
         () -> new BlockItem(TerraVeraBlocks.AIR_CONDITIONER.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> GENERATOR = ITEMS.register("generator",
+        () -> new BlockItem(TerraVeraBlocks.GENERATOR.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> HAND_CRANK = ITEMS.register("hand_crank",
+        () -> new BlockItem(TerraVeraBlocks.HAND_CRANK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> WIND_TURBINE = ITEMS.register("wind_turbine",
+        () -> new BlockItem(TerraVeraBlocks.WIND_TURBINE.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> COPPER_WIRE = ITEMS.register("copper_wire",
+        () -> new BlockItem(TerraVeraBlocks.COPPER_WIRE.get(), new Item.Properties()));
     /** A wired logic board. It is consumed when installed, preventing an unprogrammed compressor from operating. */
     public static final DeferredHolder<Item, Item> PROGRAMMED_CIRCUIT = ITEMS.registerSimpleItem("programmed_circuit");
     public static final DeferredHolder<Item, Item> REFRIGERANT_CANISTER = ITEMS.registerSimpleItem("refrigerant_canister");

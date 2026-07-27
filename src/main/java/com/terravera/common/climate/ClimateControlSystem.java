@@ -8,6 +8,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import com.terravera.common.temperature.Shelter;
+import com.terravera.common.power.PowerNetwork;
 
 /** Server-authoritative late-game room climate controller. Cooling is heat transfer: the indoor coil removes heat
  * only while the outdoor condenser has somewhere warmer to reject it, and poor shells leak that work away. */
@@ -55,14 +56,9 @@ public final class ClimateControlSystem {
         }
         return best;
     }
-    /** Integration point for power mods: named generators provide capacity today; packs may replace this method. */
+    /** The compressor needs an actual contiguous copper-wire run, not merely a generator somewhere nearby. */
     private static int availablePower(Level level, BlockPos origin) {
-        int power = 0;
-        for (int x=-12;x<=12;x++) for (int y=-6;y<=6;y++) for (int z=-12;z<=12;z++) {
-            String id = BuiltInRegistries.BLOCK.getKey(level.getBlockState(origin.offset(x,y,z)).getBlock()).getPath();
-            if (id.contains("generator") || id.contains("dynamo") || id.contains("turbine")) power += 180;
-        }
-        return power;
+        return PowerNetwork.availablePower(level, origin);
     }
     private static void rejectHeat(Level level, BlockPos unit, float heat) { /* Hook for future regional microclimate / condenser particles. */ }
 }

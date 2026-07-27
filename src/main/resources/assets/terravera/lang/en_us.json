@@ -338,5 +338,14 @@
   "terravera.climate.unprogrammed": "INERT: install a programmed circuit",
   "terravera.climate.maintenance": "Maintenance: %s%%",
   "terravera.climate.shell_hint": "Needs sealed, insulated room + generator",
-  "terravera.climate.missing_material": "Required circuit, filter, or refrigerant is missing."
+  "terravera.climate.missing_material": "Required circuit, filter, or refrigerant is missing.",
+  "block.terravera.generator": "Electrical Generator",
+  "block.terravera.hand_crank": "Hand Crank Generator",
+  "block.terravera.wind_turbine": "Wind Turbine",
+  "block.terravera.copper_wire": "Insulated Copper Wire",
+  "item.terravera.generator": "Electrical Generator",
+  "item.terravera.hand_crank": "Hand Crank Generator",
+  "item.terravera.wind_turbine": "Wind Turbine",
+  "item.terravera.copper_wire": "Insulated Copper Wire",
+  "terravera.climate.wiring_hint": "Connect a generator, hand crank, or outdoor wind turbine with copper wire."
 }

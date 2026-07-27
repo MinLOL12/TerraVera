@@ -1,0 +1,1 @@
+{"parent":"minecraft:block/cube","textures":{"down":"terravera:block/generator_top","up":"terravera:block/generator_top","north":"terravera:block/generator_side","south":"terravera:block/generator_side","east":"terravera:block/generator_side","west":"terravera:block/generator_side","particle":"terravera:block/generator_side"}}

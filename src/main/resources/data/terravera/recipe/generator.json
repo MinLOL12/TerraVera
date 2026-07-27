@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":["ICI","RPR","IRI"],"key":{"I":{"item":"minecraft:iron_ingot"},"C":{"item":"minecraft:copper_ingot"},"R":{"item":"minecraft:redstone"},"P":{"item":"minecraft:piston"}},"result":{"id":"terravera:generator","count":1}}
