@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -92,7 +94,11 @@ public final class HealthEventHandler
         if (level.isClientSide() || event.getHand() != InteractionHand.MAIN_HAND) return;
         if (!player.getMainHandItem().isEmpty()) return;
 
-        final BlockHitResult hit = getWaterHit(level, player);
+        // Use the block the player actually clicked first.  Re-raytracing with SOURCE_ONLY is subtly wrong here:
+        // it can miss a perfectly drinkable flowing TFC source when the client/server eye position differs by a
+        // fraction of a block (and it also misses water clicked through a non-source fluid face).
+        final BlockPos clickedPos = event.getPos();
+        final BlockHitResult hit = getWaterHit(level, player, clickedPos);
         if (hit == null) return;
 
         final BlockPos pos = hit.getBlockPos();
@@ -175,9 +181,18 @@ public final class HealthEventHandler
     }
 
     @Nullable
-    private static BlockHitResult getWaterHit(Level level, Player player)
+    private static BlockHitResult getWaterHit(Level level, Player player, BlockPos clickedPos)
     {
-        final BlockHitResult hit = net.minecraft.world.item.Item.getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
+        // RightClickBlock's position is authoritative on the server.  This is important for TFC fluids because the
+        // interaction is often dispatched for a fluid face rather than the exact block selected by a client POV ray.
+        if (!level.getFluidState(clickedPos).isEmpty())
+        {
+            return new BlockHitResult(Vec3.atCenterOf(clickedPos), Direction.UP, clickedPos, false);
+        }
+
+        // Keep the raytrace as a fallback for interactions routed through an adjacent block (for example a fluid face
+        // with a container in hand).
+        final BlockHitResult hit = net.minecraft.world.item.Item.getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
         return hit.getType() == HitResult.Type.BLOCK && !level.getFluidState(hit.getBlockPos()).isEmpty() ? hit : null;
     }
 

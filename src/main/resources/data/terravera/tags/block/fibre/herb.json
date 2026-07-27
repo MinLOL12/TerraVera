@@ -1,12 +1,36 @@
 {
   "values": [
-    "tfc:plant/goldenrod",
-    "tfc:plant/perovskia",
-    "tfc:plant/canna",
-    "tfc:plant/athyrium_fern",
-    "tfc:plant/sword_fern",
-    "tfc:plant/ostrich_fern",
-    "tfc:plant/meads_milkweed",
-    "tfc:plant/yucca"
+    {
+      "id": "tfc:plant/goldenrod",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/perovskia",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/canna",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/athyrium_fern",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/sword_fern",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/ostrich_fern",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/meads_milkweed",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/yucca",
+      "required": false
+    }
   ]
 }
