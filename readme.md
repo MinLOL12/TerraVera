@@ -104,6 +104,28 @@ Then:
   `showWaterTooltip`.
 - `[hygiene]` — `enableHygiene`, `hygieneDecayMultiplier`.
 
+### 3. Blacksmithing maintenance instead of durability refills
+
+Metal tools are no longer treated as items that can be magically refilled. Once a metal tool is worn down, heat it in a
+charcoal forge until TFC reports it is hot enough to work, put the tool in your off hand, hold a metal hammer in your
+main hand, and strike a placed **Workplate** or any TFC anvil. Sneak-right-click the surface to choose the next
+operation:
+
+- **Drawing** lengthens and thins a worn edge.
+- **Upsetting** shortens and thickens an end that needs mass behind it.
+- **Flattening** spreads high spots and broad edges.
+- **Straightening** takes bends out with corrective blows.
+- **Bending** deliberately sets or corrects a curve.
+- **Controlled hammer strikes** true the shape while closing damage.
+- **Forge welding** is the special case: it requires welding heat and consumes flux plus a separate welding-hot sheet or
+  rod of matching metal, because separate hot metal is being joined. Ordinary repairs do not consume flux.
+
+Every maintenance operation restores only a little durability, changes the tool's recorded shape, and loses a tiny
+amount of metal to scale, filing, and sharpening. That remaining metal mass caps the tool's future maximum repair, so a
+well-loved tool can be kept alive many times but slowly wears away over its lifetime. The **Workplate** itself is made
+as a TFC welding recipe from a wrought-iron double sheet and a wrought-iron rod stiffener; the welding process supplies
+the realistic requirements of heat, an anvil, a metal hammer, and flux.
+
 ### Food: flavor and eating time
 
 Two small, TFC-flavoured changes to eating:

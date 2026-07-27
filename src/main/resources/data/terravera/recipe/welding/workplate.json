@@ -1,0 +1,15 @@
+{
+  "__comment__": "The workplate is made by forge-welding a wrought-iron rod stiffener under a thick wrought-iron plate. TFC welding supplies the realistic requirements: both pieces must be at welding heat, the player must use a metal hammer on an anvil, and one flux is consumed only for this joining operation.",
+  "type": "tfc:welding",
+  "first_input": {
+    "tag": "c:double_sheets/wrought_iron"
+  },
+  "second_input": {
+    "tag": "c:rods/wrought_iron"
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:workplate"
+  },
+  "tier": 2
+}

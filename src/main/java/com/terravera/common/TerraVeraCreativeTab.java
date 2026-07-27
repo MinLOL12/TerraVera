@@ -40,6 +40,8 @@ public final class TerraVeraCreativeTab
     {
         if (event.getTabKey() != TAB.getKey()) return;
 
+        event.accept(TerraVeraItems.WORKPLATE.get());
+
         event.accept(TerraVeraItems.PLANT_FIBER.get());
         event.accept(TerraVeraItems.RETTED_FIBER.get());
         event.accept(TerraVeraItems.BAST_FIBER.get());

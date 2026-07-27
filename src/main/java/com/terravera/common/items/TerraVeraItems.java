@@ -11,17 +11,25 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import com.terravera.TerraVera;
+import com.terravera.common.blocks.TerraVeraBlocks;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.TerraVeraDataComponents;
 
 public final class TerraVeraItems
 {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TerraVera.MOD_ID);
+
+    // ----- Smithing stations ---------------------------------------------------------------------------------
+
+    /** Portable maintenance surface for hot-work repairs. Use with a metal hammer; flux is reserved for welds. */
+    public static final DeferredHolder<Item, BlockItem> WORKPLATE = ITEMS.register("workplate",
+        () -> new BlockItem(TerraVeraBlocks.WORKPLATE.get(), new Item.Properties()));
 
     // ----- Cordage chain -------------------------------------------------------------------------------------
     // Raw fibre -> retted fibre -> cordage -> lashing on a tool.
