@@ -1,0 +1,25 @@
+{
+  "__comment__": "Hides that still have usable fur on them. Packs can add their own animal hides here.",
+  "values": [
+    {
+      "id": "tfc:large_sheepskin_hide",
+      "required": false
+    },
+    {
+      "id": "tfc:medium_sheepskin_hide",
+      "required": false
+    },
+    {
+      "id": "tfc:small_sheepskin_hide",
+      "required": false
+    },
+    {
+      "id": "#tfc:scraped_hide",
+      "required": false
+    },
+    {
+      "id": "minecraft:rabbit_hide",
+      "required": false
+    }
+  ]
+}

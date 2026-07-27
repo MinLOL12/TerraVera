@@ -1,0 +1,26 @@
+{
+  "__comment__": "Face a sewn chest panel with felt and bind it. The panel is the shape; the facing is what decides how the finished garment behaves in the cold.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "terravera:sewn_body_panel"
+    },
+    {
+      "item": "terravera:felt_cloth"
+    },
+    {
+      "item": "terravera:felt_cloth"
+    },
+    {
+      "item": "terravera:felt_cloth"
+    },
+    {
+      "tag": "terravera:cordage"
+    }
+  ],
+  "result": {
+    "id": "terravera:felt_coat",
+    "count": 1
+  }
+}

@@ -88,6 +88,19 @@ public final class TerraVeraConfig
         /** Whether dirty wounds can become infected. */
         public final Supplier<Boolean> enableWoundInfection;
 
+        // ----- Body temperature -----------------------------------------------------------------------------
+
+        /** Master switch for the body temperature system. */
+        public final Supplier<Boolean> enableBodyTemperature;
+        /** Multiplier on how fast core temperature responds to an imbalance. Lower is more forgiving. */
+        public final Supplier<Double> temperatureRateMultiplier;
+        /** Whether the extreme hypothermia and heat stroke bands can do direct damage at all. */
+        public final Supplier<Boolean> enableTemperatureDamage;
+        /** Whether symptom messages appear on the action bar. Turn off for a completely unprompted experience. */
+        public final Supplier<Boolean> showTemperatureSymptoms;
+        /** Whether rain and water soak clothing, and whether soaked clothing loses insulation. */
+        public final Supplier<Boolean> enableWetClothing;
+
         ServerConfig(ModConfigSpec.Builder builder)
         {
             builder.push("hafting");
@@ -175,6 +188,24 @@ public final class TerraVeraConfig
             enableWoundInfection = builder
                 .comment("If true, taking damage while filthy - or from something out of the soil - can cause an infected wound or tetanus.")
                 .define("enableWoundInfection", true);
+            builder.pop();
+
+            builder.push("temperature");
+            enableBodyTemperature = builder
+                .comment("If true, the player has a core body temperature affected by climate, weather, wind, water, clothing, shelter, fire, and activity. Symptoms appear gradually; nothing does instant damage.")
+                .define("enableBodyTemperature", true);
+            temperatureRateMultiplier = builder
+                .comment("Multiplier on how fast core temperature moves. Below 1.0 gives you longer to react; above 1.0 makes exposure more urgent.")
+                .defineInRange("temperatureRateMultiplier", 1.0, 0.1, 5.0);
+            enableTemperatureDamage = builder
+                .comment("If true, the extreme hypothermia and heat stroke bands do slow direct damage. Even when false, the impairment effects still apply.")
+                .define("enableTemperatureDamage", true);
+            showTemperatureSymptoms = builder
+                .comment("If true, the player is told what their body is doing ('Your hands feel stiff.') on the action bar. There is deliberately never a numeric readout or a cold bar.")
+                .define("showTemperatureSymptoms", true);
+            enableWetClothing = builder
+                .comment("If true, rain and water soak clothing, soaked clothing loses most of its insulation, and clothes have to be dried by a fire.")
+                .define("enableWetClothing", true);
             builder.pop();
 
             builder.push("water");

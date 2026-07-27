@@ -1,0 +1,17 @@
+{
+  "__comment__": "Rendered fat and beeswax. Worked into leather it makes the difference between a coat that sheds rain and one that soaks it up and then freezes.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:foods/cooking_oil"
+    },
+    {
+      "item": "tfc:jute_fiber"
+    }
+  ],
+  "result": {
+    "id": "terravera:dubbin",
+    "count": 2
+  }
+}

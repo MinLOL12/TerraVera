@@ -1,0 +1,22 @@
+{
+  "__comment__": "Two faces of cloth stitched around a trapped-air filling. The best cold-weather fabric that can be made without synthetics, and it takes a full textile chain to get here.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CCC",
+    "BBB",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "tfc:wool_cloth"
+    },
+    "B": {
+      "item": "terravera:batting"
+    }
+  },
+  "result": {
+    "id": "terravera:quilted_cloth",
+    "count": 2
+  }
+}

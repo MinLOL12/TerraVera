@@ -1,0 +1,22 @@
+{
+  "__comment__": "A frame to hang wet clothes on. It is not a heat source; the point is that you have to put it somewhere warm, which makes keeping a fire going the actual mechanic.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SCS",
+    "S S",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "C": {
+      "tag": "terravera:cordage"
+    }
+  },
+  "result": {
+    "id": "terravera:drying_rack",
+    "count": 1
+  }
+}

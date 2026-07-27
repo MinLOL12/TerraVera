@@ -1,0 +1,26 @@
+{
+  "__comment__": "Face a sewn chest panel with oilskin and bind it. The panel is the shape; the facing is what decides how the finished garment behaves in the cold.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "terravera:sewn_body_panel"
+    },
+    {
+      "item": "terravera:oilskin_cloth"
+    },
+    {
+      "item": "terravera:oilskin_cloth"
+    },
+    {
+      "item": "terravera:oilskin_cloth"
+    },
+    {
+      "tag": "terravera:cordage"
+    }
+  ],
+  "result": {
+    "id": "terravera:oilskin_cloak",
+    "count": 1
+  }
+}

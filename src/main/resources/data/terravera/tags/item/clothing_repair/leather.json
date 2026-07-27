@@ -1,0 +1,6 @@
+{
+  "__comment__": "What this clothing line can be mended with. Packs can add their own equivalents.",
+  "values": [
+    "minecraft:leather"
+  ]
+}

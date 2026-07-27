@@ -1,0 +1,21 @@
+{
+  "__comment__": "Cut and stitched at a sewing table. The pattern is the shape of the garment, not its material - the facing recipe decides that.",
+  "type": "tfc:sewing",
+  "squares": [
+    "  BBBB  ",
+    " BBBBBB ",
+    " BB  BB ",
+    "        "
+  ],
+  "stitches": [
+    "  #####  ",
+    " #     # ",
+    " #     # ",
+    "  #   #  ",
+    "         "
+  ],
+  "result": {
+    "id": "terravera:sewn_hood_panel",
+    "count": 1
+  }
+}

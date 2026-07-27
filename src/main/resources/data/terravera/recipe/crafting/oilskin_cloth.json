@@ -1,0 +1,17 @@
+{
+  "__comment__": "Leather worked through with rendered fat until it stops taking water. The only thing here that genuinely keeps its insulation in a downpour.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "terravera:dubbin"
+    }
+  ],
+  "result": {
+    "id": "terravera:oilskin_cloth",
+    "count": 1
+  }
+}

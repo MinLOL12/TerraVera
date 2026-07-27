@@ -141,6 +141,11 @@ public final class StructuralIntegrity
         final Profile profile = profile(state);
         if (profile == Profile.NONE) return true;
 
+        // A footing is the bottom of the load path, not another member that needs one. It only has to be sitting on
+        // something - ground, rock, or any solid block - rather than hanging in the air. Requiring a foundation to
+        // itself be "supported" was what made laid stone footings shed themselves the moment they were placed.
+        if (profile == Profile.FOUNDATION) return bearsOnSomething(level, pos);
+
         if (isBeam(state))
         {
             return state.getValue(SupportBeamBlock.AXIS) == Axis.Y
@@ -202,6 +207,14 @@ public final class StructuralIntegrity
         return capacity;
     }
 
+    /**
+     * A post is anchored when the bottom of its column lands on something that can actually take the load: a
+     * foundation, tagged ground or rock, masonry, timber, or simply any block with a solid top face.
+     * <p>
+     * The earlier rule accepted <em>only</em> the foundation tag, which meant a perfectly sensible post standing on a
+     * plank floor, a log, or a rubble course two blocks thick was treated as floating and collapsed underneath the
+     * builder. Posts are the mod's answer to "how do I hold this up"; they must not be the hardest thing to place.
+     */
     private static boolean verticalBeamAnchored(Level level, BlockPos pos)
     {
         BlockPos cursor = pos;
@@ -212,13 +225,45 @@ public final class StructuralIntegrity
             if (!isVerticalBeam(state)) break;
             cursor = cursor.below();
         }
-        return level.getBlockState(cursor).is(FOUNDATION)
-            || profile(level.getBlockState(cursor)) == Profile.FOUNDATION;
+        return bearing(level, cursor);
     }
 
-    /** A lintel/purlin needs an anchored post under both ends, within the material's safe span. */
+    /** @return {@code true} if this block can carry a column: footing, ground, masonry, timber, or a solid face. */
+    private static boolean bearing(Level level, BlockPos pos)
+    {
+        final BlockState state = level.getBlockState(pos);
+        if (state.is(FOUNDATION)) return true;
+        final Profile profile = profile(state);
+        if (profile == Profile.FOUNDATION || profile == Profile.MASONRY || profile == Profile.TIMBER) return true;
+        // A beam can carry another beam - a post landing on a lintel or a sill plate is ordinary framing.
+        if (profile.beam) return true;
+        return state.isFaceSturdy(level, pos, Direction.UP);
+    }
+
+    /** A footing only has to sit on the ground. It is the bottom of the load path, not another loaded member. */
+    private static boolean bearsOnSomething(Level level, BlockPos pos)
+    {
+        final BlockPos below = pos.below();
+        final BlockState state = level.getBlockState(below);
+        if (state.isAir()) return false;
+        // Anything not obviously insubstantial will do. Rubble is laid straight onto grass, sand, gravel, or rock.
+        return state.is(FOUNDATION)
+            || profile(state) != Profile.NONE
+            || state.isFaceSturdy(level, below, Direction.UP)
+            || !state.getCollisionShape(level, below).isEmpty();
+    }
+
+    /**
+     * A lintel/purlin needs a support under both ends within the material's safe span.
+     * <p>
+     * "Support" is an anchored post, but also a wall or footing the beam is simply resting on or built into - which is
+     * how a lintel over a doorway or a purlin bedded into a gable actually works. A beam resting directly on the
+     * ground is likewise fine; it is a sill, not a cantilever.
+     */
     private static boolean horizontalBeamBraced(Level level, BlockPos pos, int span)
     {
+        if (bearing(level, pos.below())) return true; // a sill beam laid straight onto a wall head or the ground
+
         final Axis axis = level.getBlockState(pos).getValue(SupportBeamBlock.AXIS);
         final Direction negative = axis == Axis.X ? Direction.WEST : Direction.NORTH;
         final Direction positive = axis == Axis.X ? Direction.EAST : Direction.SOUTH;
@@ -229,9 +274,16 @@ public final class StructuralIntegrity
     {
         for (int distance = 0; distance <= span; distance++)
         {
+            final BlockPos along = pos.relative(direction, distance);
             // Posts meet a horizontal beam from below, rather than occupying its same block.
-            final BlockPos candidate = pos.relative(direction, distance).below();
-            if (isVerticalBeam(level.getBlockState(candidate)) && verticalBeamAnchored(level, candidate)) return true;
+            if (isVerticalBeam(level.getBlockState(along.below())) && verticalBeamAnchored(level, along.below())) return true;
+            // A beam bedded into a wall, or landing on a footing, is supported at that end.
+            if (distance > 0)
+            {
+                final Profile inline = profile(level.getBlockState(along));
+                if (inline == Profile.MASONRY || inline == Profile.TIMBER || inline == Profile.FOUNDATION) return true;
+                if (bearing(level, along.below())) return true;
+            }
         }
         return false;
     }

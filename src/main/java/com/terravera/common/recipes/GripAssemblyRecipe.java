@@ -25,25 +25,38 @@ import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.component.ToolGrip;
 
 /**
- * Wraps a grip around an existing, cordage-hafted wooden handle.
+ * Wraps a grip around a tool's handle.
  * <p>
  * The recipe deliberately copies the tool stack. This preserves its wear, knapping, lashing, heat, and other data -
- * a grip is a refit, not a free replacement tool. Requiring an existing {@code CORDAGE} component also makes the
- * progression explicit: first make a stick handle and bind the head; only then is there a handle worth improving.
+ * a grip is a refit, not a free replacement tool.
+ * <p>
+ * <strong>What counts as a tool.</strong> Originally this recipe only accepted stacks carrying TerraVera's own
+ * {@code CORDAGE} component, i.e. a head the player had personally lashed. In practice that meant grips could not be
+ * fitted to <em>anything</em> a normal game produces: every metal tool, every TFC-crafted stone tool, and every tool
+ * that had been repaired or traded lacks that component, so the recipe silently never matched. A handle wrap is a
+ * physical thing you tie around a haft; it does not care how the haft was made. Any damageable tool now qualifies,
+ * and the lashed-handle requirement survives as an opt-in flag ({@code require_lashed_handle}) for packs that want
+ * the stricter progression.
+ * <p>
+ * Refitting is also allowed: a tool already wearing a leather wrap can be upgraded to rubber. Only re-fitting the
+ * <em>same</em> material is rejected, because that would be a no-op that quietly eats a grip.
  */
-public record GripAssemblyRecipe(String material, Ingredient grip, Ingredient binding)
+public record GripAssemblyRecipe(String material, Ingredient grip, Ingredient binding, boolean requireLashedHandle)
     implements net.minecraft.world.item.crafting.CraftingRecipe
 {
     public static final MapCodec<GripAssemblyRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
         com.mojang.serialization.Codec.STRING.fieldOf("material").forGetter(GripAssemblyRecipe::material),
         Ingredient.CODEC.fieldOf("grip").forGetter(GripAssemblyRecipe::grip),
-        Ingredient.CODEC.fieldOf("binding").forGetter(GripAssemblyRecipe::binding)
+        Ingredient.CODEC.fieldOf("binding").forGetter(GripAssemblyRecipe::binding),
+        com.mojang.serialization.Codec.BOOL.optionalFieldOf("require_lashed_handle", false)
+            .forGetter(GripAssemblyRecipe::requireLashedHandle)
     ).apply(i, GripAssemblyRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, GripAssemblyRecipe> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.stringUtf8(24), GripAssemblyRecipe::material,
         Ingredient.CONTENTS_STREAM_CODEC, GripAssemblyRecipe::grip,
         Ingredient.CONTENTS_STREAM_CODEC, GripAssemblyRecipe::binding,
+        ByteBufCodecs.BOOL, GripAssemblyRecipe::requireLashedHandle,
         GripAssemblyRecipe::new
     );
 
@@ -120,9 +133,7 @@ public record GripAssemblyRecipe(String material, Ingredient grip, Ingredient bi
             {
                 bindingCount++;
             }
-            else if (stack.isDamageableItem()
-                && stack.has(TerraVeraDataComponents.CORDAGE.get())
-                && !stack.has(TerraVeraDataComponents.TOOL_GRIP.get()))
+            else if (acceptsGrip(stack))
             {
                 if (tool != null) return null;
                 tool = stack;
@@ -133,5 +144,18 @@ public record GripAssemblyRecipe(String material, Ingredient grip, Ingredient bi
             }
         }
         return tool != null && gripCount == 1 && bindingCount == 1 ? tool : null;
+    }
+
+    /**
+     * @return whether a wrap can be tied onto this stack. Any single damageable tool with a haft qualifies; the only
+     * refusals are non-tools, stacks of more than one, and a tool that already wears this exact grip material.
+     */
+    private boolean acceptsGrip(ItemStack stack)
+    {
+        if (stack.getCount() != 1 || !stack.isDamageableItem()) return false;
+        if (requireLashedHandle && !stack.has(TerraVeraDataComponents.CORDAGE.get())) return false;
+
+        final com.terravera.common.component.ToolGrip existing = stack.get(TerraVeraDataComponents.TOOL_GRIP.get());
+        return existing == null || !existing.material().equals(material);
     }
 }

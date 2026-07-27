@@ -1,0 +1,20 @@
+{
+  "__comment__": "Face a sewn head panel with straw and bind it. The panel is the shape; the facing is what decides how the finished garment behaves in the cold.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "terravera:sewn_hood_panel"
+    },
+    {
+      "item": "terravera:straw_mat"
+    },
+    {
+      "tag": "terravera:cordage"
+    }
+  ],
+  "result": {
+    "id": "terravera:straw_sun_hat",
+    "count": 1
+  }
+}

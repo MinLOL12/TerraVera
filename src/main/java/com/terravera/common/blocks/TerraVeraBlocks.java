@@ -58,5 +58,16 @@ public final class TerraVeraBlocks
             .sound(SoundType.METAL)
             .noOcclusion()));
 
+    /**
+     * A frame for drying wet clothes on. It is not itself a heat source - the point is that you have to put it
+     * somewhere warm, which makes "keep a fire going" the actual mechanic rather than "own the right block".
+     */
+    public static final DeferredHolder<Block, DryingRackBlock> DRYING_RACK = BLOCKS.register("drying_rack",
+        () -> new DryingRackBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD)
+            .strength(1.2f, 1.5f)
+            .sound(SoundType.WOOD)
+            .noOcclusion()));
+
     private TerraVeraBlocks() {}
 }
