@@ -28,5 +28,8 @@ public final class TerraVeraContainers
         CONTAINERS.register("workplate",
             () -> IMenuTypeExtension.create(WorkplateContainer::fromNetwork));
 
+    public static final DeferredHolder<MenuType<?>, MenuType<ClimateControllerMenu>> CLIMATE_CONTROLLER =
+        CONTAINERS.register("climate_controller", () -> IMenuTypeExtension.create(ClimateControllerMenu::fromNetwork));
+
     private TerraVeraContainers() {}
 }

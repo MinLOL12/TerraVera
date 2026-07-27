@@ -31,6 +31,14 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, BlockItem> WORKPLATE = ITEMS.register("workplate",
         () -> new BlockItem(TerraVeraBlocks.WORKPLATE.get(), new Item.Properties()));
 
+    // ----- Industrial climate control ------------------------------------------------------------------------
+    public static final DeferredHolder<Item, BlockItem> AIR_CONDITIONER = ITEMS.register("air_conditioner",
+        () -> new BlockItem(TerraVeraBlocks.AIR_CONDITIONER.get(), new Item.Properties()));
+    /** A wired logic board. It is consumed when installed, preventing an unprogrammed compressor from operating. */
+    public static final DeferredHolder<Item, Item> PROGRAMMED_CIRCUIT = ITEMS.registerSimpleItem("programmed_circuit");
+    public static final DeferredHolder<Item, Item> REFRIGERANT_CANISTER = ITEMS.registerSimpleItem("refrigerant_canister");
+    public static final DeferredHolder<Item, Item> AIR_FILTER = ITEMS.registerSimpleItem("air_filter");
+
     // ----- Structural construction ---------------------------------------------------------------------------
 
     public static final DeferredHolder<Item, BlockItem> RUBBLE_FOUNDATION = ITEMS.register("rubble_foundation",

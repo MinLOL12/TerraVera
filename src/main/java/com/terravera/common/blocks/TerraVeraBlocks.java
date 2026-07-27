@@ -33,6 +33,11 @@ public final class TerraVeraBlocks
             .sound(SoundType.METAL)
             .noOcclusion()));
 
+    /** Late-industrial vapor-compression unit; its controller circuit and electrical supply are required separately. */
+    public static final DeferredHolder<Block, AirConditionerBlock> AIR_CONDITIONER = BLOCKS.register("air_conditioner",
+        () -> new AirConditionerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops().strength(5.0f, 8.0f).sound(SoundType.METAL)));
+
     /** Compact laid-stone footing. It distributes a column's load into soil or rock beneath it. */
     public static final DeferredHolder<Block, Block> RUBBLE_FOUNDATION = BLOCKS.register("rubble_foundation",
         () -> new Block(BlockBehaviour.Properties.of()

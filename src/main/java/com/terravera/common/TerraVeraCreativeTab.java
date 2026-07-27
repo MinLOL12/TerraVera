@@ -40,6 +40,10 @@ public final class TerraVeraCreativeTab
     {
         if (event.getTabKey() != TAB.getKey()) return;
 
+        event.accept(TerraVeraItems.AIR_CONDITIONER.get());
+        event.accept(TerraVeraItems.PROGRAMMED_CIRCUIT.get());
+        event.accept(TerraVeraItems.REFRIGERANT_CANISTER.get());
+        event.accept(TerraVeraItems.AIR_FILTER.get());
         event.accept(TerraVeraItems.WORKPLATE.get());
         event.accept(TerraVeraItems.RUBBLE_FOUNDATION.get());
         event.accept(TerraVeraItems.WOODEN_SUPPORT_BEAM.get());

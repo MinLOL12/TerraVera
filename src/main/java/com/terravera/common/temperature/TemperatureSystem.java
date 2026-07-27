@@ -115,6 +115,8 @@ public final class TemperatureSystem
         // --- 4. Run the model ---
         float felt = ThermalModel.feltTemperature(ambient, wind, state.skinWetness(), sun, immersion);
         felt = shelter.isIndoors() ? shelter.moderate(felt, averageAmbient) : felt + shelter.openFireWarmth();
+        // Vapor-compression cooling changes room air by moving heat through the condenser; it never edits core heat.
+        felt = com.terravera.common.climate.ClimateControlSystem.condition(level, pos, shelter, felt);
         // Being in water means the fire on the bank is not warming you, whatever the survey said.
         if (immersion > 0.6f) felt = Math.min(felt, ambient);
 

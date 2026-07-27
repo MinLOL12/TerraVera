@@ -419,3 +419,13 @@ Adding a new stone, a new fibre plant, or retuning what counts as an axe bit is 
 ## Licence
 
 [EUPL v1.2](LICENSE.txt), the same licence as TerraFirmaCraft, which this builds on.
+
+## Refrigeration and climate control
+
+Climate control is an **industrial endgame** rather than a survival shortcut. Early cooling is architectural: dig underground rooms, build thick stone shells for thermal mass, add high/low ventilation, and use water-and-air evaporative cooling in dry regions. Those methods are passive; they do not need a grid and they do not make a hot, leaky house comfortable.
+
+The final step is the **Vapor-Compression Air Conditioner**. Its recipe calls for industrial iron/copper, a mechanical piston/compressor, and redstone control hardware. Craft a **Programmed Climate Control Circuit**, then open the unit GUI and install it. An unprogrammed unit is intentionally inert. It also requires a nearby generator/dynamo/turbine block (within 12 blocks), a sealed insulated room, and continuing service with an **Air Filter** and **Refrigerant Canister**.
+
+The controller GUI exposes a 16–30 °C target and five compressor speeds. Electrical demand grows sharply with both compressor speed and the gap between outdoor air and the selected target; badly sealed or uninsulated buildings multiply that demand. The system models vapor-compression cooling as heat moved from the room through its condenser, not a direct change to player temperature. Consequently desert settlements gain far more from the machine than cool regions, where insulation, stone mass, and ventilation remain the sensible investment.
+
+Filters are part of indoor air quality: a serviced system keeps dust/airborne load out of circulated air; neglected filters and refrigerant/compressor wear steadily reduce output until the unit is serviced. This makes large electrical generation, filtration materials, mechanical repair, and building design ongoing requirements rather than a one-time craft.
