@@ -1,12 +1,33 @@
 {
   "__comment__": "Tall, fibrous stems that yield true bast - the strongest cordage available in the stone age. Requires a blade to strip, which is the deliberate bootstrap: your first knife comes from grass cordage, and only then can you get at the good fibre.",
   "values": [
-    "tfc:plant/pampas_grass",
-    "tfc:plant/cattail",
-    "tfc:plant/bur_reed",
-    "tfc:plant/phragmite",
-    "tfc:plant/arundo",
-    "tfc:plant/switchgrass",
-    "tfc:wild_crop/jute"
+    {
+      "id": "tfc:plant/pampas_grass",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/cattail",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/bur_reed",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/phragmite",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/arundo",
+      "required": false
+    },
+    {
+      "id": "tfc:plant/switchgrass",
+      "required": false
+    },
+    {
+      "id": "tfc:wild_crop/jute",
+      "required": false
+    }
   ]
 }
