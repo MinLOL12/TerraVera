@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"minecraft:block/iron_block"}}
+{"parent":"minecraft:block/cube","textures":{"down":"terravera:block/air_conditioner_top","up":"terravera:block/air_conditioner_top","north":"terravera:block/air_conditioner_side","south":"terravera:block/air_conditioner_side","east":"terravera:block/air_conditioner_side","west":"terravera:block/air_conditioner_side","particle":"terravera:block/air_conditioner_side"}}

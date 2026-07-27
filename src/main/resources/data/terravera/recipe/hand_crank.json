@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":["  I","SIS"," S "],"key":{"I":{"item":"minecraft:iron_ingot"},"S":{"item":"minecraft:stick"}},"result":{"id":"terravera:hand_crank","count":1}}
