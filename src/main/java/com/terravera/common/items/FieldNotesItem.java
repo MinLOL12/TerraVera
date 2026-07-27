@@ -44,6 +44,16 @@ public class FieldNotesItem extends Item
                     type.displayName(), Component.translatable(skills.knowledgeKey(type)), Math.round(skills.experience(type)))
                     .withStyle(ChatFormatting.GRAY));
             }
+
+            // The one place a player can get a considered read on their thermal situation instead of a symptom.
+            // Even here it is in words: what their clothes are worth, and what the building is doing.
+            if (com.terravera.config.TerraVeraConfig.SERVER.enableBodyTemperature.get())
+            {
+                player.sendSystemMessage(Component.translatable("terravera.temperature.notes.title")
+                    .withStyle(ChatFormatting.GOLD));
+                com.terravera.common.temperature.TemperatureSystem.describe(player)
+                    .forEach(player::sendSystemMessage);
+            }
         }
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }

@@ -1,0 +1,20 @@
+{
+  "__comment__": "Wool or cattail down carded loose. It insulates because of the air it holds, not the fibre.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tfc:wool"
+    },
+    {
+      "item": "tfc:wool"
+    },
+    {
+      "item": "terravera:plant_fiber"
+    }
+  ],
+  "result": {
+    "id": "terravera:batting",
+    "count": 3
+  }
+}

@@ -118,6 +118,47 @@ public final class TerraVeraItems
     /** A full apothecary kit made from prepared extracts. The end of the line: cures essentially anything. */
     public static final DeferredHolder<Item, Item> MEDICINE = ITEMS.registerSimpleItem("medicine");
 
+    // ----- Clothing ------------------------------------------------------------------------------------------
+    // The wardrobe is large enough to deserve its own file. See TerraVeraClothing for the material lines and the
+    // reasoning behind them; registering it here keeps every TerraVera item in one registry pass.
+
+    static
+    {
+        com.terravera.common.temperature.TerraVeraClothing.register(ITEMS);
+    }
+
+    /** Raw and intermediate textile goods that the sewing and weaving recipes turn into garments. */
+    public static final DeferredHolder<Item, Item> PLANT_FIBER_CLOTH = ITEMS.registerSimpleItem("plant_fiber_cloth");
+    public static final DeferredHolder<Item, Item> STRAW_MAT = ITEMS.registerSimpleItem("straw_mat");
+    public static final DeferredHolder<Item, Item> FELT_CLOTH = ITEMS.registerSimpleItem("felt_cloth");
+    public static final DeferredHolder<Item, Item> LINEN_CLOTH = ITEMS.registerSimpleItem("linen_cloth");
+    public static final DeferredHolder<Item, Item> OILSKIN_CLOTH = ITEMS.registerSimpleItem("oilskin_cloth");
+    public static final DeferredHolder<Item, Item> QUILTED_CLOTH = ITEMS.registerSimpleItem("quilted_cloth");
+    /** Hide with the fur still on it, scraped but not tanned bald. The input to every fur garment. */
+    public static final DeferredHolder<Item, Item> FUR_PELT = ITEMS.registerSimpleItem("fur_pelt");
+    /** Rendered fat or pressed oil, worked into leather to make it shed water. */
+    public static final DeferredHolder<Item, Item> DUBBIN = ITEMS.registerSimpleItem("dubbin");
+    /** Carded wool or cattail down, used as the trapped-air filling in quilted clothing. */
+    public static final DeferredHolder<Item, Item> BATTING = ITEMS.registerSimpleItem("batting");
+    /**
+     * Cut-and-sewn garment panels, made at a TFC sewing table.
+     * <p>
+     * These are the join between TFC's sewing minigame and TerraVera's wardrobe. The sewing table can only tell light
+     * cloth from dark cloth, so it cannot know whether the bolt you fed it was wool or linen - which means sewing
+     * alone could never produce a material-correct garment. Instead the table produces the <em>shape</em>: you stitch
+     * out a hood, a body, a pair of legs, or a pair of feet, and then face those panels with the actual material you
+     * want the garment made of. Both halves are real work, and the pattern you sew is genuinely reusable across every
+     * material line.
+     */
+    public static final DeferredHolder<Item, Item> SEWN_HOOD_PANEL = ITEMS.registerSimpleItem("sewn_hood_panel");
+    public static final DeferredHolder<Item, Item> SEWN_BODY_PANEL = ITEMS.registerSimpleItem("sewn_body_panel");
+    public static final DeferredHolder<Item, Item> SEWN_LEG_PANEL = ITEMS.registerSimpleItem("sewn_leg_panel");
+    public static final DeferredHolder<Item, Item> SEWN_FOOT_PANEL = ITEMS.registerSimpleItem("sewn_foot_panel");
+
+    /** A drying frame for wet clothes. Hang a soaked coat near a fire rather than wearing it dry. */
+    public static final DeferredHolder<Item, BlockItem> DRYING_RACK = ITEMS.register("drying_rack",
+        () -> new BlockItem(TerraVeraBlocks.DRYING_RACK.get(), new Item.Properties()));
+
     // ----- Knapped heads -------------------------------------------------------------------------------------
     // One item per working end, not one per (rock category x tool). The stone is in the component.
 

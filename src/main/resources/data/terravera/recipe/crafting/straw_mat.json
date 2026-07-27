@@ -1,0 +1,22 @@
+{
+  "__comment__": "Straw plaited flat. Nearly worthless against cold, but a wide brim is real sun protection.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "SCS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:thatch"
+    },
+    "C": {
+      "item": "terravera:primitive_cordage"
+    }
+  },
+  "result": {
+    "id": "terravera:straw_mat",
+    "count": 1
+  }
+}

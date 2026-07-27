@@ -32,6 +32,8 @@ import com.terravera.common.health.effect.TerraVeraEffects;
 import com.terravera.common.items.TerraVeraItems;
 import com.terravera.common.recipes.TerraVeraRecipes;
 import com.terravera.common.skill.SkillSystem;
+import com.terravera.common.temperature.TemperatureEventHandler;
+import com.terravera.common.temperature.TerraVeraClothing;
 import com.terravera.common.structure.StructuralIntegrity;
 import com.terravera.config.TerraVeraConfig;
 
@@ -79,6 +81,7 @@ public final class TerraVera
         TerraVeraContainers.CONTAINERS.register(bus);
         TerraVeraEffects.EFFECTS.register(bus);
         TerraVeraAttachments.TYPES.register(bus);
+        TerraVeraClothing.ARMOR_MATERIALS.register(bus);
 
         bus.addListener(TerraVeraCreativeTab::onBuildTabContents);
 
@@ -92,6 +95,10 @@ public final class TerraVera
         HealthEventHandler.init();
         BoilingHandler.init();
         HerbGathering.init();
+
+        // Body temperature: climate, clothing, shelter, and the symptoms of struggling to regulate.
+        // See com.terravera.common.temperature.
+        TemperatureEventHandler.init();
 
         if (FMLEnvironment.dist == Dist.CLIENT)
         {

@@ -16,6 +16,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import com.terravera.TerraVera;
 import com.terravera.common.health.PlayerHealth;
 import com.terravera.common.skill.PlayerSkills;
+import com.terravera.common.temperature.BodyTemperature;
 
 /**
  * Data attachments TerraVera puts on the player.
@@ -38,6 +39,19 @@ public final class TerraVeraAttachments
             .builder(() -> PlayerHealth.EMPTY)
             .serialize(PlayerHealth.CODEC)
             .copyOnDeath()
+            .build());
+
+    /**
+     * Core body temperature, wetness, and recent exertion.
+     * <p>
+     * Deliberately <em>not</em> copied on death: a new body starts at a normal temperature. Being resurrected already
+     * hypothermic would punish the player for the death twice, and the wet clothes they respawn in are recorded on
+     * the garments themselves anyway.
+     */
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<BodyTemperature>> BODY_TEMPERATURE =
+        register("body_temperature", () -> AttachmentType
+            .builder(() -> BodyTemperature.EMPTY)
+            .serialize(BodyTemperature.CODEC)
             .build());
 
     /** Practical knowledge gained by doing work. It is copied on death because knowledge is not a body stat. */

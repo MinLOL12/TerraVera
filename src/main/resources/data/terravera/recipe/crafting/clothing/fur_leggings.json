@@ -1,0 +1,23 @@
+{
+  "__comment__": "Face a sewn legs panel with fur and bind it. The panel is the shape; the facing is what decides how the finished garment behaves in the cold.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "terravera:sewn_leg_panel"
+    },
+    {
+      "item": "terravera:fur_pelt"
+    },
+    {
+      "item": "terravera:fur_pelt"
+    },
+    {
+      "tag": "terravera:cordage"
+    }
+  ],
+  "result": {
+    "id": "terravera:fur_leggings",
+    "count": 1
+  }
+}

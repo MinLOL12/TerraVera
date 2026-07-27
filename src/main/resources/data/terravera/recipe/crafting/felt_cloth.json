@@ -1,0 +1,18 @@
+{
+  "__comment__": "Wool worked with heat and pressure until the fibres lock together. Warmer and far more windproof than a knit, at the cost of breathing at all.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WW",
+    "WW"
+  ],
+  "key": {
+    "W": {
+      "item": "tfc:wool_cloth"
+    }
+  },
+  "result": {
+    "id": "terravera:felt_cloth",
+    "count": 3
+  }
+}

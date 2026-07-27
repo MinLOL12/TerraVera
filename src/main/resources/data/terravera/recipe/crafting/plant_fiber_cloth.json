@@ -1,0 +1,22 @@
+{
+  "__comment__": "Fibre twisted and matted by hand into a rough sheet. It is barely a fabric, which is exactly why clothing made from it is barely clothing.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "FFF",
+    "FCF",
+    "FFF"
+  ],
+  "key": {
+    "F": {
+      "item": "terravera:plant_fiber"
+    },
+    "C": {
+      "item": "terravera:primitive_cordage"
+    }
+  },
+  "result": {
+    "id": "terravera:plant_fiber_cloth",
+    "count": 1
+  }
+}

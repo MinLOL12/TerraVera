@@ -1,0 +1,17 @@
+{
+  "__comment__": "A scraped hide with the fur left on. Tanning bald costs you the warmest material in the game.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "terravera:furred_hides"
+    },
+    {
+      "item": "tfc:powder/wood_ash"
+    }
+  ],
+  "result": {
+    "id": "terravera:fur_pelt",
+    "count": 1
+  }
+}

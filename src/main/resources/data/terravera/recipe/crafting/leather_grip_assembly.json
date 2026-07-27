@@ -1,7 +1,7 @@
 {
-  "__comment__": "Fit this only after a stick/rod has been lashed into a tool handle. One fresh cord ties the overlapping leather wrap in place.",
+  "__comment__": "A laced leather wrap tied over a tool's handle with one fresh cord. It fits any hafted tool - your own lashed work, a TFC stone tool, or a metal one - because a handle wrap does not care how the haft was made.",
   "type": "terravera:grip_assembly",
   "material": "leather",
   "grip": { "item": "terravera:leather_tool_grip" },
-  "binding": { "item": "terravera:cordage" }
+  "binding": { "tag": "terravera:cordage" }
 }

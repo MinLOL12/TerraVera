@@ -104,6 +104,16 @@ period to be braced before it sheds as dropped material. Natural caves and world
   beam, and horizontal beams need anchored posts under both ends. A line of stone blocks can make a wall, but a broad,
   heavy roof needs posts, lintels, and a real foundation.
 
+The bracing rules are deliberately generous about *what counts as support*, because the members you place to hold a
+building up must never be the hardest thing to keep standing:
+
+- A **foundation** is the bottom of the load path. It only has to be sitting on something — grass, sand, gravel, rock,
+  or another footing. It is not itself a loaded member needing a footing beneath it.
+- A **post** is anchored when the bottom of its column lands on a footing, on tagged ground, on masonry or timber, on
+  another beam, or on any block with a solid top face. A post standing on your plank floor is a post, not a hazard.
+- A **lintel** needs support within its span at both ends. A post under the end counts, and so does resting on a wall
+  head, being bedded into masonry, or simply lying on the ground as a sill.
+
 The material categories are datapack tags under `data/terravera/tags/block/structural/`, so packs can classify their
 own TFC stones, bricks, thatch, and lumber. `enableStructuralIntegrity` turns the mechanic off for worlds that prefer
 free placement.
@@ -128,8 +138,10 @@ The handle path also continues after the first stick haft:
    and a leather backing into a **Rubber Tool Grip**, then bind that over an already-lashed handle with heavy cordage.
    Rubber costs more but better damps shock and improves task control.
 
-The grip assembly recipe copies the exact tool stack, so its existing durability, knapping, lashing and repair history
-are preserved rather than reset.
+A grip fits **any hafted tool with a handle** — your own lashed stone work, a TFC stone tool, or a metal one. A wrap
+is a physical thing tied around a haft; it does not care how the haft was made. Leather can also be upgraded to rubber
+in place. The grip assembly recipe copies the exact tool stack, so its existing durability, knapping, lashing and
+repair history are preserved rather than reset.
 
 ## Configuration
 
@@ -148,6 +160,8 @@ are preserved rather than reset.
 - `[water]` — `enableWaterContamination`, `waterContaminationMultiplier`, `warnBeforeDrinkingUnsafeWater`,
   `showWaterTooltip`.
 - `[hygiene]` — `enableHygiene`, `hygieneDecayMultiplier`.
+- `[temperature]` — `enableBodyTemperature`, `temperatureRateMultiplier`, `enableTemperatureDamage`,
+  `showTemperatureSymptoms`, `enableWetClothing`.
 
 ### 3. Blacksmithing maintenance instead of durability refills
 
@@ -268,6 +282,119 @@ disease system compounds with the food system rather than sitting beside it.
 Everything above is data-driven and hot-reloadable. All of it can be turned off or retuned in
 `config/terravera-server.toml` under `[disease]`, `[water]`, and `[hygiene]`.
 
+## Warmth, weather, and what you are wearing
+
+TerraVera gives the player a **core body temperature** rather than a cold bar. It is a real number the game tracks,
+and one the player is never shown. What they get instead — the same contract as the disease and taste systems — is
+their own body reporting on itself:
+
+> *You feel slightly chilled.*
+> *Your hands feel stiff.*
+> *You are struggling to stay warm.*
+> *You feel overheated.*
+
+**Nothing about it is instant.** Core temperature has inertia. Walking into a blizzard naked does not hurt you; it
+takes over three minutes of it to reach the first band that impairs anything, and the better part of ten to become
+hypothermic — and the first two bands either side of comfortable do nothing mechanical at all. They exist purely so
+you are told before anything is taken away from you. Only the two extreme bands do slow, capped direct damage, and by
+then you have ignored several minutes of escalating warnings.
+
+The model is one equation, and every behaviour below falls out of it rather than being special-cased:
+
+```
+heat produced = basal metabolism x activity  (+ shivering, + fever)
+heat lost     = (core - felt ambient) / (skin resistance x clothing)  + sweat
+dCore/dt      = (produced - lost) x thermal inertia
+```
+
+### What the environment does
+
+Biome climate, latitude, altitude, season, and time of day all come straight from TerraFirmaCraft's own climate model,
+so the thermometer you are already reading is the one the system uses. On top of that TerraVera reads what a
+thermometer in a box would miss: **wind** (worse when wet, worse on a ridge, worse in a storm), **rain**, **water
+immersion** (water strips heat far faster than air at the same temperature), and **sun versus shade** — full midday
+sun is worth about six degrees, a tree is worth all of them back, and shade becomes a genuine resource in the desert.
+
+### What clothing does
+
+Insulation is a **divisor, not a bonus**, so the first layer matters enormously and the fifth barely at all. It is
+also **symmetric**: the same term that keeps heat in on a winter night traps it during summer work. No rule punishes
+you for wearing a parka in the desert; it simply also works in the desert.
+
+| Material | Warmth | Wind | Breathes | When wet | Why you would wear it |
+| --- | --- | --- | --- | --- | --- |
+| Bare skin | none | none | fully | — | Comfortable to about 22 °C at rest. Below that you are losing. |
+| Plant fibre | negligible | poor | yes | useless | Day one, from the fibre you are already gathering. |
+| Straw | negligible | poor | yes | useless | A wide brim is the only real sun protection you can weave. |
+| Burlap | light | fair | yes | poor | The first actual fabric. |
+| Linen | light | fair | **excellent** | fine | The hot-climate answer: light, cool, fast drying. |
+| Wool | **strong** | fair | fair | **still works** | The cold milestone. Comfortable to about −6 °C at rest. |
+| Felt | strong | good | poor | fair | Warmer and windproof, but airless. |
+| Leather | moderate | **near-total** | poor | fair | Stops wind and weather rather than being warm. |
+| Oilskin | moderate | **total** | none | **barely wets** | The rain answer: it cannot fail because it cannot soak. |
+| Fur | **extreme** | good | poor | poor | Warmest thing there is. A liability anywhere warm. |
+| Silk | moderate | fair | very good | fair | Light and versatile, good in both directions. |
+| Quilted | extreme | good | fair | fair | The best cold gear that can be sewn. |
+
+**Wet clothing is the single most important lesson in the cold.** A soaked garment keeps about a quarter of its dry
+insulation — except wool, which keeps most of it, and oilskin, which never gets there. Wetness is stored **per
+garment, on the item**, so a soaked coat is still soaked tomorrow, still soaked when you take it off, and can be hung
+on a **Drying Rack** near a fire while you wear a spare. Carrying a change of clothes is a genuine strategy.
+
+### What buildings do
+
+The hut you actually built matters, and for the reasons a real hut would. A bounded flood fill answers four questions
+a builder already understands:
+
+- **Is it enclosed?** A roof and walls stop the wind and hold air still. Much the largest single effect.
+- **Is it sealed?** Every gap leaks. An open door is a hole, and the model notices.
+- **What is it made of?** Stone has enormous thermal mass, so it lags the outdoors — cool through a hot afternoon,
+  holding warmth into a cold evening. Timber and thatch insulate better per block but track the weather.
+- **What is underfoot?** A dirt floor conducts your heat into the ground; a raised plank floor over an air gap does
+  not, which is exactly why cold-climate buildings have one.
+
+Fires, hearths, forges, and stoves are **localised**: inverse-square falloff, worth far more inside a sealed room than
+in the open. A campfire under the stars still helps — refusing to count it because there are no walls would be
+perverse — just much less.
+
+### Heat, work, and water
+
+Mining, running, and swinging an axe raise the metabolic term, which is why you overheat chopping wood in a coat and
+then freeze the moment you stop — exertion decays slowly on purpose, so that dangerous interval exists in game too.
+Overheating makes you sweat, sweating **costs water**, and sweat only cools you if it can evaporate. That last point
+is why an airless parka in the heat is dangerous for a second reason beyond its warmth: it shuts off the body's only
+active cooling. Shade, breathable cloth, and staying hydrated are how heat is beaten — it is never a hard ceiling.
+
+### Sleeping
+
+Lying down in the open in the cold is the most dangerous thing an unprepared player can do, and your body keeps
+cooling while you are unconscious. You are never *refused* the bed — being blocked with no explanation is the worst
+possible version of this — but you are told, before you commit, that this is a bad place to spend the night. Bedding
+and a fire are the fix, and the message says so.
+
+## Over forty garments, and how you make them
+
+TFC's sewing table can only tell light cloth from dark cloth, so sewing alone could never know whether the bolt you
+fed it was wool or linen. TerraVera splits the job the way a tailor would:
+
+1. **Sew the pattern.** At a sewing table, stitch out a **hood**, **body**, **leg**, or **foot** panel. The pattern is
+   reusable across every material line.
+2. **Face it with a material.** Combine the panel with the cloth, hide, or pelt you actually want the garment made of,
+   plus a cord to bind it. *That* is what decides how the finished garment behaves.
+
+Both halves are real work, and there are eleven material lines × four body slots, plus a few single-slot specialities
+(the straw sun hat, the oilskin cloak) that only make sense as one piece — forty-two garments in all. They equip in
+the ordinary armour slots and render on the player. Physical armour value is near-zero throughout on purpose: this is
+clothing, not an armour tier.
+
+The textile chain behind them is its own small progression: matted **plant fibre cloth** and plaited **straw mats** on
+day one; **burlap** and **linen** once you have jute and flax; **wool cloth** from sheep, then **felt** by working it
+further; **dubbin** rendered from fat to turn leather into **oilskin**; **fur pelts** from scraping a hide without
+tanning the fur off; and finally **batting** and **quilted cloth**, the best cold-weather fabric that can be sewn.
+
+Everything is tunable in `config/terravera-server.toml` under `[temperature]`, including turning the whole system,
+wet clothing, symptom messages, or the extreme-band damage off independently.
+
 ## Extending it
 
 Everything that defines the mod's behaviour is data, loaded through TerraFirmaCraft's own data manager system (so it
@@ -279,6 +406,8 @@ reloads with `/reload` and syncs to clients automatically):
 - `data/<ns>/terravera/illness/<name>.json` — a disease: its vectors, incubation, duration, symptoms, and remedies.
 - `data/<ns>/terravera/remedy/<name>.json` — what treats what, by how much, and at which progression tier.
 - `data/<ns>/recipe/…` — `terravera:lashing` and `terravera:twisting` recipes.
+- `data/<ns>/tags/item/clothing_repair/<material>.json` — what mends each clothing line.
+- `data/<ns>/tags/item/furred_hides.json` — hides that still have usable fur on them.
 
 Adding a disease is a single JSON file — pick its transmission vectors, an incubation period, a symptom list, and the
 remedy tags that treat it. The health system also reads a handful of tags (`terravera:fouls_water`,

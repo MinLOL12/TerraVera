@@ -1,0 +1,26 @@
+{
+  "__comment__": "Face a sewn chest panel with leather and bind it. The panel is the shape; the facing is what decides how the finished garment behaves in the cold.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "terravera:sewn_body_panel"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "tag": "terravera:cordage"
+    }
+  ],
+  "result": {
+    "id": "terravera:leather_jerkin",
+    "count": 1
+  }
+}

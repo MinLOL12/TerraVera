@@ -72,6 +72,24 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.REHYDRATION_SALTS.get());
         event.accept(TerraVeraItems.MEDICINE.get());
 
+        // Textile chain and the wardrobe, in roughly the order a player unlocks them.
+        event.accept(TerraVeraItems.PLANT_FIBER_CLOTH.get());
+        event.accept(TerraVeraItems.STRAW_MAT.get());
+        event.accept(TerraVeraItems.LINEN_CLOTH.get());
+        event.accept(TerraVeraItems.FELT_CLOTH.get());
+        event.accept(TerraVeraItems.FUR_PELT.get());
+        event.accept(TerraVeraItems.DUBBIN.get());
+        event.accept(TerraVeraItems.OILSKIN_CLOTH.get());
+        event.accept(TerraVeraItems.BATTING.get());
+        event.accept(TerraVeraItems.QUILTED_CLOTH.get());
+        event.accept(TerraVeraItems.SEWN_HOOD_PANEL.get());
+        event.accept(TerraVeraItems.SEWN_BODY_PANEL.get());
+        event.accept(TerraVeraItems.SEWN_LEG_PANEL.get());
+        event.accept(TerraVeraItems.SEWN_FOOT_PANEL.get());
+        event.accept(TerraVeraItems.DRYING_RACK.get());
+        com.terravera.common.temperature.TerraVeraClothing.garments()
+            .values().forEach(holder -> event.accept(holder.get()));
+
         // One entry per (head kind x stone), with the component filled in, so that creative and JEI show real heads
         // rather than blank ones that no lashing recipe will accept.
         TerraVeraItems.HEADS.forEach((kind, holder) -> {

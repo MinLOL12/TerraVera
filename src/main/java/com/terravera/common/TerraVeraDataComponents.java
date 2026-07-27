@@ -61,6 +61,15 @@ public final class TerraVeraDataComponents
             .persistent(com.terravera.common.health.WaterTreatment.CODEC)
             .networkSynchronized(com.terravera.common.health.WaterTreatment.STREAM_CODEC));
 
+    /**
+     * Attached to worn garments. A soaked coat stays soaked until it is dried, which is what turns "dry your clothes"
+     * into a real decision rather than a slogan, and makes carrying a spare set worthwhile.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<com.terravera.common.temperature.Wetness>> GARMENT_WETNESS =
+        register("garment_wetness", builder -> builder
+            .persistent(com.terravera.common.temperature.Wetness.CODEC)
+            .networkSynchronized(com.terravera.common.temperature.Wetness.STREAM_CODEC));
+
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(
         String name, UnaryOperator<DataComponentType.Builder<T>> builder)
     {

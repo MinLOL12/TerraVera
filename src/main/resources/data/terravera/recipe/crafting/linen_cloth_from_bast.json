@@ -1,0 +1,19 @@
+{
+  "__comment__": "Retted bast spun and woven. Light, cool, and fast drying - the correct answer to a hot climate.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "BBB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "terravera:bast_fiber"
+    }
+  },
+  "result": {
+    "id": "terravera:linen_cloth",
+    "count": 1
+  }
+}
