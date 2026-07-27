@@ -33,6 +33,7 @@ public final class TerraVeraClient
         // Workplate repair GUI: a clean TFC-style screen that walks the player through every step of
         // metal tool maintenance — placing the hammer and tool, selecting an operation, and striking.
         event.register(com.terravera.common.container.TerraVeraContainers.WORKPLATE.get(), WorkplateScreen::new);
+        event.register(com.terravera.common.container.TerraVeraContainers.CLIMATE_CONTROLLER.get(), ClimateControllerScreen::new);
     }
 
     private TerraVeraClient() {}
