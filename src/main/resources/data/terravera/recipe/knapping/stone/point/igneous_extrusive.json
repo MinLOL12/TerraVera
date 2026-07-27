@@ -1,0 +1,25 @@
+{
+  "type": "tfc:knapping",
+  "ingredient": {
+    "tag": "tfc:stones/loose/igneous_extrusive"
+  },
+  "knapping_type": "tfc:rock",
+  "pattern": [
+    "  #  ",
+    "  #  ",
+    " ### ",
+    " ### ",
+    " ### "
+  ],
+  "result": {
+    "id": "terravera:head/point",
+    "count": 1,
+    "components": {
+      "terravera:knapped_head": {
+        "kind": "terravera:point",
+        "material": "igneous_extrusive",
+        "quality": 0.75
+      }
+    }
+  }
+}

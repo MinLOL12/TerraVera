@@ -67,6 +67,10 @@ which teaches the underlying model instead of asking you to memorise pictures.
 Every head also carries a **quality** score based on how comfortably it cleared the bar, which combines with cordage
 strength to scale the finished tool's durability.
 
+The five shipped heads are also registered as `tfc:knapping` recipes for every TFC rock category. This makes them
+visible in TFC's Rock Knapping recipe integrations (including JEI). The pattern shown there is one representative
+shape for the profile, not the only shape the shaping screen accepts.
+
 ## Building
 
 TerraFirmaCraft is not on a public Maven repository, so you have to point the build at a copy:
