@@ -88,8 +88,8 @@ public class WorkplateScreen extends AbstractContainerScreen<WorkplateContainer>
         super(container, inventory, title);
         imageWidth = 210;
         imageHeight = 240;
-        inventoryLabelColor = COL_TEXT_DARK;
-        titleLabelColor = COL_TEXT_DARK;
+        titleLabelY = 7;
+        inventoryLabelY = 145;
     }
 
     @Override
@@ -159,6 +159,13 @@ public class WorkplateScreen extends AbstractContainerScreen<WorkplateContainer>
         drawParchmentBackground(g);
         drawSlotFrames(g);
         drawSlotLabels(g);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics g, int mouseX, int mouseY)
+    {
+        g.drawString(font, title, titleLabelX, titleLabelY, COL_TEXT_DARK, false);
+        g.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, COL_TEXT_DARK, false);
     }
 
     @Override

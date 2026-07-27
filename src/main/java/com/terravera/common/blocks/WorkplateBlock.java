@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.network.NetworkHooks;
 
 import com.terravera.common.container.WorkplateContainer;
 
@@ -58,7 +57,7 @@ public class WorkplateBlock extends Block
 
         if (player instanceof ServerPlayer serverPlayer)
         {
-            NetworkHooks.openScreen(serverPlayer, new MenuProvider()
+            serverPlayer.openMenu(new MenuProvider()
             {
                 @Override
                 public Component getDisplayName()

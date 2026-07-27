@@ -77,7 +77,7 @@ public class WorkplateContainer extends AbstractContainerMenu
     }
 
     /**
-     * Client-side constructor, called from the network data that {@code NetworkHooks.openScreen} sends.
+     * Client-side constructor, called from the network data that {@code ServerPlayer.openMenu} sends.
      */
     public static WorkplateContainer fromNetwork(int windowId, Inventory inventory, RegistryFriendlyByteBuf buf)
     {
