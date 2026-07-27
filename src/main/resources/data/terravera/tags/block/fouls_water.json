@@ -1,0 +1,15 @@
+{
+  "__comment__": "Blocks that make adjacent water dirtier. Mud and muck are the natural case; a latrine dug next to your well is the self-inflicted one.",
+  "values": [
+    "#tfc:mud",
+    "tfc:mud/silt",
+    "tfc:mud/loam",
+    "tfc:mud/sandy_loam",
+    "tfc:mud/silty_loam",
+    { "id": "minecraft:mud", "required": false },
+    { "id": "minecraft:muddy_mangrove_roots", "required": false },
+    { "id": "tfc:composter", "required": false },
+    { "id": "tfc:plant/duckweed", "required": false },
+    { "id": "tfc:plant/pistia", "required": false }
+  ]
+}

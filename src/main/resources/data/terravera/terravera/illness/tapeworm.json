@@ -1,0 +1,13 @@
+{
+  "__comment__": "Taenia. Undercooked pork, beef, or fish. Very long, very quiet: it takes two to three months to establish and then simply lives in you, eating first. Almost no acute symptoms - just constant hunger and nutrition that never quite adds up. Cook your meat.",
+  "vectors": ["undercooked_meat"],
+  "base_chance": 0.11,
+  "incubation_ticks": 480000,
+  "duration_ticks": 960000,
+  "severity": "moderate",
+  "symptoms": ["increased_hunger", "malabsorption", "fatigue"],
+  "contagious": false,
+  "immunity_ticks": 0,
+  "lethal": false,
+  "remedies": ["terravera:remedies/antiparasitic", "terravera:remedies/medicine"]
+}

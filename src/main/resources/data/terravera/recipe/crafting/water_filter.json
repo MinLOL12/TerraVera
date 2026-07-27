@@ -1,0 +1,19 @@
+{
+  "__comment__": "Sand, charcoal, and cloth in a frame. The whole point is that this is available long before any metalworking - it is a bag of sand and a bit of cloth.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CSC",
+    "SHS",
+    "CSC"
+  ],
+  "key": {
+    "C": { "tag": "terravera:cordage" },
+    "S": { "tag": "c:sands" },
+    "H": { "item": "tfc:powder/charcoal" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:water_filter"
+  }
+}

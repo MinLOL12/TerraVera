@@ -1,0 +1,9 @@
+{
+  "__comment__": "Dry-climate shrubs. Artemisia and its relatives - the real source of every pre-modern anthelmintic worth the name.",
+  "values": [
+    { "id": "tfc:plant/sagebrush", "required": false },
+    { "id": "tfc:plant/perovskia", "required": false },
+    { "id": "tfc:plant/desert_flame", "required": false },
+    { "id": "tfc:plant/mountain_hullwort", "required": false }
+  ]
+}

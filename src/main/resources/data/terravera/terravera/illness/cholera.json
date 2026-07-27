@@ -1,0 +1,13 @@
+{
+  "__comment__": "Vibrio cholerae. Badly contaminated water - a fouled well, a pond downhill of waste. Incubation is brutally short (hours to two days) and death is by dehydration, fast. The counter is equally real: aggressive rehydration keeps you alive while it runs its course. Boiling prevents it; filtration does not.",
+  "vectors": ["water", "sanitation"],
+  "base_chance": 0.09,
+  "incubation_ticks": 24000,
+  "duration_ticks": 96000,
+  "severity": "critical",
+  "symptoms": ["dehydration", "fatigue", "muscle_pain", "nausea"],
+  "contagious": false,
+  "immunity_ticks": 360000,
+  "lethal": true,
+  "remedies": ["terravera:remedies/rehydration", "terravera:remedies/medicine"]
+}

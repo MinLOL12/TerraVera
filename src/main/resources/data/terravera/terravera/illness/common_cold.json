@@ -1,0 +1,13 @@
+{
+  "__comment__": "Rhinovirus. Spreads by close contact, incubates 1-3 days, runs about a week. Almost harmless, universally annoying, and the illness most players will meet first. Confers short-lived immunity to this strain only.",
+  "vectors": ["contact"],
+  "base_chance": 0.10,
+  "incubation_ticks": 36000,
+  "duration_ticks": 120000,
+  "severity": "mild",
+  "symptoms": ["fatigue", "cough"],
+  "contagious": true,
+  "immunity_ticks": 480000,
+  "lethal": false,
+  "remedies": ["terravera:remedies/herbal", "terravera:remedies/medicine"]
+}

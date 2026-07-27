@@ -1,0 +1,13 @@
+{
+  "__comment__": "Trichinella. Undercooked pork and, classically, bear meat. Far nastier than tapeworm: the larvae migrate into muscle, which is why the symptom set is fever plus severe muscle pain. One to two weeks to onset, weeks to resolve.",
+  "vectors": ["undercooked_meat"],
+  "base_chance": 0.08,
+  "incubation_ticks": 192000,
+  "duration_ticks": 288000,
+  "severity": "severe",
+  "symptoms": ["muscle_pain", "fever", "fatigue", "malabsorption"],
+  "contagious": false,
+  "immunity_ticks": 0,
+  "lethal": true,
+  "remedies": ["terravera:remedies/antiparasitic", "terravera:remedies/antipyretic", "terravera:remedies/medicine"]
+}

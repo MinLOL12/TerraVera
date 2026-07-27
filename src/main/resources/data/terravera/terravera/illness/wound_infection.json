@@ -1,0 +1,13 @@
+{
+  "__comment__": "Ordinary pyogenic wound infection. A cut taken while filthy. Quick to show (2-3 days), and the most preventable illness in the mod - wash, and dress the wound.",
+  "vectors": ["wound"],
+  "base_chance": 0.13,
+  "incubation_ticks": 60000,
+  "duration_ticks": 120000,
+  "severity": "moderate",
+  "symptoms": ["fever", "muscle_pain", "fatigue"],
+  "contagious": false,
+  "immunity_ticks": 0,
+  "lethal": false,
+  "remedies": ["terravera:remedies/wound", "terravera:remedies/herbal", "terravera:remedies/medicine"]
+}

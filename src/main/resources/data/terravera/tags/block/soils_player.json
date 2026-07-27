@@ -1,0 +1,10 @@
+{
+  "__comment__": "Blocks that get you filthy to work in or stand on. Feeds hygiene decay, which in turn feeds food- and wound-borne infection risk.",
+  "values": [
+    "#tfc:mud",
+    "#terravera:fouls_water",
+    { "id": "minecraft:mud", "required": false },
+    { "id": "tfc:composter", "required": false },
+    { "id": "minecraft:soul_sand", "required": false }
+  ]
+}

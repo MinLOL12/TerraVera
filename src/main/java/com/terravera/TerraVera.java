@@ -22,7 +22,12 @@ import com.terravera.common.TerraVeraCreativeTab;
 import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.TerraVeraDataManagers;
 import com.terravera.common.container.TerraVeraContainers;
+import com.terravera.common.TerraVeraAttachments;
 import com.terravera.common.food.TasteEventHandler;
+import com.terravera.common.health.BoilingHandler;
+import com.terravera.common.health.HealthEventHandler;
+import com.terravera.common.health.HerbGathering;
+import com.terravera.common.health.effect.TerraVeraEffects;
 import com.terravera.common.items.TerraVeraItems;
 import com.terravera.common.recipes.TerraVeraRecipes;
 import com.terravera.config.TerraVeraConfig;
@@ -68,11 +73,18 @@ public final class TerraVera
         TerraVeraDataComponents.COMPONENTS.register(bus);
         TerraVeraDataManagers.MANAGERS.register(bus);
         TerraVeraContainers.CONTAINERS.register(bus);
+        TerraVeraEffects.EFFECTS.register(bus);
+        TerraVeraAttachments.TYPES.register(bus);
 
         bus.addListener(TerraVeraCreativeTab::onBuildTabContents);
 
         TerraVeraEventHandler.init();
         TasteEventHandler.init();   // Register the tasting system
+
+        // Disease, water sanitation, and hygiene. See com.terravera.common.health.
+        HealthEventHandler.init();
+        BoilingHandler.init();
+        HerbGathering.init();
 
         if (FMLEnvironment.dist == Dist.CLIENT)
         {

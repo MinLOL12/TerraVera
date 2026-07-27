@@ -1,0 +1,12 @@
+{
+  "__comment__": "Blocks you can wash at, besides a clean water source. Barrels and vessels of water, mainly.",
+  "values": [
+    { "id": "tfc:barrel/oak", "required": false },
+    { "id": "tfc:barrel/birch", "required": false },
+    { "id": "tfc:barrel/chestnut", "required": false },
+    { "id": "tfc:barrel/pine", "required": false },
+    { "id": "tfc:barrel/spruce", "required": false },
+    { "id": "tfc:barrel/willow", "required": false },
+    { "id": "tfc:large_vessel", "required": false }
+  ]
+}

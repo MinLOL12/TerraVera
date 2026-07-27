@@ -47,6 +47,34 @@ public final class TerraVeraItems
         () -> new CordageItem(new Item.Properties()
             .component(TerraVeraDataComponents.CORDAGE.get(), new Cordage(0.85f, "mixed", 550))));
 
+    // ----- Health, hygiene, and water treatment --------------------------------------------------------------
+    // The disease system's progression is expressed almost entirely in these items: what you can make determines
+    // what you can defend yourself against. See com.terravera.common.health.
+
+    /**
+     * Bitter, tannin-rich leaves, gathered from the same plants that yield fibre. The day-one remedy: chew it and
+     * feel slightly less awful. Never cures anything, and it is not supposed to.
+     */
+    public static final DeferredHolder<Item, Item> BITTER_HERBS = ITEMS.registerSimpleItem("bitter_herbs");
+    /** Salicin-bearing bark, stripped from willow with a knife. Real aspirin - it manages fever and aching. */
+    public static final DeferredHolder<Item, Item> WILLOW_BARK = ITEMS.registerSimpleItem("willow_bark");
+    /** Anthelmintic herbs - wormwood and its relatives. The only stone-age answer to a tapeworm. */
+    public static final DeferredHolder<Item, Item> WORMWOOD = ITEMS.registerSimpleItem("wormwood");
+    /** Clean cloth boiled and kept dry, for dressing a wound before it turns. */
+    public static final DeferredHolder<Item, Item> CLEAN_DRESSING = ITEMS.registerSimpleItem("clean_dressing");
+    /** Tallow and lye, boiled. The single largest hygiene improvement available, and a real chemical process. */
+    public static final DeferredHolder<Item, Item> SOAP = ITEMS.registerSimpleItem("soap");
+    /**
+     * Sand, charcoal, and cloth in a frame. Removes the protozoa and most of the load from a container of water, but
+     * deliberately not the bacteria - that still needs boiling.
+     */
+    public static final DeferredHolder<Item, Item> WATER_FILTER = ITEMS.register("water_filter",
+        () -> new WaterFilterItem(new Item.Properties().durability(64)));
+    /** Boiled water, salt, and a sweetener. Oral rehydration therapy; the thing that stops cholera killing you. */
+    public static final DeferredHolder<Item, Item> REHYDRATION_SALTS = ITEMS.registerSimpleItem("rehydration_salts");
+    /** Distilled, concentrated medicine. The end of the line: cures essentially anything. */
+    public static final DeferredHolder<Item, Item> MEDICINE = ITEMS.registerSimpleItem("medicine");
+
     // ----- Knapped heads -------------------------------------------------------------------------------------
     // One item per working end, not one per (rock category x tool). The stone is in the component.
 

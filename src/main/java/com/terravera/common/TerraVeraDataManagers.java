@@ -15,6 +15,8 @@ import net.dries007.tfc.util.data.DataManagers;
 import com.terravera.TerraVera;
 import com.terravera.common.knapping.HeadProfile;
 import com.terravera.common.knapping.KnappableStone;
+import com.terravera.common.health.Illness;
+import com.terravera.common.health.Remedy;
 import com.terravera.common.recipes.FibreSource;
 
 /**
@@ -31,6 +33,8 @@ public final class TerraVeraDataManagers
         register(HeadProfile.MANAGER);
         register(KnappableStone.MANAGER);
         register(FibreSource.MANAGER);
+        register(Illness.MANAGER);
+        register(Remedy.MANAGER);
     }
 
     private static void register(DataManager<?> manager)

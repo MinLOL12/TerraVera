@@ -54,7 +54,7 @@ public class TasteSystemTest
     public void coversEveryTfcFoodItem()
     {
         // Fruit, vegetables, and the odd whole blocks
-        for (final String id : {
+        for (final String id : new String[] {
             "banana", "blackberry", "blueberry", "bunchberry", "cherry", "cloudberry", "cranberry",
             "elderberry", "gooseberry", "green_apple", "lemon", "olive", "orange", "peach", "plum",
             "raspberry", "red_apple", "snowberry", "strawberry", "wintergreen_berry", "melon_slice",
@@ -74,7 +74,7 @@ public class TasteSystemTest
         for (final String grain : GRAINS)
         {
             assertTasteRegistered("tfc:food/" + grain);
-            for (final String stage : {"_grain", "_flour", "_dough", "_bread", "_bread_sandwich", "_bread_jam_sandwich"})
+            for (final String stage : new String[] {"_grain", "_flour", "_dough", "_bread", "_bread_sandwich", "_bread_jam_sandwich"})
             {
                 assertTasteRegistered("tfc:food/" + grain + stage);
             }
