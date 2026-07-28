@@ -49,7 +49,101 @@ public final class TemperatureEventHandler
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event)
     {
-        TemperatureSystem.tick(event.getEntity());
+        Player player = event.getEntity();
+        TemperatureSystem.tick(player);
+        tickStamina(player);
+    }
+
+    private static void tickStamina(Player player)
+    {
+        if (player.level().isClientSide() || player.isCreative() || player.isSpectator()) return;
+
+        BodyTemperature state = TemperatureSystem.get(player);
+        float stamina = state.stamina();
+
+        // Calculate stamina change based on sprinting and rest
+        boolean isSprinting = player.isSprinting();
+        if (isSprinting)
+        {
+            // Sprinting drains stamina
+            stamina -= 0.4f; // ~8% per second
+            if (stamina <= 0f)
+            {
+                stamina = 0f;
+                player.setSprinting(false);
+            }
+        }
+        else
+        {
+            // Rest/Walking restores stamina
+            // Check thirst/fluids: to restore stamina, the player must have fluids.
+            float thirst = 100f;
+            try
+            {
+                thirst = net.dries007.tfc.common.player.IPlayerInfo.get(player).getThirst();
+            }
+            catch (Exception ignored) {}
+
+            float recoveryMultiplier = 1.0f;
+            if (thirst < 30f)
+            {
+                recoveryMultiplier = 0.0f; // Completely dehydrated, no stamina recovery!
+            }
+            else
+            {
+                recoveryMultiplier = Mth.clamp((thirst - 30f) / 70f, 0f, 1f);
+            }
+
+            float baseRecovery = 0.15f; // Walking base recovery
+            if (player.isSleeping() || player.isPassenger())
+            {
+                baseRecovery = 0.8f; // Sleep rest recovery is very fast
+            }
+            else if (player.walkDist - player.walkDistO <= 0.02f)
+            {
+                baseRecovery = 0.5f; // Standing still/Crouching rest recovery is fast
+            }
+
+            stamina += baseRecovery * recoveryMultiplier;
+        }
+
+        stamina = Mth.clamp(stamina, 0f, 100f);
+
+        // Sprint restriction: if stamina is too low (< 10%), prevent starting to sprint
+        if (stamina < 10f && player.isSprinting())
+        {
+            player.setSprinting(false);
+        }
+
+        // Save updated stamina
+        if (stamina != state.stamina())
+        {
+            TemperatureSystem.set(player, state.withStamina(stamina));
+        }
+
+        // Display Stamina bar if it is not full (100%)
+        if (stamina < 100f)
+        {
+            int bars = (int) (stamina / 10f);
+            String barStr = "■".repeat(bars) + "□".repeat(10 - bars);
+            net.minecraft.network.chat.MutableComponent staminaMessage = Component.literal("Stamina: [" + barStr + "] " + (int) stamina + "%")
+                .withStyle(stamina < 20f ? ChatFormatting.RED : (stamina < 50f ? ChatFormatting.GOLD : ChatFormatting.GREEN));
+            
+            // Add a warning if dehydrated
+            float thirst = 100f;
+            try
+            {
+                thirst = net.dries007.tfc.common.player.IPlayerInfo.get(player).getThirst();
+            }
+            catch (Exception ignored) {}
+
+            if (thirst < 30f)
+            {
+                staminaMessage.append(Component.literal(" (Dehydrated - Drink Fluids!)").withStyle(ChatFormatting.RED));
+            }
+            
+            player.displayClientMessage(staminaMessage, true);
+        }
     }
 
     /**

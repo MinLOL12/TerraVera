@@ -429,59 +429,6 @@ public class TasteSystem {
         tastes.put("properly_cooked_steak", 70);
         tastes.put("raw_steak", -15);
 
-        // ---- TerraVera: vinegar varieties ------------------------------------------------------------------
-        // Vinegar items are registered as items (not fluids). The specific varieties (cider, wine, etc.) are
-        // produced as bonus items from barrel recipes alongside generic tfc:vinegar fluid. All recipes that
-        // consume vinegar use tfc:vinegar fluid; the item variants exist for direct consumption and taste.
-        tastes.put("terravera:cider_vinegar", 35);
-        tastes.put("terravera:wine_vinegar", 40);
-        tastes.put("terravera:beer_vinegar", 20);
-        tastes.put("terravera:mead_vinegar", 45);
-        tastes.put("terravera:rice_mash_vinegar", 30);
-        // Generic vinegar removed; TFC provides its own vinegar bottle.
-
-        // ---- TerraVera: pickled foods ----------------------------------------------------------------------
-        tastes.put("terravera:pickled_cabbage", 50);
-        tastes.put("terravera:pickled_cucumber", 55);
-        tastes.put("terravera:pickled_mushroom", 48);
-        tastes.put("terravera:pickled_egg", 60);
-
-        // ---- TerraVera: brined preparations -----------------------------------------------------------------
-        tastes.put("terravera:brined_meat", 65);
-        tastes.put("terravera:brined_vegetable", 52);
-
-        // ---- TerraVera: medicinal vinegar ------------------------------------------------------------------
-        tastes.put("terravera:oxymel", 55);
-        tastes.put("terravera:herbal_vinegar_infusion", 42);
-
-        // ---- TerraVera: household vinegar ------------------------------------------------------------------
-        tastes.put("terravera:cleaning_vinegar", -10);
-        tastes.put("terravera:descaling_solution", -20);
-        tastes.put("terravera:vinegar_sauce", 58);
-        tastes.put("terravera:vinegar_dressing", 62);
-
-        // ---- Expanded pickled -----------------------------------------------------------------------------
-        tastes.put("terravera:pickled_onion", 45);
-        tastes.put("terravera:pickled_beet", 52);
-        tastes.put("terravera:pickled_pepper", 48);
-        tastes.put("terravera:pickled_garlic", 42);
-        tastes.put("terravera:pickled_carrot", 50);
-
-        // ---- Expanded brined ------------------------------------------------------------------------------
-        tastes.put("terravera:brined_chicken", 68);
-        tastes.put("terravera:brined_fish", 60);
-        tastes.put("terravera:brined_mushroom", 55);
-
-        // ---- Expanded medicinal ---------------------------------------------------------------------------
-        tastes.put("terravera:fire_tonic", 35);
-        tastes.put("terravera:digestive_tonic", 40);
-        tastes.put("terravera:sleep_infusion", 30);
-
-        // ---- Expanded household ---------------------------------------------------------------------------
-        tastes.put("terravera:polish_paste", -5);
-        tastes.put("terravera:leather_conditioner", 10);
-        tastes.put("terravera:wood_stain", 5);
-
         return tastes;
     }
 

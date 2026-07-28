@@ -22,24 +22,27 @@ import net.minecraft.util.Mth;
  * @param exertion      a smoothed measure of recent physical work, in {@code [0, 1]}
  * @param lastBand      the band the player was last told about, used to avoid repeating themselves
  * @param lastMessage   game tick of the last symptom message
+ * @param stamina       current physical stamina, in {@code [0, 100]}
  */
 public record BodyTemperature(
     float core,
     float skinWetness,
     float exertion,
     int lastBand,
-    long lastMessage
+    long lastMessage,
+    float stamina
 ) {
     /** A player who has just spawned: comfortable, dry, rested. */
     public static final BodyTemperature EMPTY =
-        new BodyTemperature(ThermalModel.NEUTRAL_CORE, 0f, 0f, 0, Long.MIN_VALUE);
+        new BodyTemperature(ThermalModel.NEUTRAL_CORE, 0f, 0f, 0, Long.MIN_VALUE, 100f);
 
     public static final Codec<BodyTemperature> CODEC = RecordCodecBuilder.create(i -> i.group(
         Codec.FLOAT.optionalFieldOf("core", ThermalModel.NEUTRAL_CORE).forGetter(BodyTemperature::core),
         Codec.FLOAT.optionalFieldOf("skin_wetness", 0f).forGetter(BodyTemperature::skinWetness),
         Codec.FLOAT.optionalFieldOf("exertion", 0f).forGetter(BodyTemperature::exertion),
         Codec.INT.optionalFieldOf("last_band", 0).forGetter(BodyTemperature::lastBand),
-        Codec.LONG.optionalFieldOf("last_message", Long.MIN_VALUE).forGetter(BodyTemperature::lastMessage)
+        Codec.LONG.optionalFieldOf("last_message", Long.MIN_VALUE).forGetter(BodyTemperature::lastMessage),
+        Codec.FLOAT.optionalFieldOf("stamina", 100f).forGetter(BodyTemperature::stamina)
     ).apply(i, BodyTemperature::new));
 
     public BodyTemperature
@@ -47,6 +50,7 @@ public record BodyTemperature(
         core = Mth.clamp(core, 27f, 43f);
         skinWetness = Mth.clamp(skinWetness, 0f, 1f);
         exertion = Mth.clamp(exertion, 0f, 1f);
+        stamina = Mth.clamp(stamina, 0f, 100f);
     }
 
     public ThermalModel.Band band()
@@ -65,22 +69,27 @@ public record BodyTemperature(
 
     public BodyTemperature withCore(float value)
     {
-        return new BodyTemperature(value, skinWetness, exertion, lastBand, lastMessage);
+        return new BodyTemperature(value, skinWetness, exertion, lastBand, lastMessage, stamina);
     }
 
     public BodyTemperature withSkinWetness(float value)
     {
-        return new BodyTemperature(core, value, exertion, lastBand, lastMessage);
+        return new BodyTemperature(core, value, exertion, lastBand, lastMessage, stamina);
     }
 
     public BodyTemperature withExertion(float value)
     {
-        return new BodyTemperature(core, skinWetness, value, lastBand, lastMessage);
+        return new BodyTemperature(core, skinWetness, value, lastBand, lastMessage, stamina);
+    }
+
+    public BodyTemperature withStamina(float value)
+    {
+        return new BodyTemperature(core, skinWetness, exertion, lastBand, lastMessage, value);
     }
 
     public BodyTemperature announced(ThermalModel.Band band, long tick)
     {
-        return new BodyTemperature(core, skinWetness, exertion, band.severity(), tick);
+        return new BodyTemperature(core, skinWetness, exertion, band.severity(), tick, stamina);
     }
 
     /**
@@ -89,6 +98,6 @@ public record BodyTemperature(
      */
     public BodyTemperature onDeath()
     {
-        return new BodyTemperature(ThermalModel.NEUTRAL_CORE, skinWetness, 0f, 0, Long.MIN_VALUE);
+        return new BodyTemperature(ThermalModel.NEUTRAL_CORE, skinWetness, 0f, 0, Long.MIN_VALUE, 100f);
     }
 }

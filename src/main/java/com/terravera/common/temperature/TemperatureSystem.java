@@ -73,6 +73,13 @@ public final class TemperatureSystem
         player.setData(TerraVeraAttachments.BODY_TEMPERATURE.get(), state);
     }
 
+    public static void addStamina(Player player, float amount)
+    {
+        BodyTemperature state = get(player);
+        state = state.withStamina(Mth.clamp(state.stamina() + amount, 0f, 100f));
+        set(player, state);
+    }
+
     // ----- The tick ----------------------------------------------------------------------------------------------
 
     /**
