@@ -9,7 +9,9 @@ package com.terravera.common.temperature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -54,6 +56,10 @@ public record Shelter(
 ) {
     /** Standing in the open. No shell, no floor benefit, no fire. */
     public static final Shelter OUTDOORS = new Shelter(0f, 0f, 0f, 0f, 0f, 0f);
+
+    /** Primitive layered membranes that stop weather despite not occupying a full cubic metre. */
+    private static final TagKey<Block> BARK_INSULATION = TagKey.create(Registries.BLOCK,
+        com.terravera.TerraVera.identifier("insulation/bark"));
 
     /** How many blocks the interior flood fill will visit before giving up and calling the space "outdoors". */
     private static final int MAX_INTERIOR = 220;
@@ -147,6 +153,9 @@ public record Shelter(
         {
             return state.hasProperty(BlockStateProperties.OPEN) && !state.getValue(BlockStateProperties.OPEN);
         }
+        // Layered bark is a thin membrane but still stops rain and air movement; requiring a full cube here would make
+        // a visibly complete primitive roof behave like open sky.
+        if (state.is(BARK_INSULATION)) return true;
         return state.isFaceSturdy(level, pos, Direction.UP) || state.isCollisionShapeFullBlock(level, pos);
     }
 
@@ -156,6 +165,7 @@ public record Shelter(
      */
     private static float shellInsulation(BlockState state)
     {
+        if (state.is(BARK_INSULATION)) return 0.8f;
         if (state.is(BlockTags.WOOL) || state.is(BlockTags.WOOL_CARPETS)) return 1.0f;
         if (state.is(BlockTags.LEAVES)) return 0.85f;
         if (state.is(BlockTags.PLANKS) || state.is(BlockTags.LOGS)) return 0.6f;
@@ -173,6 +183,7 @@ public record Shelter(
      */
     private static float shellMass(BlockState state)
     {
+        if (state.is(BARK_INSULATION)) return 0.1f;
         if (state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BlockTags.STONE_BRICKS)) return 1.0f;
         if (state.is(Blocks.PACKED_MUD) || state.is(Blocks.MUD_BRICKS) || state.is(BlockTags.DIRT)) return 0.85f;
         if (state.is(BlockTags.LOGS)) return 0.45f;

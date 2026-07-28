@@ -56,7 +56,7 @@ java {
 repositories {
     mavenCentral()
     mavenLocal()
-    // GeckoLib - animation engine for TerraVera's wind turbine, air conditioner, and hand crank.
+    // GeckoLib - animation engine for TerraVera's machines and layered passive water collectors.
     exclusiveContent {
         forRepository { maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/") { name = "GeckoLib" } }
         filter { includeGroup("software.bernie.geckolib") }
@@ -149,7 +149,7 @@ dependencies {
     // TFC hard-depends on Patchouli, so we get it at runtime regardless
     implementation("vazkii.patchouli:Patchouli:$patchouliVersion")
 
-    // GeckoLib drives the animated wind turbine rotor, air-conditioner fan, and hand-crank handle
+    // GeckoLib drives machine animations and the layered rain/dew/basin/still collector models
     implementation("software.bernie.geckolib:geckolib-neoforge-$minecraftVersion:$geckoLibVersion")
 
     // JEI, optional

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [" L ", "CSC", "S S"],
+  "key": {
+    "C": {"item": "terravera:linen_cloth"},
+    "L": {"tag": "terravera:cordage"},
+    "S": {"item": "minecraft:stick"}
+  },
+  "result": {"id": "terravera:dew_collector"}
+}

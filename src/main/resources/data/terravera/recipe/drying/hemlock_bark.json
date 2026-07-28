@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "misc",
+  "ingredient": {
+    "item": "terravera:hemlock_bark"
+  },
+  "result": {
+    "id": "terravera:dried_hemlock_bark"
+  },
+  "experience": 0.0,
+  "cookingtime": 1200
+}

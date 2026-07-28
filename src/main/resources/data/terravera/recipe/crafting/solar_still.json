@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [" G ", "GCG", " B "],
+  "key": {
+    "G": {"item": "minecraft:glass_pane"},
+    "C": {"item": "tfc:ceramic/bowl"},
+    "B": {"item": "terravera:rock_basin"}
+  },
+  "result": {"id": "terravera:solar_still"}
+}

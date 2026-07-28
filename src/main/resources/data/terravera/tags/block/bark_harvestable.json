@@ -1,0 +1,6 @@
+{
+  "values": [
+    "#minecraft:logs",
+    {"id": "#tfc:logs_that_log", "required": false}
+  ]
+}

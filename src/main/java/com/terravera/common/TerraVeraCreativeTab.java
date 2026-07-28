@@ -50,14 +50,33 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.PROGRAMMED_CIRCUIT.get());
         event.accept(TerraVeraItems.REFRIGERANT_CANISTER.get());
         event.accept(TerraVeraItems.AIR_FILTER.get());
+        event.accept(TerraVeraItems.RAIN_CATCHER.get());
+        event.accept(TerraVeraItems.DEW_COLLECTOR.get());
+        event.accept(TerraVeraItems.ROCK_BASIN.get());
+        event.accept(TerraVeraItems.SOLAR_STILL.get());
         event.accept(TerraVeraItems.WORKPLATE.get());
         event.accept(TerraVeraItems.RUBBLE_FOUNDATION.get());
         event.accept(TerraVeraItems.WOODEN_SUPPORT_BEAM.get());
         event.accept(TerraVeraItems.WROUGHT_IRON_SUPPORT_BEAM.get());
+        event.accept(TerraVeraItems.BARK_ROOFING.get());
         event.accept(TerraVeraItems.FIELD_NOTES.get());
         event.accept(TerraVeraItems.LEATHER_TOOL_GRIP.get());
         event.accept(TerraVeraItems.RAW_LATEX.get());
         event.accept(TerraVeraItems.RUBBER_TOOL_GRIP.get());
+
+        event.accept(TerraVeraItems.OAK_BARK.get());
+        event.accept(TerraVeraItems.HEMLOCK_BARK.get());
+        event.accept(TerraVeraItems.WILLOW_BARK.get());
+        event.accept(TerraVeraItems.BIRCH_BARK.get());
+        event.accept(TerraVeraItems.BAST_BARK.get());
+        event.accept(TerraVeraItems.BARK.get());
+        event.accept(TerraVeraItems.DRIED_OAK_BARK.get());
+        event.accept(TerraVeraItems.DRIED_HEMLOCK_BARK.get());
+        event.accept(TerraVeraItems.DRIED_WILLOW_BARK.get());
+        event.accept(TerraVeraItems.DRIED_BIRCH_BARK.get());
+        event.accept(TerraVeraItems.DRIED_BAST_BARK.get());
+        event.accept(TerraVeraItems.DRIED_BARK.get());
+        event.accept(TerraVeraItems.BIRCH_BARK_CONTAINER.get());
 
         event.accept(TerraVeraItems.PLANT_FIBER.get());
         event.accept(TerraVeraItems.RETTED_FIBER.get());
@@ -68,7 +87,6 @@ public final class TerraVeraCreativeTab
 
         // Health, hygiene, and water treatment, in rough progression order.
         event.accept(TerraVeraItems.BITTER_HERBS.get());
-        event.accept(TerraVeraItems.WILLOW_BARK.get());
         event.accept(TerraVeraItems.WORMWOOD.get());
         event.accept(TerraVeraItems.WATER_FILTER.get());
         event.accept(TerraVeraItems.CLEAN_DRESSING.get());

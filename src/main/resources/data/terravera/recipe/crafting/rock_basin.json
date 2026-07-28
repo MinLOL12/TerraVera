@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["S S", "S S", "SSS"],
+  "key": {"S": {"tag": "c:stones"}},
+  "result": {"id": "terravera:rock_basin"}
+}

@@ -1,0 +1,1 @@
+{"type":"tfc:barrel_sealed","duration":9600,"input_fluid":{"amount":1000,"fluid":"minecraft:water"},"input_item":{"count":2,"item":"terravera:dried_willow_bark"},"output_fluid":{"amount":1000,"id":"tfc:tannin"}}

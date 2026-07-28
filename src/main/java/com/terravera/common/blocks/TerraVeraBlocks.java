@@ -18,6 +18,8 @@ import com.terravera.common.power.HandCrankBlock;
 import com.terravera.common.power.SingleWireBlock;
 import com.terravera.common.power.WindTurbineBlock;
 import com.terravera.common.power.WireIntersectionBlock;
+import com.terravera.common.water.CollectorType;
+import com.terravera.common.water.WaterCollectorBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -73,6 +75,26 @@ public final class TerraVeraBlocks
     public static final DeferredHolder<Block, WireIntersectionBlock> WIRE_INTERSECTION = BLOCKS.register("wire_intersection",
         () -> new WireIntersectionBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(.5f)
             .sound(SoundType.COPPER).noCollission().noOcclusion()));
+
+    // ----- Passive water collection -------------------------------------------------------------------------
+
+    public static final DeferredHolder<Block, WaterCollectorBlock> RAIN_CATCHER = BLOCKS.register("rain_catcher",
+        () -> new WaterCollectorBlock(CollectorType.RAIN_CATCHER, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD).strength(1.2f).sound(SoundType.WOOD).noOcclusion()));
+    public static final DeferredHolder<Block, WaterCollectorBlock> DEW_COLLECTOR = BLOCKS.register("dew_collector",
+        () -> new WaterCollectorBlock(CollectorType.DEW_COLLECTOR, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_GRAY).strength(0.8f).sound(SoundType.WOOL).noOcclusion()));
+    public static final DeferredHolder<Block, WaterCollectorBlock> ROCK_BASIN = BLOCKS.register("rock_basin",
+        () -> new WaterCollectorBlock(CollectorType.ROCK_BASIN, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.STONE).requiresCorrectToolForDrops().strength(2.5f, 5f).sound(SoundType.STONE).noOcclusion()));
+    public static final DeferredHolder<Block, WaterCollectorBlock> SOLAR_STILL = BLOCKS.register("solar_still",
+        () -> new WaterCollectorBlock(CollectorType.SOLAR_STILL, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.STONE).strength(1.5f, 2f).sound(SoundType.GLASS).noOcclusion()));
+
+    /** Overlapping bark sheets used as a temporary rain skin, roof covering, or primitive insulation. */
+    public static final DeferredHolder<Block, BarkRoofBlock> BARK_ROOFING = BLOCKS.register("bark_roofing",
+        () -> new BarkRoofBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD)
+            .strength(0.7f, 1f).sound(SoundType.WOOD).noOcclusion()));
 
     /** Compact laid-stone footing. It distributes a column's load into soil or rock beneath it. */
     public static final DeferredHolder<Block, Block> RUBBLE_FOUNDATION = BLOCKS.register("rubble_foundation",

@@ -36,8 +36,8 @@ import com.terravera.config.TerraVeraConfig;
  *     <li><strong>Bitter herbs</strong> come from the same broadleaf herbs that yield herb fibre. Common, weak.</li>
  *     <li><strong>Wormwood</strong> comes from dry-climate shrubs - sagebrush and its relatives. Uncommon, and the
  *     only pre-modern anthelmintic in the game.</li>
- *     <li><strong>Willow bark</strong> is stripped from willow logs with a knife. It requires a blade, in the same
- *     spirit as bast fibre requiring one.</li>
+ *     <li><strong>Willow bark</strong> is handled by the sustainable bark-harvesting system, so breaking logs cannot
+ *     bypass tree damage and recovery.</li>
  * </ul>
  */
 public final class HerbGathering
@@ -77,11 +77,6 @@ public final class HerbGathering
             Block.popResource(level, pos, new ItemStack(TerraVeraItems.WORMWOOD.get()));
         }
 
-        // Willow bark: needs a blade, same bootstrap logic as bast fibre.
-        if (bladed && state.is(HerbTags.WILLOW_BARK_SOURCE) && random.nextFloat() < 0.45f)
-        {
-            Block.popResource(level, pos, new ItemStack(TerraVeraItems.WILLOW_BARK.get(), 1 + random.nextInt(2)));
-        }
     }
 
     /** Block tags for the three gatherable remedies. Kept here rather than in the main tag class for locality. */
@@ -89,7 +84,6 @@ public final class HerbGathering
     {
         public static final net.minecraft.tags.TagKey<Block> BITTER_HERB_SOURCE = tag("herbs/bitter");
         public static final net.minecraft.tags.TagKey<Block> WORMWOOD_SOURCE = tag("herbs/wormwood");
-        public static final net.minecraft.tags.TagKey<Block> WILLOW_BARK_SOURCE = tag("herbs/willow_bark");
 
         private static net.minecraft.tags.TagKey<Block> tag(String name)
         {

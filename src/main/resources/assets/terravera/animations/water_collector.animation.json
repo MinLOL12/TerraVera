@@ -1,0 +1,25 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.water_collector.ripple": {
+      "loop": true,
+      "animation_length": 3.0,
+      "bones": {
+        "water": {
+          "position": {
+            "0.0": { "vector": [0, 0, 0] },
+            "0.75": { "vector": [0, 0.08, 0] },
+            "1.5": { "vector": [0, 0, 0] },
+            "2.25": { "vector": [0, -0.05, 0] },
+            "3.0": { "vector": [0, 0, 0] }
+          },
+          "scale": {
+            "0.0": { "vector": [1, 1, 1] },
+            "1.5": { "vector": [0.985, 1, 1.015] },
+            "3.0": { "vector": [1, 1, 1] }
+          }
+        }
+      }
+    }
+  }
+}

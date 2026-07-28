@@ -1,10 +1,26 @@
 {
   "__comment__": "Roof coverings must be carried by a beam immediately below. Packs can add thatch, tile, and TFC roof blocks here.",
   "values": [
-    "minecraft:oak_slab", "minecraft:spruce_slab", "minecraft:birch_slab", "minecraft:jungle_slab",
-    "minecraft:acacia_slab", "minecraft:dark_oak_slab", "minecraft:mangrove_slab", "minecraft:cherry_slab",
-    "minecraft:stone_slab", "minecraft:cobblestone_slab", "minecraft:brick_slab", "minecraft:stone_brick_slab",
-    "minecraft:oak_stairs", "minecraft:spruce_stairs", "minecraft:birch_stairs", "minecraft:jungle_stairs",
-    "minecraft:acacia_stairs", "minecraft:dark_oak_stairs", "minecraft:stone_brick_stairs", "minecraft:brick_stairs"
+    "minecraft:oak_slab",
+    "minecraft:spruce_slab",
+    "minecraft:birch_slab",
+    "minecraft:jungle_slab",
+    "minecraft:acacia_slab",
+    "minecraft:dark_oak_slab",
+    "minecraft:mangrove_slab",
+    "minecraft:cherry_slab",
+    "minecraft:stone_slab",
+    "minecraft:cobblestone_slab",
+    "minecraft:brick_slab",
+    "minecraft:stone_brick_slab",
+    "minecraft:oak_stairs",
+    "minecraft:spruce_stairs",
+    "minecraft:birch_stairs",
+    "minecraft:jungle_stairs",
+    "minecraft:acacia_stairs",
+    "minecraft:dark_oak_stairs",
+    "minecraft:stone_brick_stairs",
+    "minecraft:brick_stairs",
+    "terravera:bark_roofing"
   ]
 }

@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,water_level=0": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=north,water_level=1": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=north,water_level=2": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=north,water_level=3": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=north,water_level=4": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=south,water_level=0": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=south,water_level=1": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=south,water_level=2": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=south,water_level=3": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=south,water_level=4": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=east,water_level=0": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=east,water_level=1": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=east,water_level=2": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=east,water_level=3": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=east,water_level=4": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=west,water_level=0": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=west,water_level=1": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=west,water_level=2": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=west,water_level=3": {
+      "model": "terravera:block/rock_basin"
+    },
+    "facing=west,water_level=4": {
+      "model": "terravera:block/rock_basin"
+    }
+  }
+}

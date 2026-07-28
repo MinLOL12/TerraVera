@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,water_level=0": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=north,water_level=1": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=north,water_level=2": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=north,water_level=3": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=north,water_level=4": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=south,water_level=0": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=south,water_level=1": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=south,water_level=2": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=south,water_level=3": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=south,water_level=4": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=east,water_level=0": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=east,water_level=1": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=east,water_level=2": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=east,water_level=3": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=east,water_level=4": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=west,water_level=0": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=west,water_level=1": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=west,water_level=2": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=west,water_level=3": {
+      "model": "terravera:block/solar_still"
+    },
+    "facing=west,water_level=4": {
+      "model": "terravera:block/solar_still"
+    }
+  }
+}

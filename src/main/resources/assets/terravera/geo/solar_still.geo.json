@@ -1,0 +1,346 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.terravera.solar_still",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 1.6,
+        "visible_bounds_offset": [
+          0,
+          0.8,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "basin",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "base",
+              "origin": [
+                -8,
+                0,
+                -8
+              ],
+              "size": [
+                16,
+                2,
+                16
+              ],
+              "uv": [
+                32,
+                0
+              ]
+            },
+            {
+              "name": "north_wall",
+              "origin": [
+                -8,
+                2,
+                -8
+              ],
+              "size": [
+                16,
+                2,
+                2
+              ],
+              "uv": [
+                40,
+                16
+              ]
+            },
+            {
+              "name": "south_wall",
+              "origin": [
+                -8,
+                2,
+                6
+              ],
+              "size": [
+                16,
+                2,
+                2
+              ],
+              "uv": [
+                40,
+                16
+              ]
+            },
+            {
+              "name": "west_wall",
+              "origin": [
+                -8,
+                2,
+                -6
+              ],
+              "size": [
+                2,
+                2,
+                12
+              ],
+              "uv": [
+                40,
+                16
+              ]
+            },
+            {
+              "name": "east_wall",
+              "origin": [
+                6,
+                2,
+                -6
+              ],
+              "size": [
+                2,
+                2,
+                12
+              ],
+              "uv": [
+                40,
+                16
+              ]
+            },
+            {
+              "name": "cup",
+              "origin": [
+                -2,
+                2,
+                -2
+              ],
+              "size": [
+                4,
+                2,
+                4
+              ],
+              "uv": [
+                24,
+                16
+              ]
+            },
+            {
+              "name": "cup_rim",
+              "origin": [
+                -2.5,
+                4,
+                -2.5
+              ],
+              "size": [
+                5,
+                0.7,
+                5
+              ],
+              "uv": [
+                24,
+                16
+              ]
+            },
+            {
+              "name": "wick",
+              "origin": [
+                -0.4,
+                4,
+                -0.4
+              ],
+              "size": [
+                0.8,
+                3,
+                0.8
+              ],
+              "uv": [
+                48,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cover_layers",
+          "pivot": [
+            0,
+            6,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "glass_n",
+              "origin": [
+                -7,
+                4,
+                -7
+              ],
+              "size": [
+                14,
+                0.5,
+                8
+              ],
+              "uv": [
+                48,
+                16
+              ],
+              "rotation": [
+                -23,
+                0,
+                0
+              ],
+              "pivot": [
+                0,
+                6,
+                0
+              ]
+            },
+            {
+              "name": "glass_s",
+              "origin": [
+                -7,
+                4,
+                -1
+              ],
+              "size": [
+                14,
+                0.5,
+                8
+              ],
+              "uv": [
+                48,
+                16
+              ],
+              "rotation": [
+                23,
+                0,
+                0
+              ],
+              "pivot": [
+                0,
+                6,
+                0
+              ]
+            },
+            {
+              "name": "glass_w",
+              "origin": [
+                -7,
+                4,
+                -7
+              ],
+              "size": [
+                8,
+                0.5,
+                14
+              ],
+              "uv": [
+                48,
+                16
+              ],
+              "rotation": [
+                0,
+                0,
+                -23
+              ],
+              "pivot": [
+                0,
+                6,
+                0
+              ]
+            },
+            {
+              "name": "glass_e",
+              "origin": [
+                -1,
+                4,
+                -7
+              ],
+              "size": [
+                8,
+                0.5,
+                14
+              ],
+              "uv": [
+                48,
+                16
+              ],
+              "rotation": [
+                0,
+                0,
+                23
+              ],
+              "pivot": [
+                0,
+                6,
+                0
+              ]
+            },
+            {
+              "name": "ridge_n",
+              "origin": [
+                -7,
+                7,
+                -0.5
+              ],
+              "size": [
+                14,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            },
+            {
+              "name": "ridge_s",
+              "origin": [
+                -0.5,
+                7,
+                -7
+              ],
+              "size": [
+                1,
+                1,
+                14
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "name": "water",
+          "pivot": [
+            0,
+            4.7,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "still_water",
+              "origin": [
+                -1.5,
+                4.5,
+                -1.5
+              ],
+              "size": [
+                3,
+                0.3,
+                3
+              ],
+              "uv": [
+                32,
+                32
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
