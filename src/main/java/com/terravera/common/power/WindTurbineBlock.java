@@ -24,12 +24,19 @@ import com.terravera.common.blockentity.WindTurbineBlockEntity;
  * and on the bottom, never to the blades themselves.
  */
 public class WindTurbineBlock extends HorizontalDirectionalBlock implements EntityBlock, PowerSource {
+    public static final com.mojang.serialization.MapCodec<WindTurbineBlock> CODEC = simpleCodec(WindTurbineBlock::new);
+
     public static final BooleanProperty SPINNING = BooleanProperty.create("spinning");
     public static final int OUTPUT_WATTS = 220;
 
     public WindTurbineBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(SPINNING, false));
+    }
+
+    @Override
+    protected com.mojang.serialization.MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -71,5 +78,13 @@ public class WindTurbineBlock extends HorizontalDirectionalBlock implements Enti
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide() ? null : createTickerHelper(type, TerraVeraBlockEntities.WIND_TURBINE.get(), WindTurbineBlockEntity::serverTick);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Nullable
+    private static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(
+        BlockEntityType<A> actualType, BlockEntityType<E> expectedType, BlockEntityTicker<? super E> ticker
+    ) {
+        return expectedType == actualType ? (BlockEntityTicker<A>) ticker : null;
     }
 }
