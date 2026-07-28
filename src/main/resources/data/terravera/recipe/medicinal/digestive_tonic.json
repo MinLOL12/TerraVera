@@ -1,0 +1,1 @@
+{"__comment":"Digestive tonic: cider vinegar, herbs, and sweetener for digestive health.","type":"tfc:pot","duration":8000,"fluid_ingredient":{"amount":500,"fluid":"terravera:cider_vinegar"},"ingredients":[{"item":"minecraft:honey_bottle"},{"item":"terravera:bitter_herbs"}],"item_output":[{"count":2,"id":"terravera:digestive_tonic"}],"temperature":220.0}

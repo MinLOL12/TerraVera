@@ -1,0 +1,1 @@
+{"__comment":"Brined fish using cider vinegar and salt for long-term preservation.","type":"tfc:pot","duration":12000,"fluid_ingredient":{"amount":500,"fluid":"terravera:cider_vinegar"},"ingredients":[{"item":"tfc:food/cod"},{"item":"tfc:powder/salt"},{"item":"terravera:bitter_herbs"}],"item_output":[{"count":1,"id":"terravera:brined_fish"}],"temperature":260.0}

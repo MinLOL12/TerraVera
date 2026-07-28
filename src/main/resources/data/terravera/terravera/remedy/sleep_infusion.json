@@ -1,0 +1,10 @@
+{
+  "__comment":"Sleep infusion remedy using wine vinegar and herbs for rest.",
+  "ingredient":"terravera:remedies/prepared_vinegar",
+  "treats":[],
+  "treats_symptoms":["insomnia","restlessness"],
+  "shorten_ticks":6000,
+  "severity_reduction":0.15,
+  "cures":false,
+  "tier":"prepared"
+}

@@ -1,0 +1,8 @@
+{
+  "__comment": "Wine vinegar: wine acetified in barrel with oxygen exposure.",
+  "type": "tfc:barrel_sealed",
+  "duration": 48000,
+  "input_fluid": { "amount": 1000, "fluid": "tfc:wine" },
+  "input_item": { "count": 1, "item": "terravera:vinegar" },
+  "output_fluid": { "amount": 1000, "id": "terravera:wine_vinegar" }
+}

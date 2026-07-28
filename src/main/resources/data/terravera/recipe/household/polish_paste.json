@@ -1,0 +1,1 @@
+{"__comment":"Polish paste: vinegar, wax, and oil for historical crafting and maintenance.","type":"tfc:pot","duration":6000,"fluid_ingredient":{"amount":300,"fluid":"terravera:cider_vinegar"},"ingredients":[{"item":"terravera:rendered_tallow"},{"item":"tfc:powder/salt"}],"item_output":[{"count":2,"id":"terravera:polish_paste"}],"temperature":280.0}

@@ -1,0 +1,14 @@
+{
+  "__comment": "Cheese with vinegar: acid coagulation using cider vinegar to produce fresh cheese.",
+  "type": "tfc:pot",
+  "duration": 10000,
+  "fluid_ingredient": { "amount": 500, "fluid": "terravera:cider_vinegar" },
+  "ingredients": [
+    { "item": "tfc:dairy/milk_bucket" },
+    { "item": "tfc:powder/salt" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "tfc:food/cheese" }
+  ],
+  "temperature": 360.0
+}

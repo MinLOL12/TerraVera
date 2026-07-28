@@ -1,0 +1,1 @@
+{"__comment":"Wood stain: vinegar combined with bark tannins for historical wood treatment.","type":"tfc:pot","duration":15000,"fluid_ingredient":{"amount":600,"fluid":"terravera:cider_vinegar"},"ingredients":[{"item":"terravera:dried_oak_bark"},{"item":"tfc:powder/salt"}],"item_output":[{"count":1,"id":"terravera:wood_stain"}],"temperature":300.0}
