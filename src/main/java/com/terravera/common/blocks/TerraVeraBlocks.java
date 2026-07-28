@@ -212,5 +212,14 @@ public final class TerraVeraBlocks
             .sound(SoundType.WOOD)
             .noOcclusion()));
 
+    /** A sheet of paper taped/glued to a wall – displays freehand drawing + typed text */
+    public static final DeferredHolder<Block, com.terravera.common.blocks.PostedPaperBlock> POSTED_PAPER = BLOCKS.register("posted_paper",
+        () -> new com.terravera.common.blocks.PostedPaperBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_WHITE)
+            .strength(0.1f)
+            .sound(SoundType.WOOL)
+            .noOcclusion()
+            .noCollission()));
+
     private TerraVeraBlocks() {}
 }

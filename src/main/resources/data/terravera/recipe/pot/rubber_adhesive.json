@@ -1,0 +1,15 @@
+{
+  "__comment__": "MOST REALISTIC TAPE ADHESIVE: Pressure-sensitive adhesive (PSA) 1930s formula – 60% natural rubber (polyisoprene, high MW, cohesive), 35% rosin (abietic acid tackifier, lowers Tg, adds tack), 5% plasticizer (olive oil/tallow, lowers modulus). Dissolved in turpentine or naphtha, coated 20-40um on backing, dried. Peel strength ~3 N/25mm. This is exactly Scotch transparent tape 1930: rubber+rosin+oil on cellulose film. Heating to 120-150C melts rubber and rosin together; oil keeps it soft so it never fully hardens – remains tacky at room temp (viscoelastic).",
+  "type": "tfc:pot",
+  "duration": 3000,
+  "fluid_ingredient": { "amount": 100, "fluid": "tfc:olive_oil" },
+  "ingredients": [
+    { "item": "terravera:natural_rubber" },
+    { "item": "terravera:rosin" },
+    { "item": "tfc:tallow" }
+  ],
+  "item_output": [
+    { "id": "terravera:rubber_adhesive", "count": 3 }
+  ],
+  "temperature": 150.0
+}

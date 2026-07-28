@@ -1,0 +1,11 @@
+{
+  "__comment__": "FINAL TAPE ASSEMBLY: Real PSA tape is adhesive dissolved in solvent (turpentine, ~40% solids) brushed/sprayed onto backing at 20um wet, dried at 80-100C to drive off solvent, wound onto rolls. Peel adhesion comes from viscoelastic Dahlquist criterion: storage modulus <0.3MPa at 1Hz. Our crafting = backing strips + sticky mass + (implicitly) solvent that evaporates. 1 adhesive mass makes ~6 tape rolls (each roll ~10 blocks worth of posting).",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "terravera:rubber_adhesive" },
+    { "item": "terravera:paper_strips" },
+    { "item": "terravera:paper_strips" }
+  ],
+  "result": { "id": "terravera:adhesive_tape", "count": 6 }
+}

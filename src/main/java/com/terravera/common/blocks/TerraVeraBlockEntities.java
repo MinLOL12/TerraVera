@@ -70,6 +70,11 @@ public final class TerraVeraBlockEntities
         TYPES.register("carcass_rack", () -> BlockEntityType.Builder
             .of(com.terravera.common.butchery.CarcassRackBlockEntity::new, TerraVeraBlocks.CARCASS_RACK.get()).build(null));
 
+    /** Posted paper sheet taped to a wall – stores drawing + text */
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.terravera.common.blocks.PostedPaperBlockEntity>> POSTED_PAPER =
+        TYPES.register("posted_paper", () -> BlockEntityType.Builder
+            .of(com.terravera.common.blocks.PostedPaperBlockEntity::new, TerraVeraBlocks.POSTED_PAPER.get()).build(null));
+
     public static void registerCapabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event)
     {
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,

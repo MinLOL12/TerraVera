@@ -1,0 +1,15 @@
+{
+  "__comment__": "PINE PITCH GLUE: Neolithic hafting glue, 10,000 BCE - still used. Composition: rosin (adhesive matrix, 60%), charcoal powder (filler, increases viscosity, reduces brittleness, 20%), tallow/beeswax (plasticizer, prevents cracking, 20%). Heated to 120C, mixed, applied hot. Hardens on cooling to strong but slightly flexible bond. The actual glue that held stone heads before cordage.",
+  "type": "tfc:pot",
+  "duration": 2000,
+  "fluid_ingredient": { "amount": 100, "fluid": "tfc:tallow" },
+  "ingredients": [
+    { "item": "terravera:rosin" },
+    { "item": "tfc:powder/charcoal" },
+    { "item": "tfc:powder/charcoal" }
+  ],
+  "item_output": [
+    { "id": "terravera:pine_pitch_glue", "count": 3 }
+  ],
+  "temperature": 130.0
+}

@@ -1,0 +1,4 @@
+{
+  "__comment__": "Primitive glues: hide glue (collagen from sinew/bone) and pine pitch glue (rosin + charcoal + tallow). Both also hang paper.",
+  "values": ["terravera:hide_glue", "terravera:pine_pitch_glue"]
+}

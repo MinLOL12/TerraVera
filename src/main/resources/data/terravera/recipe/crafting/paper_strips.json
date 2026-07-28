@@ -1,0 +1,10 @@
+{
+  "__comment__": "Tape backing: real masking tape uses creped paper (cellulose) or tight cotton cloth. We cut plant fiber cloth / paper sheets into 2cm strips. Backing provides tensile strength – adhesive alone would stretch and break. Creping gives conformability.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "terravera:paper_sheet" },
+    { "tag": "tfc:knives" }
+  ],
+  "result": { "id": "terravera:paper_strips", "count": 4 }
+}

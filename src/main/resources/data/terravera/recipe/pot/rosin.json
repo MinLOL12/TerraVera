@@ -1,0 +1,14 @@
+{
+  "__comment__": "REALISTIC ROSIN: Fresh pine resin is 60-70% diterpene resin acids (abietic acid) dissolved in 20-30% volatile turpentine (alpha-pinene) plus 5-10% water. Distill at 150-200C: turpentine boils off (bp 154-170C), water evaporates, solid rosin remains. Rosin is brittle, glassy, yellow-amber – the classic tackifier that makes rubber actually sticky instead of just elastic. Since ~2000 BCE.",
+  "type": "tfc:pot",
+  "duration": 2000,
+  "fluid_ingredient": { "amount": 100, "fluid": "minecraft:water" },
+  "ingredients": [
+    { "item": "terravera:pine_resin" },
+    { "item": "terravera:pine_resin" }
+  ],
+  "item_output": [
+    { "id": "terravera:rosin", "count": 2 }
+  ],
+  "temperature": 200.0
+}

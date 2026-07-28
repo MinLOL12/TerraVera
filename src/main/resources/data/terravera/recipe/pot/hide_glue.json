@@ -1,0 +1,15 @@
+{
+  "__comment__": "HIDE/ANIMAL GLUE: Collagen glue used since 200,000 BCE. Bones, sinew, tendon ~30% collagen (triple helix of Gly-Pro-Hyp). Boil 6-12h at 80-100C in water: collagen denatures, hydrolyzes into gelatin (partial hydrolysis). Dry to 15% water = glue cakes. Reversible, strong (30MPa shear). Used to haft tools, furniture, and yes, post paper. Recipe: tendon/sinew/bone + water low boil.",
+  "type": "tfc:pot",
+  "duration": 6000,
+  "fluid_ingredient": { "amount": 500, "fluid": "minecraft:water" },
+  "ingredients": [
+    { "item": "terravera:sinew" },
+    { "item": "terravera:tendon" },
+    { "item": "terravera:marrow_bone" }
+  ],
+  "item_output": [
+    { "id": "terravera:hide_glue", "count": 3 }
+  ],
+  "temperature": 95.0
+}

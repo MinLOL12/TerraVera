@@ -50,6 +50,9 @@ public final class TerraVeraEventHandler
     /** Trees that can be tapped for natural latex. Packs can add their own true rubber species to this tag. */
     private static final TagKey<Block> LATEX_TREES = TagKey.create(Registries.BLOCK,
         ResourceLocation.fromNamespaceAndPath(TerraVera.MOD_ID, "latex_trees"));
+    /** Resinous conifers that exude pine resin when cut with a knife. */
+    private static final TagKey<Block> RESIN_TREES = TagKey.create(Registries.BLOCK,
+        ResourceLocation.fromNamespaceAndPath(TerraVera.MOD_ID, "resin_trees"));
 
     public static void init()
     {
@@ -182,6 +185,17 @@ public final class TerraVeraEventHandler
             if (!level.isClientSide() && level.getRandom().nextFloat() < 0.35f)
             {
                 Block.popResource(level, event.getPos(), new ItemStack(com.terravera.common.items.TerraVeraItems.RAW_LATEX.get()));
+            }
+            event.setCanceled(true);
+            event.setCancellationResult(net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide()));
+            return;
+        }
+        // Tap resinous conifers for pine resin – the base of rosin, tackifier, and pitch glues.
+        if (state.is(RESIN_TREES) && player.getMainHandItem().is(TFCTags.Items.TOOLS_KNIFE))
+        {
+            if (!level.isClientSide() && level.getRandom().nextFloat() < 0.40f)
+            {
+                Block.popResource(level, event.getPos(), new ItemStack(com.terravera.common.items.TerraVeraItems.PINE_RESIN.get()));
             }
             event.setCanceled(true);
             event.setCancellationResult(net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide()));

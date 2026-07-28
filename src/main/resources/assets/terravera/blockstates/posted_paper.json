@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "terravera:block/posted_paper" },
+    "facing=south": { "model": "terravera:block/posted_paper" },
+    "facing=east": { "model": "terravera:block/posted_paper" },
+    "facing=west": { "model": "terravera:block/posted_paper" }
+  }
+}

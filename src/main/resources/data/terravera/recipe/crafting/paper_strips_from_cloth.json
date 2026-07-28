@@ -1,0 +1,10 @@
+{
+  "__comment__": "Cloth tape backing – ancestor of duct tape: cotton duck coated with rubber adhesive. Much stronger than paper tape.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "terravera:plant_fiber_cloth" },
+    { "tag": "tfc:knives" }
+  ],
+  "result": { "id": "terravera:paper_strips", "count": 3 }
+}

@@ -1,0 +1,14 @@
+{
+  "__comment__": "Resinous conifers that exude pine resin when tapped with a knife. Resin is the base of rosin, turpentine, and pitch glues. Real trees: Pinus, Picea, Abies, Larix.",
+  "values": [
+    "minecraft:spruce_log",
+    "minecraft:spruce_wood",
+    "minecraft:pine_log",
+    { "id": "tfc:wood/log/pine", "required": false },
+    { "id": "tfc:wood/log/spruce", "required": false },
+    { "id": "tfc:wood/log/douglas_fir", "required": false },
+    { "id": "tfc:wood/log/fir", "required": false },
+    { "id": "tfc:wood/wood/pine", "required": false },
+    { "id": "tfc:wood/wood/spruce", "required": false }
+  ]
+}
