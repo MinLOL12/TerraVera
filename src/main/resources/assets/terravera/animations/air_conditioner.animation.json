@@ -1,0 +1,38 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.air_conditioner.fan_fast": {
+      "loop": true,
+      "animation_length": 0.45,
+      "bones": {
+        "fan": {
+          "rotation": {
+            "0.0": { "vector": [0, 0, 0] },
+            "0.45": { "vector": [0, 360, 0], "easing": "linear" }
+          }
+        },
+        "unit": {
+          "position": {
+            "0.0": { "vector": [0, 0, 0] },
+            "0.1125": { "vector": [0, 0.04, 0] },
+            "0.225": { "vector": [0, 0, 0] },
+            "0.3375": { "vector": [0, -0.03, 0] },
+            "0.45": { "vector": [0, 0, 0] }
+          }
+        }
+      }
+    },
+    "animation.air_conditioner.fan_slow": {
+      "loop": true,
+      "animation_length": 2.4,
+      "bones": {
+        "fan": {
+          "rotation": {
+            "0.0": { "vector": [0, 0, 0] },
+            "2.4": { "vector": [0, 360, 0], "easing": "linear" }
+          }
+        }
+      }
+    }
+  }
+}

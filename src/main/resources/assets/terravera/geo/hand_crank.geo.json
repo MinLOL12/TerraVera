@@ -1,0 +1,43 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.terravera.hand_crank",
+        "texture_width": 32,
+        "texture_height": 32,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 2,
+        "visible_bounds_offset": [0, 1, 0]
+      },
+      "bones": [
+        {
+          "name": "crank_unit",
+          "pivot": [8, 0, 8],
+          "cubes": [
+            { "name": "base_plate", "origin": [4, 0, 4], "size": [8, 2, 8], "uv": [0, 0] },
+            { "name": "cheek_west", "origin": [4.5, 2, 7], "size": [2, 5.5, 2], "uv": [0, 0] },
+            { "name": "cheek_east", "origin": [9.5, 2, 7], "size": [2, 5.5, 2], "uv": [0, 0] },
+            { "name": "axle", "origin": [6, 5.5, 7.25], "size": [4, 1.5, 1.5], "uv": [16, 0] },
+            { "name": "axle_cap_west", "origin": [5.75, 5.75, 7.5], "size": [0.5, 1, 1], "uv": [16, 0] },
+            { "name": "axle_cap_east", "origin": [9.75, 5.75, 7.5], "size": [0.5, 1, 1], "uv": [16, 0] },
+            { "name": "terminal_north", "origin": [7, 0.25, 3], "size": [2, 1, 1], "uv": [16, 16] },
+            { "name": "terminal_south", "origin": [7, 0.25, 12], "size": [2, 1, 1], "uv": [16, 16] },
+            { "name": "terminal_east", "origin": [12, 0.25, 7], "size": [1, 1, 2], "uv": [16, 16] },
+            { "name": "terminal_west", "origin": [3, 0.25, 7], "size": [1, 1, 2], "uv": [16, 16] }
+          ]
+        },
+        {
+          "name": "crank",
+          "pivot": [8, 6.25, 8],
+          "cubes": [
+            { "name": "crank_arm", "origin": [7.25, 1.25, 7.25], "size": [1.5, 5, 1.5], "uv": [16, 0] },
+            { "name": "handle_grip", "origin": [4.25, 0.5, 7.15], "size": [3.5, 1.5, 1.7], "uv": [0, 16] },
+            { "name": "grip_collar_inner", "origin": [7.35, 0.35, 7], "size": [0.6, 1.8, 2], "uv": [0, 16] },
+            { "name": "grip_collar_outer", "origin": [4.05, 0.35, 7], "size": [0.6, 1.8, 2], "uv": [0, 16] }
+          ]
+        }
+      ]
+    }
+  ]
+}

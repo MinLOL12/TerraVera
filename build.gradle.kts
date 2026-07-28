@@ -11,6 +11,7 @@ val parchmentMinecraftVersion: String = "1.21.1"
 // Dependency versions
 val jeiVersion: String = "19.25.0.321"
 val patchouliVersion: String = "1.21.1-92-NEOFORGE"
+val geckoLibVersion: String = "4.8.3"
 
 val modId: String = "terravera"
 val modVersion: String = System.getenv("VERSION") ?: "0.1.0-indev"
@@ -29,7 +30,8 @@ val generateModMetadata = tasks.register<ProcessResources>("generateModMetadata"
         "minecraftVersionRange" to "[$minecraftVersion]",
         "neoForgeVersionRange" to "[$neoForgeVersion,)",
         "patchouliVersionRange" to "[$patchouliVersion,)",
-        "jeiVersionRange" to "[$jeiVersion,)"
+        "jeiVersionRange" to "[$jeiVersion,)",
+        "geckoLibVersionRange" to "[$geckoLibVersion,)"
     )
     inputs.properties(properties)
     expand(properties)
@@ -54,6 +56,11 @@ java {
 repositories {
     mavenCentral()
     mavenLocal()
+    // GeckoLib - animation engine for TerraVera's wind turbine, air conditioner, and hand crank.
+    exclusiveContent {
+        forRepository { maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/") { name = "GeckoLib" } }
+        filter { includeGroup("software.bernie.geckolib") }
+    }
     exclusiveContent {
         forRepository { maven("https://maven.blamejared.com/") }
         filter { includeGroup("mezz.jei") }
@@ -141,6 +148,9 @@ dependencies {
 
     // TFC hard-depends on Patchouli, so we get it at runtime regardless
     implementation("vazkii.patchouli:Patchouli:$patchouliVersion")
+
+    // GeckoLib drives the animated wind turbine rotor, air-conditioner fan, and hand-crank handle
+    implementation("software.bernie.geckolib:geckolib-neoforge-$minecraftVersion:$geckoLibVersion")
 
     // JEI, optional
     compileOnly("mezz.jei:jei-$minecraftVersion-common-api:$jeiVersion")

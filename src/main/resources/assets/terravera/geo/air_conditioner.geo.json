@@ -1,0 +1,64 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.terravera.air_conditioner",
+        "texture_width": 32,
+        "texture_height": 32,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 2,
+        "visible_bounds_offset": [0, 1, 0]
+      },
+      "bones": [
+        {
+          "name": "unit",
+          "pivot": [8, 0, 8],
+          "cubes": [
+            { "name": "base", "origin": [0, 0, 0], "size": [16, 2, 16], "uv": [0, 0] },
+            { "name": "post_nw", "origin": [0, 2, 0], "size": [2, 12, 2], "uv": [0, 0] },
+            { "name": "post_ne", "origin": [14, 2, 0], "size": [2, 12, 2], "uv": [0, 0] },
+            { "name": "post_sw", "origin": [0, 2, 14], "size": [2, 12, 2], "uv": [0, 0] },
+            { "name": "post_se", "origin": [14, 2, 14], "size": [2, 12, 2], "uv": [0, 0] },
+            { "name": "panel_back", "origin": [2, 2, 15], "size": [12, 12, 1], "uv": [0, 16] },
+            { "name": "panel_west", "origin": [0, 2, 2], "size": [1, 12, 12], "uv": [0, 16] },
+            { "name": "panel_east", "origin": [15, 2, 2], "size": [1, 12, 12], "uv": [0, 16] },
+            { "name": "panel_front", "origin": [2, 10, 1], "size": [12, 4, 1], "uv": [0, 16] },
+            { "name": "louver_panel", "origin": [2, 3, 0], "size": [12, 7, 1], "uv": [0, 16] },
+            { "name": "louver_slat_1", "origin": [2.5, 4, -0.3], "size": [11, 0.8, 0.6], "uv": [16, 0] },
+            { "name": "louver_slat_2", "origin": [2.5, 6, -0.3], "size": [11, 0.8, 0.6], "uv": [16, 0] },
+            { "name": "louver_slat_3", "origin": [2.5, 8, -0.3], "size": [11, 0.8, 0.6], "uv": [16, 0] },
+            { "name": "roof_north", "origin": [0, 14, 0], "size": [16, 2, 2], "uv": [0, 0] },
+            { "name": "roof_south", "origin": [0, 14, 14], "size": [16, 2, 2], "uv": [0, 0] },
+            { "name": "roof_west", "origin": [0, 14, 2], "size": [2, 2, 12], "uv": [0, 0] },
+            { "name": "roof_east", "origin": [14, 14, 2], "size": [2, 2, 12], "uv": [0, 0] },
+            { "name": "grille_bar_1", "origin": [2, 15, 4], "size": [12, 1, 1.2], "uv": [16, 0] },
+            { "name": "grille_bar_2", "origin": [2, 15, 7.4], "size": [12, 1, 1.2], "uv": [16, 0] },
+            { "name": "grille_bar_3", "origin": [2, 15, 10.8], "size": [12, 1, 1.2], "uv": [16, 0] },
+            { "name": "terminal_block", "origin": [6.5, 0.5, 15.5], "size": [3, 2, 1], "uv": [16, 16] }
+          ]
+        },
+        {
+          "name": "fan",
+          "pivot": [8, 13, 8],
+          "cubes": [
+            { "name": "motor", "origin": [6.5, 11.5, 6.5], "size": [3, 2.5, 3], "uv": [16, 0] },
+            { "name": "shaft", "origin": [7.5, 14, 7.5], "size": [1, 1.5, 1], "uv": [16, 0] },
+            { "name": "blade_cross_x", "origin": [3, 12.4, 7.3], "size": [10, 0.7, 1.4], "uv": [0, 16] },
+            { "name": "blade_cross_z", "origin": [7.3, 12.4, 3], "size": [1.4, 0.7, 10], "uv": [0, 16] }
+          ]
+        },
+        {
+          "name": "fan_diagonal",
+          "parent": "fan",
+          "pivot": [8, 13, 8],
+          "rotation": [0, 45, 0],
+          "cubes": [
+            { "name": "blade_diag_x", "origin": [3.4, 12.4, 7.3], "size": [9.2, 0.7, 1.4], "uv": [0, 16] },
+            { "name": "blade_diag_z", "origin": [7.3, 12.4, 3.4], "size": [1.4, 0.7, 9.2], "uv": [0, 16] }
+          ]
+        }
+      ]
+    }
+  ]
+}
