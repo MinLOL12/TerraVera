@@ -54,7 +54,8 @@ public class PreparedFarmlandBlockEntity extends BlockEntity
     protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider)
     {
         super.saveAdditional(nbt, provider);
-        nbt.store("soil", SoilCondition.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, soilCondition));
+        SoilCondition.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, soilCondition)
+            .result().ifPresent(tag -> nbt.put("soil", tag));
     }
 
     @Override

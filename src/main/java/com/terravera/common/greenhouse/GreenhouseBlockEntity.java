@@ -172,7 +172,8 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
     protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider)
     {
         super.saveAdditional(nbt, provider);
-        nbt.store("climate", GreenhouseClimate.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, climate));
+        GreenhouseClimate.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, climate)
+            .result().ifPresent(tag -> nbt.put("climate", tag));
         nbt.putInt("plant_count", plantCount);
         nbt.putBoolean("vent_open", ventilationOpen);
         nbt.putInt("tick_counter", tickCounter);

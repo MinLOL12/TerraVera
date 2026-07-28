@@ -177,7 +177,7 @@ public class GreenhouseBlock extends BaseEntityBlock
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        return defaultState()
+        return defaultBlockState()
             .setValue(TIER, greenhouseTier.level())
             .setValue(VENT_OPEN, false)
             .setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()));
