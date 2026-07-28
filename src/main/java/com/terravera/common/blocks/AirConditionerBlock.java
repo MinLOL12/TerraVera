@@ -32,12 +32,19 @@ import com.terravera.common.power.PowerConsumer;
  * is actively moving heat), which the client uses to idle or spin up the roof fan.
  */
 public class AirConditionerBlock extends HorizontalDirectionalBlock implements EntityBlock, PowerConsumer {
+    public static final com.mojang.serialization.MapCodec<AirConditionerBlock> CODEC = simpleCodec(AirConditionerBlock::new);
+
     public static final BooleanProperty POWERED = BooleanProperty.create("powered");
     public static final BooleanProperty RUNNING = BooleanProperty.create("running");
 
     public AirConditionerBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(POWERED, false).setValue(RUNNING, false));
+    }
+
+    @Override
+    protected com.mojang.serialization.MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override
