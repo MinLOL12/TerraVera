@@ -2,7 +2,7 @@
   "__comment": "Dressing: a vinegar and oil emulsion for salads.",
   "type": "tfc:pot",
   "duration": 3000,
-  "fluid_ingredient": { "amount": 300, "fluid": "terravera:cider_vinegar" },
+  "fluid_ingredient": { "amount": 300, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "tfc:food/olive" },
     { "item": "tfc:powder/salt" }

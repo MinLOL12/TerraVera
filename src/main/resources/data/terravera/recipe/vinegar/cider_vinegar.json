@@ -1,8 +1,21 @@
 {
-  "__comment": "Cider vinegar: hard cider exposed to oxygen in a sealed barrel produces acetified cider vinegar over time.",
+  "__comment": "Cider vinegar: hard cider exposed to oxygen in a sealed barrel produces acetified cider vinegar over time. Produces generic vinegar fluid and a specific vinegar item.",
   "type": "tfc:barrel_sealed",
   "duration": 48000,
-  "input_fluid": { "amount": 1000, "fluid": "tfc:cider" },
-  "input_item": { "count": 1, "item": "terravera:vinegar" },
-  "output_fluid": { "amount": 1000, "id": "terravera:cider_vinegar" }
+  "input_fluid": {
+    "amount": 1000,
+    "fluid": "tfc:cider"
+  },
+  "input_item": {
+    "count": 1,
+    "item": "terravera:vinegar"
+  },
+  "output_fluid": {
+    "amount": 1000,
+    "id": "tfc:vinegar"
+  },
+  "output_item": {
+    "id": "terravera:cider_vinegar",
+    "count": 1
+  }
 }

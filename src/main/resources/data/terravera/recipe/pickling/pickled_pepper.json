@@ -1,15 +1,27 @@
 {
-  "__comment": "Pickled cabbage: shredded cabbage preserved in vinegar and salt for long-term storage.",
+  "__comment": "Pickled pepper: pepper preserved in vinegar and salt for long-term storage.",
   "type": "tfc:pot",
   "duration": 8000,
-  "fluid_ingredient": { "amount": 500, "fluid": "terravera:vinegar" },
+  "fluid_ingredient": {
+    "amount": 500,
+    "fluid": "tfc:vinegar"
+  },
   "ingredients": [
-    { "item": "tfc:food/cabbage" },
-    { "item": "tfc:powder/salt" },
-    { "item": "tfc:powder/salt" }
+    {
+      "item": "tfc:food/cabbage"
+    },
+    {
+      "item": "tfc:powder/salt"
+    },
+    {
+      "item": "tfc:powder/salt"
+    }
   ],
   "item_output": [
-    { "count": 2, "id": "terravera:pickled_cabbage" }
+    {
+      "count": 2,
+      "id": "terravera:pickled_cabbage"
+    }
   ],
   "temperature": 250.0
 }

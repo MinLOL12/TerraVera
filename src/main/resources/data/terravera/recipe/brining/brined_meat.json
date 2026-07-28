@@ -2,7 +2,7 @@
   "__comment": "Brined meat: salt, herbs, and vinegar prepare meat for preservation or cooking.",
   "type": "tfc:pot",
   "duration": 15000,
-  "fluid_ingredient": { "amount": 500, "fluid": "terravera:wine_vinegar" },
+  "fluid_ingredient": { "amount": 500, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "tfc:food/raw_beef" },
     { "item": "tfc:powder/salt" },

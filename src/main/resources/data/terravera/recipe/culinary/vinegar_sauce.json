@@ -2,7 +2,7 @@
   "__comment": "Vinegar sauce: a sharp sauce for cooked meats requiring specific cider vinegar.",
   "type": "tfc:pot",
   "duration": 6000,
-  "fluid_ingredient": { "amount": 500, "fluid": "terravera:cider_vinegar" },
+  "fluid_ingredient": { "amount": 500, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "tfc:powder/salt" },
     { "item": "minecraft:honey_bottle" }

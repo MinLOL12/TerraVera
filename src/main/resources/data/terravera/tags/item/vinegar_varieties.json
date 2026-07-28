@@ -1,0 +1,11 @@
+{
+  "__comment__": "All vinegar varieties. Generic vinegar is the base; specific types are derived from different alcohol sources via barrel acetification.",
+  "values": [
+    "terravera:vinegar",
+    "terravera:cider_vinegar",
+    "terravera:wine_vinegar",
+    "terravera:beer_vinegar",
+    "terravera:mead_vinegar",
+    "terravera:rice_mash_vinegar"
+  ]
+}
