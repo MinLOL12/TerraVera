@@ -1,0 +1,14 @@
+{
+  "__comment__": "Tools that can work a carcass. Keenness still comes from the material, so listing a tool here does not make a stone flake cut like steel.",
+  "replace": false,
+  "values": [
+    {
+      "id": "#tfc:knives",
+      "required": false
+    },
+    {
+      "id": "#minecraft:swords",
+      "required": false
+    }
+  ]
+}

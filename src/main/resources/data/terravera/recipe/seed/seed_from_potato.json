@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC potato seed from a harvested potato.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/potato"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/potato",
+    "count": 2
+  }
+}

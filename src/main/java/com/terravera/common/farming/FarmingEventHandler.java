@@ -8,7 +8,6 @@
 package com.terravera.common.farming;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -20,7 +19,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,19 +28,18 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
-import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.blocks.TerraVeraBlocks;
-import com.terravera.common.items.TerraVeraItems;
-import com.terravera.common.quality.CropHealth;
-import com.terravera.common.quality.SeedQuality;
 import com.terravera.common.quality.SoilCondition;
 import com.terravera.common.greenhouse.GreenhouseBlock;
 import com.terravera.common.greenhouse.GreenhouseBlockEntity;
 import com.terravera.config.TerraVeraConfig;
 
 /**
- * Handles all farming event interactions: soil preparation, crop disease ticking, seed quality on harvest,
- * and crop growth modifiers from soil and greenhouse conditions.
+ * Handles all farming event interactions: soil preparation, crop disease ticking, harvest bonuses from
+ * well-worked ground, and greenhouse tray planting.
+ * <p>
+ * Notably it does <em>not</em> handle seeds or crop blocks. TerraFirmaCraft owns those; TerraVera's job here is
+ * the soil under the crop and the glass over it.
  * <p>
  * This is the event-driven side of the farming system. The data is stored in block entities
  * ({@link PreparedFarmlandBlockEntity}, {@link GreenhouseBlockEntity}) but the triggers come from block
@@ -56,6 +53,7 @@ public final class FarmingEventHandler
     private static final TagKey<Block> PREPARABLE_SOIL = TagKey.create(
         net.minecraft.core.registries.Registries.BLOCK,
         ResourceLocation.fromNamespaceAndPath("terravera", "preparable_soil"));
+    /** Seeds TerraVera recognises. Populated from TFC's own seed tag rather than from items of TerraVera's own. */
     private static final TagKey<Item> TERRAVERA_SEEDS = TagKey.create(
         net.minecraft.core.registries.Registries.ITEM,
         ResourceLocation.fromNamespaceAndPath("terravera", "seeds"));
@@ -69,8 +67,13 @@ public final class FarmingEventHandler
     }
 
     /**
-     * When a crop is harvested, determine seed quality from the parent plant's condition and the soil it grew in.
-     * Better soil + healthier plant = better seeds for replanting.
+     * When a crop is harvested off prepared soil, well-worked ground pays back a little extra produce.
+     * <p>
+     * The old version of this handler dropped a TerraVera "select seed" carrying its own genetic quality data. That
+     * has been removed: TerraFirmaCraft already has seeds, crop blocks, and its own growth rules, and running a
+     * parallel seed line meant a second crop block rendered with vanilla wheat models sitting in TFC fields, which
+     * is where the visual glitching came from. Soil preparation now expresses itself the honest way - as more of
+     * whatever crop the player was actually growing.
      */
     @SubscribeEvent
     public static void onCropHarvest(BlockEvent.BreakEvent event)
@@ -79,57 +82,66 @@ public final class FarmingEventHandler
         if (!TerraVeraConfig.SERVER.enableFarming.get()) return;
 
         BlockState state = event.getState();
-        if (!(state.getBlock() instanceof CropBlock crop)) return;
+        if (!isCrop(state)) return;
 
         Player player = event.getPlayer();
-        if (player.isCreative()) return;
+        if (player == null || player.isCreative()) return;
 
         RandomSource random = level.getRandom();
         BlockPos pos = event.getPos();
-        BlockPos below = pos.below();
 
-        // Determine soil quality from prepared farmland below
+        // Soil quality from the prepared farmland the crop is standing on.
         SoilCondition soil = SoilCondition.UNPREPARED;
-        if (level.getBlockEntity(below) instanceof PreparedFarmlandBlockEntity be)
+        if (level.getBlockEntity(pos.below()) instanceof PreparedFarmlandBlockEntity be)
         {
             soil = be.soilCondition();
         }
 
-        // Check if inside a greenhouse for climate bonus
-        float greenhouseBonus = 0.0f;
+        float greenhouseBonus = greenhouseBonusNear(level, pos);
+        float quality = Math.min(1.0f, Math.max(0.0f,
+            soil.overallQuality() * 0.7f + greenhouseBonus * 0.3f));
+
+        // Only genuinely good ground gives a bonus, and it is a chance rather than a guarantee, so a well-kept bed
+        // is noticeably but not overwhelmingly better than tilled dirt.
+        if (quality > 0.6f && random.nextFloat() < (quality - 0.5f) * 0.8f)
+        {
+            for (ItemStack drop : Block.getDrops(state, level, pos, null, player, player.getMainHandItem()))
+            {
+                // Duplicate the produce, not the seed: a fertile field yields more grain, not more seed stock.
+                if (drop.isEmpty() || isSeedLike(drop)) continue;
+                Block.popResource(level, pos, drop.copyWithCount(1));
+                break;
+            }
+        }
+    }
+
+    /** The best greenhouse growth modifier within reach of this position, or 0 if there is no greenhouse. */
+    private static float greenhouseBonusNear(ServerLevel level, BlockPos pos)
+    {
+        float best = 0.0f;
         for (int dx = -3; dx <= 3; dx++)
         {
             for (int dz = -3; dz <= 3; dz++)
             {
                 for (int dy = 0; dy <= 3; dy++)
                 {
-                    BlockPos check = pos.offset(dx, dy, dz);
-                    if (level.getBlockEntity(check) instanceof GreenhouseBlockEntity greenhouse)
+                    if (level.getBlockEntity(pos.offset(dx, dy, dz)) instanceof GreenhouseBlockEntity greenhouse)
                     {
-                        greenhouseBonus = Math.max(greenhouseBonus, greenhouse.climate().growthModifier());
+                        best = Math.max(best, greenhouse.climate().growthModifier());
                     }
                 }
             }
         }
-
-        // Calculate harvested quality based on soil, greenhouse, and randomness
-        float baseQuality = soil.overallQuality() * 0.6f + greenhouseBonus * 0.3f + random.nextFloat() * 0.1f;
-        baseQuality = Math.min(1.0f, Math.max(0.0f, baseQuality));
-
-        // Chance of bonus seed drops based on quality
-        if (baseQuality > 0.7f && random.nextFloat() < (baseQuality - 0.5f) * 0.4f)
-        {
-            ItemStack seed = new ItemStack(TerraVeraItems.SELECT_SEED.get());
-            seed.set(TerraVeraDataComponents.SEED_QUALITY.get(),
-                new SeedQuality(baseQuality, 1, "crop", baseQuality));
-            Block.popResource(level, pos, seed);
-        }
+        return best;
     }
 
     /**
-     * TerraVera seed items carry quality data, so they are not vanilla SeedItems. Handle their planting here, and
-     * also let ordinary seed-like items plant on TerraVera prepared farmland. Greenhouse blocks accept seeds into
-     * their internal tray capacity instead of silently doing nothing.
+     * Greenhouse blocks accept seeds into their trays.
+     * <p>
+     * This handler no longer places a crop block of its own. Previously any seed-like item clicked onto prepared
+     * soil was replaced with TerraVera's generic crop, which overrode TFC's own planting and rendered a vanilla
+     * wheat model regardless of what had been sown. Prepared farmland is now simply farmland as far as planting is
+     * concerned, and TFC (or vanilla) handles the seed it knows about.
      */
     @SubscribeEvent
     public static void onSeedPlanting(PlayerInteractEvent.RightClickBlock event)
@@ -154,24 +166,7 @@ public final class FarmingEventHandler
             }
             event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
             event.setCanceled(true);
-            return;
         }
-
-        if (event.getFace() != Direction.UP) return;
-        if (!canPlantTerraVeraCropOn(clicked)) return;
-        if (!level.getBlockState(clickedPos.above()).isAir()) return;
-
-        // Do not hijack vanilla seeds on vanilla farmland; vanilla can handle those. We only add compatibility for
-        // prepared soil and for TerraVera's quality-bearing seeds.
-        boolean terraveraSeed = held.is(TERRAVERA_SEEDS);
-        boolean preparedSoil = clicked.is(TerraVeraBlocks.PREPARED_FARMLAND.get());
-        if (!terraveraSeed && !preparedSoil) return;
-
-        level.setBlock(clickedPos.above(), TerraVeraBlocks.CROP.get().defaultBlockState(), Block.UPDATE_ALL);
-        if (!player.isCreative()) held.shrink(1);
-        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("terravera.crop.planted"), true);
-        event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
-        event.setCanceled(true);
     }
 
     /**
@@ -261,7 +256,7 @@ public final class FarmingEventHandler
                 BlockPos pos = center.offset(dx, 0, dz);
                 BlockState state = level.getBlockState(pos);
 
-                if (!(state.getBlock() instanceof CropBlock)) continue;
+                if (!isCrop(state)) continue;
 
                 BlockPos below = pos.below();
                 if (level.getBlockEntity(below) instanceof PreparedFarmlandBlockEntity farmland)
@@ -269,24 +264,28 @@ public final class FarmingEventHandler
                     SoilCondition soil = farmland.soilCondition();
 
                     // Poor soil quality increases disease risk
-                    if (soil.overallQuality() < 0.3f && random.nextFloat() < 0.05f)
+                    // Poor ground sets a crop back a stage. Guarded on the vanilla AGE property because TFC
+                    // crops use their own growth properties and must not be poked through the wrong one.
+                    if (soil.overallQuality() < 0.3f && random.nextFloat() < 0.05f
+                        && state.hasProperty(CropBlock.AGE) && state.getValue(CropBlock.AGE) > 0)
                     {
-                        // Reduce crop growth stage as disease effect
-                        if (state.getValue(CropBlock.AGE) > 0)
-                        {
-                            level.setBlock(pos, state.setValue(CropBlock.AGE,
-                                Math.max(0, state.getValue(CropBlock.AGE) - 1)), Block.UPDATE_ALL);
-                        }
-                    }
-
-                    // Weed competition: unweeded soil slows crop growth
-                    if (soil.weedFree() < 0.3f && random.nextFloat() < 0.03f)
-                    {
-                        // Crop doesn't advance even on random tick
+                        level.setBlock(pos, state.setValue(CropBlock.AGE,
+                            Math.max(0, state.getValue(CropBlock.AGE) - 1)), Block.UPDATE_ALL);
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Whether a block is a crop. TFC's crops do not extend vanilla {@link CropBlock}, so matching only on that
+     * class silently skipped every TFC field - which made the whole soil system look like it did nothing.
+     */
+    private static boolean isCrop(BlockState state)
+    {
+        if (state.getBlock() instanceof CropBlock) return true;
+        String path = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
+        return path.startsWith("crop/") || path.contains("_crop") || path.endsWith("_plant");
     }
 
     private static boolean isTillable(BlockState state)
@@ -300,18 +299,6 @@ public final class FarmingEventHandler
             path.contains("loam") ||
             path.contains("silt") ||
             path.contains("soil");
-    }
-
-    private static boolean canPlantTerraVeraCropOn(BlockState state)
-    {
-        String path = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        return state.is(TerraVeraBlocks.PREPARED_FARMLAND.get()) ||
-            state.is(net.minecraft.world.level.block.Blocks.FARMLAND) ||
-            state.is(BlockTags.DIRT) ||
-            path.contains("loam") ||
-            path.contains("silt") ||
-            path.contains("soil") ||
-            path.contains("farmland");
     }
 
     private static boolean isSeedLike(ItemStack stack)

@@ -1,0 +1,10 @@
+{
+  "__comment__": "Offal.",
+  "replace": false,
+  "values": [
+    "terravera:heart",
+    "terravera:liver",
+    "terravera:kidneys",
+    "terravera:stomach"
+  ]
+}

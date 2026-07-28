@@ -1,0 +1,17 @@
+{
+  "__comment__": "Split the bone and scoop the marrow out. What is left is still bone.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:marrow_bone"
+    },
+    {
+      "tag": "tfc:knives"
+    }
+  ],
+  "result": {
+    "id": "terravera:bone_marrow",
+    "count": 1
+  }
+}

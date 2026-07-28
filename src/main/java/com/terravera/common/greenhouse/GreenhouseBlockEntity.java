@@ -7,10 +7,14 @@
 
 package com.terravera.common.greenhouse;
 
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +48,11 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private GreenhouseClimate climate;
     private int plantCount;
-    private int trayPlantCount;
+    /**
+     * The planted trays. This replaces the old bare {@code trayPlantCount} counter: a count could record that a
+     * seed had gone in but not what it was or whether it had finished, which is why nothing was ever collectable.
+     */
+    private final List<GreenhouseTray> trays = new ArrayList<>();
     private int nearbyCropCount;
     private float sunlightExposure;
     private boolean ventilationOpen;
@@ -57,7 +65,6 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
         this.climate = new GreenhouseClimate(tier, 20.0f, 0.5f, 0.0f, false, 0.3f,
             GreenhouseTier.byLevel(tier).solarCapture(), 0.0f, false, false);
         this.plantCount = 0;
-        this.trayPlantCount = 0;
         this.nearbyCropCount = 0;
         this.sunlightExposure = 0.0f;
         this.ventilationOpen = state.getValue(GreenhouseBlock.VENT_OPEN);
@@ -66,7 +73,23 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
 
     public GreenhouseClimate climate() { return climate; }
     public int plantCount() { return plantCount; }
-    public int trayPlantCount() { return trayPlantCount; }
+    public int trayPlantCount() { return trays.size(); }
+    public List<GreenhouseTray> trays() { return trays; }
+
+    /** How many trays have finished and are waiting to be collected. */
+    public int matureTrayCount()
+    {
+        return (int) trays.stream().filter(GreenhouseTray::mature).count();
+    }
+
+    /** Growth of the least advanced unfinished tray, for the GUI progress readout. 1 when all are done. */
+    public float trayProgress()
+    {
+        return trays.stream().filter(tray -> !tray.mature())
+            .map(GreenhouseTray::progress)
+            .min(Float::compare)
+            .orElse(trays.isEmpty() ? 0f : 1f);
+    }
     public int nearbyCropCount() { return nearbyCropCount; }
     public float sunlightExposure() { return sunlightExposure; }
     public boolean ventilationOpen() { return ventilationOpen; }
@@ -84,16 +107,48 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
 
     public boolean tryPlantSeed(ItemStack seed, Player player)
     {
-        if (trayPlantCount >= trayCapacity())
+        if (trays.size() >= trayCapacity())
         {
             player.displayClientMessage(Component.translatable("terravera.greenhouse.plant_full"), true);
             return false;
         }
-        trayPlantCount++;
-        plantCount = nearbyCropCount + trayPlantCount;
+        trays.add(GreenhouseTray.sow(seed));
+        plantCount = nearbyCropCount + trays.size();
         setChanged();
-        player.displayClientMessage(Component.translatable("terravera.greenhouse.seed_planted", trayPlantCount, trayCapacity()), true);
+        player.displayClientMessage(
+            Component.translatable("terravera.greenhouse.seed_planted", trays.size(), trayCapacity()), true);
         return true;
+    }
+
+    /**
+     * Collect everything that has finished growing.
+     * <p>
+     * Yield scales with the greenhouse's climate at the moment of harvest rather than being a flat one-per-tray:
+     * a well-run glasshouse should pay back the glass. A tray that is collected is emptied, so the player replants
+     * it - the greenhouse is a workspace, not an automatic farm.
+     *
+     * @return the harvested stacks, empty if nothing was ready
+     */
+    public List<ItemStack> harvestMatureTrays()
+    {
+        final List<ItemStack> harvested = new ArrayList<>();
+        if (level == null) return harvested;
+
+        final float quality = climate.growthModifier();
+        trays.removeIf(tray -> {
+            if (!tray.mature()) return false;
+            final int count = 1 + (quality >= 0.85f ? 2 : quality >= 0.55f ? 1 : 0);
+            final ItemStack yield = tray.harvest(count);
+            if (!yield.isEmpty()) harvested.add(yield);
+            return true;
+        });
+
+        if (!harvested.isEmpty())
+        {
+            plantCount = nearbyCropCount + trays.size();
+            setChanged();
+        }
+        return harvested;
     }
 
     public void setVentilationOpen(boolean open)
@@ -147,7 +202,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
 
         int scanRadius = scanRadius(gTier);
         nearbyCropCount = countNearbyCrops(level, pos, scanRadius);
-        plantCount = nearbyCropCount + trayPlantCount;
+        plantCount = nearbyCropCount + trays.size();
 
         // Determine outside conditions from the level
         float outsideTemp = getOutsideTemperature(level, pos);
@@ -174,6 +229,14 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
         if (ventState != ventilationOpen)
         {
             ventilationOpen = ventState;
+        }
+
+        // Grow the planted trays against the climate we just simulated, rather than against a fixed rate. This is
+        // the step that makes the climate controls matter: badly managed glass simply does not finish a crop.
+        final String season = CropSpecialization.currentSeason(level.getDayTime());
+        for (int i = 0; i < trays.size(); i++)
+        {
+            trays.set(i, trays.get(i).grown(climate, season));
         }
 
         // Modern greenhouses with automation: self-regulate ventilation if overheating
@@ -352,7 +415,12 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
                 net.minecraft.nbt.NbtOps.INSTANCE, nbt.get("climate")).result().orElse(GreenhouseClimate.DEFAULT);
         }
         plantCount = nbt.getInt("plant_count");
-        trayPlantCount = nbt.getInt("tray_plant_count");
+        trays.clear();
+        final ListTag trayList = nbt.getList("trays", Tag.TAG_COMPOUND);
+        for (int i = 0; i < trayList.size(); i++)
+        {
+            trays.add(GreenhouseTray.load(trayList.getCompound(i)));
+        }
         nearbyCropCount = nbt.getInt("nearby_crop_count");
         sunlightExposure = nbt.getFloat("sunlight_exposure");
         ventilationOpen = nbt.getBoolean("vent_open");
@@ -366,7 +434,9 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
         GreenhouseClimate.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, climate)
             .result().ifPresent(tag -> nbt.put("climate", tag));
         nbt.putInt("plant_count", plantCount);
-        nbt.putInt("tray_plant_count", trayPlantCount);
+        final ListTag trayList = new ListTag();
+        for (GreenhouseTray tray : trays) trayList.add(tray.save());
+        nbt.put("trays", trayList);
         nbt.putInt("nearby_crop_count", nearbyCropCount);
         nbt.putFloat("sunlight_exposure", sunlightExposure);
         nbt.putBoolean("vent_open", ventilationOpen);

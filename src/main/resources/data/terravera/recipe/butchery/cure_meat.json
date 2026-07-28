@@ -1,0 +1,23 @@
+{
+  "__comment__": "Salt curing. Salt draws the water out of the meat and takes the bacteria's living with it; this is how meat survives a summer without a cellar.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:trim_meat"
+    },
+    {
+      "item": "terravera:trim_meat"
+    },
+    {
+      "item": "tfc:powder/salt"
+    },
+    {
+      "item": "tfc:powder/salt"
+    }
+  ],
+  "result": {
+    "id": "terravera:cured_meat",
+    "count": 2
+  }
+}

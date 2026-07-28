@@ -1,0 +1,24 @@
+{
+  "__comment__": "Suet renders to a harder, whiter, far longer-keeping tallow than soft fat does.",
+  "type": "tfc:pot",
+  "duration": 1800,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "terravera:suet"
+    },
+    {
+      "item": "terravera:suet"
+    }
+  ],
+  "item_output": [
+    {
+      "count": 3,
+      "id": "terravera:rendered_tallow"
+    }
+  ],
+  "temperature": 260.0
+}

@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC garlic seed from a harvested garlic.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/garlic"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/garlic",
+    "count": 2
+  }
+}

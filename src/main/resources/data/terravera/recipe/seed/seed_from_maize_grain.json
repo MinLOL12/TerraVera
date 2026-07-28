@@ -1,0 +1,13 @@
+{
+  "__comment__": "Recover TFC maize seed from threshed grain.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/maize_grain"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/maize",
+    "count": 1
+  }
+}

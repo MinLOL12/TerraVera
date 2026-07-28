@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC green_bean seed from a harvested green_bean.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/green_bean"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/green_bean",
+    "count": 2
+  }
+}

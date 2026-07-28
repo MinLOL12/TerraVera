@@ -76,8 +76,8 @@ public class FarmingResourceTest
             "recipe/seed/seed_from_maize.json",
             "recipe/seed/seed_from_rice.json",
             "recipe/seed/seed_from_wheat_grain.json",
-            "recipe/seed/select_seed.json",
-            "recipe/seed/prize_seed.json"
+            "recipe/seed/seed_from_carrot.json",
+            "recipe/seed/seed_from_potato.json"
         };
         for (String recipe : expected)
         {

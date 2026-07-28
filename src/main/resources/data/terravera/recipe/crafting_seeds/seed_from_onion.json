@@ -1,8 +1,0 @@
-{
-  "__comment__": "Extract seed from TFC onion.",
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    { "item": "tfc:food/onion" }
-  ],
-  "result": { "id": "terravera:seed", "count": 3 }
-}

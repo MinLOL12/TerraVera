@@ -1,20 +1,95 @@
 {
-  "__comment__": "Raw meats that carry parasites. Pork and bear are the trichinosis classics; beef and fish carry tapeworm. Cook them.",
+  "__comment__": "Raw meats that carry parasites. Pork and bear are the trichinosis classics; beef and fish carry tapeworm. Cook them. Butchered cuts and offal belong here too - raw offal in particular is where the parasites concentrate.",
   "values": [
-    { "id": "tfc:food/pork", "required": false },
-    { "id": "tfc:food/bear", "required": false },
-    { "id": "tfc:food/beef", "required": false },
-    { "id": "tfc:food/venison", "required": false },
-    { "id": "tfc:food/bison", "required": false },
-    { "id": "tfc:food/horse_meat", "required": false },
-    { "id": "tfc:food/wolf", "required": false },
-    { "id": "tfc:food/hyena", "required": false },
-    { "id": "tfc:food/gran_feline", "required": false },
-    { "id": "tfc:food/salmon", "required": false },
-    { "id": "tfc:food/cod", "required": false },
-    { "id": "tfc:food/lake_trout", "required": false },
-    { "id": "tfc:food/rainbow_trout", "required": false },
-    { "id": "tfc:food/northern_pike", "required": false },
-    { "id": "tfc:food/burbot", "required": false }
+    {
+      "id": "tfc:food/pork",
+      "required": false
+    },
+    {
+      "id": "tfc:food/bear",
+      "required": false
+    },
+    {
+      "id": "tfc:food/beef",
+      "required": false
+    },
+    {
+      "id": "tfc:food/venison",
+      "required": false
+    },
+    {
+      "id": "tfc:food/bison",
+      "required": false
+    },
+    {
+      "id": "tfc:food/horse_meat",
+      "required": false
+    },
+    {
+      "id": "tfc:food/wolf",
+      "required": false
+    },
+    {
+      "id": "tfc:food/hyena",
+      "required": false
+    },
+    {
+      "id": "tfc:food/gran_feline",
+      "required": false
+    },
+    {
+      "id": "tfc:food/salmon",
+      "required": false
+    },
+    {
+      "id": "tfc:food/cod",
+      "required": false
+    },
+    {
+      "id": "tfc:food/lake_trout",
+      "required": false
+    },
+    {
+      "id": "tfc:food/rainbow_trout",
+      "required": false
+    },
+    {
+      "id": "tfc:food/northern_pike",
+      "required": false
+    },
+    {
+      "id": "tfc:food/burbot",
+      "required": false
+    },
+    {
+      "id": "terravera:shoulder_cut"
+    },
+    {
+      "id": "terravera:rib_cut"
+    },
+    {
+      "id": "terravera:loin_cut"
+    },
+    {
+      "id": "terravera:leg_cut"
+    },
+    {
+      "id": "terravera:trim_meat"
+    },
+    {
+      "id": "terravera:heart"
+    },
+    {
+      "id": "terravera:liver"
+    },
+    {
+      "id": "terravera:kidneys"
+    },
+    {
+      "id": "terravera:stomach"
+    },
+    {
+      "id": "terravera:blood"
+    }
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "__comment__": "Tendon gives shorter, coarser fibre than back sinew. Three for the same length of cord.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:tendon"
+    },
+    {
+      "item": "terravera:tendon"
+    },
+    {
+      "item": "terravera:tendon"
+    }
+  ],
+  "result": {
+    "id": "terravera:sinew_cord",
+    "count": 1
+  }
+}

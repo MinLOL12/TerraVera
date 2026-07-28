@@ -1,0 +1,27 @@
+{
+  "__comment__": "Bone broth. Hours of simmering to pull the collagen out - the one hot meal a stone-age camp can reliably make from what is left after everything edible has been eaten.",
+  "type": "tfc:pot",
+  "duration": 4800,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "terravera:marrow_bone"
+    },
+    {
+      "item": "terravera:marrow_bone"
+    },
+    {
+      "item": "terravera:trim_meat"
+    }
+  ],
+  "item_output": [
+    {
+      "count": 1,
+      "id": "terravera:bone_marrow"
+    }
+  ],
+  "temperature": 300.0
+}

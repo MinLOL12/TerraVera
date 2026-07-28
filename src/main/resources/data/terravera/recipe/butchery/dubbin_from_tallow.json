@@ -1,0 +1,17 @@
+{
+  "__comment__": "Dubbin from rendered tallow. The historical waterproofing for leather, and the reason a tanned hide keeps out rain.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:rendered_tallow"
+    },
+    {
+      "item": "tfc:jute_fiber"
+    }
+  ],
+  "result": {
+    "id": "terravera:dubbin",
+    "count": 2
+  }
+}

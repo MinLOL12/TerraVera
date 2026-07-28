@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC carrot seed from a harvested carrot.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/carrot"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/carrot",
+    "count": 2
+  }
+}

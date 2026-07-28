@@ -19,7 +19,9 @@ public enum SkillType
     SMITHING("smithing"),
     BUILDING("building"),
     COOKING("cooking"),
-    MEDICINE("medicine");
+    MEDICINE("medicine"),
+    /** Knife work on a carcass: where to open it, where the seams are, and how not to waste half the animal. */
+    BUTCHERY("butchery");
 
     private final String id;
 

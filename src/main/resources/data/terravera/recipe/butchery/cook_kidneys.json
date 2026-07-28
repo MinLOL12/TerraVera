@@ -1,0 +1,13 @@
+{
+  "__comment__": "Offal is only food once it has been cooked properly; raw it is where the parasites are.",
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:kidneys"
+  },
+  "result": {
+    "id": "terravera:trim_meat"
+  },
+  "experience": 0.0,
+  "cookingtime": 600
+}

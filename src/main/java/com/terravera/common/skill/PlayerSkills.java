@@ -18,17 +18,18 @@ import net.minecraft.util.Mth;
  * Knowing a little about ore does not make someone a better surgeon, and even an expert continues to learn without
  * gaining implausible linear bonuses. {@link #proficiency(SkillType)} is the only value gameplay code should use.
  */
-public record PlayerSkills(float mining, float smithing, float building, float cooking, float medicine)
+public record PlayerSkills(float mining, float smithing, float building, float cooking, float medicine, float butchery)
 {
     public static final float MAX_EXPERIENCE = 10_000f;
-    public static final PlayerSkills EMPTY = new PlayerSkills(0f, 0f, 0f, 0f, 0f);
+    public static final PlayerSkills EMPTY = new PlayerSkills(0f, 0f, 0f, 0f, 0f, 0f);
 
     public static final Codec<PlayerSkills> CODEC = RecordCodecBuilder.create(i -> i.group(
         Codec.FLOAT.optionalFieldOf("mining", 0f).forGetter(PlayerSkills::mining),
         Codec.FLOAT.optionalFieldOf("smithing", 0f).forGetter(PlayerSkills::smithing),
         Codec.FLOAT.optionalFieldOf("building", 0f).forGetter(PlayerSkills::building),
         Codec.FLOAT.optionalFieldOf("cooking", 0f).forGetter(PlayerSkills::cooking),
-        Codec.FLOAT.optionalFieldOf("medicine", 0f).forGetter(PlayerSkills::medicine)
+        Codec.FLOAT.optionalFieldOf("medicine", 0f).forGetter(PlayerSkills::medicine),
+        Codec.FLOAT.optionalFieldOf("butchery", 0f).forGetter(PlayerSkills::butchery)
     ).apply(i, PlayerSkills::new));
 
     public PlayerSkills
@@ -38,6 +39,7 @@ public record PlayerSkills(float mining, float smithing, float building, float c
         building = clamp(building);
         cooking = clamp(cooking);
         medicine = clamp(medicine);
+        butchery = clamp(butchery);
     }
 
     public float experience(SkillType skill)
@@ -49,6 +51,7 @@ public record PlayerSkills(float mining, float smithing, float building, float c
             case BUILDING -> building;
             case COOKING -> cooking;
             case MEDICINE -> medicine;
+            case BUTCHERY -> butchery;
         };
     }
 
@@ -67,11 +70,12 @@ public record PlayerSkills(float mining, float smithing, float building, float c
         final float next = clamp(value);
         return switch (skill)
         {
-            case MINING -> new PlayerSkills(next, smithing, building, cooking, medicine);
-            case SMITHING -> new PlayerSkills(mining, next, building, cooking, medicine);
-            case BUILDING -> new PlayerSkills(mining, smithing, next, cooking, medicine);
-            case COOKING -> new PlayerSkills(mining, smithing, building, next, medicine);
-            case MEDICINE -> new PlayerSkills(mining, smithing, building, cooking, next);
+            case MINING -> new PlayerSkills(next, smithing, building, cooking, medicine, butchery);
+            case SMITHING -> new PlayerSkills(mining, next, building, cooking, medicine, butchery);
+            case BUILDING -> new PlayerSkills(mining, smithing, next, cooking, medicine, butchery);
+            case COOKING -> new PlayerSkills(mining, smithing, building, next, medicine, butchery);
+            case MEDICINE -> new PlayerSkills(mining, smithing, building, cooking, next, butchery);
+            case BUTCHERY -> new PlayerSkills(mining, smithing, building, cooking, medicine, next);
         };
     }
 

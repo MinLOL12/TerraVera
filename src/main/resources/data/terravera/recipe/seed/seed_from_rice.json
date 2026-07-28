@@ -1,8 +1,13 @@
 {
-  "__comment__": "Extract seed from rice grain.",
+  "__comment__": "Thresh a rice crop back into TFC seed for replanting.",
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "tfc:food/rice" }
+    {
+      "item": "tfc:food/rice"
+    }
   ],
-  "result": { "id": "terravera:seed", "count": 3 }
+  "result": {
+    "id": "tfc:seeds/rice",
+    "count": 2
+  }
 }

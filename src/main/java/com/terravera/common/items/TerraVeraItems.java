@@ -288,16 +288,72 @@ public final class TerraVeraItems
     /** A stone- or bone-tipped rake for clearing stones and debris from prepared beds. */
     public static final DeferredHolder<Item, Item> SOIL_RAKE = ITEMS.registerSimpleItem("soil_rake");
 
-    // ----- Seed system -----------------------------------------------------------------------------------
+    // ----- Butchering ------------------------------------------------------------------------------------
+    // An animal is not a pile of steaks. Killing one gives a carcass; the carcass is worked down in stages, and
+    // each stage produces something a different part of the mod consumes. See com.terravera.common.butchery.
+    //
+    // Raw organ meat and blood carry no vanilla FoodProperties on purpose: eating a raw liver should go through
+    // TFC's own food and the mod's parasite rules, not hand out three hunger shanks for free. They become food by
+    // being cooked, which is a recipe, not an item property.
 
-    /** Standard seed. Quality varies. Used for replanting crops. */
-    public static final DeferredHolder<Item, Item> SEED = ITEMS.registerSimpleItem("seed");
+    /** A whole animal carcass. Right-click with a blade in the other hand to work it down a stage at a time. */
+    public static final DeferredHolder<Item, Item> CARCASS = ITEMS.register("carcass",
+        () -> new com.terravera.common.butchery.CarcassItem(new Item.Properties()));
 
-    /** Select seed: saved from the best plants. Higher quality, better yields. */
-    public static final DeferredHolder<Item, Item> SELECT_SEED = ITEMS.registerSimpleItem("select_seed");
+    /** Primal cuts. Named for where they came off the animal, because that is what determines how to cook them. */
+    public static final DeferredHolder<Item, Item> SHOULDER_CUT = ITEMS.registerSimpleItem("shoulder_cut");
+    public static final DeferredHolder<Item, Item> RIB_CUT = ITEMS.registerSimpleItem("rib_cut");
+    public static final DeferredHolder<Item, Item> LOIN_CUT = ITEMS.registerSimpleItem("loin_cut");
+    public static final DeferredHolder<Item, Item> LEG_CUT = ITEMS.registerSimpleItem("leg_cut");
+    /** Scraps knifed off the bone. What a careless butcher produces instead of a clean primal. */
+    public static final DeferredHolder<Item, Item> TRIM_MEAT = ITEMS.registerSimpleItem("trim_meat");
 
-    /** Prize seed: generations of careful selection. The best genetics available. */
-    public static final DeferredHolder<Item, Item> PRIZE_SEED = ITEMS.registerSimpleItem("prize_seed");
+    /** Soft fat, for rendering into tallow: soap, candles, and cooking. */
+    public static final DeferredHolder<Item, Item> ANIMAL_FAT = ITEMS.registerSimpleItem("animal_fat");
+    /** Hard kidney fat. Renders cleaner than soft fat and keeps far longer. */
+    public static final DeferredHolder<Item, Item> SUET = ITEMS.registerSimpleItem("suet");
+    /** Dried back sinew, the strongest natural cordage available before spun fibre. Bowstrings and sewing. */
+    public static final DeferredHolder<Item, Item> SINEW = ITEMS.registerSimpleItem("sinew");
+    /** Leg tendon: tougher and shorter than sinew, used for lashing and glue stock. */
+    public static final DeferredHolder<Item, Item> TENDON = ITEMS.registerSimpleItem("tendon");
+    /** Collected blood. Fertiliser, or food in the recipes that historically used it. */
+    public static final DeferredHolder<Item, Item> BLOOD = ITEMS.registerSimpleItem("blood");
+
+    /** Organs. Dense nutrition and, for liver, the mod's only real dietary source of some deficiencies' cures. */
+    public static final DeferredHolder<Item, Item> HEART = ITEMS.registerSimpleItem("heart");
+    public static final DeferredHolder<Item, Item> LIVER = ITEMS.registerSimpleItem("liver");
+    public static final DeferredHolder<Item, Item> KIDNEYS = ITEMS.registerSimpleItem("kidneys");
+    /** The stomach, cleaned. A container, a rennet source, and food if you are prepared to boil it long enough. */
+    public static final DeferredHolder<Item, Item> STOMACH = ITEMS.registerSimpleItem("stomach");
+
+    /** Long bone with the marrow still in it. Split it for marrow, or boil it for broth. */
+    public static final DeferredHolder<Item, Item> MARROW_BONE = ITEMS.registerSimpleItem("marrow_bone");
+    /** Rendered marrow. Fat and vitamins in the one form a stone-age diet reliably provides them. */
+    public static final DeferredHolder<Item, Item> BONE_MARROW = ITEMS.registerSimpleItem("bone_marrow");
+    /** A bone needle, ground down from a splinter. The sewing tool the clothing system has been missing. */
+    public static final DeferredHolder<Item, Item> BONE_NEEDLE = ITEMS.registerSimpleItem("bone_needle");
+    /** A knapped bone awl for punching holes in hide before stitching it. */
+    public static final DeferredHolder<Item, Item> BONE_AWL = ITEMS.registerSimpleItem("bone_awl");
+    /** Rendered tallow, poured and set. The input to soap and to candles. */
+    public static final DeferredHolder<Item, Item> RENDERED_TALLOW = ITEMS.registerSimpleItem("rendered_tallow");
+    /** A tallow candle on a fibre wick. */
+    public static final DeferredHolder<Item, Item> TALLOW_CANDLE = ITEMS.registerSimpleItem("tallow_candle");
+    /** Twisted sinew cord: shorter than plant cordage but far stronger, and it shrinks tight as it dries. */
+    public static final DeferredHolder<Item, Item> SINEW_CORD = ITEMS.registerSimpleItem("sinew_cord");
+    /** A backed sinew bowstring. */
+    public static final DeferredHolder<Item, Item> SINEW_BOWSTRING = ITEMS.registerSimpleItem("sinew_bowstring");
+    /** Dried blood, ground. A high-nitrogen fertiliser and a genuine historical soil amendment. */
+    public static final DeferredHolder<Item, Item> BLOOD_MEAL = ITEMS.registerSimpleItem("blood_meal");
+    /** Salt-cured meat that keeps without a cellar. */
+    public static final DeferredHolder<Item, Item> CURED_MEAT = ITEMS.registerSimpleItem("cured_meat");
+    /** Air-dried strips. Lighter than cured meat and the traveller's ration. */
+    public static final DeferredHolder<Item, Item> DRIED_MEAT_STRIPS = ITEMS.registerSimpleItem("dried_meat_strips");
+
+    // ----- Seeds -----------------------------------------------------------------------------------------
+    // TerraVera deliberately registers no seed items of its own. TerraFirmaCraft already models seeds, crop
+    // blocks, and their growth; shipping a parallel generic seed meant a second crop block rendered with vanilla
+    // wheat models next to a TFC crop, which is where the visual glitching came from. Soil preparation and the
+    // greenhouse now act on TFC's own crops instead.
 
     // ----- Irrigation ------------------------------------------------------------------------------------
 

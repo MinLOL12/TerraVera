@@ -34,6 +34,7 @@ public class GreenhouseMenu extends AbstractContainerMenu
     public static final int TOGGLE_IRRIGATION = 1;
     public static final int TOGGLE_HEATING = 2;
     public static final int TOGGLE_COOLING = 3;
+    public static final int HARVEST = 4;
 
     private final BlockPos pos;
     private final ContainerLevelAccess access;
@@ -47,6 +48,8 @@ public class GreenhouseMenu extends AbstractContainerMenu
     private final DataSlot glassPercent = DataSlot.standalone();
     private final DataSlot plants = DataSlot.standalone();
     private final DataSlot capacity = DataSlot.standalone();
+    private final DataSlot readyTrays = DataSlot.standalone();
+    private final DataSlot trayProgressPercent = DataSlot.standalone();
     private final DataSlot flags = DataSlot.standalone();
 
     public GreenhouseMenu(int id, Inventory inv, BlockPos pos)
@@ -65,6 +68,8 @@ public class GreenhouseMenu extends AbstractContainerMenu
         addDataSlot(glassPercent);
         addDataSlot(plants);
         addDataSlot(capacity);
+        addDataSlot(readyTrays);
+        addDataSlot(trayProgressPercent);
         addDataSlot(flags);
 
         addPlayerSlots(inv);
@@ -97,6 +102,8 @@ public class GreenhouseMenu extends AbstractContainerMenu
         glassPercent.set(Math.round(climate.glassCoverage() * 100.0f));
         plants.set(greenhouse.plantCount());
         capacity.set(greenhouse.trayCapacity());
+        readyTrays.set(greenhouse.matureTrayCount());
+        trayProgressPercent.set(Math.round(greenhouse.trayProgress() * 100.0f));
 
         int bitFlags = 0;
         if (greenhouse.ventilationOpen()) bitFlags |= 1;
@@ -116,6 +123,9 @@ public class GreenhouseMenu extends AbstractContainerMenu
     public int glassPercent() { return glassPercent.get(); }
     public int plants() { return plants.get(); }
     public int capacity() { return capacity.get(); }
+    public int plantedTrays() { return Math.min(plants(), capacity()); }
+    public int readyTrays() { return readyTrays.get(); }
+    public int trayProgressPercent() { return trayProgressPercent.get(); }
     public boolean ventOpen() { return (flags.get() & 1) != 0; }
     public boolean irrigationActive() { return (flags.get() & 2) != 0; }
     public boolean heatingOn() { return (flags.get() & 4) != 0; }
@@ -150,6 +160,23 @@ public class GreenhouseMenu extends AbstractContainerMenu
                 }
                 greenhouse.setCooling(!greenhouse.climate().coolingOn());
             }
+            case HARVEST ->
+            {
+                final var harvested = greenhouse.harvestMatureTrays();
+                if (harvested.isEmpty())
+                {
+                    player.displayClientMessage(Component.translatable("terravera.greenhouse.nothing_ready"), true);
+                    return false;
+                }
+                int total = 0;
+                for (ItemStack stack : harvested)
+                {
+                    total += stack.getCount();
+                    // Hand the crop to the player, and drop what will not fit rather than deleting it.
+                    if (!player.getInventory().add(stack)) player.drop(stack, false);
+                }
+                player.displayClientMessage(Component.translatable("terravera.greenhouse.harvested", total), true);
+            }
             default -> { return false; }
         }
         sync(player.level());
@@ -162,12 +189,14 @@ public class GreenhouseMenu extends AbstractContainerMenu
         {
             for (int col = 0; col < 9; col++)
             {
-                addSlot(new Slot(inv, col + row * 9 + 9, 8 + col * 18, 112 + row * 18));
+                // Slot grid origin must match GreenhouseScreen.INVENTORY_TOP; the old 112 sat underneath the
+                // status text the screen was drawing at y=122.
+                addSlot(new Slot(inv, col + row * 9 + 9, 8 + col * 18, 141 + row * 18));
             }
         }
         for (int col = 0; col < 9; col++)
         {
-            addSlot(new Slot(inv, col, 8 + col * 18, 170));
+            addSlot(new Slot(inv, col, 8 + col * 18, 199));
         }
     }
 

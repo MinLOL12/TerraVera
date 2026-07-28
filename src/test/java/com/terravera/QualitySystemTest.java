@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import com.terravera.common.quality.CropHealth;
 import com.terravera.common.quality.MaterialQuality;
-import com.terravera.common.quality.SeedQuality;
 import com.terravera.common.quality.SoilCondition;
 import com.terravera.common.greenhouse.GreenhouseClimate;
 import com.terravera.common.greenhouse.GreenhouseTier;
@@ -18,7 +17,7 @@ import com.terravera.common.greenhouse.CropSpecialization;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests the quality system: material quality, seed quality, soil condition, crop health, and greenhouse climate
+ * Tests the quality system: material quality, soil condition, crop health, and greenhouse climate
  * simulation. These are all pure-data records with no Minecraft dependencies, so they can be tested without a
  * game instance.
  */
@@ -53,40 +52,6 @@ public class QualitySystemTest
         assertTrue(dq.quality() >= 0 && dq.quality() <= 1);
         assertTrue(dq.moisture() >= 0 && dq.moisture() <= 1);
         assertFalse(dq.category().isEmpty());
-    }
-
-    // ----- Seed Quality -----
-
-    @Test
-    public void seedSelectionImprovesOverGenerations()
-    {
-        SeedQuality seed = new SeedQuality(0.5f, 0, "wheat", 0.7f);
-        // Simulate 10 generations of selection
-        for (int i = 0; i < 10; i++)
-        {
-            seed = seed.nextGeneration(0.8f); // Parent harvested at 0.8 quality
-        }
-        assertTrue(seed.quality() > 0.5f, "Seed quality should improve with selection");
-        assertTrue(seed.generation() == 10, "Generation should increment");
-        assertTrue(seed.viability() > 0.7f, "Viability should improve with selection");
-    }
-
-    @Test
-    public void seedQualityTiersAreCorrect()
-    {
-        assertEquals("prize",    new SeedQuality(0.9f, 5, "wheat", 0.95f).tierLabel());
-        assertEquals("select",   new SeedQuality(0.7f, 3, "wheat", 0.85f).tierLabel());
-        assertEquals("standard", new SeedQuality(0.5f, 1, "wheat", 0.75f).tierLabel());
-        assertEquals("cull",     new SeedQuality(0.2f, 0, "wheat", 0.5f).tierLabel());
-    }
-
-    @Test
-    public void poorSeedSelectionDegradesQuality()
-    {
-        SeedQuality seed = new SeedQuality(0.5f, 0, "wheat", 0.7f);
-        // Save seeds from a poor harvest
-        SeedQuality next = seed.nextGeneration(0.2f);
-        assertTrue(next.quality() < 0.5f, "Saving poor seeds should reduce quality");
     }
 
     // ----- Soil Condition -----

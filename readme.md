@@ -141,10 +141,11 @@ free placement.
 ## Learned knowledge and fitted handles
 
 Characters begin inexperienced rather than uniformly competent. TerraVera records separate practical experience for
-**mining, smithing, building, cooking, and medicine**. Experience has a diminishing curve and conservative,
+**mining, smithing, building, cooking, medicine, and butchery**. Experience has a diminishing curve and conservative,
 field-specific effects: mining improves exposed-ore recognition and work efficiency; smithing improves temperature
 control, repair quality and metal economy; building slightly improves safe beam layout; cooking improves the quality
-of food made; medicine improves diagnosis/dosing of a correctly matched remedy. None of these replace the underlying
+of food made; medicine improves diagnosis/dosing of a correctly matched remedy; butchery decides how much of an
+animal you actually recover. None of these replace the underlying
 material, heat, support, or treatment requirement.
 
 Craft a **Field Notes** book with a book and charcoal, then use it to review each field and its accumulated experience.
@@ -163,6 +164,87 @@ is a physical thing tied around a haft; it does not care how the haft was made. 
 in place. The grip assembly recipe copies the exact tool stack, so its existing durability, knapping, lashing and
 repair history are preserved rather than reset.
 
+## Soil, glass, and seeds
+
+Soil preparation is TerraVera's; seeds and crops are TerraFirmaCraft's.
+
+TerraVera used to ship its own seed line with genetic quality, generations, and a generic crop block to grow them
+in. That block rendered with vanilla wheat models regardless of what had been sown and overrode TFC's own planting,
+which is where the visual glitching came from. It is gone. What remains is the part TFC does not do:
+
+- **Prepared farmland** you clear, loosen, amend, and weed, which pays back as extra produce at harvest — more of
+  whatever crop you were actually growing, not a parallel seed currency.
+- **Greenhouses** in four tiers, which simulate an interior microclimate rather than applying a flat yield bonus.
+
+The seed-extraction recipes are still there; they now hand back **TFC seeds**, so threshing wheat gives you
+`tfc:seeds/wheat` and it plants, grows, and harvests exactly as TFC intends.
+
+Greenhouse trays are now real. Right-click the controller with seeds to sow a tray, and the tray tracks what was
+sown and how far along it is, growing against the greenhouse's actual simulated climate — a cold, unlit hoop house
+genuinely stalls. When a tray finishes, the **Collect** button in the control panel hands you the crop, and a
+well-run glasshouse yields up to three of it per tray. Trays empty when collected; the greenhouse is a workspace,
+not an automatic farm.
+
+
+## Butchering
+
+Killing an animal does not produce steaks. It produces a **carcass**, and a carcass is a job of work.
+
+The carcass is an item, not a block, so a deer shot on a mountainside can be carried home rather than butchered
+where it fell. Hold it in one hand and a blade in the other, and each right-click performs the next stage:
+
+| Stage | Products |
+| --- | --- |
+| Bleed | Blood — but only if the animal is still fresh |
+| Skin | Hide, or fleece from a wool-bearing animal |
+| Draw | Heart, liver, kidneys, stomach |
+| Break down | Shoulder, ribs, loin, leg, and trimmings |
+| Strip the frame | Bones, marrow bones, fat, suet, sinew, tendon |
+
+The order is fixed because it is fixed in reality. You cannot skin an animal you have already quartered, and if you
+break the primals before drawing the guts you have opened the stomach into the meat. You can stop after the primal
+cuts if all you want is dinner — at the cost of the fat, bone, and sinew everything else is made from.
+
+### Everything comes off an animal for a reason
+
+| Product | Feeds |
+| --- | --- |
+| **Fat**, suet | Rendered tallow → soap, candles, dubbin, cooking |
+| **Sinew**, tendon | Sinew cord — the strongest lashing in the mod — bowstrings, and sewing thread |
+| **Bone** | Bone meal, needles, awls, and marrow-bone broth |
+| **Blood** | Blood meal fertiliser, or black pudding if you have a stomach to boil it in |
+| **Organs** | Cooked offal, and boiled liver as a real nutritional medicine |
+| **Hide** | Handed straight to TFC's own soaking and tanning chain — TerraVera does not duplicate it |
+
+### Freshness
+
+A carcass passes through **fresh → cool → aging → spoiling → rotten**, and heat drives it. Spoilage roughly doubles
+for every 10 °C, so a TFC winter lets you hang a deer for days and a hot afternoon gives you until evening.
+
+The bands are not uniform. Blood and offal are the first things lost; muscle survives well past them, and hanging a
+carcass genuinely improves it before it turns. Hide, bone, and sinew outlast everything, which is why even a rotten
+animal is still worth the knife work. Prompt butchering is rewarded rather than merely required.
+
+### Skill, and the knife in your hand
+
+Two things decide how much of an animal you recover, and neither substitutes for the other.
+
+**Keenness** is what the blade is made of: a knapped flake tears where steel parts the seams, and TFC's metal tiers
+map straight onto it, so butchering improves as your metalworking does. **Edge** is the condition of that particular
+tool — a steel knife worn to its last few points is worse than a fresh copper one. A dull knife does not only waste
+meat, it takes noticeably longer, because you end up sawing.
+
+**Practice** is the other half. Beginners waste; experienced butchers recover more of everything. But a sharp knife
+in unpracticed hands and a stone flake in expert hands both land in the middle: neither buying your way past the
+skill nor grinding past the equipment fully works.
+
+Mistakes compound. A carcass that was badly skinned is a worse carcass to draw and to break down — the hide is
+nicked and the muscle torn — and careful later work only partly recovers it. That is the mechanical reason to slow
+down at the start.
+
+`enableButchery`, `enableCarcassFreshness`, and `carcassSpoilageMultiplier` control all of it.
+
+
 ## Configuration
 
 `config/terravera-server.toml`, all hot-reloadable:
@@ -173,6 +255,8 @@ repair history are preserved rather than reset.
 - `showKnappingFeedback` — set `false` to hide the "why isn't this working" hints.
 - `scaleFoodEatTimeBySize` — set `false` to go back to vanilla's flat 1.6 second eat time for every food.
 - `foodEatTimeMultiplier` — global multiplier on top of the size-derived eat time, for tuning pace without retuning every band.
+- `enableButchery` — set `false` to let animals drop their normal loot instead of a carcass.
+- `enableCarcassFreshness`, `carcassSpoilageMultiplier` — how long you have to process an animal before it turns.
 - `showFlavorTooltip` — set `false` to hide the "Flavor: ..." line on food tooltips.
 - `[building].enableStructuralIntegrity` — set `false` to disable load-path checks and structural failures.
 - `[disease]` — `enableDisease`, `diseaseChanceMultiplier`, `diseaseDurationMultiplier`, `enableContagion`,

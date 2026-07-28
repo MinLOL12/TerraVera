@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 
 import com.terravera.client.TerraVeraClient;
 import com.terravera.common.bark.BarkHarvesting;
+import com.terravera.common.butchery.ButcherySystem;
 import com.terravera.common.blocks.TerraVeraBlockEntities;
 import com.terravera.common.blocks.TerraVeraBlocks;
 import com.terravera.common.TerraVeraCreativeTab;
@@ -105,6 +106,10 @@ public final class TerraVera
         // Body temperature: climate, clothing, shelter, and the symptoms of struggling to regulate.
         // See com.terravera.common.temperature.
         TemperatureEventHandler.init();
+
+        // Butchering: carcasses, freshness, and the staged breakdown of an animal into parts.
+        // See com.terravera.common.butchery.
+        ButcherySystem.init();
 
         // Farming: soil preparation, crop diseases, seed quality, greenhouse management.
         // See com.terravera.common.farming.

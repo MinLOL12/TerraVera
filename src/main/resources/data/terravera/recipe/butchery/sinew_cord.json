@@ -1,0 +1,17 @@
+{
+  "__comment__": "Sinew is pounded out into fibres and twisted damp; it shrinks as it dries and grips harder than any plant cord.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:sinew"
+    },
+    {
+      "item": "terravera:sinew"
+    }
+  ],
+  "result": {
+    "id": "terravera:sinew_cord",
+    "count": 1
+  }
+}

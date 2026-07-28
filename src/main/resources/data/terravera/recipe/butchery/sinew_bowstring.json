@@ -1,0 +1,20 @@
+{
+  "__comment__": "A bowstring laid up from sinew cord and served at the loops.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:sinew_cord"
+    },
+    {
+      "item": "terravera:sinew_cord"
+    },
+    {
+      "item": "terravera:sinew_cord"
+    }
+  ],
+  "result": {
+    "id": "terravera:sinew_bowstring",
+    "count": 1
+  }
+}

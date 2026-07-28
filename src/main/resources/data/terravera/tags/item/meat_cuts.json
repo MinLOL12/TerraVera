@@ -1,0 +1,11 @@
+{
+  "__comment__": "Primal cuts, for recipes that want any of them rather than a specific one.",
+  "replace": false,
+  "values": [
+    "terravera:shoulder_cut",
+    "terravera:rib_cut",
+    "terravera:loin_cut",
+    "terravera:leg_cut",
+    "terravera:trim_meat"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "__comment__": "Recover TFC rice seed from threshed grain.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/rice_grain"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/rice",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC soybean seed from a harvested soybean.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/soybean"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/soybean",
+    "count": 2
+  }
+}

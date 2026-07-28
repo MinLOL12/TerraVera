@@ -4,6 +4,8 @@
     "terravera:compost",
     "terravera:aged_manure",
     "terravera:horticultural_sand",
-    "terravera:agricultural_lime"
-  ]
+    "terravera:agricultural_lime",
+    "terravera:blood_meal"
+  ],
+  "__comment__": "Things worth digging into a bed. Blood meal is the nitrogen source butchering feeds into the farming system."
 }
