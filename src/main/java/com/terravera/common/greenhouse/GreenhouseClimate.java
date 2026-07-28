@@ -59,19 +59,44 @@ public record GreenhouseClimate(
         Codec.BOOL.fieldOf("cooling_on").forGetter(GreenhouseClimate::coolingOn)
     ).apply(i, GreenhouseClimate::new));
 
-    public static final StreamCodec<ByteBuf, GreenhouseClimate> STREAM_CODEC = StreamCodec.composite(
-        ByteBufCodecs.VAR_INT, GreenhouseClimate::tier,
-        ByteBufCodecs.FLOAT, GreenhouseClimate::temperatureC,
-        ByteBufCodecs.FLOAT, GreenhouseClimate::humidity,
-        ByteBufCodecs.FLOAT, GreenhouseClimate::ventilationOpen,
-        ByteBufCodecs.BOOL, GreenhouseClimate::irrigationActive,
-        ByteBufCodecs.FLOAT, GreenhouseClimate::soilMoisture,
-        ByteBufCodecs.FLOAT, GreenhouseClimate::glassCoverage,
-        ByteBufCodecs.FLOAT, GreenhouseClimate::orientationBonus,
-        ByteBufCodecs.BOOL, GreenhouseClimate::heatingOn,
-        ByteBufCodecs.BOOL, GreenhouseClimate::coolingOn,
-        GreenhouseClimate::new
-    );
+    /**
+     * Written by hand because {@link StreamCodec#composite} only supports up to six components and this record
+     * has ten.
+     */
+    public static final StreamCodec<ByteBuf, GreenhouseClimate> STREAM_CODEC = new StreamCodec<>()
+    {
+        @Override
+        public GreenhouseClimate decode(ByteBuf buf)
+        {
+            return new GreenhouseClimate(
+                ByteBufCodecs.VAR_INT.decode(buf),
+                ByteBufCodecs.FLOAT.decode(buf),
+                ByteBufCodecs.FLOAT.decode(buf),
+                ByteBufCodecs.FLOAT.decode(buf),
+                ByteBufCodecs.BOOL.decode(buf),
+                ByteBufCodecs.FLOAT.decode(buf),
+                ByteBufCodecs.FLOAT.decode(buf),
+                ByteBufCodecs.FLOAT.decode(buf),
+                ByteBufCodecs.BOOL.decode(buf),
+                ByteBufCodecs.BOOL.decode(buf)
+            );
+        }
+
+        @Override
+        public void encode(ByteBuf buf, GreenhouseClimate value)
+        {
+            ByteBufCodecs.VAR_INT.encode(buf, value.tier());
+            ByteBufCodecs.FLOAT.encode(buf, value.temperatureC());
+            ByteBufCodecs.FLOAT.encode(buf, value.humidity());
+            ByteBufCodecs.FLOAT.encode(buf, value.ventilationOpen());
+            ByteBufCodecs.BOOL.encode(buf, value.irrigationActive());
+            ByteBufCodecs.FLOAT.encode(buf, value.soilMoisture());
+            ByteBufCodecs.FLOAT.encode(buf, value.glassCoverage());
+            ByteBufCodecs.FLOAT.encode(buf, value.orientationBonus());
+            ByteBufCodecs.BOOL.encode(buf, value.heatingOn());
+            ByteBufCodecs.BOOL.encode(buf, value.coolingOn());
+        }
+    };
 
     /**
      * Tick the greenhouse climate forward one step. Called from the block entity's server tick.
@@ -92,12 +117,12 @@ public record GreenhouseClimate(
         float baseTemp = t.effectiveTemperature(outsideTemp, sunlightExposure + orientationBonus, daytime);
 
         // Heating adds temperature (modern greenhouse only)
-        if (heatingOn && t.supportsAutomation) {
+        if (heatingOn && t.supportsAutomation()) {
             baseTemp += 5.0f;
         }
 
         // Cooling removes temperature (modern greenhouse only)
-        if (coolingOn && t.supportsAutomation) {
+        if (coolingOn && t.supportsAutomation()) {
             baseTemp = Math.max(outsideTemp, baseTemp - 8.0f);
         }
 

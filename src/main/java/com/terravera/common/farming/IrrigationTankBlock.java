@@ -5,6 +5,8 @@
 
 package com.terravera.common.farming;
 
+import com.mojang.serialization.MapCodec;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -23,9 +25,17 @@ import com.terravera.common.blocks.TerraVeraBlockEntities;
  */
 public class IrrigationTankBlock extends BaseEntityBlock
 {
+    public static final MapCodec<IrrigationTankBlock> CODEC = simpleCodec(IrrigationTankBlock::new);
+
     public IrrigationTankBlock(Properties properties)
     {
         super(properties.strength(2.0f, 4.0f).noOcclusion());
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec()
+    {
+        return CODEC;
     }
 
     @Override
