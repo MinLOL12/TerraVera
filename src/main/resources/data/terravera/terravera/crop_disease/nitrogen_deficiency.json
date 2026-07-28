@@ -1,0 +1,14 @@
+{
+  "__comment__": "Nitrogen deficiency: yellowing lower leaves, slow growth. Fixed by adding compost or manure.",
+  "id": "nitrogen_deficiency",
+  "type": "nutrient",
+  "severity_scale": 0.5,
+  "humidity_threshold": 0.0,
+  "temperature_min_c": 0.0,
+  "temperature_max_c": 50.0,
+  "spread_rate": 0.01,
+  "symptoms": ["yellowing_lower_leaves", "slow_growth", "small_fruit"],
+  "yield_penalty": 0.35,
+  "treatments": ["compost", "aged_manure", "compost_tea"],
+  "prevention": ["regular_amendment", "crop_rotation_with_legumes", "cover_crops"]
+}

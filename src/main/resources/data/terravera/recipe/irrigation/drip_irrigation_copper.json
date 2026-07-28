@@ -1,0 +1,13 @@
+{
+  "__comment__": "Copper drip irrigation: more durable than clay, and can be pressurized from above.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "C C",
+    "C C"
+  ],
+  "key": {
+    "C": { "tag": "c:ingots/copper" }
+  },
+  "result": { "id": "terravera:drip_irrigation", "count": 6 }
+}

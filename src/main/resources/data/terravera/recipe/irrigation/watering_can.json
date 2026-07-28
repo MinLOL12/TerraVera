@@ -1,0 +1,15 @@
+{
+  "__comment__": "Watering can: a simple hand irrigation tool. Made from a clay vessel with a spout.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    "BVB",
+    "BBB"
+  ],
+  "key": {
+    "S": { "tag": "c:rods/wooden" },
+    "B": { "item": "minecraft:brick" },
+    "V": { "item": "minecraft:bowl" }
+  },
+  "result": { "id": "terravera:watering_can", "count": 1 }
+}

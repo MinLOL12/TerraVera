@@ -1,0 +1,17 @@
+{
+  "__comment__": "Modern greenhouse: powered ventilation, heating, irrigation, and climate control. The pinnacle of growing infrastructure.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GTG",
+    "FHF",
+    "GRG"
+  ],
+  "key": {
+    "G": { "item": "terravera:greenhouse_glass" },
+    "F": { "item": "terravera:greenhouse_frame" },
+    "T": { "item": "terravera:thermostat" },
+    "H": { "item": "terravera:glass_greenhouse" },
+    "R": { "item": "terravera:programmed_circuit" }
+  },
+  "result": { "id": "terravera:modern_greenhouse", "count": 1 }
+}

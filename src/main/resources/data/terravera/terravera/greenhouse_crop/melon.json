@@ -1,0 +1,13 @@
+{
+  "__comment__": "Melon: heat-loving crop with high greenhouse benefit. Produces larger, sweeter fruit under glass.",
+  "crop": "melon",
+  "greenhouse_bonus": 1.6,
+  "min_temp_c": 20.0,
+  "optimal_temp_c": 28.0,
+  "max_temp_c": 38.0,
+  "humidity_sensitive": false,
+  "natural_seasons": ["summer"],
+  "greenhouse_seasons": ["spring", "summer", "autumn"],
+  "value_tier": "high",
+  "notes": "Needs lots of space and warmth. Best in modern greenhouse with heating in cold biomes."
+}

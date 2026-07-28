@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "tier=1,vent_open=false,powered=false": { "model": "terravera:block/hoop_house" },
+    "tier=1,vent_open=true,powered=false": { "model": "terravera:block/hoop_house" },
+    "tier=1,vent_open=false,powered=true": { "model": "terravera:block/hoop_house" },
+    "tier=1,vent_open=true,powered=true": { "model": "terravera:block/hoop_house" }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "__comment__": "Companion planting chart: a written guide to which crops benefit each other when planted nearby. Reduces pest pressure naturally.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:paper" },
+    { "item": "minecraft:feather" },
+    { "item": "minecraft:ink_sac" },
+    { "item": "terravera:field_notes" }
+  ],
+  "result": { "id": "terravera:companion_chart", "count": 1 }
+}

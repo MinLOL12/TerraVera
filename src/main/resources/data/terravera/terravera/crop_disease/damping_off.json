@@ -1,0 +1,14 @@
+{
+  "__comment__": "Damping off: a fungal disease that kills seedlings at the soil line. Caused by poor sanitation and overwatering in seed trays.",
+  "id": "damping_off",
+  "type": "fungal",
+  "severity_scale": 0.9,
+  "humidity_threshold": 0.75,
+  "temperature_min_c": 10.0,
+  "temperature_max_c": 25.0,
+  "spread_rate": 0.05,
+  "symptoms": ["seedling_collapse", "stem_pinch", "rotten_base"],
+  "yield_penalty": 1.0,
+  "treatments": ["copper_seed_tray", "reduce_watering", "improve_ventilation"],
+  "prevention": ["sterile_seed_tray", "good_airflow", "avoid_overwatering", "clean_tools"]
+}

@@ -1,0 +1,14 @@
+{
+  "__comment__": "Root rot: caused by overwatering in poorly drained soil. Sand amendment and careful irrigation prevent it.",
+  "id": "root_rot",
+  "type": "fungal",
+  "severity_scale": 0.8,
+  "humidity_threshold": 0.8,
+  "temperature_min_c": 8.0,
+  "temperature_max_c": 28.0,
+  "spread_rate": 0.02,
+  "symptoms": ["wilting", "yellowing", "stunted_roots"],
+  "yield_penalty": 0.6,
+  "treatments": ["reduce_watering", "horticultural_sand", "agricultural_lime"],
+  "prevention": ["good_drainage", "avoid_overwatering", "crop_rotation"]
+}

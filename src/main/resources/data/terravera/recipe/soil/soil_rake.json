@@ -1,0 +1,16 @@
+{
+  "__comment__": "Soil rake: stone-tined rake for clearing stones and debris from prepared beds.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "CHC",
+    " W "
+  ],
+  "key": {
+    "S": { "tag": "c:cobblestones" },
+    "C": { "item": "terravera:cordage" },
+    "H": { "item": "terravera:heavy_cordage" },
+    "W": { "tag": "c:rods/wooden" }
+  },
+  "result": { "id": "terravera:soil_rake", "count": 1 }
+}

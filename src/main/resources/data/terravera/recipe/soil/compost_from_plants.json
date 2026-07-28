@@ -1,0 +1,12 @@
+{
+  "__comment__": "Compost from plant waste: decomposed vegetation mixed with soil and water.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "terravera:plant_fiber" },
+    { "item": "terravera:plant_fiber" },
+    { "item": "terravera:plant_fiber" },
+    { "item": "terravera:plant_fiber" },
+    { "item": "minecraft:dirt" }
+  ],
+  "result": { "id": "terravera:compost", "count": 1 }
+}

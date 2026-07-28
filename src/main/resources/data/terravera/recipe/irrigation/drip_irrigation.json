@@ -1,0 +1,14 @@
+{
+  "__comment__": "Drip irrigation pipe: clay tubes that distribute water from a tank to nearby beds.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "W W",
+    "CCC"
+  ],
+  "key": {
+    "C": { "item": "minecraft:clay_ball" },
+    "W": { "item": "minecraft:bowl" }
+  },
+  "result": { "id": "terravera:drip_irrigation", "count": 4 }
+}

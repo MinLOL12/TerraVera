@@ -1,0 +1,15 @@
+{
+  "__comment__": "Digging stick from bone: a sharper, more durable tip made from a large bone.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    " C ",
+    " W "
+  ],
+  "key": {
+    "B": { "item": "minecraft:bone" },
+    "C": { "item": "terravera:primitive_cordage" },
+    "W": { "tag": "c:rods/wooden" }
+  },
+  "result": { "id": "terravera:digging_stick", "count": 1 }
+}

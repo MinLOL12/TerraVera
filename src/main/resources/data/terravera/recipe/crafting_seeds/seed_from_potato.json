@@ -1,0 +1,8 @@
+{
+  "__comment__": "Extract seed from TFC potato (seed potato for replanting).",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tfc:food/potato" }
+  ],
+  "result": { "id": "terravera:seed", "count": 2 }
+}

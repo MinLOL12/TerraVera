@@ -1,0 +1,9 @@
+{
+  "__comment__": "Agricultural lime: crushed limestone for adjusting soil pH. Made by crushing sedimentary rock.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "tag": "tfc:rock/raw/sedimentary" },
+    { "tag": "tfc:rock/raw/sedimentary" }
+  ],
+  "result": { "id": "terravera:agricultural_lime", "count": 4 }
+}

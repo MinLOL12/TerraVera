@@ -20,6 +20,10 @@ import com.terravera.common.power.WindTurbineBlock;
 import com.terravera.common.power.WireIntersectionBlock;
 import com.terravera.common.water.CollectorType;
 import com.terravera.common.water.WaterCollectorBlock;
+import com.terravera.common.farming.DripIrrigationBlock;
+import com.terravera.common.farming.PreparedFarmlandBlock;
+import com.terravera.common.greenhouse.GreenhouseBlock;
+import com.terravera.common.greenhouse.GreenhouseTier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -129,6 +133,68 @@ public final class TerraVeraBlocks
         () -> new DryingRackBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.WOOD)
             .strength(1.2f, 1.5f)
+            .sound(SoundType.WOOD)
+            .noOcclusion()));
+
+    // ----- Greenhouse structures ----------------------------------------------------------------------------
+
+    /** A small glazed box that protects seedlings from frost. The simplest greenhouse: minimal climate buffer. */
+    public static final DeferredHolder<Block, GreenhouseBlock> COLD_FRAME = BLOCKS.register("cold_frame",
+        () -> new GreenhouseBlock(GreenhouseTier.COLD_FRAME, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_BLUE)
+            .strength(1.0f, 2.0f)
+            .sound(SoundType.GLASS)
+            .noOcclusion()));
+
+    /** Wood-and-fabric hoop covering. Extends the growing season modestly without glass. */
+    public static final DeferredHolder<Block, GreenhouseBlock> HOOP_HOUSE = BLOCKS.register("hoop_house",
+        () -> new GreenhouseBlock(GreenhouseTier.HOOP_HOUSE, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.TERRACOTTA_BROWN)
+            .strength(1.5f, 3.0f)
+            .sound(SoundType.WOOL)
+            .noOcclusion()));
+
+    /** A proper glass greenhouse with ventilation. Good solar capture and temperature control. */
+    public static final DeferredHolder<Block, GreenhouseBlock> GLASS_GREENHOUSE = BLOCKS.register("glass_greenhouse",
+        () -> new GreenhouseBlock(GreenhouseTier.GLASS_GREENHOUSE, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_BLUE)
+            .strength(2.5f, 5.0f)
+            .sound(SoundType.GLASS)
+            .noOcclusion()));
+
+    /** The pinnacle: powered ventilation, heating, irrigation, and automated climate control. */
+    public static final DeferredHolder<Block, GreenhouseBlock> MODERN_GREENHOUSE = BLOCKS.register("modern_greenhouse",
+        () -> new GreenhouseBlock(GreenhouseTier.MODERN_GREENHOUSE, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(4.0f, 8.0f)
+            .sound(SoundType.METAL)
+            .noOcclusion()));
+
+    // ----- Soil preparation and farming ----------------------------------------------------------------------
+
+    /** Farmland that has been cleared of stones, loosened, and optionally amended. Quality varies by preparation. */
+    public static final DeferredHolder<Block, PreparedFarmlandBlock> PREPARED_FARMLAND = BLOCKS.register("prepared_farmland",
+        () -> new PreparedFarmlandBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.DIRT)
+            .strength(0.6f)
+            .sound(SoundType.GRAVEL)));
+
+    // ----- Irrigation ---------------------------------------------------------------------------------------
+
+    /** Drip irrigation pipe that distributes water from storage tanks to nearby prepared farmland. */
+    public static final DeferredHolder<Block, DripIrrigationBlock> DRIP_IRRIGATION = BLOCKS.register("drip_irrigation",
+        () -> new DripIrrigationBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_GRAY)
+            .strength(0.8f)
+            .sound(SoundType.STONE)
+            .noOcclusion()));
+
+    /** Rainwater storage tank. Collects rainwater and feeds drip irrigation. Has a block entity for tick-based water collection. */
+    public static final DeferredHolder<Block, com.terravera.common.farming.IrrigationTankBlock> IRRIGATION_TANK = BLOCKS.register("irrigation_tank",
+        () -> new com.terravera.common.farming.IrrigationTankBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD)
+            .strength(2.0f, 4.0f)
             .sound(SoundType.WOOD)
             .noOcclusion()));
 

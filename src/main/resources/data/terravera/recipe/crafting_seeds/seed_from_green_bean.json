@@ -1,0 +1,8 @@
+{
+  "__comment__": "Extract seed from TFC green bean.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tfc:food/green_bean" }
+  ],
+  "result": { "id": "terravera:seed", "count": 3 }
+}

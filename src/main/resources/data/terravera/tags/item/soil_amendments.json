@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "terravera:compost",
+    "terravera:aged_manure",
+    "terravera:horticultural_sand",
+    "terravera:agricultural_lime"
+  ]
+}

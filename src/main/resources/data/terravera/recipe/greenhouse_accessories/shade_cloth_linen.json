@@ -1,0 +1,14 @@
+{
+  "__comment__": "Shade cloth from linen: a finer, more durable shade cloth made from linen.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "LHL",
+    "LLL"
+  ],
+  "key": {
+    "L": { "item": "terravera:linen_cloth" },
+    "H": { "item": "terravera:heavy_cordage" }
+  },
+  "result": { "id": "terravera:shade_cloth", "count": 2 }
+}

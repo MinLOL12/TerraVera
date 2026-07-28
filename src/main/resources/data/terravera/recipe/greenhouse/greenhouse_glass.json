@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SGS",
+    "GGG",
+    "SGS"
+  ],
+  "key": {
+    "S": { "tag": "c:ingots/wrought_iron" },
+    "G": { "tag": "c:glass_panes" }
+  },
+  "result": { "id": "terravera:greenhouse_glass", "count": 4 }
+}

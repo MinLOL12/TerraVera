@@ -1,0 +1,11 @@
+{
+  "__comment__": "Bordeaux mixture from treated water: uses clean treated water instead of a bucket.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "tag": "c:ingots/copper" },
+    { "item": "terravera:agricultural_lime" },
+    { "item": "terravera:agricultural_lime" },
+    { "item": "minecraft:bowl" }
+  ],
+  "result": { "id": "terravera:bordeaux_mixture", "count": 1 }
+}

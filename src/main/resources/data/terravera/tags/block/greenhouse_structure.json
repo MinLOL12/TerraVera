@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "terravera:cold_frame",
+    "terravera:hoop_house",
+    "terravera:glass_greenhouse",
+    "terravera:modern_greenhouse"
+  ]
+}

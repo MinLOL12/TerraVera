@@ -1,0 +1,13 @@
+{
+  "__comment__": "Pot recipe: Bordeaux mixture prepared by boiling copper sulfate with lime in a pot. Yields a more concentrated fungicide.",
+  "type": "terravera:pot",
+  "ingredients": [
+    { "tag": "c:ingots/copper" },
+    { "item": "terravera:agricultural_lime" },
+    { "item": "terravera:agricultural_lime" },
+    { "item": "minecraft:water_bucket" }
+  ],
+  "result": { "id": "terravera:bordeaux_mixture", "count": 4 },
+  "duration": 400,
+  "temperature": 400
+}

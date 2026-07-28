@@ -1,0 +1,10 @@
+{
+  "__comment__": "Bordeaux mixture: copper sulfate and lime. The classic organic fungicide. Applied to crops to prevent fungal diseases.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "tag": "c:ingots/copper" },
+    { "item": "terravera:agricultural_lime" },
+    { "item": "minecraft:water_bucket" }
+  ],
+  "result": { "id": "terravera:bordeaux_mixture", "count": 2 }
+}

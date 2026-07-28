@@ -1,0 +1,16 @@
+{
+  "__comment__": "Irrigation controller: automated water distribution for modern greenhouses.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CPC",
+    "WTW",
+    "CPC"
+  ],
+  "key": {
+    "C": { "tag": "c:ingots/copper" },
+    "P": { "item": "terravera:programmed_circuit" },
+    "W": { "item": "minecraft:bowl" },
+    "T": { "item": "terravera:thermostat" }
+  },
+  "result": { "id": "terravera:irrigation_controller", "count": 1 }
+}

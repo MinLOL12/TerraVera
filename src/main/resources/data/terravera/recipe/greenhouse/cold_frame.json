@@ -1,0 +1,15 @@
+{
+  "__comment__": "Cold frame: a small glazed box. Wood frame with a glass lid. The simplest greenhouse.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "WLW",
+    "WWW"
+  ],
+  "key": {
+    "G": { "tag": "c:glass_panes" },
+    "W": { "tag": "minecraft:planks" },
+    "L": { "item": "minecraft:leather" }
+  },
+  "result": { "id": "terravera:cold_frame", "count": 1 }
+}

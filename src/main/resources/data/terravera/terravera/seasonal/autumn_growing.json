@@ -1,0 +1,7 @@
+{
+  "__comment__": "Autumn growing: harvest season. Greenhouses extend warm-season crops into autumn.",
+  "season": "autumn",
+  "outdoor_growable": ["wheat", "rye", "cabbage", "lettuce", "spinach", "onion", "carrot", "beet", "turnip", "potato"],
+  "greenhouse_extended": ["tomato", "pepper", "cucumber", "strawberry"],
+  "notes": "Glass greenhouses and modern greenhouses keep warm-season crops producing through early autumn. Cold frames handle cool-season crops."
+}

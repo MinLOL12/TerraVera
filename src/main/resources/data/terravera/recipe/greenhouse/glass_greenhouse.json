@@ -1,0 +1,16 @@
+{
+  "__comment__": "Glass greenhouse: proper structure with glass walls, ventilation, and good solar capture.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "FHF",
+    "GBG"
+  ],
+  "key": {
+    "G": { "item": "terravera:greenhouse_glass" },
+    "F": { "item": "terravera:greenhouse_frame" },
+    "H": { "item": "terravera:heavy_cordage" },
+    "B": { "item": "terravera:rubble_foundation" }
+  },
+  "result": { "id": "terravera:glass_greenhouse", "count": 1 }
+}

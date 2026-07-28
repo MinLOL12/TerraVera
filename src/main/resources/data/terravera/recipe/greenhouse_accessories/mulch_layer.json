@@ -1,0 +1,9 @@
+{
+  "__comment__": "Mulch layer: straw or bark spread over soil to reduce evaporation, suppress weeds, and regulate soil temperature.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "terravera:straw_mat" },
+    { "item": "terravera:straw_mat" }
+  ],
+  "result": { "id": "terravera:mulch_layer", "count": 4 }
+}

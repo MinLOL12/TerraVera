@@ -1,0 +1,10 @@
+{
+  "__comment__": "Winter growing guide: crops that can produce food in winter inside a greenhouse, making the infrastructure an investment in food security.",
+  "season": "winter",
+  "outdoor_growable": [],
+  "cold_frame_growable": ["spinach", "lettuce"],
+  "hoop_house_growable": ["spinach", "lettuce", "cabbage", "turnip"],
+  "glass_greenhouse_growable": ["spinach", "lettuce", "cabbage", "turnip", "carrot", "onion", "strawberry"],
+  "modern_greenhouse_growable": ["spinach", "lettuce", "cabbage", "turnip", "carrot", "onion", "strawberry", "tomato", "pepper", "cucumber"],
+  "notes": "A modern greenhouse with heating can grow anything year-round. Without heating, expect reduced yields and only cold-tolerant crops."
+}

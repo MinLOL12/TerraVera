@@ -1,0 +1,13 @@
+{
+  "__comment__": "Stone irrigation tank: a more permanent cistern carved from stone. Holds water without rotting.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "S S",
+    "SSS"
+  ],
+  "key": {
+    "S": { "tag": "c:cobblestones" }
+  },
+  "result": { "id": "terravera:irrigation_tank", "count": 1 }
+}

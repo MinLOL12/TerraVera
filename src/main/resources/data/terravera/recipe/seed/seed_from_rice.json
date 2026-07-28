@@ -1,0 +1,8 @@
+{
+  "__comment__": "Extract seed from rice grain.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tfc:food/rice" }
+  ],
+  "result": { "id": "terravera:seed", "count": 3 }
+}

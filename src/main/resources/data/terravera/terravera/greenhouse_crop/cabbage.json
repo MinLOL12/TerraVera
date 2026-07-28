@@ -1,0 +1,13 @@
+{
+  "__comment__": "Cabbage: cool-season crop that grows year-round in a modern greenhouse.",
+  "crop": "cabbage",
+  "greenhouse_bonus": 1.2,
+  "min_temp_c": 7.0,
+  "optimal_temp_c": 18.0,
+  "max_temp_c": 25.0,
+  "humidity_sensitive": false,
+  "natural_seasons": ["spring", "autumn"],
+  "greenhouse_seasons": ["spring", "summer", "autumn", "winter"],
+  "value_tier": "moderate",
+  "notes": "Good cold tolerance. Grows in hoop house through winter."
+}

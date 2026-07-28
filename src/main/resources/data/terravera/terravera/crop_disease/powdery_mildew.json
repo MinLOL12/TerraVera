@@ -1,0 +1,14 @@
+{
+  "__comment__": "Powdery mildew: white fungal coating on leaves. Thrives in warm, humid, poorly ventilated greenhouses.",
+  "id": "powdery_mildew",
+  "type": "fungal",
+  "severity_scale": 0.6,
+  "humidity_threshold": 0.6,
+  "temperature_min_c": 15.0,
+  "temperature_max_c": 30.0,
+  "spread_rate": 0.035,
+  "symptoms": ["white_powder_on_leaves", "leaf_curl", "reduced_photosynthesis"],
+  "yield_penalty": 0.3,
+  "treatments": ["bordeaux_mixture", "improve_ventilation", "milk_spray"],
+  "prevention": ["good_airflow", "low_humidity", "resistant_varieties", "crop_rotation"]
+}

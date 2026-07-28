@@ -1,0 +1,8 @@
+{
+  "__comment__": "Extract seed from TFC carrot.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tfc:food/carrot" }
+  ],
+  "result": { "id": "terravera:seed", "count": 3 }
+}

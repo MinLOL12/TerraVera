@@ -1,0 +1,15 @@
+{
+  "__comment__": "Copper watering can: more durable than clay, and the copper inhibits algae growth inside.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    "CVC",
+    "CCC"
+  ],
+  "key": {
+    "S": { "tag": "c:rods/wooden" },
+    "C": { "tag": "c:ingots/copper" },
+    "V": { "item": "minecraft:bowl" }
+  },
+  "result": { "id": "terravera:watering_can", "count": 1 }
+}

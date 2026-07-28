@@ -1,0 +1,14 @@
+{
+  "__comment__": "Greenhouse frame: iron framework for a proper glass greenhouse. Requires smithing.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "ISI",
+    "III"
+  ],
+  "key": {
+    "I": { "tag": "c:ingots/wrought_iron" },
+    "S": { "item": "terravera:wooden_support_beam" }
+  },
+  "result": { "id": "terravera:greenhouse_frame", "count": 2 }
+}

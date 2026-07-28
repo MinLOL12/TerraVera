@@ -1,0 +1,14 @@
+{
+  "__comment__": "Thermal mass barrel: a water-filled barrel that absorbs heat during the day and releases it at night, stabilizing greenhouse temperature.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "W W",
+    "III"
+  ],
+  "key": {
+    "I": { "tag": "c:ingots/wrought_iron" },
+    "W": { "tag": "minecraft:planks" }
+  },
+  "result": { "id": "terravera:thermal_mass_barrel", "count": 1 }
+}

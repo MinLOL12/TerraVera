@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    { "apply": { "model": "terravera:block/drip_irrigation_center" }},
+    { "when": { "north": "true" }, "apply": { "model": "terravera:block/drip_irrigation_side", "y": 0 }},
+    { "when": { "south": "true" }, "apply": { "model": "terravera:block/drip_irrigation_side", "y": 180 }},
+    { "when": { "east": "true" }, "apply": { "model": "terravera:block/drip_irrigation_side", "y": 90 }},
+    { "when": { "west": "true" }, "apply": { "model": "terravera:block/drip_irrigation_side", "y": 270 }}
+  ]
+}

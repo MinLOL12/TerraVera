@@ -1,0 +1,11 @@
+{
+  "__comment__": "Aged manure: composted animal dung. Much richer than plant compost but harder to obtain.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:rotten_flesh" },
+    { "item": "minecraft:rotten_flesh" },
+    { "item": "terravera:compost" },
+    { "item": "terravera:compost" }
+  ],
+  "result": { "id": "terravera:aged_manure", "count": 1 }
+}

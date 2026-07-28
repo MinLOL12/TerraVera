@@ -1,0 +1,15 @@
+{
+  "__comment__": "Thermostat: a bi-metallic temperature controller for automated greenhouse ventilation. Modern greenhouse only.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "CRC",
+    "W W"
+  ],
+  "key": {
+    "C": { "tag": "c:ingots/copper" },
+    "R": { "item": "terravera:programmed_circuit" },
+    "W": { "item": "terravera:single_wire" }
+  },
+  "result": { "id": "terravera:thermostat", "count": 1 }
+}

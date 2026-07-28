@@ -1,0 +1,14 @@
+{
+  "__comment__": "Aphid infestation: soft-bodied insects that suck sap from leaves. Neem oil and companion planting control them.",
+  "id": "aphid_infestation",
+  "type": "pest",
+  "severity_scale": 0.7,
+  "humidity_threshold": 0.5,
+  "temperature_min_c": 15.0,
+  "temperature_max_c": 32.0,
+  "spread_rate": 0.04,
+  "symptoms": ["curled_leaves", "sticky_residue", "stunted_growth"],
+  "yield_penalty": 0.4,
+  "treatments": ["neem_oil", "companion_planting", "beneficial_insects"],
+  "prevention": ["companion_planting", "crop_rotation", "healthy_soil"]
+}

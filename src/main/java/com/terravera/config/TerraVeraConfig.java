@@ -75,6 +75,25 @@ public final class TerraVeraConfig
         public final Supplier<Double> waterContaminationMultiplier;
         /** Whether the player is warned before drinking from visibly risky water. */
         public final Supplier<Boolean> warnBeforeDrinkingUnsafeWater;
+
+        // ----- Farming, soil, seeds, greenhouses, and crop disease ----------------------------------------
+
+        /** Master switch for the farming overhaul: soil preparation, seed quality, crop disease, greenhouses. */
+        public final Supplier<Boolean> enableFarming;
+        /** Whether natural material quality affects crafting results. */
+        public final Supplier<Boolean> enableMaterialQuality;
+        /** Whether saved seeds carry genetic quality that improves with selection. */
+        public final Supplier<Boolean> enableSeedQuality;
+        /** Whether crops can develop fungal infections, pest problems, and nutrient deficiencies. */
+        public final Supplier<Boolean> enableCropDisease;
+        /** Global multiplier on crop disease pressure. Lower means diseases develop more slowly. */
+        public final Supplier<Double> cropDiseaseMultiplier;
+        /** Whether greenhouses simulate interior temperature and humidity. */
+        public final Supplier<Boolean> enableGreenhouseClimate;
+        /** Whether modern greenhouses can automatically regulate ventilation and climate. */
+        public final Supplier<Boolean> enableGreenhouseAutomation;
+        /** Multiplier on how quickly soil quality decays. Lower means prepared soil lasts longer. */
+        public final Supplier<Double> soilDecayMultiplier;
         /** Whether the hygiene system is active. */
         public final Supplier<Boolean> enableHygiene;
         /** Multiplier on how fast hygiene decays from work and filth. */
@@ -230,6 +249,33 @@ public final class TerraVeraConfig
             hygieneDecayMultiplier = builder
                 .comment("Multiplier on how fast hygiene is lost. Lower means you stay clean longer.")
                 .defineInRange("hygieneDecayMultiplier", 1.0, 0.0, 5.0);
+            builder.pop();
+
+            builder.push("farming");
+            enableFarming = builder
+                .comment("Master switch for the farming system: soil preparation, seed quality, crop disease, and greenhouse climate. If false, all farming runs on vanilla rules.")
+                .define("enableFarming", true);
+            enableMaterialQuality = builder
+                .comment("If true, natural materials vary in quality. Straight sticks make better shafts, long fibres make stronger cordage, dry wood burns better than wet wood.")
+                .define("enableMaterialQuality", true);
+            enableSeedQuality = builder
+                .comment("If true, seeds carry genetic quality. Larger, healthier seeds produce stronger plants. Saving the best seeds each harvest gradually improves crops over generations.")
+                .define("enableSeedQuality", true);
+            enableCropDisease = builder
+                .comment("If true, unhealthy fields develop fungal infections, insect problems, or nutrient deficiencies. Good sanitation, crop rotation, and healthy soil reduce risk.")
+                .define("enableCropDisease", true);
+            cropDiseaseMultiplier = builder
+                .comment("Global multiplier on crop disease pressure. 0.5 halves how fast diseases develop; 2.0 doubles it.")
+                .defineInRange("cropDiseaseMultiplier", 1.0, 0.0, 5.0);
+            enableGreenhouseClimate = builder
+                .comment("If true, greenhouses simulate interior temperature and humidity. Temperature depends on glass coverage, orientation, ventilation, insulation, and sunlight.")
+                .define("enableGreenhouseClimate", true);
+            enableGreenhouseAutomation = builder
+                .comment("If true, modern greenhouses can automatically regulate ventilation and climate when powered.")
+                .define("enableGreenhouseAutomation", true);
+            soilDecayMultiplier = builder
+                .comment("Multiplier on how quickly prepared soil quality decays. Lower means cleared, loosened, and fertile soil lasts longer.")
+                .defineInRange("soilDecayMultiplier", 1.0, 0.0, 5.0);
             builder.pop();
         }
 

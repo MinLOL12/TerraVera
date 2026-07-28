@@ -1,0 +1,62 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.greenhouse.vent_open": {
+      "loop": true,
+      "animation_length": 2.0,
+      "bones": {
+        "vent_left": {
+          "rotation": {
+            "0.0": { "vector": [0, 0, 0] },
+            "1.0": { "vector": [-45, 0, 0], "easing": "easeInOutQuad" },
+            "2.0": { "vector": [-45, 0, 0], "easing": "easeInOutQuad" }
+          }
+        },
+        "vent_right": {
+          "rotation": {
+            "0.0": { "vector": [0, 0, 0] },
+            "1.0": { "vector": [-45, 0, 0], "easing": "easeInOutQuad" },
+            "2.0": { "vector": [-45, 0, 0], "easing": "easeInOutQuad" }
+          }
+        }
+      }
+    },
+    "animation.greenhouse.vent_closed": {
+      "loop": false,
+      "animation_length": 0.5,
+      "bones": {
+        "vent_left": {
+          "rotation": {
+            "0.0": { "vector": [-45, 0, 0] },
+            "0.5": { "vector": [0, 0, 0], "easing": "easeInOutQuad" }
+          }
+        },
+        "vent_right": {
+          "rotation": {
+            "0.0": { "vector": [-45, 0, 0] },
+            "0.5": { "vector": [0, 0, 0], "easing": "easeInOutQuad" }
+          }
+        }
+      }
+    },
+    "animation.greenhouse.modern_idle": {
+      "loop": true,
+      "animation_length": 3.0,
+      "bones": {
+        "fan": {
+          "rotation": {
+            "0.0": { "vector": [0, 0, 0] },
+            "3.0": { "vector": [0, 360, 0], "easing": "linear" }
+          }
+        },
+        "panel_light": {
+          "scale": {
+            "0.0": { "vector": [1, 1, 1] },
+            "1.5": { "vector": [1.05, 1.05, 1.05], "easing": "easeInOutSine" },
+            "3.0": { "vector": [1, 1, 1], "easing": "easeInOutSine" }
+          }
+        }
+      }
+    }
+  }
+}
