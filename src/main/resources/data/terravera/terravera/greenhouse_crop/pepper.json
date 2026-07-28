@@ -1,0 +1,13 @@
+{
+  "__comment__": "Peppers (bell peppers, chilies) are extremely temperature-sensitive and thrive in greenhouses.",
+  "crop": "pepper",
+  "greenhouse_bonus": 1.6,
+  "min_temp_c": 18.0,
+  "optimal_temp_c": 26.0,
+  "max_temp_c": 38.0,
+  "humidity_sensitive": false,
+  "natural_seasons": ["summer"],
+  "greenhouse_seasons": ["spring", "summer", "autumn"],
+  "value_tier": "high",
+  "notes": "Very temperature sensitive. Excellent candidate for heated greenhouse in cold biomes."
+}

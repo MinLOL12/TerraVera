@@ -1,0 +1,7 @@
+{
+  "__comment__": "Summer growing: most crops thrive, but greenhouses can overheat and need ventilation.",
+  "season": "summer",
+  "outdoor_growable": ["wheat", "barley", "oat", "rye", "maize", "rice", "tomato", "pepper", "cucumber", "strawberry", "melon", "pumpkin", "potato", "soybean", "cabbage", "onion", "carrot", "beet", "turnip"],
+  "greenhouse_warning": "Ventilate aggressively in summer. Glass greenhouses can exceed 45°C without open vents. Modern greenhouses need active cooling.",
+  "notes": "Summer is when open-field growing peaks. Greenhouses are mainly for heat-sensitive crops (lettuce, spinach) that prefer cooler conditions."
+}

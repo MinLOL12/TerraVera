@@ -1,0 +1,13 @@
+{
+  "__comment__": "Wheat: a staple grain. Minimal greenhouse benefit. Grows well in open fields.",
+  "crop": "wheat",
+  "greenhouse_bonus": 1.05,
+  "min_temp_c": 5.0,
+  "optimal_temp_c": 20.0,
+  "max_temp_c": 30.0,
+  "humidity_sensitive": false,
+  "natural_seasons": ["spring", "summer", "autumn"],
+  "greenhouse_seasons": ["spring", "summer", "autumn"],
+  "value_tier": "low",
+  "notes": "Not worth growing in a greenhouse. Use open fields for staple grains."
+}

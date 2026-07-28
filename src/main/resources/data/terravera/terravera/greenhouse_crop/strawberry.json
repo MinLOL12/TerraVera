@@ -1,0 +1,13 @@
+{
+  "__comment__": "Strawberries produce fruit much earlier and longer under glass. A high-value greenhouse specialist.",
+  "crop": "strawberry",
+  "greenhouse_bonus": 1.7,
+  "min_temp_c": 10.0,
+  "optimal_temp_c": 22.0,
+  "max_temp_c": 30.0,
+  "humidity_sensitive": true,
+  "natural_seasons": ["spring", "summer"],
+  "greenhouse_seasons": ["spring", "summer", "autumn", "winter"],
+  "value_tier": "very_high",
+  "notes": "Highest value-per-block greenhouse crop. Fungal risk from high humidity."
+}

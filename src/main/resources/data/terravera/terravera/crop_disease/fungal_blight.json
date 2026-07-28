@@ -1,0 +1,14 @@
+{
+  "__comment__": "Fungal blight: the most common crop disease. Thrives in high humidity and warm temperatures. Poor ventilation in greenhouses makes it worse.",
+  "id": "fungal_blight",
+  "type": "fungal",
+  "severity_scale": 1.0,
+  "humidity_threshold": 0.65,
+  "temperature_min_c": 12.0,
+  "temperature_max_c": 35.0,
+  "spread_rate": 0.03,
+  "symptoms": ["mildew", "leaf_spot", "stem_rot"],
+  "yield_penalty": 0.5,
+  "treatments": ["bordeaux_mixture", "ventilation", "crop_rotation"],
+  "prevention": ["good_airflow", "low_humidity", "clean_tools", "crop_rotation"]
+}

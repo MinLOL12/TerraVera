@@ -1,0 +1,13 @@
+{
+  "__comment__": "Lettuce: cool-season crop that actually prefers the lower temperatures of a cold frame or hoop house.",
+  "crop": "lettuce",
+  "greenhouse_bonus": 1.3,
+  "min_temp_c": 5.0,
+  "optimal_temp_c": 18.0,
+  "max_temp_c": 25.0,
+  "humidity_sensitive": false,
+  "natural_seasons": ["spring", "autumn"],
+  "greenhouse_seasons": ["spring", "summer", "autumn", "winter"],
+  "value_tier": "moderate",
+  "notes": "Best in cold frame or hoop house. Bolts (goes to seed) if too warm."
+}

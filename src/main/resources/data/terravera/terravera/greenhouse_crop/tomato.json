@@ -1,0 +1,13 @@
+{
+  "__comment__": "Tomatoes are a classic greenhouse crop: they need warmth, benefit from controlled humidity, and produce far more under glass.",
+  "crop": "tomato",
+  "greenhouse_bonus": 1.5,
+  "min_temp_c": 15.0,
+  "optimal_temp_c": 24.0,
+  "max_temp_c": 35.0,
+  "humidity_sensitive": true,
+  "natural_seasons": ["spring", "summer"],
+  "greenhouse_seasons": ["spring", "summer", "autumn", "winter"],
+  "value_tier": "high",
+  "notes": "Needs support trellising. Benefits greatly from greenhouse warmth in cold biomes."
+}

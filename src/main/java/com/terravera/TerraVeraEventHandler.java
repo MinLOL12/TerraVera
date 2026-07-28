@@ -38,6 +38,8 @@ import com.terravera.common.component.ToolMetalState;
 import com.terravera.common.component.ToolGrip;
 import com.terravera.common.container.ShapingContainer;
 import com.terravera.common.knapping.KnappableStone;
+import com.terravera.common.quality.SeedQuality;
+import com.terravera.common.quality.MaterialQuality;
 import com.terravera.common.recipes.FibreSource;
 import com.terravera.common.smithing.SmithingOperation;
 import com.terravera.common.smithing.ToolSmithing;
@@ -227,6 +229,26 @@ public final class TerraVeraEventHandler
                 Component.translatable("terravera.grip." + grip.material()),
                 Math.round((grip.speedMultiplier() - 1f) * 100f),
                 Math.round((grip.efficiencyMultiplier() - 1f) * 100f)));
+        }
+
+        // Seed quality tooltip
+        final SeedQuality seed = event.getItemStack().get(TerraVeraDataComponents.SEED_QUALITY.get());
+        if (seed != null)
+        {
+            event.getToolTip().add(Component.translatable("terravera.tooltip.seed_quality",
+                Component.translatable("terravera.tooltip.seed." + seed.tierLabel()),
+                seed.generation(),
+                seed.viability() * 100f));
+        }
+
+        // Material quality tooltip (on natural materials)
+        final MaterialQuality quality = event.getItemStack().get(TerraVeraDataComponents.MATERIAL_QUALITY.get());
+        if (quality != null)
+        {
+            event.getToolTip().add(Component.translatable("terravera.tooltip.material_quality",
+                Component.translatable("terravera.tooltip.quality." + quality.tierLabel()),
+                quality.category(),
+                quality.moistureLabel()));
         }
     }
 
