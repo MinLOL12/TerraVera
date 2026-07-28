@@ -426,7 +426,15 @@ Climate control is an **industrial endgame** rather than a survival shortcut. Ea
 
 The final step is the **Vapor-Compression Air Conditioner**. Its recipe calls for industrial iron/copper, a mechanical piston/compressor, and redstone control hardware. Craft a **Programmed Climate Control Circuit**, then open the unit GUI and install it. An unprogrammed unit is intentionally inert. It also requires a sealed insulated room and continuing service with an **Air Filter** and **Refrigerant Canister**.
 
-Power is now physical: place **Insulated Copper Wire** in a continuous face-adjacent run from the AC to an **Electrical Generator**, a **Hand Crank Generator**, or an outdoor **Wind Turbine**. The generator supplies steady capacity; the wind turbine only works with open sky above it; right-click the hand crank to generate for five seconds at a time. Wires do not jump across gaps or power a machine merely because a source is nearby.
+Power is now physical. Wire must make a continuous, face-connected run from a source to the AC's terminal lugs - wires never jump gaps, and a machine is only tapped through the terminal faces it exposes. Three conductors are available:
+
+- **Single Wire** - a bare copper conductor for horizontal runs, rated at 100 W.
+- **Insulated Copper Cable** - the workhorse cable, 200 W.
+- **Wire Intersection** - a six-way cast junction rated for 400 W, used for vertical drops, climbs, and crossing runs.
+
+Wires glow faintly while they are carrying current, so a dead run is obvious at a glance. Each grid sums its sources against its loads: if demand exceeds supply everything browns out, and if a run is asked to carry more than its weakest feeder conductor is rated for, that conductor heats up, sparks, and eventually burns out - split heavy loads onto heavier wire.
+
+The machines are animated with GeckoLib and tell you their own state. The **Wind Turbine** rotor spins while the block has open sky above it (attach wire to the terminal lugs on the mast); the **Hand Crank Generator** handle spins a full revolution on every right-click and keeps a slow driving rotation for the five seconds it is producing 140 W; and the **Air Conditioner** roof fan sits still when unpowered, idles slowly when fed, and spins up with a faint cabinet vibration while the compressor is actively moving heat. The **Electrical Generator** supplies a steady 360 W through the terminal posts on its four sides.
 
 The controller GUI exposes a 16–30 °C target and five compressor speeds. Electrical demand grows sharply with both compressor speed and the gap between outdoor air and the selected target; badly sealed or uninsulated buildings multiply that demand. The system models vapor-compression cooling as heat moved from the room through its condenser, not a direct change to player temperature. Consequently desert settlements gain far more from the machine than cool regions, where insulation, stone mass, and ventilation remain the sensible investment.
 

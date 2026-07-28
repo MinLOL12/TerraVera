@@ -29,6 +29,13 @@ than on reproducing an exact silhouette.
     side = "BOTH"
 
 [[dependencies.${modId}]]
+    modId = "geckolib"
+    type = "required"
+    versionRange = "${geckoLibVersionRange}"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.${modId}]]
     modId = "jei"
     type = "optional"
     versionRange = "${jeiVersionRange}"

@@ -13,7 +13,11 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import com.terravera.common.power.CopperWireBlock;
+import com.terravera.common.power.GeneratorBlock;
 import com.terravera.common.power.HandCrankBlock;
+import com.terravera.common.power.SingleWireBlock;
+import com.terravera.common.power.WindTurbineBlock;
+import com.terravera.common.power.WireIntersectionBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -38,27 +42,37 @@ public final class TerraVeraBlocks
     /** Late-industrial vapor-compression unit; its controller circuit and electrical supply are required separately. */
     public static final DeferredHolder<Block, AirConditionerBlock> AIR_CONDITIONER = BLOCKS.register("air_conditioner",
         () -> new AirConditionerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL)
-            .requiresCorrectToolForDrops().strength(5.0f, 8.0f).sound(SoundType.METAL)));
+            .requiresCorrectToolForDrops().strength(5.0f, 8.0f).sound(SoundType.METAL).noOcclusion()));
 
     /** Constant-output generator, intended for a fuel/progression pack or a dedicated generator room. */
-    public static final DeferredHolder<Block, Block> GENERATOR = BLOCKS.register("generator",
-        () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
+    public static final DeferredHolder<Block, GeneratorBlock> GENERATOR = BLOCKS.register("generator",
+        () -> new GeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
             .strength(4.5f, 7f).sound(SoundType.METAL)));
 
-    /** Right-click repeatedly to turn it; each turn supplies a short burst of emergency power. */
+    /** Right-click to turn it; each full revolution of the handle supplies a short burst of emergency power. */
     public static final DeferredHolder<Block, HandCrankBlock> HAND_CRANK = BLOCKS.register("hand_crank",
         () -> new HandCrankBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2f, 3f)
             .sound(SoundType.WOOD).noOcclusion()));
 
     /** Outdoor wind generator. It produces only when its rotor has clear sky above it. */
-    public static final DeferredHolder<Block, Block> WIND_TURBINE = BLOCKS.register("wind_turbine",
-        () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
+    public static final DeferredHolder<Block, WindTurbineBlock> WIND_TURBINE = BLOCKS.register("wind_turbine",
+        () -> new WindTurbineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
             .strength(3.5f, 5f).sound(SoundType.METAL).noOcclusion()));
 
-    /** Face-adjacent insulated copper cable used by the local power network. */
+    /** A bare single copper conductor. Cheap and thin - 100 W rating, horizontal runs only. */
+    public static final DeferredHolder<Block, SingleWireBlock> SINGLE_WIRE = BLOCKS.register("single_wire",
+        () -> new SingleWireBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(.3f)
+            .sound(SoundType.COPPER).noCollission().noOcclusion()));
+
+    /** Insulated low-voltage cable, 200 W rating. The workhorse of a wiring run. */
     public static final DeferredHolder<Block, CopperWireBlock> COPPER_WIRE = BLOCKS.register("copper_wire",
-        () -> new CopperWireBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(.3f)
+        () -> new CopperWireBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(.35f)
             .sound(SoundType.WOOL).noCollission().noOcclusion()));
+
+    /** A six-way cast junction rated for 400 W. Used for vertical drops, climbs and crossing runs. */
+    public static final DeferredHolder<Block, WireIntersectionBlock> WIRE_INTERSECTION = BLOCKS.register("wire_intersection",
+        () -> new WireIntersectionBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(.5f)
+            .sound(SoundType.COPPER).noCollission().noOcclusion()));
 
     /** Compact laid-stone footing. It distributes a column's load into soil or rock beneath it. */
     public static final DeferredHolder<Block, Block> RUBBLE_FOUNDATION = BLOCKS.register("rubble_foundation",

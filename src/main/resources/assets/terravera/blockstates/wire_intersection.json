@@ -1,0 +1,170 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_core"
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_core_lit"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "north": "true"
+          },
+          {
+            "powered": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_north"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "north": "true"
+          },
+          {
+            "powered": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_north_lit"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "south": "true"
+          },
+          {
+            "powered": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_south"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "south": "true"
+          },
+          {
+            "powered": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_south_lit"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "west": "true"
+          },
+          {
+            "powered": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_west"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "west": "true"
+          },
+          {
+            "powered": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_west_lit"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "east": "true"
+          },
+          {
+            "powered": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_east"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "east": "true"
+          },
+          {
+            "powered": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_east_lit"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "up": "true"
+          },
+          {
+            "powered": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_up"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "up": "true"
+          },
+          {
+            "powered": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "terravera:block/wire/wire_intersection_arm_up_lit"
+      }
+    }
+  ]
+}

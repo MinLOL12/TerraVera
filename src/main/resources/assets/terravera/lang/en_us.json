@@ -342,10 +342,19 @@
   "block.terravera.generator": "Electrical Generator",
   "block.terravera.hand_crank": "Hand Crank Generator",
   "block.terravera.wind_turbine": "Wind Turbine",
-  "block.terravera.copper_wire": "Insulated Copper Wire",
+  "block.terravera.single_wire": "Single Wire",
+  "block.terravera.copper_wire": "Insulated Copper Cable",
+  "block.terravera.wire_intersection": "Wire Intersection",
   "item.terravera.generator": "Electrical Generator",
   "item.terravera.hand_crank": "Hand Crank Generator",
   "item.terravera.wind_turbine": "Wind Turbine",
-  "item.terravera.copper_wire": "Insulated Copper Wire",
-  "terravera.climate.wiring_hint": "Connect a generator, hand crank, or outdoor wind turbine with copper wire."
+  "item.terravera.single_wire": "Single Wire",
+  "item.terravera.copper_wire": "Insulated Copper Cable",
+  "item.terravera.wire_intersection": "Wire Intersection",
+  "terravera.climate.wiring_hint": "Connect a generator, hand crank, or outdoor wind turbine with wire. Watch the glow: lit wire is live.",
+  "terravera.power.single_wire_hint": "Bare conductor. Carries 100 W, horizontal runs only.",
+  "terravera.power.copper_wire_hint": "Insulated cable. Carries 200 W along any horizontal run.",
+  "terravera.power.wire_intersection_hint": "Six-way junction. Carries 400 W, and makes vertical drops and climbs.",
+  "terravera.power.overload_hint": "Overloaded conductors overheat and burn out - split the load onto heavier wire.",
+  "terravera.power.turbine_hint": "Attach wire to the terminal lugs on the mast. The rotor only spins with open sky above."
 }

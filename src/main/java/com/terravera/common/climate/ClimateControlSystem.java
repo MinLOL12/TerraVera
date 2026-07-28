@@ -31,17 +31,39 @@ public final class ClimateControlSystem {
         BlockPos unit = nearestUnit(level, player);
         if (unit == null) return ambient;
         Controller c = get(unit);
-        if (!c.programmed() || c.maintenance() < .12f || !shell.isIndoors()) return ambient;
+        if (!c.programmed() || c.maintenance() < .12f || !shell.isIndoors()) {
+            setWorkState(level, unit, false, false);
+            return ambient;
+        }
         // Sealing and insulation are independent: stone alone is heavy, but a leaky stone hall is expensive to cool.
         float building = shell.sealing() * (.25f + .75f * shell.insulation());
-        if (building < .18f) return ambient;
+        if (building < .18f) {
+            setWorkState(level, unit, false, false);
+            return ambient;
+        }
         float demand = demand(c, ambient, building);
-        if (availablePower(level, unit) < demand) return ambient; // Brownout: compressor cannot start.
+        int power = availablePower(level, unit);
+        if (power < demand) { // Brownout: an under-fed compressor will not half-run.
+            setWorkState(level, unit, false, false);
+            return ambient;
+        }
         float moved = Math.min(Math.max(0, ambient - c.target()), c.speed() * 1.35f * building * c.maintenance());
+        setWorkState(level, unit, true, moved > 0.01f);
         // The condenser receives the same heat plus compressor work. This is intentionally exposed as a local heat load.
         rejectHeat(level, unit, moved + demand * .08f);
         put(unit, new Controller(c.target(), c.speed(), c.programmed(), Math.max(0f, c.maintenance() - demand * .000035f)));
         return ambient - moved;
+    }
+
+    /** The unit's standing demand on the grid, used by the power network scan. A machine without its circuit is inert. */
+    public static int gridDemand(BlockPos unit) {
+        Controller c = get(unit);
+        return c.programmed() ? 35 + 24 * c.speed() : 0;
+    }
+
+    private static void setWorkState(Level level, BlockPos unit, boolean powered, boolean running) {
+        if (level.isClientSide()) return;
+        com.terravera.common.blocks.AirConditionerBlock.setWorkState(level, unit, powered, running);
     }
     public static int demand(Controller c, float ambient, float building) {
         return Math.round((35 + 24 * c.speed() + 7 * Math.max(0, ambient - c.target())) * (1.15f - building) / Math.max(.2f, c.maintenance()));

@@ -1,1 +1,6 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"terravera:block/wood"}}
+{
+  "parent": "minecraft:builtin/entity",
+  "textures": {
+    "particle": "terravera:block/hand_crank_unit"
+  }
+}

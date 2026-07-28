@@ -8,19 +8,39 @@
 package com.terravera.client;
 
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import software.bernie.geckolib.renderer.GeoBlockRenderer;
+
+import com.terravera.client.model.AirConditionerModel;
+import com.terravera.client.model.HandCrankModel;
+import com.terravera.client.model.WindTurbineModel;
+import com.terravera.common.blocks.TerraVeraBlockEntities;
 
 /**
  * Client-side initialization for TerraVera.
  * <p>
  * Registers a custom knapping screen that uses TFC's native buttons and textures
- * but displays TerraVera's function-based knapping feedback.
+ * but displays TerraVera's function-based knapping feedback, and the GeckoLib block renderers that animate the
+ * wind turbine rotor, the air-conditioner fan, and the hand-crank handle.
  */
 public final class TerraVeraClient
 {
     public static void init(IEventBus bus)
     {
         bus.addListener(TerraVeraClient::registerScreens);
+        bus.addListener(TerraVeraClient::registerBlockRenderers);
+    }
+
+    /** GeckoLib renderers for TerraVera's animated machines. */
+    private static void registerBlockRenderers(EntityRenderersEvent.RegisterRenderers event)
+    {
+        event.registerBlockEntityRenderer(TerraVeraBlockEntities.WIND_TURBINE.get(),
+            context -> new GeoBlockRenderer<>(new WindTurbineModel<>()));
+        event.registerBlockEntityRenderer(TerraVeraBlockEntities.AIR_CONDITIONER.get(),
+            context -> new GeoBlockRenderer<>(new AirConditionerModel<>()));
+        event.registerBlockEntityRenderer(TerraVeraBlockEntities.HAND_CRANK.get(),
+            context -> new GeoBlockRenderer<>(new HandCrankModel<>()));
     }
 
     private static void registerScreens(RegisterMenuScreensEvent event)

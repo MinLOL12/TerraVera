@@ -44,7 +44,9 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.GENERATOR.get());
         event.accept(TerraVeraItems.HAND_CRANK.get());
         event.accept(TerraVeraItems.WIND_TURBINE.get());
+        event.accept(TerraVeraItems.SINGLE_WIRE.get());
         event.accept(TerraVeraItems.COPPER_WIRE.get());
+        event.accept(TerraVeraItems.WIRE_INTERSECTION.get());
         event.accept(TerraVeraItems.PROGRAMMED_CIRCUIT.get());
         event.accept(TerraVeraItems.REFRIGERANT_CANISTER.get());
         event.accept(TerraVeraItems.AIR_FILTER.get());
