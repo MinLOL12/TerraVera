@@ -430,6 +430,9 @@ public class TasteSystem {
         tastes.put("raw_steak", -15);
 
         // ---- TerraVera: vinegar varieties ------------------------------------------------------------------
+        // Vinegar items are registered as items (not fluids). The specific varieties (cider, wine, etc.) are
+        // produced as bonus items from barrel recipes alongside generic tfc:vinegar fluid. All recipes that
+        // consume vinegar use tfc:vinegar fluid; the item variants exist for direct consumption and taste.
         tastes.put("terravera:cider_vinegar", 35);
         tastes.put("terravera:wine_vinegar", 40);
         tastes.put("terravera:beer_vinegar", 20);

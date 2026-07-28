@@ -2,7 +2,7 @@
   "__comment": "Herbal vinegar infusion: herbs steeped in wine vinegar for digestive and tonic benefits.",
   "type": "tfc:pot",
   "duration": 6000,
-  "fluid_ingredient": { "amount": 500, "fluid": "terravera:wine_vinegar" },
+  "fluid_ingredient": { "amount": 500, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "terravera:bitter_herbs" },
     { "item": "terravera:wormwood" }

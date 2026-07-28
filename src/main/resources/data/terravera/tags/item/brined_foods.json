@@ -1,0 +1,10 @@
+{
+  "__comment__": "Meats and vegetables prepared in vinegar and salt brine for improved preservation and flavor.",
+  "values": [
+    "terravera:brined_meat",
+    "terravera:brined_vegetable",
+    "terravera:brined_chicken",
+    "terravera:brined_fish",
+    "terravera:brined_mushroom"
+  ]
+}

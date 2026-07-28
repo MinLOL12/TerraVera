@@ -100,6 +100,49 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.REHYDRATION_SALTS.get());
         event.accept(TerraVeraItems.MEDICINE.get());
 
+        // Vinegar varieties and derived preparations, in rough progression order.
+        event.accept(TerraVeraItems.GENERIC_VINEGAR.get());
+        event.accept(TerraVeraItems.CIDER_VINEGAR.get());
+        event.accept(TerraVeraItems.WINE_VINEGAR.get());
+        event.accept(TerraVeraItems.BEER_VINEGAR.get());
+        event.accept(TerraVeraItems.MEAD_VINEGAR.get());
+        event.accept(TerraVeraItems.RICE_MASH_VINEGAR.get());
+
+        // Pickled foods: preserved in vinegar brine.
+        event.accept(TerraVeraItems.PICKLED_CABBAGE.get());
+        event.accept(TerraVeraItems.PICKLED_CUCUMBER.get());
+        event.accept(TerraVeraItems.PICKLED_MUSHROOM.get());
+        event.accept(TerraVeraItems.PICKLED_EGG.get());
+        event.accept(TerraVeraItems.PICKLED_BEET.get());
+        event.accept(TerraVeraItems.PICKLED_CARROT.get());
+        event.accept(TerraVeraItems.PICKLED_GARLIC.get());
+        event.accept(TerraVeraItems.PICKLED_ONION.get());
+        event.accept(TerraVeraItems.PICKLED_PEPPER.get());
+
+        // Brined preparations: meat and vegetables prepared in vinegar and salt.
+        event.accept(TerraVeraItems.BRINED_MEAT.get());
+        event.accept(TerraVeraItems.BRINED_VEGETABLE.get());
+        event.accept(TerraVeraItems.BRINED_CHICKEN.get());
+        event.accept(TerraVeraItems.BRINED_FISH.get());
+        event.accept(TerraVeraItems.BRINED_MUSHROOM.get());
+
+        // Medicinal vinegar preparations.
+        event.accept(TerraVeraItems.OXYMEL.get());
+        event.accept(TerraVeraItems.HERBAL_VINEGAR_INFUSION.get());
+        event.accept(TerraVeraItems.FIRE_TONIC.get());
+        event.accept(TerraVeraItems.DIGESTIVE_TONIC.get());
+        event.accept(TerraVeraItems.SLEEP_INFUSION.get());
+
+        // Household vinegar uses.
+        event.accept(TerraVeraItems.CLEANING_VINEGAR.get());
+        event.accept(TerraVeraItems.DESCALING_SOLUTION.get());
+        event.accept(TerraVeraItems.VINEGAR_SAUCE.get());
+        event.accept(TerraVeraItems.VINEGAR_MARINADE.get());
+        event.accept(TerraVeraItems.VINEGAR_DRESSING.get());
+        event.accept(TerraVeraItems.POLISH_PASTE.get());
+        event.accept(TerraVeraItems.LEATHER_CONDITIONER.get());
+        event.accept(TerraVeraItems.WOOD_STAIN.get());
+
         // Textile chain and the wardrobe, in roughly the order a player unlocks them.
         event.accept(TerraVeraItems.PLANT_FIBER_CLOTH.get());
         event.accept(TerraVeraItems.STRAW_MAT.get());

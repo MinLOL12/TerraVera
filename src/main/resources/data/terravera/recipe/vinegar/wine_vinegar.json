@@ -1,8 +1,21 @@
 {
-  "__comment": "Wine vinegar: wine acetified in barrel with oxygen exposure.",
+  "__comment": "Wine vinegar: wine acetified in barrel with oxygen exposure. Produces generic vinegar fluid and a specific vinegar item.",
   "type": "tfc:barrel_sealed",
   "duration": 48000,
-  "input_fluid": { "amount": 1000, "fluid": "tfc:wine" },
-  "input_item": { "count": 1, "item": "terravera:vinegar" },
-  "output_fluid": { "amount": 1000, "id": "terravera:wine_vinegar" }
+  "input_fluid": {
+    "amount": 1000,
+    "fluid": "tfc:wine"
+  },
+  "input_item": {
+    "count": 1,
+    "item": "terravera:vinegar"
+  },
+  "output_fluid": {
+    "amount": 1000,
+    "id": "tfc:vinegar"
+  },
+  "output_item": {
+    "id": "terravera:wine_vinegar",
+    "count": 1
+  }
 }

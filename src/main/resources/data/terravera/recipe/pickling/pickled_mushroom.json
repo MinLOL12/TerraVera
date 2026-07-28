@@ -2,7 +2,7 @@
   "__comment": "Pickled mushrooms: wild mushrooms preserved in wine vinegar for long shelf life.",
   "type": "tfc:pot",
   "duration": 10000,
-  "fluid_ingredient": { "amount": 500, "fluid": "terravera:wine_vinegar" },
+  "fluid_ingredient": { "amount": 500, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "tfc:food/brown_mushroom" },
     { "item": "tfc:powder/salt" }

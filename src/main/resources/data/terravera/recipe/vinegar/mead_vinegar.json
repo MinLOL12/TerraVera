@@ -1,8 +1,21 @@
 {
-  "__comment": "Mead vinegar: fermented honey wine acetified produces sweet sharp mead vinegar.",
+  "__comment": "Mead vinegar: fermented honey wine acetified produces sweet sharp mead vinegar. Produces generic vinegar fluid and a specific vinegar item.",
   "type": "tfc:barrel_sealed",
   "duration": 42000,
-  "input_fluid": { "amount": 1000, "fluid": "tfc:mead" },
-  "input_item": { "count": 1, "item": "terravera:vinegar" },
-  "output_fluid": { "amount": 1000, "id": "terravera:mead_vinegar" }
+  "input_fluid": {
+    "amount": 1000,
+    "fluid": "tfc:mead"
+  },
+  "input_item": {
+    "count": 1,
+    "item": "terravera:vinegar"
+  },
+  "output_fluid": {
+    "amount": 1000,
+    "id": "tfc:vinegar"
+  },
+  "output_item": {
+    "id": "terravera:mead_vinegar",
+    "count": 1
+  }
 }

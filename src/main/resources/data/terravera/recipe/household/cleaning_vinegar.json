@@ -2,7 +2,7 @@
   "__comment": "Cleaning vinegar: vinegar used to clean cookware and remove residues.",
   "type": "tfc:pot",
   "duration": 3000,
-  "fluid_ingredient": { "amount": 300, "fluid": "terravera:vinegar" },
+  "fluid_ingredient": { "amount": 300, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "minecraft:glass_bottle" },
     { "item": "tfc:powder/salt" }

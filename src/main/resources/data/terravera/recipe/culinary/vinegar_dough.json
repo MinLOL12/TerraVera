@@ -2,7 +2,7 @@
   "__comment": "Vinegar dough: vinegar used in dough preparation to improve texture and shelf life.",
   "type": "tfc:pot",
   "duration": 4000,
-  "fluid_ingredient": { "amount": 200, "fluid": "terravera:rice_mash_vinegar" },
+  "fluid_ingredient": { "amount": 200, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "tfc:food/wheat_flour" },
     { "item": "minecraft:water_bucket" }

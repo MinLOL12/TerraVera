@@ -2,7 +2,7 @@
   "__comment": "Brined vegetables: vinegar, salt, and spices prepare vegetables before preservation or cooking.",
   "type": "tfc:pot",
   "duration": 8000,
-  "fluid_ingredient": { "amount": 500, "fluid": "terravera:cider_vinegar" },
+  "fluid_ingredient": { "amount": 500, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "tfc:food/carrot" },
     { "item": "tfc:powder/salt" },

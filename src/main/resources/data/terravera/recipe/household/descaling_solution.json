@@ -2,7 +2,7 @@
   "__comment": "Descaling solution: vinegar combined with water to descale kettles and remove mineral deposits.",
   "type": "tfc:pot",
   "duration": 4000,
-  "fluid_ingredient": { "amount": 500, "fluid": "terravera:cider_vinegar" },
+  "fluid_ingredient": { "amount": 500, "fluid": "tfc:vinegar" },
   "ingredients": [
     { "item": "minecraft:glass_bottle" },
     { "item": "tfc:powder/salt" }
