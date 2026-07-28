@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:builtin/entity",
+  "textures": {
+    "particle": "terravera:block/modern_greenhouse"
+  }
+}
