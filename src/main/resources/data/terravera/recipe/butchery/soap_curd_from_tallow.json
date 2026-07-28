@@ -1,0 +1,30 @@
+{
+  "__comment__": "Saponification with solid rendered tallow rather than a bucket of it: the same reaction the fluid recipe runs, available to a player who has fat but no barrel of tallow.",
+  "type": "tfc:pot",
+  "duration": 3600,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "terravera:rendered_tallow"
+    },
+    {
+      "item": "terravera:rendered_tallow"
+    },
+    {
+      "item": "terravera:lye_concentrate"
+    },
+    {
+      "item": "terravera:lye_concentrate"
+    }
+  ],
+  "item_output": [
+    {
+      "count": 3,
+      "id": "terravera:soap_curd"
+    }
+  ],
+  "temperature": 480.0
+}

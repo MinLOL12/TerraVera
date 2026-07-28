@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC beet seed from a harvested beet.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/beet"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/beet",
+    "count": 2
+  }
+}

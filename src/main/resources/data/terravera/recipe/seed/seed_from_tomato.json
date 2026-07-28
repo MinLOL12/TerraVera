@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC tomato seed from a harvested tomato.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/tomato"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/tomato",
+    "count": 2
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC onion seed from a harvested onion.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/onion"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/onion",
+    "count": 2
+  }
+}

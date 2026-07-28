@@ -1,8 +1,0 @@
-{
-  "__comment__": "Extract seed from TFC tomato.",
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    { "item": "tfc:food/tomato" }
-  ],
-  "result": { "id": "terravera:seed", "count": 4 }
-}

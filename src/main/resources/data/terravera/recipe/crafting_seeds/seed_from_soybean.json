@@ -1,8 +1,0 @@
-{
-  "__comment__": "Extract seed from TFC soybean. Soybeans fix nitrogen in the soil, making them excellent rotation crops.",
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    { "item": "tfc:food/soybean" }
-  ],
-  "result": { "id": "terravera:seed", "count": 3 }
-}

@@ -1,0 +1,9 @@
+{
+  "__comment__": "Fat in any of its forms, for rendering, soap, and cooking recipes.",
+  "replace": false,
+  "values": [
+    "terravera:animal_fat",
+    "terravera:suet",
+    "terravera:rendered_tallow"
+  ]
+}

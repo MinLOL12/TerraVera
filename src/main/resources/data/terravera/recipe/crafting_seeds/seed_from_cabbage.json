@@ -1,8 +1,0 @@
-{
-  "__comment__": "Extract seed from TFC cabbage.",
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    { "item": "tfc:food/cabbage" }
-  ],
-  "result": { "id": "terravera:seed", "count": 3 }
-}

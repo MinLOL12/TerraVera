@@ -1,8 +1,13 @@
 {
-  "__comment__": "Extract seed from rye.",
+  "__comment__": "Thresh a rye crop back into TFC seed for replanting.",
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "tfc:food/rye" }
+    {
+      "item": "tfc:food/rye"
+    }
   ],
-  "result": { "id": "terravera:seed", "count": 2 }
+  "result": {
+    "id": "tfc:seeds/rye",
+    "count": 2
+  }
 }

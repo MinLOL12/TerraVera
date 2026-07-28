@@ -1,0 +1,13 @@
+{
+  "__comment__": "Recover TFC barley seed from threshed grain.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/barley_grain"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/barley",
+    "count": 1
+  }
+}

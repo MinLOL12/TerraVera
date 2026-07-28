@@ -1,0 +1,27 @@
+{
+  "__comment__": "Blood dried down and ground. Historically one of the strongest nitrogen fertilisers available before industrial ammonia.",
+  "type": "tfc:pot",
+  "duration": 2400,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "terravera:blood"
+    },
+    {
+      "item": "terravera:blood"
+    },
+    {
+      "item": "terravera:blood"
+    }
+  ],
+  "item_output": [
+    {
+      "count": 2,
+      "id": "terravera:blood_meal"
+    }
+  ],
+  "temperature": 200.0
+}

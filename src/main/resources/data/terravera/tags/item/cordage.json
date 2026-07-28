@@ -1,3 +1,8 @@
 {
-  "values": [ "terravera:cordage", "terravera:heavy_cordage" ]
+  "values": [
+    "terravera:cordage",
+    "terravera:heavy_cordage",
+    "terravera:sinew_cord"
+  ],
+  "__comment__": "Anything that can lash a tool head on. Sinew cord is the strongest of them, and it comes off a carcass rather than a plant."
 }

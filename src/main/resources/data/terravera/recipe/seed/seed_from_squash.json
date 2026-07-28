@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC squash seed from a harvested squash.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/squash"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/squash",
+    "count": 2
+  }
+}

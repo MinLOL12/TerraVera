@@ -1,0 +1,13 @@
+{
+  "__comment__": "Recover TFC oat seed from threshed grain.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/oat_grain"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/oat",
+    "count": 1
+  }
+}

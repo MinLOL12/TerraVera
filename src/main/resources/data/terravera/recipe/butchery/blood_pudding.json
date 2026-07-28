@@ -1,0 +1,30 @@
+{
+  "__comment__": "Blood, fat, and grain, boiled in a cleaned stomach. Black pudding, more or less, and the reason blood was never wasted.",
+  "type": "tfc:pot",
+  "duration": 2400,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "terravera:blood"
+    },
+    {
+      "item": "terravera:animal_fat"
+    },
+    {
+      "item": "terravera:stomach"
+    },
+    {
+      "item": "tfc:food/wheat_grain"
+    }
+  ],
+  "item_output": [
+    {
+      "count": 2,
+      "id": "terravera:cured_meat"
+    }
+  ],
+  "temperature": 300.0
+}

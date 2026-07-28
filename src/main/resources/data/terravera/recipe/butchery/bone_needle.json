@@ -1,0 +1,17 @@
+{
+  "__comment__": "A splinter of bone ground to a point and drilled. The sewing kit the clothing line has always implied.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "tag": "tfc:knives"
+    }
+  ],
+  "result": {
+    "id": "terravera:bone_needle",
+    "count": 2
+  }
+}

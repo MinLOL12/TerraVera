@@ -1,0 +1,14 @@
+{
+  "__comment__": "Sinew cord serves anywhere plain string would, which is what lets it reach the sewing and fletching recipes.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:sinew_cord"
+    }
+  ],
+  "result": {
+    "id": "minecraft:string",
+    "count": 2
+  }
+}

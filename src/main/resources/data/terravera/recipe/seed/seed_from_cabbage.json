@@ -1,0 +1,13 @@
+{
+  "__comment__": "Save TFC cabbage seed from a harvested cabbage.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/cabbage"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/cabbage",
+    "count": 2
+  }
+}

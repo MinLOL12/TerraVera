@@ -1,0 +1,17 @@
+{
+  "__comment__": "An awl for punching stitch holes through hide before the needle goes near it.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "tag": "tfc:knives"
+    }
+  ],
+  "result": {
+    "id": "terravera:bone_awl",
+    "count": 1
+  }
+}

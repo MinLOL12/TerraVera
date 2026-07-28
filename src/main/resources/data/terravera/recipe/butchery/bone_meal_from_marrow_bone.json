@@ -1,0 +1,14 @@
+{
+  "__comment__": "A spent marrow bone crushes down to bone meal like any other.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:marrow_bone"
+    }
+  ],
+  "result": {
+    "id": "minecraft:bone_meal",
+    "count": 3
+  }
+}

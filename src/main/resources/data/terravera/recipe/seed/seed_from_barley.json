@@ -1,8 +1,13 @@
 {
-  "__comment__": "Extract seed from barley.",
+  "__comment__": "Thresh a barley crop back into TFC seed for replanting.",
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "tfc:food/barley" }
+    {
+      "item": "tfc:food/barley"
+    }
   ],
-  "result": { "id": "terravera:seed", "count": 2 }
+  "result": {
+    "id": "tfc:seeds/barley",
+    "count": 2
+  }
 }

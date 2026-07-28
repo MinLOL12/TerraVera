@@ -1,8 +1,13 @@
 {
-  "__comment__": "Extract seed from oats.",
+  "__comment__": "Thresh a oat crop back into TFC seed for replanting.",
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "tfc:food/oat" }
+    {
+      "item": "tfc:food/oat"
+    }
   ],
-  "result": { "id": "terravera:seed", "count": 2 }
+  "result": {
+    "id": "tfc:seeds/oat",
+    "count": 2
+  }
 }

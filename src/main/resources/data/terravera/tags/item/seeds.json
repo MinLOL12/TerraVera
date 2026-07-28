@@ -1,8 +1,11 @@
 {
+  "__comment__": "TerraVera no longer ships its own seed items. Planting, quality, and crop growth are TerraFirmaCraft's job; this tag simply names the TFC seeds that TerraVera's prepared soil and greenhouses recognise.",
   "replace": false,
   "values": [
-    "terravera:seed",
-    "terravera:select_seed",
-    "terravera:prize_seed"
+    { "id": "#tfc:seeds", "required": false },
+    { "id": "minecraft:wheat_seeds", "required": false },
+    { "id": "minecraft:beetroot_seeds", "required": false },
+    { "id": "minecraft:melon_seeds", "required": false },
+    { "id": "minecraft:pumpkin_seeds", "required": false }
   ]
 }

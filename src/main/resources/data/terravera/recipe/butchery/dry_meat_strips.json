@@ -1,0 +1,13 @@
+{
+  "__comment__": "Meat cut thin and dried slowly rather than cooked. Lighter than cured meat and it keeps almost as long.",
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:cured_meat"
+  },
+  "result": {
+    "id": "terravera:dried_meat_strips"
+  },
+  "experience": 0.0,
+  "cookingtime": 2400
+}

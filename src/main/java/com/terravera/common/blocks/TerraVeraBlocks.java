@@ -22,7 +22,6 @@ import com.terravera.common.water.CollectorType;
 import com.terravera.common.water.WaterCollectorBlock;
 import com.terravera.common.farming.DripIrrigationBlock;
 import com.terravera.common.farming.PreparedFarmlandBlock;
-import com.terravera.common.farming.TerraVeraCropBlock;
 import com.terravera.common.greenhouse.GreenhouseBlock;
 import com.terravera.common.greenhouse.GreenhouseTier;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -181,14 +180,9 @@ public final class TerraVeraBlocks
             .strength(0.6f)
             .sound(SoundType.GRAVEL)));
 
-    /** Generic planted crop for TerraVera's quality-bearing seeds. */
-    public static final DeferredHolder<Block, TerraVeraCropBlock> CROP = BLOCKS.register("crop",
-        () -> new TerraVeraCropBlock(BlockBehaviour.Properties.of()
-            .mapColor(MapColor.PLANT)
-            .noCollission()
-            .randomTicks()
-            .instabreak()
-            .sound(SoundType.CROP)));
+    // TerraVera registers no crop block of its own. It used to, for its generic seed line, and that block rendered
+    // with vanilla wheat models on top of TerraFirmaCraft's crops - the visual glitch that the seed system caused.
+    // Crops belong to TFC; TerraVera contributes the soil under them and the glass over them.
 
     // ----- Irrigation ---------------------------------------------------------------------------------------
 

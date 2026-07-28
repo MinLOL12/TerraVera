@@ -1,0 +1,27 @@
+{
+  "__comment__": "Rendering. Fat is heated gently in water until the connective tissue lets go and the pure tallow floats off. Suet renders cleaner than soft fat, which is why it is worth keeping separate.",
+  "type": "tfc:pot",
+  "duration": 1800,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    {
+      "item": "terravera:animal_fat"
+    },
+    {
+      "item": "terravera:animal_fat"
+    },
+    {
+      "item": "terravera:animal_fat"
+    }
+  ],
+  "item_output": [
+    {
+      "count": 2,
+      "id": "terravera:rendered_tallow"
+    }
+  ],
+  "temperature": 260.0
+}

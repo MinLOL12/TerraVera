@@ -23,9 +23,9 @@ import com.terravera.common.component.Cordage;
 import com.terravera.common.component.KnappedHead;
 import com.terravera.common.component.ToolMetalState;
 import com.terravera.common.component.ToolGrip;
+import com.terravera.common.butchery.CarcassData;
 import com.terravera.common.quality.CropHealth;
 import com.terravera.common.quality.MaterialQuality;
-import com.terravera.common.quality.SeedQuality;
 import com.terravera.common.quality.SoilCondition;
 import com.terravera.common.greenhouse.GreenhouseClimate;
 
@@ -88,11 +88,11 @@ public final class TerraVeraDataComponents
         register("material_quality", builder -> builder.persistent(MaterialQuality.CODEC).networkSynchronized(MaterialQuality.STREAM_CODEC));
 
     /**
-     * Attached to seed items. Carries the genetic quality, generation count, crop type, and viability of saved seeds.
-     * Better seeds produce better crops; saving the best seeds each harvest gradually improves the strain.
+     * Attached to carcass items. Records what the animal was, when it died, how far it has been butchered, and how
+     * good the knife work has been so far. Everything the butchering system decides is derived from this.
      */
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SeedQuality>> SEED_QUALITY =
-        register("seed_quality", builder -> builder.persistent(SeedQuality.CODEC).networkSynchronized(SeedQuality.STREAM_CODEC));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CarcassData>> CARCASS =
+        register("carcass", builder -> builder.persistent(CarcassData.CODEC).networkSynchronized(CarcassData.STREAM_CODEC));
 
     /**
      * Attached to prepared farmland block entities. Tracks how well the soil has been cleared, loosened,

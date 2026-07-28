@@ -82,8 +82,14 @@ public final class TerraVeraConfig
         public final Supplier<Boolean> enableFarming;
         /** Whether natural material quality affects crafting results. */
         public final Supplier<Boolean> enableMaterialQuality;
-        /** Whether saved seeds carry genetic quality that improves with selection. */
-        public final Supplier<Boolean> enableSeedQuality;
+        // ----- Butchering ------------------------------------------------------------------------------------
+
+        /** Master switch for the butchering system. If false, animals drop their normal loot. */
+        public final Supplier<Boolean> enableButchery;
+        /** Whether carcasses lose condition over time and with heat. */
+        public final Supplier<Boolean> enableCarcassFreshness;
+        /** Multiplier on how fast a carcass spoils. Lower means longer to get it processed. */
+        public final Supplier<Double> carcassSpoilageMultiplier;
         /** Whether crops can develop fungal infections, pest problems, and nutrient deficiencies. */
         public final Supplier<Boolean> enableCropDisease;
         /** Global multiplier on crop disease pressure. Lower means diseases develop more slowly. */
@@ -251,6 +257,18 @@ public final class TerraVeraConfig
                 .defineInRange("hygieneDecayMultiplier", 1.0, 0.0, 5.0);
             builder.pop();
 
+            builder.push("butchery");
+            enableButchery = builder
+                .comment("If true, killed animals drop a carcass that must be skinned, drawn, and broken down by hand instead of dropping finished meat and hides. Products feed TFC's leather, food, and bone chains.")
+                .define("enableButchery", true);
+            enableCarcassFreshness = builder
+                .comment("If true, a carcass passes from fresh through cool, aging, and spoiling to rotten. Warm weather is much faster than cold. Organs are lost first, then the meat; hide and bone last longest.")
+                .define("enableCarcassFreshness", true);
+            carcassSpoilageMultiplier = builder
+                .comment("Multiplier on carcass spoilage speed. 0.5 gives twice as long to process an animal; 2.0 halves it.")
+                .defineInRange("carcassSpoilageMultiplier", 1.0, 0.0, 5.0);
+            builder.pop();
+
             builder.push("farming");
             enableFarming = builder
                 .comment("Master switch for the farming system: soil preparation, seed quality, crop disease, and greenhouse climate. If false, all farming runs on vanilla rules.")
@@ -258,9 +276,6 @@ public final class TerraVeraConfig
             enableMaterialQuality = builder
                 .comment("If true, natural materials vary in quality. Straight sticks make better shafts, long fibres make stronger cordage, dry wood burns better than wet wood.")
                 .define("enableMaterialQuality", true);
-            enableSeedQuality = builder
-                .comment("If true, seeds carry genetic quality. Larger, healthier seeds produce stronger plants. Saving the best seeds each harvest gradually improves crops over generations.")
-                .define("enableSeedQuality", true);
             enableCropDisease = builder
                 .comment("If true, unhealthy fields develop fungal infections, insect problems, or nutrient deficiencies. Good sanitation, crop rotation, and healthy soil reduce risk.")
                 .define("enableCropDisease", true);

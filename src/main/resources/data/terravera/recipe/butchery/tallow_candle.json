@@ -1,0 +1,20 @@
+{
+  "__comment__": "A tallow candle: fat poured around a plant-fibre wick. It smokes and it smells, but it is light you can carry.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "terravera:rendered_tallow"
+    },
+    {
+      "item": "terravera:rendered_tallow"
+    },
+    {
+      "tag": "terravera:cordage"
+    }
+  ],
+  "result": {
+    "id": "terravera:tallow_candle",
+    "count": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "__comment__": "Recover TFC rye seed from threshed grain.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfc:food/rye_grain"
+    }
+  ],
+  "result": {
+    "id": "tfc:seeds/rye",
+    "count": 1
+  }
+}

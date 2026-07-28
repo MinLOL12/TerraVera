@@ -1,0 +1,13 @@
+{
+  "__comment__": "Roasted over the fire. The simplest thing to do with a primal cut.",
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:loin_cut"
+  },
+  "result": {
+    "id": "terravera:cured_meat"
+  },
+  "experience": 0.0,
+  "cookingtime": 1200
+}

@@ -139,10 +139,33 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.AGRICULTURAL_LIME.get());
         event.accept(TerraVeraItems.PREPARED_FARMLAND.get());
 
-        // Seed quality progression.
-        event.accept(TerraVeraItems.SEED.get());
-        event.accept(TerraVeraItems.SELECT_SEED.get());
-        event.accept(TerraVeraItems.PRIZE_SEED.get());
+        // Butchering: the carcass, the parts that come off it, and what those parts become.
+        event.accept(TerraVeraItems.CARCASS.get());
+        event.accept(TerraVeraItems.SHOULDER_CUT.get());
+        event.accept(TerraVeraItems.RIB_CUT.get());
+        event.accept(TerraVeraItems.LOIN_CUT.get());
+        event.accept(TerraVeraItems.LEG_CUT.get());
+        event.accept(TerraVeraItems.TRIM_MEAT.get());
+        event.accept(TerraVeraItems.CURED_MEAT.get());
+        event.accept(TerraVeraItems.DRIED_MEAT_STRIPS.get());
+        event.accept(TerraVeraItems.HEART.get());
+        event.accept(TerraVeraItems.LIVER.get());
+        event.accept(TerraVeraItems.KIDNEYS.get());
+        event.accept(TerraVeraItems.STOMACH.get());
+        event.accept(TerraVeraItems.BLOOD.get());
+        event.accept(TerraVeraItems.BLOOD_MEAL.get());
+        event.accept(TerraVeraItems.ANIMAL_FAT.get());
+        event.accept(TerraVeraItems.SUET.get());
+        event.accept(TerraVeraItems.RENDERED_TALLOW.get());
+        event.accept(TerraVeraItems.TALLOW_CANDLE.get());
+        event.accept(TerraVeraItems.SINEW.get());
+        event.accept(TerraVeraItems.TENDON.get());
+        event.accept(TerraVeraItems.SINEW_CORD.get());
+        event.accept(TerraVeraItems.SINEW_BOWSTRING.get());
+        event.accept(TerraVeraItems.MARROW_BONE.get());
+        event.accept(TerraVeraItems.BONE_MARROW.get());
+        event.accept(TerraVeraItems.BONE_NEEDLE.get());
+        event.accept(TerraVeraItems.BONE_AWL.get());
 
         // Irrigation equipment.
         event.accept(TerraVeraItems.DRIP_IRRIGATION.get());
