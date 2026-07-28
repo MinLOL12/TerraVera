@@ -118,6 +118,42 @@ public final class TerraVeraCreativeTab
         com.terravera.common.temperature.TerraVeraClothing.garments()
             .values().forEach(holder -> event.accept(holder.get()));
 
+        // Greenhouse structures and materials, in progression order.
+        event.accept(TerraVeraItems.COLD_FRAME.get());
+        event.accept(TerraVeraItems.HOOP_HOUSE.get());
+        event.accept(TerraVeraItems.GLASS_GREENHOUSE.get());
+        event.accept(TerraVeraItems.MODERN_GREENHOUSE.get());
+        event.accept(TerraVeraItems.GREENHOUSE_GLASS.get());
+        event.accept(TerraVeraItems.OILED_CLOTH_COVERING.get());
+        event.accept(TerraVeraItems.HOOP_FRAME.get());
+        event.accept(TerraVeraItems.GREENHOUSE_FRAME.get());
+        event.accept(TerraVeraItems.THERMOSTAT.get());
+        event.accept(TerraVeraItems.IRRIGATION_CONTROLLER.get());
+
+        // Soil preparation tools and amendments.
+        event.accept(TerraVeraItems.DIGGING_STICK.get());
+        event.accept(TerraVeraItems.SOIL_RAKE.get());
+        event.accept(TerraVeraItems.COMPOST.get());
+        event.accept(TerraVeraItems.AGED_MANURE.get());
+        event.accept(TerraVeraItems.HORTICULTURAL_SAND.get());
+        event.accept(TerraVeraItems.AGRICULTURAL_LIME.get());
+        event.accept(TerraVeraItems.PREPARED_FARMLAND.get());
+
+        // Seed quality progression.
+        event.accept(TerraVeraItems.SEED.get());
+        event.accept(TerraVeraItems.SELECT_SEED.get());
+        event.accept(TerraVeraItems.PRIZE_SEED.get());
+
+        // Irrigation equipment.
+        event.accept(TerraVeraItems.DRIP_IRRIGATION.get());
+        event.accept(TerraVeraItems.IRRIGATION_TANK.get());
+        event.accept(TerraVeraItems.WATERING_CAN.get());
+
+        // Crop disease treatment.
+        event.accept(TerraVeraItems.BORDEAUX_MIXTURE.get());
+        event.accept(TerraVeraItems.NEEM_OIL.get());
+        event.accept(TerraVeraItems.COMPANION_CHART.get());
+
         // One entry per (head kind x stone), with the component filled in, so that creative and JEI show real heads
         // rather than blank ones that no lashing recipe will accept.
         TerraVeraItems.HEADS.forEach((kind, holder) -> {

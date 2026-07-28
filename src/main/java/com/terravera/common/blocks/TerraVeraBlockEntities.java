@@ -17,6 +17,9 @@ import com.terravera.common.blockentity.AirConditionerBlockEntity;
 import com.terravera.common.blockentity.HandCrankBlockEntity;
 import com.terravera.common.blockentity.WindTurbineBlockEntity;
 import com.terravera.common.water.WaterCollectorBlockEntity;
+import com.terravera.common.farming.IrrigationTankBlockEntity;
+import com.terravera.common.farming.PreparedFarmlandBlockEntity;
+import com.terravera.common.greenhouse.GreenhouseBlockEntity;
 
 /**
  * Block entity types for TerraVera's animated machines. The block entities exist purely to host GeckoLib animation
@@ -44,6 +47,23 @@ public final class TerraVeraBlockEntities
             .of(WaterCollectorBlockEntity::new,
                 TerraVeraBlocks.RAIN_CATCHER.get(), TerraVeraBlocks.DEW_COLLECTOR.get(),
                 TerraVeraBlocks.ROCK_BASIN.get(), TerraVeraBlocks.SOLAR_STILL.get()).build(null));
+
+    /** Block entity for all four greenhouse tiers. Hosts climate simulation and GeckoLib ventilation animation. */
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GreenhouseBlockEntity>> GREENHOUSE =
+        TYPES.register("greenhouse", () -> BlockEntityType.Builder
+            .of(GreenhouseBlockEntity::new,
+                TerraVeraBlocks.COLD_FRAME.get(), TerraVeraBlocks.HOOP_HOUSE.get(),
+                TerraVeraBlocks.GLASS_GREENHOUSE.get(), TerraVeraBlocks.MODERN_GREENHOUSE.get()).build(null));
+
+    /** Stores soil condition data on prepared farmland blocks. */
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PreparedFarmlandBlockEntity>> PREPARED_FARMLAND =
+        TYPES.register("prepared_farmland", () -> BlockEntityType.Builder
+            .of(PreparedFarmlandBlockEntity::new, TerraVeraBlocks.PREPARED_FARMLAND.get()).build(null));
+
+    /** Rainwater storage tank that feeds drip irrigation. */
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IrrigationTankBlockEntity>> IRRIGATION_TANK =
+        TYPES.register("irrigation_tank", () -> BlockEntityType.Builder
+            .of(IrrigationTankBlockEntity::new, TerraVeraBlocks.IRRIGATION_TANK.get()).build(null));
 
     public static void registerCapabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event)
     {

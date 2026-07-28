@@ -1,0 +1,14 @@
+{
+  "__comment__": "Oiled cloth covering for hoop houses. Fabric treated with linseed oil to shed water while transmitting light.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CDC",
+    "CCC"
+  ],
+  "key": {
+    "C": { "item": "terravera:plant_fiber_cloth" },
+    "D": { "item": "terravera:dubbin" }
+  },
+  "result": { "id": "terravera:oiled_cloth_covering", "count": 2 }
+}

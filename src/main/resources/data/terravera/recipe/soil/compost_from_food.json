@@ -1,0 +1,11 @@
+{
+  "__comment__": "Compost: decomposed organic matter. Made by layering food scraps, leaves, and soil in a pit or barrel. Requires time.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:rotten_flesh" },
+    { "tag": "minecraft:leaves" },
+    { "item": "minecraft:dirt" },
+    { "item": "minecraft:dirt" }
+  ],
+  "result": { "id": "terravera:compost", "count": 2 }
+}

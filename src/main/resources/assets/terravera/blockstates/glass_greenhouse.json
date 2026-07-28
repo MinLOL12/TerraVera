@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "tier=2,vent_open=false,powered=false": { "model": "terravera:block/glass_greenhouse" },
+    "tier=2,vent_open=true,powered=false": { "model": "terravera:block/glass_greenhouse" },
+    "tier=2,vent_open=false,powered=true": { "model": "terravera:block/glass_greenhouse" },
+    "tier=2,vent_open=true,powered=true": { "model": "terravera:block/glass_greenhouse" }
+  }
+}

@@ -23,6 +23,11 @@ import com.terravera.common.component.Cordage;
 import com.terravera.common.component.KnappedHead;
 import com.terravera.common.component.ToolMetalState;
 import com.terravera.common.component.ToolGrip;
+import com.terravera.common.quality.CropHealth;
+import com.terravera.common.quality.MaterialQuality;
+import com.terravera.common.quality.SeedQuality;
+import com.terravera.common.quality.SoilCondition;
+import com.terravera.common.greenhouse.GreenhouseClimate;
 
 public final class TerraVeraDataComponents
 {
@@ -74,6 +79,41 @@ public final class TerraVeraDataComponents
         register("garment_wetness", builder -> builder
             .persistent(com.terravera.common.temperature.Wetness.CODEC)
             .networkSynchronized(com.terravera.common.temperature.Wetness.STREAM_CODEC));
+
+    /**
+     * Attached to natural materials (sticks, fibre, wood, clay). Carries the quality and moisture of the raw
+     * material, which affects crafting results and burn characteristics.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<MaterialQuality>> MATERIAL_QUALITY =
+        register("material_quality", builder -> builder.persistent(MaterialQuality.CODEC).networkSynchronized(MaterialQuality.STREAM_CODEC));
+
+    /**
+     * Attached to seed items. Carries the genetic quality, generation count, crop type, and viability of saved seeds.
+     * Better seeds produce better crops; saving the best seeds each harvest gradually improves the strain.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SeedQuality>> SEED_QUALITY =
+        register("seed_quality", builder -> builder.persistent(SeedQuality.CODEC).networkSynchronized(SeedQuality.STREAM_CODEC));
+
+    /**
+     * Attached to prepared farmland block entities. Tracks how well the soil has been cleared, loosened,
+     * fertilized, and weeded. Soil quality directly affects crop growth and yield.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SoilCondition>> SOIL_CONDITION =
+        register("soil_condition", builder -> builder.persistent(SoilCondition.CODEC).networkSynchronized(SoilCondition.STREAM_CODEC));
+
+    /**
+     * Attached to crop block entities. Tracks vigour, disease pressure, pest damage, and nutrient levels.
+     * Unhealthy crops grow slowly, yield poorly, and can die.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CropHealth>> CROP_HEALTH =
+        register("crop_health", builder -> builder.persistent(CropHealth.CODEC).networkSynchronized(CropHealth.STREAM_CODEC));
+
+    /**
+     * Attached to greenhouse block entities. The complete climate state: temperature, humidity, ventilation,
+     * irrigation, heating, and cooling.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<GreenhouseClimate>> GREENHOUSE_CLIMATE =
+        register("greenhouse_climate", builder -> builder.persistent(GreenhouseClimate.CODEC).networkSynchronized(GreenhouseClimate.STREAM_CODEC));
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(
         String name, UnaryOperator<DataComponentType.Builder<T>> builder)

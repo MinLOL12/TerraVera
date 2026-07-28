@@ -226,6 +226,108 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, BlockItem> DRYING_RACK = ITEMS.register("drying_rack",
         () -> new BlockItem(TerraVeraBlocks.DRYING_RACK.get(), new Item.Properties()));
 
+    // ----- Greenhouse structures --------------------------------------------------------------------------
+
+    /** Cold frame: a small glazed box that protects seedlings from frost. */
+    public static final DeferredHolder<Item, BlockItem> COLD_FRAME = ITEMS.register("cold_frame",
+        () -> new GeoMachineItem(TerraVeraBlocks.COLD_FRAME.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.GreenhouseModel<>("cold_frame")));
+
+    /** Hoop house: wood frame with fabric/oiled cloth covering for season extension. */
+    public static final DeferredHolder<Item, BlockItem> HOOP_HOUSE = ITEMS.register("hoop_house",
+        () -> new GeoMachineItem(TerraVeraBlocks.HOOP_HOUSE.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.GreenhouseModel<>("hoop_house")));
+
+    /** Glass greenhouse: durable structure with good temperature control and ventilation. */
+    public static final DeferredHolder<Item, BlockItem> GLASS_GREENHOUSE = ITEMS.register("glass_greenhouse",
+        () -> new GeoMachineItem(TerraVeraBlocks.GLASS_GREENHOUSE.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.GreenhouseModel<>("glass_greenhouse")));
+
+    /** Modern greenhouse: powered ventilation, heating, irrigation, and climate control. */
+    public static final DeferredHolder<Item, BlockItem> MODERN_GREENHOUSE = ITEMS.register("modern_greenhouse",
+        () -> new GeoMachineItem(TerraVeraBlocks.MODERN_GREENHOUSE.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.GreenhouseModel<>("modern_greenhouse")));
+
+    // ----- Greenhouse materials ---------------------------------------------------------------------------
+
+    /** A single pane of greenhouse glass, the building block of glass greenhouse walls and roofs. */
+    public static final DeferredHolder<Item, Item> GREENHOUSE_GLASS = ITEMS.registerSimpleItem("greenhouse_glass");
+
+    /** Woven oiled cloth for hoop house covering. Lets light through, sheds rain, traps some heat. */
+    public static final DeferredHolder<Item, Item> OILED_CLOTH_COVERING = ITEMS.registerSimpleItem("oiled_cloth_covering");
+
+    /** A wooden hoop frame section for hoop houses. */
+    public static final DeferredHolder<Item, Item> HOOP_FRAME = ITEMS.registerSimpleItem("hoop_frame");
+
+    /** Iron frame section for modern greenhouse structure. */
+    public static final DeferredHolder<Item, Item> GREENHOUSE_FRAME = ITEMS.registerSimpleItem("greenhouse_frame");
+
+    /** Thermostat controller for automated temperature management in modern greenhouses. */
+    public static final DeferredHolder<Item, Item> THERMOSTAT = ITEMS.registerSimpleItem("thermostat");
+
+    /** Automated irrigation controller. */
+    public static final DeferredHolder<Item, Item> IRRIGATION_CONTROLLER = ITEMS.registerSimpleItem("irrigation_controller");
+
+    // ----- Soil preparation tools and materials -----------------------------------------------------------
+
+    /** A wooden digging stick for breaking soil. The simplest soil preparation tool. */
+    public static final DeferredHolder<Item, Item> DIGGING_STICK = ITEMS.registerSimpleItem("digging_stick");
+
+    /** Compost: decomposed organic matter. The primary soil amendment. Improves fertility. */
+    public static final DeferredHolder<Item, Item> COMPOST = ITEMS.registerSimpleItem("compost");
+
+    /** Well-rotted manure. Richer than compost but rarer. Major fertility boost. */
+    public static final DeferredHolder<Item, Item> AGED_MANURE = ITEMS.registerSimpleItem("aged_manure");
+
+    /** Sand added to heavy clay soil to improve drainage and workability. */
+    public static final DeferredHolder<Item, Item> HORTICULTURAL_SAND = ITEMS.registerSimpleItem("horticultural_sand");
+
+    /** Crushed limestone for adjusting soil pH. */
+    public static final DeferredHolder<Item, Item> AGRICULTURAL_LIME = ITEMS.registerSimpleItem("agricultural_lime");
+
+    /** A stone- or bone-tipped rake for clearing stones and debris from prepared beds. */
+    public static final DeferredHolder<Item, Item> SOIL_RAKE = ITEMS.registerSimpleItem("soil_rake");
+
+    // ----- Seed system -----------------------------------------------------------------------------------
+
+    /** Standard seed. Quality varies. Used for replanting crops. */
+    public static final DeferredHolder<Item, Item> SEED = ITEMS.registerSimpleItem("seed");
+
+    /** Select seed: saved from the best plants. Higher quality, better yields. */
+    public static final DeferredHolder<Item, Item> SELECT_SEED = ITEMS.registerSimpleItem("select_seed");
+
+    /** Prize seed: generations of careful selection. The best genetics available. */
+    public static final DeferredHolder<Item, Item> PRIZE_SEED = ITEMS.registerSimpleItem("prize_seed");
+
+    // ----- Irrigation ------------------------------------------------------------------------------------
+
+    /** Drip irrigation pipe section. Distributes water to nearby prepared farmland. */
+    public static final DeferredHolder<Item, BlockItem> DRIP_IRRIGATION = ITEMS.register("drip_irrigation",
+        () -> new BlockItem(TerraVeraBlocks.DRIP_IRRIGATION.get(), new Item.Properties()));
+
+    /** Prepared farmland block item (for creative/debug placement). */
+    public static final DeferredHolder<Item, BlockItem> PREPARED_FARMLAND = ITEMS.register("prepared_farmland",
+        () -> new BlockItem(TerraVeraBlocks.PREPARED_FARMLAND.get(), new Item.Properties()));
+
+    /** Irrigation storage tank. Collects rainwater and feeds drip irrigation. */
+    public static final DeferredHolder<Item, BlockItem> IRRIGATION_TANK = ITEMS.register("irrigation_tank",
+        () -> new GeoMachineItem(TerraVeraBlocks.IRRIGATION_TANK.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.IrrigationTankModel<>()));
+
+    /** A watering can. Simple hand irrigation tool. */
+    public static final DeferredHolder<Item, Item> WATERING_CAN = ITEMS.registerSimpleItem("watering_can");
+
+    // ----- Crop disease treatment -------------------------------------------------------------------------
+
+    /** A natural fungicide made from copper sulfate and lime. Controls fungal diseases on crops. */
+    public static final DeferredHolder<Item, Item> BORDEAUX_MIXTURE = ITEMS.registerSimpleItem("bordeaux_mixture");
+
+    /** Neem oil extract. Natural pesticide that controls aphids, whiteflies, and other soft-bodied insects. */
+    public static final DeferredHolder<Item, Item> NEEM_OIL = ITEMS.registerSimpleItem("neem_oil");
+
+    /** A companion planting guide. Planting certain crops together reduces pest pressure naturally. */
+    public static final DeferredHolder<Item, Item> COMPANION_CHART = ITEMS.registerSimpleItem("companion_chart");
+
     private static DeferredHolder<Item, Item> driedBark(String id, BarkProperties properties)
     {
         return ITEMS.register(id, () -> new BarkItem(properties.dried(), true, null, new Item.Properties()));

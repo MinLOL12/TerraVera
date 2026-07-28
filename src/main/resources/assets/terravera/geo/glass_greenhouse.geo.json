@@ -1,0 +1,160 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.glass_greenhouse",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 4,
+        "visible_bounds_height": 4,
+        "visible_bounds_offset": [0, 1.5, 0]
+      },
+      "bones": [
+        {
+          "name": "foundation",
+          "pivot": [0, 0, 0],
+          "cubes": [
+            {
+              "origin": [-8, 0, -6],
+              "size": [16, 2, 12],
+              "uv": [0, 0]
+            }
+          ]
+        },
+        {
+          "name": "frame_left_wall",
+          "parent": "foundation",
+          "pivot": [-8, 2, 0],
+          "cubes": [
+            {
+              "origin": [-8, 2, -6],
+              "size": [1, 10, 12],
+              "uv": [0, 16]
+            }
+          ]
+        },
+        {
+          "name": "frame_right_wall",
+          "parent": "foundation",
+          "pivot": [7, 2, 0],
+          "cubes": [
+            {
+              "origin": [7, 2, -6],
+              "size": [1, 10, 12],
+              "uv": [0, 38]
+            }
+          ]
+        },
+        {
+          "name": "frame_back_wall",
+          "parent": "foundation",
+          "pivot": [0, 2, -6],
+          "cubes": [
+            {
+              "origin": [-7, 2, -6],
+              "size": [14, 10, 1],
+              "uv": [0, 60]
+            }
+          ]
+        },
+        {
+          "name": "glass_front",
+          "parent": "foundation",
+          "pivot": [0, 2, 6],
+          "cubes": [
+            {
+              "origin": [-7, 2, 5],
+              "size": [14, 10, 1],
+              "uv": [0, 72]
+            }
+          ]
+        },
+        {
+          "name": "glass_panels_left",
+          "parent": "foundation",
+          "pivot": [-7, 4, 0],
+          "cubes": [
+            {
+              "origin": [-7.5, 3, -5],
+              "size": [0, 8, 10],
+              "uv": [30, 16]
+            }
+          ]
+        },
+        {
+          "name": "glass_panels_right",
+          "parent": "foundation",
+          "pivot": [7, 4, 0],
+          "cubes": [
+            {
+              "origin": [7.5, 3, -5],
+              "size": [0, 8, 10],
+              "uv": [30, 34]
+            }
+          ]
+        },
+        {
+          "name": "roof",
+          "parent": "foundation",
+          "pivot": [0, 12, 0],
+          "cubes": [
+            {
+              "origin": [-8.5, 11.5, -6.5],
+              "size": [17, 1, 13],
+              "uv": [0, 84]
+            }
+          ]
+        },
+        {
+          "name": "ridge",
+          "parent": "roof",
+          "pivot": [0, 13, 0],
+          "cubes": [
+            {
+              "origin": [-1, 12, -6.5],
+              "size": [2, 2, 13],
+              "uv": [48, 0]
+            }
+          ]
+        },
+        {
+          "name": "vent_left",
+          "parent": "foundation",
+          "pivot": [-8, 9, 0],
+          "cubes": [
+            {
+              "origin": [-8.5, 7, -2],
+              "size": [1, 4, 4],
+              "uv": [48, 16]
+            }
+          ]
+        },
+        {
+          "name": "vent_right",
+          "parent": "foundation",
+          "pivot": [7, 9, 0],
+          "cubes": [
+            {
+              "origin": [7.5, 7, -2],
+              "size": [1, 4, 4],
+              "uv": [48, 24]
+            }
+          ]
+        },
+        {
+          "name": "door_frame",
+          "parent": "foundation",
+          "pivot": [0, 2, 6],
+          "cubes": [
+            {
+              "origin": [-2, 2, 5],
+              "size": [4, 8, 1],
+              "uv": [48, 32]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

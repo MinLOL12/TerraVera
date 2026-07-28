@@ -1,0 +1,75 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.irrigation_tank",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3,
+        "visible_bounds_offset": [0, 1, 0]
+      },
+      "bones": [
+        {
+          "name": "tank_body",
+          "pivot": [0, 0, 0],
+          "cubes": [
+            {
+              "origin": [-5, 0, -5],
+              "size": [10, 12, 10],
+              "uv": [0, 0]
+            }
+          ]
+        },
+        {
+          "name": "tank_rim",
+          "parent": "tank_body",
+          "pivot": [0, 12, 0],
+          "cubes": [
+            {
+              "origin": [-5.5, 11.5, -5.5],
+              "size": [11, 1, 11],
+              "uv": [0, 24]
+            }
+          ]
+        },
+        {
+          "name": "water_surface",
+          "parent": "tank_body",
+          "pivot": [0, 8, 0],
+          "cubes": [
+            {
+              "origin": [-4.5, 8, -4.5],
+              "size": [9, 0.5, 9],
+              "uv": [0, 36]
+            }
+          ]
+        },
+        {
+          "name": "spigot",
+          "parent": "tank_body",
+          "pivot": [5, 2, 0],
+          "cubes": [
+            {
+              "origin": [5, 1, -1],
+              "size": [2, 2, 2],
+              "uv": [0, 44]
+            }
+          ]
+        },
+        {
+          "name": "stand",
+          "pivot": [0, 0, 0],
+          "cubes": [
+            {
+              "origin": [-4, -2, -4],
+              "size": [8, 2, 8],
+              "uv": [0, 50]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

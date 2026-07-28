@@ -1,0 +1,13 @@
+{
+  "__comment__": "Pot recipe: compost tea. Soaking compost in warm water extracts nutrients into a liquid fertilizer.",
+  "type": "terravera:pot",
+  "ingredients": [
+    { "item": "terravera:compost" },
+    { "item": "terravera:compost" },
+    { "item": "minecraft:water_bucket" },
+    { "item": "terravera:plant_fiber" }
+  ],
+  "result": { "id": "terravera:aged_manure", "count": 2 },
+  "duration": 800,
+  "temperature": 200
+}

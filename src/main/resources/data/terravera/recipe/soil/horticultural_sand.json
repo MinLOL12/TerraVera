@@ -1,0 +1,11 @@
+{
+  "__comment__": "Horticultural sand: coarse sand mixed into heavy soil to improve drainage.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:sand" },
+    { "item": "minecraft:sand" },
+    { "item": "minecraft:sand" },
+    { "item": "minecraft:gravel" }
+  ],
+  "result": { "id": "terravera:horticultural_sand", "count": 4 }
+}

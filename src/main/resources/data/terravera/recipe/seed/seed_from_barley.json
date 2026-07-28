@@ -1,0 +1,8 @@
+{
+  "__comment__": "Extract seed from barley.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tfc:food/barley" }
+  ],
+  "result": { "id": "terravera:seed", "count": 2 }
+}

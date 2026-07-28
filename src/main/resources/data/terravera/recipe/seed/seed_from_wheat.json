@@ -1,0 +1,8 @@
+{
+  "__comment__": "Extract seed from wheat: threshing a wheat crop to recover seeds for replanting.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tfc:food/wheat" }
+  ],
+  "result": { "id": "terravera:seed", "count": 2 }
+}

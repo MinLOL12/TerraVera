@@ -1,0 +1,14 @@
+{
+  "__comment__": "Oiled cloth from linen: a finer, more durable covering made from linen instead of raw plant fibre cloth.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "LDL",
+    "LLL"
+  ],
+  "key": {
+    "L": { "item": "terravera:linen_cloth" },
+    "D": { "item": "terravera:dubbin" }
+  },
+  "result": { "id": "terravera:oiled_cloth_covering", "count": 3 }
+}

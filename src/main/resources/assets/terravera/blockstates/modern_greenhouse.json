@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "tier=3,vent_open=false,powered=false": { "model": "terravera:block/modern_greenhouse" },
+    "tier=3,vent_open=true,powered=false": { "model": "terravera:block/modern_greenhouse" },
+    "tier=3,vent_open=false,powered=true": { "model": "terravera:block/modern_greenhouse" },
+    "tier=3,vent_open=true,powered=true": { "model": "terravera:block/modern_greenhouse" }
+  }
+}

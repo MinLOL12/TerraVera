@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "tier=0,vent_open=false,powered=false": { "model": "terravera:block/cold_frame" },
+    "tier=0,vent_open=true,powered=false": { "model": "terravera:block/cold_frame" },
+    "tier=0,vent_open=false,powered=true": { "model": "terravera:block/cold_frame" },
+    "tier=0,vent_open=true,powered=true": { "model": "terravera:block/cold_frame" }
+  }
+}

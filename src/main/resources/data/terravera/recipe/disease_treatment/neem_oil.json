@@ -1,0 +1,11 @@
+{
+  "__comment__": "Neem oil: cold-pressed from neem seeds. A natural pesticide that controls aphids, whiteflies, and spider mites.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "terravera:bitter_herbs" },
+    { "item": "terravera:bitter_herbs" },
+    { "item": "minecraft:bowl" },
+    { "item": "minecraft:glass_bottle" }
+  ],
+  "result": { "id": "terravera:neem_oil", "count": 1 }
+}

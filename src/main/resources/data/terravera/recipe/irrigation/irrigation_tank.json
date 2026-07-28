@@ -1,0 +1,13 @@
+{
+  "__comment__": "Irrigation tank: rainwater storage that feeds drip irrigation. Made from staved wood sealed with pitch.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "P P",
+    "PPP"
+  ],
+  "key": {
+    "P": { "tag": "minecraft:planks" }
+  },
+  "result": { "id": "terravera:irrigation_tank", "count": 1 }
+}

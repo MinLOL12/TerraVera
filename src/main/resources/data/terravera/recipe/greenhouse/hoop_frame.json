@@ -1,0 +1,13 @@
+{
+  "__comment__": "Hoop frame section: bent wood or sapling strips lashed together to form the arch of a hoop house.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "S S",
+    "S S"
+  ],
+  "key": {
+    "S": { "tag": "c:rods/wooden" }
+  },
+  "result": { "id": "terravera:hoop_frame", "count": 2 }
+}

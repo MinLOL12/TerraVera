@@ -1,0 +1,18 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.irrigation_tank.idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "water_surface": {
+          "position": {
+            "0.0": { "vector": [0, 0, 0] },
+            "2.0": { "vector": [0, 0.3, 0], "easing": "easeInOutSine" },
+            "4.0": { "vector": [0, 0, 0], "easing": "easeInOutSine" }
+          }
+        }
+      }
+    }
+  }
+}

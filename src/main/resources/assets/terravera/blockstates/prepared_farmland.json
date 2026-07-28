@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "preparation=0": { "model": "terravera:block/prepared_farmland_0" },
+    "preparation=1": { "model": "terravera:block/prepared_farmland_1" },
+    "preparation=2": { "model": "terravera:block/prepared_farmland_2" },
+    "preparation=3": { "model": "terravera:block/prepared_farmland_3" }
+  }
+}

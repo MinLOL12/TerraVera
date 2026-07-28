@@ -1,0 +1,16 @@
+{
+  "__comment__": "Hoop house: wood frame with oiled cloth covering. Season extension without glass.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "FHF",
+    "WWW"
+  ],
+  "key": {
+    "C": { "item": "terravera:oiled_cloth_covering" },
+    "F": { "item": "terravera:hoop_frame" },
+    "H": { "item": "terravera:cordage" },
+    "W": { "tag": "minecraft:planks" }
+  },
+  "result": { "id": "terravera:hoop_house", "count": 1 }
+}

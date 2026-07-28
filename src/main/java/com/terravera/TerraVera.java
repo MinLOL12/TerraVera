@@ -37,6 +37,7 @@ import com.terravera.common.skill.SkillSystem;
 import com.terravera.common.temperature.TemperatureEventHandler;
 import com.terravera.common.temperature.TerraVeraClothing;
 import com.terravera.common.structure.StructuralIntegrity;
+import com.terravera.common.farming.FarmingEventHandler;
 import com.terravera.config.TerraVeraConfig;
 
 /**
@@ -104,6 +105,10 @@ public final class TerraVera
         // Body temperature: climate, clothing, shelter, and the symptoms of struggling to regulate.
         // See com.terravera.common.temperature.
         TemperatureEventHandler.init();
+
+        // Farming: soil preparation, crop diseases, seed quality, greenhouse management.
+        // See com.terravera.common.farming.
+        FarmingEventHandler.init();
 
         if (FMLEnvironment.dist == Dist.CLIENT)
         {
