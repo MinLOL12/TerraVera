@@ -18,6 +18,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import com.terravera.TerraVera;
+import com.terravera.common.component.BarkProperties;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.component.KnappedHead;
 import com.terravera.common.component.ToolMetalState;
@@ -27,6 +28,10 @@ public final class TerraVeraDataComponents
 {
     public static final DeferredRegister<DataComponentType<?>> COMPONENTS =
         DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, TerraVera.MOD_ID);
+
+    /** Moisture and species-dependent material properties carried by harvested bark sheets. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BarkProperties>> BARK_PROPERTIES =
+        register("bark_properties", builder -> builder.persistent(BarkProperties.CODEC).networkSynchronized(BarkProperties.STREAM_CODEC));
 
     /** Attached to knapped tool heads. Describes what kind of working end was produced, and how well. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<KnappedHead>> KNAPPED_HEAD =

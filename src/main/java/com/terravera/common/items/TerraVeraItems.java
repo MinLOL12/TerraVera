@@ -18,6 +18,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import com.terravera.TerraVera;
 import com.terravera.common.blocks.TerraVeraBlocks;
+import com.terravera.common.component.BarkProperties;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.TerraVeraDataComponents;
 
@@ -55,6 +56,20 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> REFRIGERANT_CANISTER = ITEMS.registerSimpleItem("refrigerant_canister");
     public static final DeferredHolder<Item, Item> AIR_FILTER = ITEMS.registerSimpleItem("air_filter");
 
+    // ----- Primitive water collection -----------------------------------------------------------------------
+    public static final DeferredHolder<Item, BlockItem> RAIN_CATCHER = ITEMS.register("rain_catcher",
+        () -> new GeoMachineItem(TerraVeraBlocks.RAIN_CATCHER.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.WaterCollectorModel<>(com.terravera.common.water.CollectorType.RAIN_CATCHER)));
+    public static final DeferredHolder<Item, BlockItem> DEW_COLLECTOR = ITEMS.register("dew_collector",
+        () -> new GeoMachineItem(TerraVeraBlocks.DEW_COLLECTOR.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.WaterCollectorModel<>(com.terravera.common.water.CollectorType.DEW_COLLECTOR)));
+    public static final DeferredHolder<Item, BlockItem> ROCK_BASIN = ITEMS.register("rock_basin",
+        () -> new GeoMachineItem(TerraVeraBlocks.ROCK_BASIN.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.WaterCollectorModel<>(com.terravera.common.water.CollectorType.ROCK_BASIN)));
+    public static final DeferredHolder<Item, BlockItem> SOLAR_STILL = ITEMS.register("solar_still",
+        () -> new GeoMachineItem(TerraVeraBlocks.SOLAR_STILL.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.WaterCollectorModel<>(com.terravera.common.water.CollectorType.SOLAR_STILL)));
+
     // ----- Structural construction ---------------------------------------------------------------------------
 
     public static final DeferredHolder<Item, BlockItem> RUBBLE_FOUNDATION = ITEMS.register("rubble_foundation",
@@ -63,6 +78,8 @@ public final class TerraVeraItems
         () -> new BlockItem(TerraVeraBlocks.WOODEN_SUPPORT_BEAM.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> WROUGHT_IRON_SUPPORT_BEAM = ITEMS.register("wrought_iron_support_beam",
         () -> new BlockItem(TerraVeraBlocks.WROUGHT_IRON_SUPPORT_BEAM.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, BlockItem> BARK_ROOFING = ITEMS.register("bark_roofing",
+        () -> new BlockItem(TerraVeraBlocks.BARK_ROOFING.get(), new Item.Properties()));
 
     // ----- Handles, grips, and field knowledge ---------------------------------------------------------------
 
@@ -77,6 +94,34 @@ public final class TerraVeraItems
     /** A pocket field notebook used to review the practical knowledge learned through play. */
     public static final DeferredHolder<Item, Item> FIELD_NOTES = ITEMS.register("field_notes",
         () -> new FieldNotesItem(new Item.Properties().stacksTo(1)));
+
+    // ----- Bark harvesting ----------------------------------------------------------------------------------
+
+    public static final BarkProperties OAK_BARK_PROPERTIES = new BarkProperties("oak", 0.62f, 0.90f, 0.45f, 0.75f, 3.5f);
+    public static final BarkProperties HEMLOCK_BARK_PROPERTIES = new BarkProperties("hemlock", 0.68f, 0.95f, 0.35f, 0.72f, 4.0f);
+    public static final BarkProperties WILLOW_BARK_PROPERTIES = new BarkProperties("willow", 0.72f, 0.55f, 0.85f, 0.62f, 2.0f);
+    public static final BarkProperties BIRCH_BARK_PROPERTIES = new BarkProperties("birch", 0.55f, 0.35f, 0.92f, 0.96f, 1.5f);
+    public static final BarkProperties BAST_BARK_PROPERTIES = new BarkProperties("bast", 0.70f, 0.30f, 0.95f, 0.66f, 2.0f);
+    public static final BarkProperties MIXED_BARK_PROPERTIES = new BarkProperties("mixed", 0.65f, 0.40f, 0.50f, 0.70f, 3.0f);
+
+    // Dry forms are registered first so fresh BarkItems can safely point at their conversion target.
+    public static final DeferredHolder<Item, Item> DRIED_OAK_BARK = driedBark("dried_oak_bark", OAK_BARK_PROPERTIES);
+    public static final DeferredHolder<Item, Item> DRIED_HEMLOCK_BARK = driedBark("dried_hemlock_bark", HEMLOCK_BARK_PROPERTIES);
+    public static final DeferredHolder<Item, Item> DRIED_WILLOW_BARK = driedBark("dried_willow_bark", WILLOW_BARK_PROPERTIES);
+    public static final DeferredHolder<Item, Item> DRIED_BIRCH_BARK = driedBark("dried_birch_bark", BIRCH_BARK_PROPERTIES);
+    public static final DeferredHolder<Item, Item> DRIED_BAST_BARK = driedBark("dried_bast_bark", BAST_BARK_PROPERTIES);
+    public static final DeferredHolder<Item, Item> DRIED_BARK = driedBark("dried_bark", MIXED_BARK_PROPERTIES);
+
+    public static final DeferredHolder<Item, Item> OAK_BARK = freshBark("oak_bark", OAK_BARK_PROPERTIES, DRIED_OAK_BARK);
+    public static final DeferredHolder<Item, Item> HEMLOCK_BARK = freshBark("hemlock_bark", HEMLOCK_BARK_PROPERTIES, DRIED_HEMLOCK_BARK);
+    /** Salicin-bearing willow bark remains usable fresh as a basic remedy, but must be dried for fuel and cordage. */
+    public static final DeferredHolder<Item, Item> WILLOW_BARK = freshBark("willow_bark", WILLOW_BARK_PROPERTIES, DRIED_WILLOW_BARK);
+    public static final DeferredHolder<Item, Item> BIRCH_BARK = freshBark("birch_bark", BIRCH_BARK_PROPERTIES, DRIED_BIRCH_BARK);
+    public static final DeferredHolder<Item, Item> BAST_BARK = freshBark("bast_bark", BAST_BARK_PROPERTIES, DRIED_BAST_BARK);
+    public static final DeferredHolder<Item, Item> BARK = freshBark("bark", MIXED_BARK_PROPERTIES, DRIED_BARK);
+
+    /** A light folded vessel for dry food and supplies; it is deliberately not a sealed fluid container. */
+    public static final DeferredHolder<Item, Item> BIRCH_BARK_CONTAINER = ITEMS.registerSimpleItem("birch_bark_container");
 
     // ----- Cordage chain -------------------------------------------------------------------------------------
     // Raw fibre -> retted fibre -> cordage -> lashing on a tool.
@@ -111,8 +156,6 @@ public final class TerraVeraItems
      * feel slightly less awful. Never cures anything, and it is not supposed to.
      */
     public static final DeferredHolder<Item, Item> BITTER_HERBS = ITEMS.registerSimpleItem("bitter_herbs");
-    /** Salicin-bearing bark, stripped from willow with a knife. Real aspirin - it manages fever and aching. */
-    public static final DeferredHolder<Item, Item> WILLOW_BARK = ITEMS.registerSimpleItem("willow_bark");
     /** Anthelmintic herbs - wormwood and its relatives. The only stone-age answer to a tapeworm. */
     public static final DeferredHolder<Item, Item> WORMWOOD = ITEMS.registerSimpleItem("wormwood");
     /** Clean cloth boiled and kept dry, for dressing a wound before it turns. */
@@ -182,6 +225,17 @@ public final class TerraVeraItems
     /** A drying frame for wet clothes. Hang a soaked coat near a fire rather than wearing it dry. */
     public static final DeferredHolder<Item, BlockItem> DRYING_RACK = ITEMS.register("drying_rack",
         () -> new BlockItem(TerraVeraBlocks.DRYING_RACK.get(), new Item.Properties()));
+
+    private static DeferredHolder<Item, Item> driedBark(String id, BarkProperties properties)
+    {
+        return ITEMS.register(id, () -> new BarkItem(properties.dried(), true, null, new Item.Properties()));
+    }
+
+    private static DeferredHolder<Item, Item> freshBark(String id, BarkProperties properties,
+                                                        Supplier<? extends Item> dried)
+    {
+        return ITEMS.register(id, () -> new BarkItem(properties, false, dried, new Item.Properties()));
+    }
 
     // ----- Knapped heads -------------------------------------------------------------------------------------
     // One item per working end, not one per (rock category x tool). The stone is in the component.

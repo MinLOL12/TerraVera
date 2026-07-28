@@ -1,0 +1,7 @@
+{
+  "values": [
+    {"id":"#c:tools/knife","required":false},
+    {"id":"#c:tools/shear","required":false},
+    {"id":"#minecraft:axes","required":false}
+  ]
+}

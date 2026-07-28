@@ -7,13 +7,24 @@
     "fluid": "minecraft:water"
   },
   "ingredients": [
-    { "item": "terravera:willow_bark" },
-    { "item": "terravera:willow_bark" },
-    { "item": "terravera:willow_bark" },
-    { "item": "tfc:burlap_cloth" }
+    {
+      "tag": "terravera:willow_barks"
+    },
+    {
+      "tag": "terravera:willow_barks"
+    },
+    {
+      "tag": "terravera:willow_barks"
+    },
+    {
+      "item": "tfc:burlap_cloth"
+    }
   ],
   "item_output": [
-    { "count": 2, "id": "terravera:salicylate_extract" }
+    {
+      "count": 2,
+      "id": "terravera:salicylate_extract"
+    }
   ],
   "temperature": 330.0
 }

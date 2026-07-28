@@ -1,1 +1,52 @@
-{"variants":{"":{"model":"terravera:block/air_conditioner"}}}
+{
+  "variants": {
+    "facing=north,powered=false,running=false": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=north,powered=false,running=true": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=north,powered=true,running=false": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=north,powered=true,running=true": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=south,powered=false,running=false": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=south,powered=false,running=true": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=south,powered=true,running=false": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=south,powered=true,running=true": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=east,powered=false,running=false": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=east,powered=false,running=true": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=east,powered=true,running=false": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=east,powered=true,running=true": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=west,powered=false,running=false": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=west,powered=false,running=true": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=west,powered=true,running=false": {
+      "model": "terravera:block/air_conditioner"
+    },
+    "facing=west,powered=true,running=true": {
+      "model": "terravera:block/air_conditioner"
+    }
+  }
+}

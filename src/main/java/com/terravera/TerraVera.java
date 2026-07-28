@@ -18,6 +18,7 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 import com.terravera.client.TerraVeraClient;
+import com.terravera.common.bark.BarkHarvesting;
 import com.terravera.common.blocks.TerraVeraBlockEntities;
 import com.terravera.common.blocks.TerraVeraBlocks;
 import com.terravera.common.TerraVeraCreativeTab;
@@ -86,8 +87,10 @@ public final class TerraVera
         TerraVeraClothing.ARMOR_MATERIALS.register(bus);
 
         bus.addListener(TerraVeraCreativeTab::onBuildTabContents);
+        bus.addListener(TerraVeraBlockEntities::registerCapabilities);
 
         TerraVeraEventHandler.init();
+        BarkHarvesting.init();
         TasteEventHandler.init();   // Register the tasting system
         SkillSystem.init();
         net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(StructuralIntegrity::onPlaced);

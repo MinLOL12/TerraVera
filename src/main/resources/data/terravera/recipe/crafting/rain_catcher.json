@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["CLC", "S S", "S S"],
+  "key": {
+    "C": {"item": "tfc:burlap_cloth"},
+    "L": {"tag": "terravera:cordage"},
+    "S": {"item": "minecraft:stick"}
+  },
+  "result": {"id": "terravera:rain_catcher"}
+}

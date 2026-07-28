@@ -31,6 +31,26 @@ whatever you lash with it, so an early axe is genuinely worse than one you make 
 Retting is a real process — soaking the stems rots away the pectin binding the bast to the woody core — and it takes
 an in-game day in a sealed barrel. It is the main time gate on early progression.
 
+### Bark and off-grid water
+
+Living trees can be right-clicked with a knife, shears, or a tagged cutting tool to remove species-specific bark.
+Fresh bark carries moisture, tannin, flexibility, flammability, and thickness data. Dry it on a drying rack (much
+faster near a fire) or slowly over a campfire before using it as tinder, TFC firepit fuel, tanning stock, bast fibre,
+folded birch containers, or layered weatherproof roofing. Willow remains usable fresh as a basic salicylate remedy.
+Two strips per tree in a seven-day recovery window are sustainable; a third damages the canopy and repeated
+ring-barking can kill the trunk. Harvest pressure is saved with the world rather than resetting on reload.
+
+Four passive water collectors bridge early survival and settled water storage:
+
+- **Rain Catcher** — fastest and largest, but only works under open sky during rain.
+- **Dew Collector** — small nighttime yield when the cloth has clear sky.
+- **Rock Basin** — cheap rain storage with more contamination than covered collectors.
+- **Solar Still** — very low daytime output, but the cleanest collected water.
+
+Each is a real fluid handler, so TFC jugs and other compatible containers can draw from it. Source contamination is
+written onto the filled container for TerraVera's disease system. Their frames, cloth layers, stone courses, covers,
+and animated water surfaces use GeckoLib geometry rather than flat block textures.
+
 ### 2. Knapping by function, not by silhouette
 
 TerraFirmaCraft's knapping asks you to reproduce an exact picture. Miss a square and you get nothing, with no

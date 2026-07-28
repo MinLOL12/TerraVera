@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "misc",
+  "ingredient": {
+    "item": "terravera:birch_bark"
+  },
+  "result": {
+    "id": "terravera:dried_birch_bark"
+  },
+  "experience": 0.0,
+  "cookingtime": 1200
+}

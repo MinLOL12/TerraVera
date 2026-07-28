@@ -15,6 +15,7 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
 import com.terravera.client.model.AirConditionerModel;
 import com.terravera.client.model.HandCrankModel;
 import com.terravera.client.model.WindTurbineModel;
+import com.terravera.client.model.WaterCollectorModel;
 import com.terravera.common.blocks.TerraVeraBlockEntities;
 
 /**
@@ -22,7 +23,7 @@ import com.terravera.common.blocks.TerraVeraBlockEntities;
  * <p>
  * Registers a custom knapping screen that uses TFC's native buttons and textures
  * but displays TerraVera's function-based knapping feedback, and the GeckoLib block renderers that animate the
- * wind turbine rotor, the air-conditioner fan, and the hand-crank handle.
+ * wind turbine rotor, the air-conditioner fan, the hand-crank handle, and layered water collectors.
  */
 public final class TerraVeraClient
 {
@@ -41,6 +42,8 @@ public final class TerraVeraClient
             context -> new GeoBlockRenderer<>(new AirConditionerModel<>()));
         event.registerBlockEntityRenderer(TerraVeraBlockEntities.HAND_CRANK.get(),
             context -> new GeoBlockRenderer<>(new HandCrankModel<>()));
+        event.registerBlockEntityRenderer(TerraVeraBlockEntities.WATER_COLLECTOR.get(),
+            context -> new GeoBlockRenderer<>(new WaterCollectorModel<>()));
     }
 
     private static void registerScreens(RegisterMenuScreensEvent event)

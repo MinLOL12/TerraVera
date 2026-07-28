@@ -16,6 +16,7 @@ import com.terravera.TerraVera;
 import com.terravera.common.blockentity.AirConditionerBlockEntity;
 import com.terravera.common.blockentity.HandCrankBlockEntity;
 import com.terravera.common.blockentity.WindTurbineBlockEntity;
+import com.terravera.common.water.WaterCollectorBlockEntity;
 
 /**
  * Block entity types for TerraVera's animated machines. The block entities exist purely to host GeckoLib animation
@@ -37,6 +38,18 @@ public final class TerraVeraBlockEntities
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HandCrankBlockEntity>> HAND_CRANK =
         TYPES.register("hand_crank", () -> BlockEntityType.Builder
             .of(HandCrankBlockEntity::new, TerraVeraBlocks.HAND_CRANK.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WaterCollectorBlockEntity>> WATER_COLLECTOR =
+        TYPES.register("water_collector", () -> BlockEntityType.Builder
+            .of(WaterCollectorBlockEntity::new,
+                TerraVeraBlocks.RAIN_CATCHER.get(), TerraVeraBlocks.DEW_COLLECTOR.get(),
+                TerraVeraBlocks.ROCK_BASIN.get(), TerraVeraBlocks.SOLAR_STILL.get()).build(null));
+
+    public static void registerCapabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event)
+    {
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+            WATER_COLLECTOR.get(), (collector, side) -> collector.fluidHandler());
+    }
 
     private TerraVeraBlockEntities() {}
 }

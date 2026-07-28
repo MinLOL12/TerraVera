@@ -19,7 +19,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
 import com.terravera.common.blockentity.AirConditionerBlockEntity;
 import com.terravera.common.climate.ClimateControlSystem;
 import com.terravera.common.container.ClimateControllerMenu;
@@ -36,6 +41,20 @@ public class AirConditionerBlock extends HorizontalDirectionalBlock implements E
 
     public static final BooleanProperty POWERED = BooleanProperty.create("powered");
     public static final BooleanProperty RUNNING = BooleanProperty.create("running");
+
+    // Matches the actual GeckoLib cabinet: base, corner rails/panels, roof grille, front louvers and rear terminal.
+    // The old inherited full cube was visually offset and selected empty space beside the model.
+    private static final VoxelShape NORTH_SHAPE = Shapes.or(
+        box(0, 0, 0, 16, 2, 16),
+        box(0, 2, 0, 2, 16, 16), box(14, 2, 0, 16, 16, 16),
+        box(2, 2, 15, 14, 14, 16), box(2, 3, -0.3, 14, 14, 2),
+        box(2, 14, 0, 14, 16, 2), box(2, 14, 14, 14, 16, 16),
+        box(2, 15, 4, 14, 16, 5.2), box(2, 15, 7.4, 14, 16, 8.6),
+        box(2, 15, 10.8, 14, 16, 12),
+        box(6.5, 0.5, 15.5, 9.5, 2.5, 16.5));
+    private static final VoxelShape SOUTH_SHAPE = rotateFromNorth(NORTH_SHAPE, Direction.SOUTH);
+    private static final VoxelShape EAST_SHAPE = rotateFromNorth(NORTH_SHAPE, Direction.EAST);
+    private static final VoxelShape WEST_SHAPE = rotateFromNorth(NORTH_SHAPE, Direction.WEST);
 
     public AirConditionerBlock(Properties properties) {
         super(properties);
@@ -55,6 +74,42 @@ public class AirConditionerBlock extends HorizontalDirectionalBlock implements E
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return shapeFor(state);
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return shapeFor(state);
+    }
+
+    private static VoxelShape shapeFor(BlockState state) {
+        return switch (state.getValue(FACING)) {
+            case SOUTH -> SOUTH_SHAPE;
+            case EAST -> EAST_SHAPE;
+            case WEST -> WEST_SHAPE;
+            default -> NORTH_SHAPE;
+        };
+    }
+
+    private static VoxelShape rotateFromNorth(VoxelShape source, Direction facing) {
+        VoxelShape result = Shapes.empty();
+        for (AABB box : source.toAabbs()) {
+            final AABB rotated = switch (facing) {
+                case SOUTH -> new AABB(1 - box.maxX, box.minY, 1 - box.maxZ,
+                    1 - box.minX, box.maxY, 1 - box.minZ);
+                case EAST -> new AABB(1 - box.maxZ, box.minY, box.minX,
+                    1 - box.minZ, box.maxY, box.maxX);
+                case WEST -> new AABB(box.minZ, box.minY, 1 - box.maxX,
+                    box.maxZ, box.maxY, 1 - box.minX);
+                default -> box;
+            };
+            result = Shapes.or(result, Shapes.create(rotated));
+        }
+        return result.optimize();
     }
 
     @Override

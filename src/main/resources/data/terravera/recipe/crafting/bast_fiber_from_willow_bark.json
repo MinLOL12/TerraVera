@@ -1,0 +1,12 @@
+{
+  "type": "tfc:advanced_shapeless_crafting",
+  "ingredients": [
+    {"item": "terravera:dried_willow_bark"},
+    {"tag": "c:tools/knife"}
+  ],
+  "primary_ingredient": {"tag": "c:tools/knife"},
+  "remainder": {
+    "modifiers": [{"type": "tfc:damage_crafting_remainder"}]
+  },
+  "result": {"id": "terravera:bast_fiber", "count": 1}
+}

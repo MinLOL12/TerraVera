@@ -1,6 +1,7 @@
 {
   "__comment__": "Raw willow bark and relatives. Salicin - real antipyretic chemistry.",
   "values": [
-    "terravera:willow_bark"
+    "terravera:willow_bark",
+    "terravera:dried_willow_bark"
   ]
 }

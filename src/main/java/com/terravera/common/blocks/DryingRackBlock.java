@@ -27,6 +27,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import com.terravera.common.TerraVeraDataComponents;
+import com.terravera.common.items.BarkItem;
 import com.terravera.common.temperature.Shelter;
 import com.terravera.common.temperature.TemperatureSystem;
 import com.terravera.common.temperature.Wetness;
@@ -82,6 +83,30 @@ public class DryingRackBlock extends HorizontalDirectionalBlock
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hit)
     {
+        // Fresh bark dries by losing real component moisture. A nearby fire is fast; an unheated rack takes repeated
+        // visits and is ineffective in freezing or wet weather. At the threshold it becomes the matching dried item.
+        if (stack.getItem() instanceof BarkItem bark && !bark.properties(stack).isDry())
+        {
+            if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
+
+            final Shelter barkShelter = Shelter.survey(level, pos.above());
+            final float barkAmbient = TemperatureSystem.ambientTemperature(level, pos);
+            float dried = 0.05f;
+            if (barkShelter.hasFire()) dried += 0.38f;
+            if (barkShelter.isIndoors()) dried += 0.06f;
+            if (barkAmbient > 20f) dried += 0.08f;
+            if (barkAmbient < 0f) dried *= 0.2f;
+            if (level.isRainingAt(pos.above()) && !barkShelter.isIndoors()) dried *= 0.1f;
+
+            final ItemStack result = bark.dry(stack, dried);
+            player.setItemInHand(hand, result);
+            final boolean dry = result.getItem() instanceof BarkItem resultBark && resultBark.properties(result).isDry();
+            player.displayClientMessage(Component.translatable(dry
+                ? "terravera.bark.dried" : "terravera.bark.drying").withStyle(ChatFormatting.GRAY), true);
+            level.playSound(null, pos, SoundType.WOOD.getPlaceSound(), net.minecraft.sounds.SoundSource.BLOCKS, 0.5f, 1.2f);
+            return ItemInteractionResult.SUCCESS;
+        }
+
         final Wetness wetness = stack.get(TerraVeraDataComponents.GARMENT_WETNESS.get());
         if (wetness == null || wetness.isDry())
         {

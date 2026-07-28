@@ -1,9 +1,14 @@
 package com.terravera.common.items;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -15,8 +20,8 @@ import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
- * BlockItem for TerraVera's GeckoLib-animated machines, so the wind turbine, air conditioner and hand crank render
- * as their full 3D models while held, in the hand, and in the creative inventory - not as flat textures. The model
+ * BlockItem for TerraVera's GeckoLib objects, so machines and layered water collectors render as their full 3D
+ * models while held, in the hand, and in the creative inventory - not as flat textures. The model
  * supplier hands over the same geo model the in-world block renderer uses.
  */
 public class GeoMachineItem extends BlockItem implements GeoItem {
@@ -31,6 +36,16 @@ public class GeoMachineItem extends BlockItem implements GeoItem {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         // The item form is a static display; all real animation happens on the placed block entity.
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        if (getBlock() instanceof com.terravera.common.water.WaterCollectorBlock collector) {
+            tooltip.add(Component.translatable("terravera.water_collector." + collector.collectorType().id() + "_hint")
+                .withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("terravera.water_collector.capacity", collector.collectorType().capacity())
+                .withStyle(ChatFormatting.DARK_AQUA));
+        }
     }
 
     @Override
