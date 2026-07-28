@@ -8,14 +8,18 @@
 package com.terravera.common.farming;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -27,10 +31,12 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import com.terravera.common.TerraVeraDataComponents;
+import com.terravera.common.blocks.TerraVeraBlocks;
 import com.terravera.common.items.TerraVeraItems;
 import com.terravera.common.quality.CropHealth;
 import com.terravera.common.quality.SeedQuality;
 import com.terravera.common.quality.SoilCondition;
+import com.terravera.common.greenhouse.GreenhouseBlock;
 import com.terravera.common.greenhouse.GreenhouseBlockEntity;
 import com.terravera.config.TerraVeraConfig;
 
@@ -47,10 +53,17 @@ public final class FarmingEventHandler
     private static final TagKey<Block> CROP_DISEASE_HOSTS = TagKey.create(
         net.minecraft.core.registries.Registries.BLOCK,
         ResourceLocation.fromNamespaceAndPath("terravera", "crop_disease_hosts"));
+    private static final TagKey<Block> PREPARABLE_SOIL = TagKey.create(
+        net.minecraft.core.registries.Registries.BLOCK,
+        ResourceLocation.fromNamespaceAndPath("terravera", "preparable_soil"));
+    private static final TagKey<Item> TERRAVERA_SEEDS = TagKey.create(
+        net.minecraft.core.registries.Registries.ITEM,
+        ResourceLocation.fromNamespaceAndPath("terravera", "seeds"));
 
     public static void init()
     {
         NeoForge.EVENT_BUS.addListener(FarmingEventHandler::onCropHarvest);
+        NeoForge.EVENT_BUS.addListener(FarmingEventHandler::onSeedPlanting);
         NeoForge.EVENT_BUS.addListener(FarmingEventHandler::onSoilPreparation);
         NeoForge.EVENT_BUS.addListener(FarmingEventHandler::onLevelTick);
     }
@@ -114,6 +127,54 @@ public final class FarmingEventHandler
     }
 
     /**
+     * TerraVera seed items carry quality data, so they are not vanilla SeedItems. Handle their planting here, and
+     * also let ordinary seed-like items plant on TerraVera prepared farmland. Greenhouse blocks accept seeds into
+     * their internal tray capacity instead of silently doing nothing.
+     */
+    @SubscribeEvent
+    public static void onSeedPlanting(PlayerInteractEvent.RightClickBlock event)
+    {
+        if (event.getHand() != net.minecraft.world.InteractionHand.MAIN_HAND) return;
+        if (!(event.getLevel() instanceof ServerLevel level)) return;
+        if (!TerraVeraConfig.SERVER.enableFarming.get()) return;
+
+        ItemStack held = event.getEntity().getMainHandItem();
+        if (!isSeedLike(held)) return;
+
+        BlockPos clickedPos = event.getPos();
+        BlockState clicked = level.getBlockState(clickedPos);
+        Player player = event.getEntity();
+
+        if (clicked.getBlock() instanceof GreenhouseBlock
+            && level.getBlockEntity(clickedPos) instanceof GreenhouseBlockEntity greenhouse)
+        {
+            if (greenhouse.tryPlantSeed(held, player))
+            {
+                if (!player.isCreative()) held.shrink(1);
+            }
+            event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+            event.setCanceled(true);
+            return;
+        }
+
+        if (event.getFace() != Direction.UP) return;
+        if (!canPlantTerraVeraCropOn(clicked)) return;
+        if (!level.getBlockState(clickedPos.above()).isAir()) return;
+
+        // Do not hijack vanilla seeds on vanilla farmland; vanilla can handle those. We only add compatibility for
+        // prepared soil and for TerraVera's quality-bearing seeds.
+        boolean terraveraSeed = held.is(TERRAVERA_SEEDS);
+        boolean preparedSoil = clicked.is(TerraVeraBlocks.PREPARED_FARMLAND.get());
+        if (!terraveraSeed && !preparedSoil) return;
+
+        level.setBlock(clickedPos.above(), TerraVeraBlocks.CROP.get().defaultBlockState(), Block.UPDATE_ALL);
+        if (!player.isCreative()) held.shrink(1);
+        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("terravera.crop.planted"), true);
+        event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+        event.setCanceled(true);
+    }
+
+    /**
      * Right-clicking dirt with a stone-tipped digging stick or hoe starts soil preparation.
      * This converts vanilla dirt/TFC soil into prepared farmland with initial low quality.
      */
@@ -124,8 +185,9 @@ public final class FarmingEventHandler
         if (!(event.getLevel() instanceof ServerLevel level)) return;
         if (!TerraVeraConfig.SERVER.enableFarming.get()) return;
 
-        BlockState clicked = level.getBlockState(event.getPos());
-        BlockPos above = event.getPos().above();
+        BlockPos soilPos = event.getPos();
+        BlockState clicked = level.getBlockState(soilPos);
+        BlockPos above = soilPos.above();
         BlockState aboveState = level.getBlockState(above);
 
         // Must be clicking on dirt/soil with empty space above
@@ -138,13 +200,14 @@ public final class FarmingEventHandler
             return;
         }
 
-        // Convert to prepared farmland
-        BlockState farmland = com.terravera.common.blocks.TerraVeraBlocks.PREPARED_FARMLAND.get()
+        // Convert the clicked soil itself to prepared farmland. The old code placed the new block in the air above,
+        // which created a floating soil block and left the original dirt untouched.
+        BlockState farmland = TerraVeraBlocks.PREPARED_FARMLAND.get()
             .defaultBlockState().setValue(PreparedFarmlandBlock.PREPARATION, 1);
-        level.setBlock(above, farmland, Block.UPDATE_ALL);
+        level.setBlock(soilPos, farmland, Block.UPDATE_ALL);
 
         // Set initial soil condition - just cleared, not yet loosened or fertilized
-        if (level.getBlockEntity(above) instanceof PreparedFarmlandBlockEntity be)
+        if (level.getBlockEntity(soilPos) instanceof PreparedFarmlandBlockEntity be)
         {
             be.setSoilCondition(new SoilCondition(0.1f, 0.0f, 0.1f, 0.0f, 0.3f));
         }
@@ -228,12 +291,41 @@ public final class FarmingEventHandler
 
     private static boolean isTillable(BlockState state)
     {
-        // Accept vanilla dirt, grass blocks, and TFC soil blocks
-        return state.is(BlockTags.DIRT) ||
+        // Accept vanilla dirt, grass blocks, the datapack-configurable TerraVera preparable soil tag, and TFC soil blocks.
+        String path = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
+        return state.is(PREPARABLE_SOIL) ||
+            state.is(BlockTags.DIRT) ||
             state.is(net.minecraft.world.level.block.Blocks.GRASS_BLOCK) ||
-            BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath().contains("dirt") ||
-            BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath().contains("loam") ||
-            BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath().contains("silt");
+            path.contains("dirt") ||
+            path.contains("loam") ||
+            path.contains("silt") ||
+            path.contains("soil");
+    }
+
+    private static boolean canPlantTerraVeraCropOn(BlockState state)
+    {
+        String path = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
+        return state.is(TerraVeraBlocks.PREPARED_FARMLAND.get()) ||
+            state.is(net.minecraft.world.level.block.Blocks.FARMLAND) ||
+            state.is(BlockTags.DIRT) ||
+            path.contains("loam") ||
+            path.contains("silt") ||
+            path.contains("soil") ||
+            path.contains("farmland");
+    }
+
+    private static boolean isSeedLike(ItemStack stack)
+    {
+        if (stack.isEmpty()) return false;
+        if (stack.is(TERRAVERA_SEEDS)) return true;
+        if (stack.is(Items.WHEAT_SEEDS) || stack.is(Items.BEETROOT_SEEDS) || stack.is(Items.MELON_SEEDS)
+            || stack.is(Items.PUMPKIN_SEEDS) || stack.is(Items.TORCHFLOWER_SEEDS) || stack.is(Items.PITCHER_POD))
+        {
+            return true;
+        }
+        String path = BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
+        return !path.contains("seed_tray") && (path.endsWith("_seed") || path.endsWith("_seeds")
+            || path.contains("/seed") || path.contains("seeds/"));
     }
 
     private FarmingEventHandler() {}

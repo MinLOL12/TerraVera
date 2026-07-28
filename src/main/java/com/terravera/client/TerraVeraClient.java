@@ -62,6 +62,7 @@ public final class TerraVeraClient
         // metal tool maintenance — placing the hammer and tool, selecting an operation, and striking.
         event.register(com.terravera.common.container.TerraVeraContainers.WORKPLATE.get(), WorkplateScreen::new);
         event.register(com.terravera.common.container.TerraVeraContainers.CLIMATE_CONTROLLER.get(), ClimateControllerScreen::new);
+        event.register(com.terravera.common.container.TerraVeraContainers.GREENHOUSE.get(), GreenhouseScreen::new);
     }
 
     private TerraVeraClient() {}

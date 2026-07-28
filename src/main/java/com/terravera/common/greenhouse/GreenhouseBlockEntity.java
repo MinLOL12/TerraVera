@@ -9,10 +9,15 @@ package com.terravera.common.greenhouse;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -39,25 +44,67 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private GreenhouseClimate climate;
     private int plantCount;
+    private int trayPlantCount;
+    private int nearbyCropCount;
+    private float sunlightExposure;
     private boolean ventilationOpen;
     private int tickCounter;
 
     public GreenhouseBlockEntity(BlockPos pos, BlockState state)
     {
         super(TerraVeraBlockEntities.GREENHOUSE.get(), pos, state);
-        this.climate = GreenhouseClimate.DEFAULT;
+        int tier = state.getValue(GreenhouseBlock.TIER);
+        this.climate = new GreenhouseClimate(tier, 20.0f, 0.5f, 0.0f, false, 0.3f,
+            GreenhouseTier.byLevel(tier).solarCapture(), 0.0f, false, false);
         this.plantCount = 0;
+        this.trayPlantCount = 0;
+        this.nearbyCropCount = 0;
+        this.sunlightExposure = 0.0f;
         this.ventilationOpen = state.getValue(GreenhouseBlock.VENT_OPEN);
         this.tickCounter = 0;
     }
 
     public GreenhouseClimate climate() { return climate; }
     public int plantCount() { return plantCount; }
+    public int trayPlantCount() { return trayPlantCount; }
+    public int nearbyCropCount() { return nearbyCropCount; }
+    public float sunlightExposure() { return sunlightExposure; }
+    public boolean ventilationOpen() { return ventilationOpen; }
+
+    public int trayCapacity()
+    {
+        return switch (GreenhouseBlock.tierFromState(getBlockState()))
+        {
+            case COLD_FRAME -> 4;
+            case HOOP_HOUSE -> 8;
+            case GLASS_GREENHOUSE -> 18;
+            case MODERN_GREENHOUSE -> 32;
+        };
+    }
+
+    public boolean tryPlantSeed(ItemStack seed, Player player)
+    {
+        if (trayPlantCount >= trayCapacity())
+        {
+            player.displayClientMessage(Component.translatable("terravera.greenhouse.plant_full"), true);
+            return false;
+        }
+        trayPlantCount++;
+        plantCount = nearbyCropCount + trayPlantCount;
+        setChanged();
+        player.displayClientMessage(Component.translatable("terravera.greenhouse.seed_planted", trayPlantCount, trayCapacity()), true);
+        return true;
+    }
 
     public void setVentilationOpen(boolean open)
     {
         this.ventilationOpen = open;
         this.climate = climate.setVentilation(open ? 1.0f : 0.0f);
+        if (level != null && getBlockState().hasProperty(GreenhouseBlock.VENT_OPEN)
+            && getBlockState().getValue(GreenhouseBlock.VENT_OPEN) != open)
+        {
+            level.setBlock(worldPosition, getBlockState().setValue(GreenhouseBlock.VENT_OPEN, open), Block.UPDATE_ALL);
+        }
         setChanged();
     }
 
@@ -98,22 +145,30 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
         // Note: use GreenhouseBlock.tierFromState(state) for other code paths to avoid
         // relying on the constructor-stored tier which may be incorrect after codec deserialization.
 
+        int scanRadius = scanRadius(gTier);
+        nearbyCropCount = countNearbyCrops(level, pos, scanRadius);
+        plantCount = nearbyCropCount + trayPlantCount;
+
         // Determine outside conditions from the level
         float outsideTemp = getOutsideTemperature(level, pos);
         float outsideHumidity = level.isRaining() ? 0.85f : 0.45f;
         boolean daytime = level.isDay();
-        float sunlight = daytime ? (level.canSeeSky(pos.above()) ? 0.8f : 0.3f) : 0.0f;
+        float glassCoverage = calculateGlassCoverage(level, pos, gTier, scanRadius);
+        sunlightExposure = daytime ? calculateSunlightExposure(level, pos, scanRadius) * (0.5f + glassCoverage * 0.5f) : 0.0f;
         boolean raining = level.isRaining();
 
         // Update ventilation from block state
         boolean ventState = state.getValue(GreenhouseBlock.VENT_OPEN);
         float ventRate = ventState ? (gTier.supportsVentilation() ? 0.8f : 0.4f) : 0.0f;
 
-        // Update climate with the new effective rate
-        GreenhouseClimate currentClimate = climate.setVentilation(ventRate);
+        // Update climate with current tier and scanned glass coverage. This lets a player build a larger glass shell
+        // around the controller; sunlight and warmth pass through glass instead of being blocked by canSeeSky().
+        GreenhouseClimate currentClimate = new GreenhouseClimate(tier, climate.temperatureC(), climate.humidity(),
+            ventRate, climate.irrigationActive(), climate.soilMoisture(), glassCoverage, climate.orientationBonus(),
+            climate.heatingOn(), climate.coolingOn());
 
         // Tick the climate model forward
-        climate = currentClimate.tick(outsideTemp, outsideHumidity, sunlight, daytime, raining, plantCount);
+        climate = currentClimate.tick(outsideTemp, outsideHumidity, sunlightExposure, daytime, raining, plantCount);
 
         // Re-sync block state if ventilation changed
         if (ventState != ventilationOpen)
@@ -154,6 +209,139 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
         return baseTemp + seasonal;
     }
 
+    private int scanRadius(GreenhouseTier tier)
+    {
+        return switch (tier)
+        {
+            case COLD_FRAME -> 2;
+            case HOOP_HOUSE -> 4;
+            case GLASS_GREENHOUSE -> 6;
+            case MODERN_GREENHOUSE -> 8;
+        };
+    }
+
+    private int countNearbyCrops(Level level, BlockPos center, int radius)
+    {
+        int count = 0;
+        for (int dx = -radius; dx <= radius; dx++)
+        {
+            for (int dz = -radius; dz <= radius; dz++)
+            {
+                for (int dy = -1; dy <= 2; dy++)
+                {
+                    BlockState cropState = level.getBlockState(center.offset(dx, dy, dz));
+                    if (cropState.getBlock() instanceof CropBlock) count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private float calculateGlassCoverage(Level level, BlockPos center, GreenhouseTier tier, int radius)
+    {
+        int glassBlocks = 0;
+        int structureBlocks = 0;
+        for (int dx = -radius; dx <= radius; dx++)
+        {
+            for (int dz = -radius; dz <= radius; dz++)
+            {
+                for (int dy = 0; dy <= 5; dy++)
+                {
+                    BlockState scan = level.getBlockState(center.offset(dx, dy, dz));
+                    if (isGlassLike(scan)) glassBlocks++;
+                    else if (scan.getBlock() instanceof GreenhouseBlock) structureBlocks++;
+                }
+            }
+        }
+
+        float requiredGlass = switch (tier)
+        {
+            case COLD_FRAME -> 2.0f;
+            case HOOP_HOUSE -> 6.0f;
+            case GLASS_GREENHOUSE -> 18.0f;
+            case MODERN_GREENHOUSE -> 28.0f;
+        };
+        float scannedCoverage = Math.min(1.0f, glassBlocks / requiredGlass);
+        float controllerCoverage = Math.min(1.0f, tier.solarCapture() + structureBlocks * 0.02f);
+        return Math.max(controllerCoverage, scannedCoverage);
+    }
+
+    private float calculateSunlightExposure(Level level, BlockPos center, int radius)
+    {
+        float total = 0.0f;
+        int samples = 0;
+
+        for (int dx = -radius; dx <= radius; dx++)
+        {
+            for (int dz = -radius; dz <= radius; dz++)
+            {
+                for (int dy = -1; dy <= 1; dy++)
+                {
+                    BlockPos base = center.offset(dx, dy, dz);
+                    BlockState baseState = level.getBlockState(base);
+                    if (baseState.getBlock() instanceof CropBlock)
+                    {
+                        total += sunlightThroughGlass(level, base.above());
+                        samples++;
+                    }
+                    else if (isPlantableSoil(baseState))
+                    {
+                        total += sunlightThroughGlass(level, base.above());
+                        samples++;
+                    }
+                }
+            }
+        }
+
+        if (samples == 0)
+        {
+            return sunlightThroughGlass(level, center.above());
+        }
+        return total / samples;
+    }
+
+    private float sunlightThroughGlass(Level level, BlockPos start)
+    {
+        int glassLayers = 0;
+        int maxY = Math.min(level.getMaxBuildHeight(), start.getY() + 32);
+        for (int y = start.getY(); y < maxY; y++)
+        {
+            BlockPos scanPos = new BlockPos(start.getX(), y, start.getZ());
+            if (level.canSeeSky(scanPos))
+            {
+                return Math.max(0.2f, 0.85f - glassLayers * 0.05f);
+            }
+
+            BlockState scan = level.getBlockState(scanPos);
+            if (scan.isAir()) continue;
+            if (isGlassLike(scan))
+            {
+                glassLayers++;
+                continue;
+            }
+            if (!scan.canOcclude() && scan.getLightBlock(level, scanPos) < 15)
+            {
+                continue;
+            }
+            return 0.0f;
+        }
+        return 0.0f;
+    }
+
+    private boolean isPlantableSoil(BlockState state)
+    {
+        return state.getBlock() instanceof com.terravera.common.farming.PreparedFarmlandBlock
+            || state.is(net.minecraft.world.level.block.Blocks.FARMLAND)
+            || state.is(net.minecraft.tags.BlockTags.DIRT);
+    }
+
+    private boolean isGlassLike(BlockState state)
+    {
+        String path = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
+        return path.contains("glass") || path.contains("greenhouse") || state.is(net.minecraft.world.level.block.Blocks.GLASS)
+            || state.is(net.minecraft.world.level.block.Blocks.GLASS_PANE);
+    }
+
     @Override
     protected void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider)
     {
@@ -164,6 +352,9 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
                 net.minecraft.nbt.NbtOps.INSTANCE, nbt.get("climate")).result().orElse(GreenhouseClimate.DEFAULT);
         }
         plantCount = nbt.getInt("plant_count");
+        trayPlantCount = nbt.getInt("tray_plant_count");
+        nearbyCropCount = nbt.getInt("nearby_crop_count");
+        sunlightExposure = nbt.getFloat("sunlight_exposure");
         ventilationOpen = nbt.getBoolean("vent_open");
         tickCounter = nbt.getInt("tick_counter");
     }
@@ -175,6 +366,9 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
         GreenhouseClimate.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, climate)
             .result().ifPresent(tag -> nbt.put("climate", tag));
         nbt.putInt("plant_count", plantCount);
+        nbt.putInt("tray_plant_count", trayPlantCount);
+        nbt.putInt("nearby_crop_count", nearbyCropCount);
+        nbt.putFloat("sunlight_exposure", sunlightExposure);
         nbt.putBoolean("vent_open", ventilationOpen);
         nbt.putInt("tick_counter", tickCounter);
     }

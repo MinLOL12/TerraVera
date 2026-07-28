@@ -8,12 +8,17 @@
 package com.terravera.common.greenhouse;
 
 import com.mojang.serialization.MapCodec;
+import com.terravera.common.container.GreenhouseMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -36,8 +41,7 @@ import org.jetbrains.annotations.Nullable;
  * The tier is baked into the block variant at registration time. The block state tracks ventilation open/closed
  * and a simple age/growth counter for visual changes.
  * <p>
- * Right-clicking with an empty hand toggles ventilation. Right-clicking with a watering can or while crouching
- * opens the climate control panel on modern greenhouses.
+ * Right-clicking opens the greenhouse control GUI. Sneak-clicking, or clicking with shears/a stick, toggles vents.
  */
 public class GreenhouseBlock extends BaseEntityBlock
 {
@@ -116,21 +120,10 @@ public class GreenhouseBlock extends BaseEntityBlock
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hit)
     {
-        // Right-click with shears or a stick toggles ventilation on non-automated greenhouses
-        if (stack.is(net.minecraft.world.item.Items.SHEARS) || stack.is(net.minecraft.tags.ItemTags.SAPLINGS))
+        // Right-click with shears or a stick toggles ventilation without opening the GUI.
+        if (stack.is(net.minecraft.world.item.Items.SHEARS) || stack.is(net.minecraft.world.item.Items.STICK))
         {
-            if (!level.isClientSide())
-            {
-                boolean currentlyOpen = state.getValue(VENT_OPEN);
-                level.setBlock(pos, state.setValue(VENT_OPEN, !currentlyOpen), Block.UPDATE_ALL);
-                if (level.getBlockEntity(pos) instanceof GreenhouseBlockEntity be)
-                {
-                    be.setVentilationOpen(!currentlyOpen);
-                }
-                player.displayClientMessage(
-                    Component.translatable("terravera.greenhouse.vent_" + (!currentlyOpen ? "opened" : "closed")),
-                    true);
-            }
+            if (!level.isClientSide()) toggleVent(state, level, pos, player);
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -142,35 +135,44 @@ public class GreenhouseBlock extends BaseEntityBlock
     {
         if (level.isClientSide()) return InteractionResult.SUCCESS;
 
-        // Toggle ventilation with empty hand
-        if (!player.isShiftKeyDown())
+        // Sneak-click remains a quick vent control for players working around the structure.
+        if (player.isShiftKeyDown())
         {
-            boolean currentlyOpen = state.getValue(VENT_OPEN);
-            level.setBlock(pos, state.setValue(VENT_OPEN, !currentlyOpen), Block.UPDATE_ALL);
-            if (level.getBlockEntity(pos) instanceof GreenhouseBlockEntity be)
-            {
-                be.setVentilationOpen(!currentlyOpen);
-            }
-            player.displayClientMessage(
-                Component.translatable("terravera.greenhouse.vent_" + (!currentlyOpen ? "opened" : "closed")),
-                true);
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            toggleVent(state, level, pos, player);
+            return InteractionResult.CONSUME;
         }
 
-        // Shift+click opens climate info
+        if (player instanceof ServerPlayer serverPlayer)
+        {
+            serverPlayer.openMenu(new MenuProvider()
+            {
+                @Override
+                public Component getDisplayName()
+                {
+                    return Component.translatable("block.terravera." + tierFromState(state).id());
+                }
+
+                @Override
+                public AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player p)
+                {
+                    return new GreenhouseMenu(windowId, inventory, pos);
+                }
+            }, buf -> buf.writeBlockPos(pos));
+        }
+        return InteractionResult.CONSUME;
+    }
+
+    private void toggleVent(BlockState state, Level level, BlockPos pos, Player player)
+    {
+        boolean currentlyOpen = state.getValue(VENT_OPEN);
+        level.setBlock(pos, state.setValue(VENT_OPEN, !currentlyOpen), Block.UPDATE_ALL);
         if (level.getBlockEntity(pos) instanceof GreenhouseBlockEntity be)
         {
-            GreenhouseClimate climate = be.climate();
-            player.displayClientMessage(
-                Component.translatable("terravera.greenhouse.info",
-                    String.format("%.1f°C", climate.temperatureC()),
-                    String.format("%.0f%%", climate.humidity() * 100),
-                    String.format("%.0f%%", climate.soilMoisture() * 100),
-                    climate.growthModifier() >= 0.7f ? "excellent" :
-                    climate.growthModifier() >= 0.4f ? "fair" : "poor"),
-                false);
+            be.setVentilationOpen(!currentlyOpen);
         }
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        player.displayClientMessage(
+            Component.translatable("terravera.greenhouse.vent_" + (!currentlyOpen ? "opened" : "closed")),
+            true);
     }
 
     @Nullable
