@@ -87,8 +87,6 @@ public final class HealthEventHandler
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onDrinkFromWorld(PlayerInteractEvent.RightClickBlock event)
     {
-        if (!TerraVeraConfig.SERVER.enableWaterContamination.get()) return;
-
         final Player player = event.getEntity();
         final Level level = event.getLevel();
         if (level.isClientSide() || event.getHand() != InteractionHand.MAIN_HAND) return;
@@ -106,6 +104,11 @@ public final class HealthEventHandler
         final WaterSource source = WaterSource.evaluate(level, pos, state);
         if (source == null || source.salty()) return;
 
+        // Restore stamina
+        com.terravera.common.temperature.TemperatureSystem.addStamina(player, 40f);
+
+        if (!TerraVeraConfig.SERVER.enableWaterContamination.get()) return;
+
         drinkUntreated(player, source.contamination(), source.quality());
     }
 
@@ -116,13 +119,17 @@ public final class HealthEventHandler
     @SubscribeEvent
     public static void onFinishDrinking(LivingEntityUseItemEvent.Finish event)
     {
-        if (!TerraVeraConfig.SERVER.enableWaterContamination.get()) return;
         if (!(event.getEntity() instanceof Player player) || player.level().isClientSide()) return;
 
         final ItemStack stack = event.getItem();
         if (stack.isEmpty() || stack.has(DataComponents.FOOD)) return; // food is handled separately
         if (FluidHelpers.getContainedFluid(stack).isEmpty() && !stack.has(
             com.terravera.common.TerraVeraDataComponents.WATER_TREATMENT.get())) return;
+
+        // Restore stamina when drinking fluids from container
+        com.terravera.common.temperature.TemperatureSystem.addStamina(player, 50f);
+
+        if (!TerraVeraConfig.SERVER.enableWaterContamination.get()) return;
 
         final WaterTreatment treatment = WaterTreatment.get(stack);
         final float contamination = treatment.effectiveContamination();
