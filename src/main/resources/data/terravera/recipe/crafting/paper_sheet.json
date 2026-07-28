@@ -1,0 +1,11 @@
+{
+  "__comment__": "REAL PAPERMAKING: TFC paper is bast fiber cloth. True paper: 1) Retted bast fibers (jute/flax) beaten to separate cellulose fibrils, 2) Slurry in water (1% consistency), 3) Pour onto woven screen mold (burlap here), water drains (couching), 4) Wet sheet pressed between felts, 5) Dried. This is how paper has been made since 105 CE Cai Lun, and earlier tapa cloth. Bast fiber -> strongest paper.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["FFF", "FCF", "FFF"],
+  "key": {
+    "F": { "item": "terravera:retted_fiber" },
+    "C": { "item": "tfc:burlap_cloth" }
+  },
+  "result": { "id": "terravera:paper_sheet", "count": 2 }
+}

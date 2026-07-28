@@ -100,7 +100,8 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.REHYDRATION_SALTS.get());
         event.accept(TerraVeraItems.MEDICINE.get());
 
-        // Writing: inks, instruments, and written records.
+        // Writing: inks, instruments, and written records. Paper is now truly writable + drawable.
+        event.accept(TerraVeraItems.PAPER_SHEET.get());
         event.accept(TerraVeraItems.IRON_GALL_INK.get());
         event.accept(TerraVeraItems.CHARCOAL_INK.get());
         event.accept(TerraVeraItems.QUILL.get());
@@ -108,6 +109,16 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.WRITTEN_PARCHMENT.get());
         event.accept(TerraVeraItems.WRITTEN_BARK.get());
         event.accept(TerraVeraItems.WRITTEN_STONE.get());
+        // Realistic tape chain: most realistic PSA tape – rubber + rosin tackifier + oil plasticizer on paper backing
+        event.accept(TerraVeraItems.PINE_RESIN.get());
+        event.accept(TerraVeraItems.ROSIN.get());
+        event.accept(TerraVeraItems.NATURAL_RUBBER.get());
+        event.accept(TerraVeraItems.RUBBER_ADHESIVE.get());
+        event.accept(TerraVeraItems.PAPER_STRIPS.get());
+        event.accept(TerraVeraItems.ADHESIVE_TAPE.get());
+        event.accept(TerraVeraItems.HIDE_GLUE.get());
+        event.accept(TerraVeraItems.PINE_PITCH_GLUE.get());
+        event.accept(TerraVeraItems.POSTED_PAPER.get());
 
         // Textile chain and the wardrobe, in roughly the order a player unlocks them.
         event.accept(TerraVeraItems.PLANT_FIBER_CLOTH.get());

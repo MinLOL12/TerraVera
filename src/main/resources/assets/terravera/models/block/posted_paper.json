@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "terravera:item/written_paper"
+  },
+  "elements": []
+}

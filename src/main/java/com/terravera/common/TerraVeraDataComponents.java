@@ -115,6 +115,10 @@ public final class TerraVeraDataComponents
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<GreenhouseClimate>> GREENHOUSE_CLIMATE =
         register("greenhouse_climate", builder -> builder.persistent(GreenhouseClimate.CODEC).networkSynchronized(GreenhouseClimate.STREAM_CODEC));
 
+    /** Writable paper content: typed text + freehand strokes */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<com.terravera.common.paper.PaperContent>> PAPER_CONTENT =
+        register("paper_content", builder -> builder.persistent(com.terravera.common.paper.PaperContent.CODEC).networkSynchronized(com.terravera.common.paper.PaperContent.STREAM_CODEC));
+
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(
         String name, UnaryOperator<DataComponentType.Builder<T>> builder)
     {

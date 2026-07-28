@@ -90,6 +90,7 @@ public final class TerraVera
 
         bus.addListener(TerraVeraCreativeTab::onBuildTabContents);
         bus.addListener(TerraVeraBlockEntities::registerCapabilities);
+        bus.addListener(com.terravera.common.network.TerraVeraNetwork::register);
 
         TerraVeraEventHandler.init();
         BarkHarvesting.init();

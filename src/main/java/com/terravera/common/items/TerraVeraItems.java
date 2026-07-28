@@ -194,8 +194,9 @@ public final class TerraVeraItems
         com.terravera.common.temperature.TerraVeraClothing.register(ITEMS);
     }
 
-    /** Raw and intermediate textile goods that the sewing and weaving recipes turn into garments. */
-    public static final DeferredHolder<Item, Item> PLANT_FIBER_CLOTH = ITEMS.registerSimpleItem("plant_fiber_cloth");
+    /** Raw and intermediate textile goods that the sewing and weaving recipes turn into garments. Also TFC'S paper – now writable. */
+    public static final DeferredHolder<Item, Item> PLANT_FIBER_CLOTH = ITEMS.register("plant_fiber_cloth",
+        () -> new com.terravera.common.paper.PaperItem(new Item.Properties()));
     public static final DeferredHolder<Item, Item> STRAW_MAT = ITEMS.registerSimpleItem("straw_mat");
     public static final DeferredHolder<Item, Item> FELT_CLOTH = ITEMS.registerSimpleItem("felt_cloth");
     public static final DeferredHolder<Item, Item> LINEN_CLOTH = ITEMS.registerSimpleItem("linen_cloth");
@@ -426,14 +427,66 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> CHARCOAL_INK = ITEMS.registerSimpleItem("charcoal_ink");
     /** A feather trimmed and cut to a nib; the universal writing instrument before steel pens. */
     public static final DeferredHolder<Item, Item> QUILL = ITEMS.registerSimpleItem("quill");
-    /** Writing on paper (bast fiber sheet). */
-    public static final DeferredHolder<Item, Item> WRITTEN_PAPER = ITEMS.registerSimpleItem("written_paper");
+    /** Blank paper sheet – beaten bast fiber, screened, pressed and dried. The TFC paper. Writable. */
+    public static final DeferredHolder<Item, Item> PAPER_SHEET = ITEMS.register("paper_sheet",
+        () -> new com.terravera.common.paper.PaperItem(new Item.Properties().stacksTo(16)));
+    /** Writing on paper (bast fiber sheet). Now a dynamic writable item. */
+    public static final DeferredHolder<Item, Item> WRITTEN_PAPER = ITEMS.register("written_paper",
+        () -> new com.terravera.common.paper.PaperItem(new Item.Properties().stacksTo(16)));
     /** Writing on scraped and stretched hide. */
-    public static final DeferredHolder<Item, Item> WRITTEN_PARCHMENT = ITEMS.registerSimpleItem("written_parchment");
+    public static final DeferredHolder<Item, Item> WRITTEN_PARCHMENT = ITEMS.register("written_parchment",
+        () -> new com.terravera.common.paper.PaperItem(new Item.Properties().stacksTo(16)));
     /** Writing painted or carved onto birch bark, the writing surface of northern cultures. */
-    public static final DeferredHolder<Item, Item> WRITTEN_BARK = ITEMS.registerSimpleItem("written_bark");
+    public static final DeferredHolder<Item, Item> WRITTEN_BARK = ITEMS.register("written_bark",
+        () -> new com.terravera.common.paper.PaperItem(new Item.Properties().stacksTo(16)));
     /** Writing painted onto a flat stone slab; the most durable record, used for markers and monuments. */
     public static final DeferredHolder<Item, Item> WRITTEN_STONE = ITEMS.registerSimpleItem("written_stone");
+
+    // ----- Paper posting & adhesives - REALISTIC TAPE ------------------------------------------------------
+    /**
+     * REALISTIC TAPE CHAIN:
+     *
+     * Natural pressure-sensitive adhesive tape = elastomer + tackifier + plasticizer + backing.
+     *
+     * 1. Pine resin: collected by tapping resinous conifers (pine, spruce, fir) with a knife – similar to latex tapping.
+     *    Fresh resin is a solution of diterpene resin acids (abietic acid) in volatile monoterpenes (turpentine).
+     *
+     * 2. Rosin (colophony): pine resin distilled at 150-200°C in a pot. Volatile turpentine boils off, leaving solid
+     *    rosin – mostly abietic acid, the classic tackifier. This is what makes tape sticky, not just rubbery.
+     *
+     * 3. Natural rubber: raw_latex is Hevea poly(cis-1,4-isoprene) emulsion. Coagulated with weak acid (vinegar)
+     *    in a sealed barrel: R-COOH protonates latex proteins, polyisoprene coalesces into a lump. This is how
+     *    plantation workers made solid rubber for 150 years before synthetic coagulants.
+     *
+     * 4. Rubber adhesive: rubber lump + rosin + plasticizer (olive oil or tallow) heated to 120-150°C in a pot.
+     *    Rubber provides cohesive strength (holds itself together), rosin provides tack (sticks to things),
+     *    olive oil/tallow plasticizes (keeps it soft, low glass transition T_g). This is exactly the formulation
+     *    of 1930s transparent Scotch tape: 60% rubber, 35% rosin, 5% plasticizer dissolved in turpentine, coated.
+     *
+     * 5. Backing: tight-weave plant fiber cloth or paper strips – cellulose gives tensile strength, keeps tape
+     *    from stretching. Ancient: woven cotton; modern masking tape: creped paper. We use plant_fiber_cloth cut
+     *    into narrow strips (burlap/linen also work but paper gives masking-tape feel).
+     *
+     * 6. Assembly: adhesive dissolved in a little alcohol/turpentine brushed onto backing strips and dried.
+     *    In-game: crafting adhesive mass + paper_strips -> tape roll. Tape roll is consumed when posting paper.
+     *
+     * Also two primitive glues:
+     * - Hide glue: collagen from bones/sinew/tendon boiled long in water (pot at 80-100°C). Real glue since 200kya.
+     * - Pine pitch glue: rosin + charcoal powder + tallow (or beeswax) melted – the hafting glue of Neolithic tools,
+     *   used to actually haft stone heads before cordage. Also posts paper.
+     */
+    public static final DeferredHolder<Item, Item> PINE_RESIN = ITEMS.registerSimpleItem("pine_resin");
+    public static final DeferredHolder<Item, Item> ROSIN = ITEMS.registerSimpleItem("rosin");
+    public static final DeferredHolder<Item, Item> NATURAL_RUBBER = ITEMS.registerSimpleItem("natural_rubber");
+    public static final DeferredHolder<Item, Item> RUBBER_ADHESIVE = ITEMS.registerSimpleItem("rubber_adhesive");
+    public static final DeferredHolder<Item, Item> PAPER_STRIPS = ITEMS.registerSimpleItem("paper_strips");
+    public static final DeferredHolder<Item, Item> ADHESIVE_TAPE = ITEMS.registerSimpleItem("adhesive_tape");
+    public static final DeferredHolder<Item, Item> HIDE_GLUE = ITEMS.registerSimpleItem("hide_glue");
+    public static final DeferredHolder<Item, Item> PINE_PITCH_GLUE = ITEMS.registerSimpleItem("pine_pitch_glue");
+
+    /** Posted paper block item – a sheet taped to wall */
+    public static final DeferredHolder<Item, BlockItem> POSTED_PAPER = ITEMS.register("posted_paper",
+        () -> new BlockItem(TerraVeraBlocks.POSTED_PAPER.get(), new Item.Properties()));
 
     private static DeferredHolder<Item, Item> driedBark(String id, BarkProperties properties)
     {

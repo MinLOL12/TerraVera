@@ -1,0 +1,11 @@
+{
+  "__comment__": "REALISTIC NATURAL RUBBER COAGULATION: Hevea latex is ~30-40% poly(cis-1,4-isoprene) particles stabilized by proteins and ammonia. Acid (acetic acid from vinegar, pH ~4) neutralizes negative charge, proteins denature, rubber particles coalesce into a lump. Historically: add vinegar or citrus, stir, wash. Salt (NaCl) also coagulates but less cleanly – used here because TFC vinegar fluid is optional. Real: 1L latex + 30ml 5% acetic acid -> ~350g dry rubber after pressing and smoking.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "terravera:raw_latex" },
+    { "item": "terravera:raw_latex" },
+    { "item": "tfc:powder/salt" }
+  ],
+  "result": { "id": "terravera:natural_rubber", "count": 1 }
+}

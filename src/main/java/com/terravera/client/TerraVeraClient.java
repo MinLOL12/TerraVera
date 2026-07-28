@@ -51,6 +51,8 @@ public final class TerraVeraClient
             context -> new GeoBlockRenderer<>(new com.terravera.client.model.IrrigationTankModel<>()));
         event.registerBlockEntityRenderer(TerraVeraBlockEntities.CARCASS_RACK.get(),
             context -> new GeoBlockRenderer<>(new com.terravera.client.model.CarcassRackModel<>()));
+        event.registerBlockEntityRenderer(TerraVeraBlockEntities.POSTED_PAPER.get(),
+            com.terravera.client.model.PostedPaperRenderer::new);
     }
 
     private static void registerScreens(RegisterMenuScreensEvent event)

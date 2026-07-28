@@ -1,0 +1,14 @@
+{
+  "__comment__": "Alt adhesive using olive oil only if tallow unavailable – same chemistry, olive oil is also valid plasticizer.",
+  "type": "tfc:pot",
+  "duration": 3000,
+  "fluid_ingredient": { "amount": 200, "fluid": "tfc:olive_oil" },
+  "ingredients": [
+    { "item": "terravera:natural_rubber" },
+    { "item": "terravera:rosin" }
+  ],
+  "item_output": [
+    { "id": "terravera:rubber_adhesive", "count": 2 }
+  ],
+  "temperature": 150.0
+}

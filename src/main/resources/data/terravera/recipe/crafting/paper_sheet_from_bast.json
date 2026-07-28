@@ -1,0 +1,11 @@
+{
+  "__comment__": "Alt paper from raw bast fiber – more primitive, weaker, like tapa cloth.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["FFF", "FBF", "FFF"],
+  "key": {
+    "F": { "item": "terravera:bast_fiber" },
+    "B": { "item": "terravera:plant_fiber" }
+  },
+  "result": { "id": "terravera:paper_sheet", "count": 1 }
+}
