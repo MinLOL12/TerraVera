@@ -1,0 +1,13 @@
+{
+  "__comment__": "Copper seed tray: more durable than wood and naturally antimicrobial, reducing damping-off disease in seedlings.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "C C",
+    "CCC"
+  ],
+  "key": {
+    "C": { "tag": "c:ingots/copper" }
+  },
+  "result": { "id": "terravera:seed_tray", "count": 1 }
+}

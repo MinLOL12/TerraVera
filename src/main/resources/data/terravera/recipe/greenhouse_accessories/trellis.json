@@ -1,0 +1,14 @@
+{
+  "__comment__": "Trellis: a wooden climbing frame for vine crops (tomatoes, cucumbers, beans). Essential for greenhouse vertical growing.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "SHS",
+    "S S"
+  ],
+  "key": {
+    "S": { "tag": "c:rods/wooden" },
+    "H": { "item": "terravera:heavy_cordage" }
+  },
+  "result": { "id": "terravera:trellis", "count": 2 }
+}

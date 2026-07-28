@@ -95,6 +95,8 @@ public class GreenhouseBlockEntity extends BlockEntity implements GeoBlockEntity
 
         int tier = state.getValue(GreenhouseBlock.TIER);
         GreenhouseTier gTier = GreenhouseTier.byLevel(tier);
+        // Note: use GreenhouseBlock.tierFromState(state) for other code paths to avoid
+        // relying on the constructor-stored tier which may be incorrect after codec deserialization.
 
         // Determine outside conditions from the level
         float outsideTemp = getOutsideTemperature(level, pos);

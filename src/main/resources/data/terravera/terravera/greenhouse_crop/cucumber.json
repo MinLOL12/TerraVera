@@ -1,0 +1,13 @@
+{
+  "__comment__": "Cucumber: a classic greenhouse crop. Loves warmth and humidity but needs trellising.",
+  "crop": "cucumber",
+  "greenhouse_bonus": 1.4,
+  "min_temp_c": 18.0,
+  "optimal_temp_c": 25.0,
+  "max_temp_c": 35.0,
+  "humidity_sensitive": false,
+  "natural_seasons": ["summer"],
+  "greenhouse_seasons": ["spring", "summer", "autumn"],
+  "value_tier": "high",
+  "notes": "Needs trellis support. Benefits from greenhouse warmth. Cross-pollination needed for fruit set."
+}

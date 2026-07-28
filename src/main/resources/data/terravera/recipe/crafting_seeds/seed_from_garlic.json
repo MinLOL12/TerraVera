@@ -1,0 +1,8 @@
+{
+  "__comment__": "Extract seed from TFC garlic (clove for replanting).",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tfc:food/garlic" }
+  ],
+  "result": { "id": "terravera:seed", "count": 3 }
+}

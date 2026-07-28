@@ -1,0 +1,14 @@
+{
+  "__comment__": "Shade cloth: a woven fabric that reduces sunlight intensity in a greenhouse. Prevents heat-loving crops from scorching in peak summer.",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CHC",
+    "CCC"
+  ],
+  "key": {
+    "C": { "item": "terravera:plant_fiber_cloth" },
+    "H": { "item": "terravera:cordage" }
+  },
+  "result": { "id": "terravera:shade_cloth", "count": 1 }
+}

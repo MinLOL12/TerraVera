@@ -1,0 +1,8 @@
+{
+  "__comment__": "Extract seed from TFC squash.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tfc:food/squash" }
+  ],
+  "result": { "id": "terravera:seed", "count": 4 }
+}

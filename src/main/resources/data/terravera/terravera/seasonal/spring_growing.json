@@ -1,0 +1,7 @@
+{
+  "__comment__": "Spring growing: most crops can be started outdoors, but greenhouses give an early start.",
+  "season": "spring",
+  "outdoor_growable": ["wheat", "barley", "oat", "rye", "cabbage", "lettuce", "spinach", "onion", "carrot", "potato", "beet", "turnip"],
+  "greenhouse_early_start": ["tomato", "pepper", "cucumber", "strawberry", "melon", "sugarcane", "soybean"],
+  "notes": "Spring is when greenhouses pay off most: getting warm-season crops started weeks before outdoor planting is safe."
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "terravera:seed_tray",
+    "terravera:trellis",
+    "terravera:shade_cloth",
+    "terravera:thermal_mass_barrel",
+    "terravera:mulch_layer"
+  ]
+}

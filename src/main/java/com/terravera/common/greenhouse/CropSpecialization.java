@@ -57,6 +57,11 @@ public final class CropSpecialization
         register("melon", 1.6f, Set.of("summer"), true);
         register("pumpkin", 1.2f, Set.of("summer", "autumn"), false);
         register("soybean", 1.3f, Set.of("summer"), false);
+
+        // Additional TFC crops
+        register("garlic", 1.1f, Set.of("spring", "summer"), false);
+        register("green_bean", 1.2f, Set.of("summer"), false);
+        register("squash", 1.3f, Set.of("summer", "autumn"), false);
     }
 
     private static void register(String cropId, float greenhouseBonus, Set<String> naturalSeasons, boolean climateSensitive)

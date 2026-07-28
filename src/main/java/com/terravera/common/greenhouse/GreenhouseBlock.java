@@ -66,6 +66,16 @@ public class GreenhouseBlock extends BaseEntityBlock
 
     public GreenhouseTier greenhouseTier() { return greenhouseTier; }
 
+    /**
+     * Get the greenhouse tier from a specific block state. This reads from the block state property rather than
+     * the constructor-stored tier, so it works correctly even when the block instance was created by a codec
+     * that doesn't know which variant it is.
+     */
+    public static GreenhouseTier tierFromState(BlockState state)
+    {
+        return GreenhouseTier.byLevel(state.getValue(TIER));
+    }
+
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() { return CODEC; }
 

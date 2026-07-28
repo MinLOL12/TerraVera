@@ -154,6 +154,13 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.NEEM_OIL.get());
         event.accept(TerraVeraItems.COMPANION_CHART.get());
 
+        // Greenhouse accessories.
+        event.accept(TerraVeraItems.SEED_TRAY.get());
+        event.accept(TerraVeraItems.TRELLIS.get());
+        event.accept(TerraVeraItems.SHADE_CLOTH.get());
+        event.accept(TerraVeraItems.THERMAL_MASS_BARREL.get());
+        event.accept(TerraVeraItems.MULCH_LAYER.get());
+
         // One entry per (head kind x stone), with the component filled in, so that creative and JEI show real heads
         // rather than blank ones that no lashing recipe will accept.
         TerraVeraItems.HEADS.forEach((kind, holder) -> {

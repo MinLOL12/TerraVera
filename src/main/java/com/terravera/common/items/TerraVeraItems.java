@@ -325,8 +325,25 @@ public final class TerraVeraItems
     /** Neem oil extract. Natural pesticide that controls aphids, whiteflies, and other soft-bodied insects. */
     public static final DeferredHolder<Item, Item> NEEM_OIL = ITEMS.registerSimpleItem("neem_oil");
 
-    /** A companion planting guide. Planting certain crops together reduces pest pressure naturally. */
+    /** Companion planting guide. Planting certain crops together reduces pest pressure naturally. */
     public static final DeferredHolder<Item, Item> COMPANION_CHART = ITEMS.registerSimpleItem("companion_chart");
+
+    // ----- Greenhouse accessories ------------------------------------------------------------------------
+
+    /** A shallow wooden frame for starting seeds in a cold frame or greenhouse before transplanting. */
+    public static final DeferredHolder<Item, Item> SEED_TRAY = ITEMS.registerSimpleItem("seed_tray");
+
+    /** A wooden climbing frame for vine crops (tomatoes, cucumbers, beans). Essential for vertical growing. */
+    public static final DeferredHolder<Item, Item> TRELLIS = ITEMS.registerSimpleItem("trellis");
+
+    /** Woven fabric that reduces sunlight intensity. Prevents greenhouse crops from scorching in peak summer. */
+    public static final DeferredHolder<Item, Item> SHADE_CLOTH = ITEMS.registerSimpleItem("shade_cloth");
+
+    /** A water-filled barrel that absorbs heat during the day and releases it at night, stabilizing temperature. */
+    public static final DeferredHolder<Item, Item> THERMAL_MASS_BARREL = ITEMS.registerSimpleItem("thermal_mass_barrel");
+
+    /** Straw or bark spread over soil to reduce evaporation, suppress weeds, and regulate soil temperature. */
+    public static final DeferredHolder<Item, Item> MULCH_LAYER = ITEMS.registerSimpleItem("mulch_layer");
 
     private static DeferredHolder<Item, Item> driedBark(String id, BarkProperties properties)
     {

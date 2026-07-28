@@ -1,0 +1,10 @@
+{
+  "__comment__": "Mulch from bark: shredded bark spread over soil. Suppresses weeds and slowly decomposes into organic matter.",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "terravera:dried_bark" },
+    { "item": "terravera:dried_bark" },
+    { "item": "terravera:dried_bark" }
+  ],
+  "result": { "id": "terravera:mulch_layer", "count": 2 }
+}

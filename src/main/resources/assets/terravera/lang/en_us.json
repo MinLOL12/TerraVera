@@ -444,6 +444,11 @@
   "item.terravera.bordeaux_mixture": "Bordeaux Mixture",
   "item.terravera.neem_oil": "Neem Oil",
   "item.terravera.companion_chart": "Companion Planting Chart",
+  "item.terravera.seed_tray": "Seed Tray",
+  "item.terravera.trellis": "Trellis",
+  "item.terravera.shade_cloth": "Shade Cloth",
+  "item.terravera.thermal_mass_barrel": "Thermal Mass Barrel",
+  "item.terravera.mulch_layer": "Mulch Layer",
 
   "terravera.greenhouse.vent_opened": "Ventilation opened",
   "terravera.greenhouse.vent_closed": "Ventilation closed",

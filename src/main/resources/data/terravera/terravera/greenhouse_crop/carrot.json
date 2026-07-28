@@ -1,0 +1,13 @@
+{
+  "__comment__": "Carrot: root crop with moderate greenhouse benefit. Better texture in cool greenhouse conditions.",
+  "crop": "carrot",
+  "greenhouse_bonus": 1.15,
+  "min_temp_c": 8.0,
+  "optimal_temp_c": 18.0,
+  "max_temp_c": 28.0,
+  "humidity_sensitive": false,
+  "natural_seasons": ["spring", "autumn"],
+  "greenhouse_seasons": ["spring", "summer", "autumn", "winter"],
+  "value_tier": "moderate",
+  "notes": "Grows in hoop house. Deep prepared soil important for straight roots."
+}
