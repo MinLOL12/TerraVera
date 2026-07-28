@@ -65,6 +65,11 @@ public final class TerraVeraBlockEntities
         TYPES.register("irrigation_tank", () -> BlockEntityType.Builder
             .of(IrrigationTankBlockEntity::new, TerraVeraBlocks.IRRIGATION_TANK.get()).build(null));
 
+    /** Dedicated rack for hanging animal carcasses to butcher with a Butcher's Knife. */
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.terravera.common.butchery.CarcassRackBlockEntity>> CARCASS_RACK =
+        TYPES.register("carcass_rack", () -> BlockEntityType.Builder
+            .of(com.terravera.common.butchery.CarcassRackBlockEntity::new, TerraVeraBlocks.CARCASS_RACK.get()).build(null));
+
     public static void registerCapabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event)
     {
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,

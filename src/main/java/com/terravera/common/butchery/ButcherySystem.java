@@ -8,6 +8,7 @@
 package com.terravera.common.butchery;
 
 import java.util.Map;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -67,7 +68,14 @@ public final class ButcherySystem
         if (level.isClientSide()) return;
         if (!(entity instanceof Animal)) return;
 
-        final ItemStack carcass = createCarcass(entity);
+        boolean usedButchersKnife = false;
+        if (event.getSource().getEntity() instanceof Player killer)
+        {
+            usedButchersKnife = killer.getMainHandItem().getItem() instanceof ButchersKnifeItem
+                || killer.getOffhandItem().getItem() instanceof ButchersKnifeItem;
+        }
+
+        final ItemStack carcass = createCarcass(entity, usedButchersKnife);
         if (carcass.isEmpty()) return;
 
         // Anything that is not a body part - saddles, wool sheared onto the ground, addon trophies - is kept.
@@ -76,24 +84,28 @@ public final class ButcherySystem
             entity.getX(), entity.getY(), entity.getZ(), carcass));
     }
 
-    /** Build a carcass item for a freshly killed animal, sized and dated from the entity itself. */
     public static ItemStack createCarcass(LivingEntity entity)
+    {
+        return createCarcass(entity, false);
+    }
+
+    /** Build a carcass item for a freshly killed animal, sized and dated from the entity itself. */
+    public static ItemStack createCarcass(LivingEntity entity, boolean usedButchersKnife)
     {
         final var id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
         final var box = entity.getBoundingBox();
         final float volume = (float) (box.getXsize() * box.getYsize() * box.getZsize());
         final CarcassSpecies species = CarcassSpecies.fromEntityId(id, volume);
 
+        final float initialWorkmanship = usedButchersKnife ? 0.78f : 0.5f;
         final ItemStack stack = new ItemStack(TerraVeraItems.CARCASS.get());
         stack.set(TerraVeraDataComponents.CARCASS.get(), new CarcassData(
-            species, ButcheryStage.INTACT, entity.level().getGameTime(), 0.5f, 0f));
+            species, ButcheryStage.INTACT, entity.level().getGameTime(), initialWorkmanship, 0f));
         return stack;
     }
 
     /**
-     * Perform the next stage of butchering on a carcass.
-     *
-     * @return true if work was done, false if the player was told why it could not be
+     * Perform the next stage of butchering on a carcass held in the player's hand.
      */
     public static boolean butcher(Player player, ItemStack carcassStack, ItemStack toolStack, InteractionHand toolHand)
     {
@@ -115,8 +127,6 @@ public final class ButcherySystem
             return false;
         }
 
-        // Freshness can be switched off entirely, in which case a carcass is treated as though it were just cooled:
-        // the best working state, so disabling the mechanic is a simplification rather than a buff or a nerf.
         final Freshness freshness;
         if (TerraVeraConfig.SERVER.enableCarcassFreshness.get())
         {
@@ -135,8 +145,6 @@ public final class ButcherySystem
 
         final ButcheryYield.Result result = ButcheryYield.perform(data, tool, proficiency, freshness, variance);
 
-        // Hand out the products. An empty result is still progress - a rotten carcass genuinely has no organs left
-        // in it, and the player needs to be able to get past that stage to reach the hide and bone underneath.
         int given = 0;
         for (Map.Entry<String, Integer> entry : result.products().entrySet())
         {
@@ -149,8 +157,6 @@ public final class ButcherySystem
             }
         }
 
-        // Advance the carcass. The stack itself becomes the next stage rather than being consumed, so a
-        // half-butchered animal is a real object the player can put down and come back to.
         final CarcassData advanced = data.advanced(result.cutQuality(), result.wasted() * 0.2f);
         carcassStack.set(TerraVeraDataComponents.CARCASS.get(), advanced);
 
@@ -159,8 +165,6 @@ public final class ButcherySystem
             carcassStack.shrink(1);
         }
 
-        // Blade wear scales with the size of the animal: breaking down a bison blunts a knife, gutting a rabbit
-        // barely touches it. This is the loop that makes maintaining your tools part of butchering.
         if (!player.isCreative() && tool.isBlade() && !toolStack.isEmpty())
         {
             final int wear = Math.max(1, Math.round(data.species().carcassMass() / 40f));
@@ -177,6 +181,103 @@ public final class ButcherySystem
             SoundSource.PLAYERS, 0.6f, 0.9f + level.getRandom().nextFloat() * 0.2f);
 
         player.displayClientMessage(Component.translatable("terravera.butchery.performed",
+            stage.displayName(), given, Math.round(result.wasted() * 100f)), true);
+        return true;
+    }
+
+    /**
+     * Perform butchering on a carcass hanging from a Carcass Rack block entity.
+     * Every time you use the butcher's knife on it, the pixels wear off realistically and drops the loot.
+     */
+    public static boolean butcherOnRack(Player player, CarcassRackBlockEntity rack, ItemStack toolStack, InteractionHand toolHand)
+    {
+        final Level level = player.level();
+        final ItemStack carcassStack = rack.getCarcassStack();
+        final CarcassData data = carcassStack.get(TerraVeraDataComponents.CARCASS.get());
+        if (data == null) return false;
+
+        final ButcheryStage stage = data.stage();
+        if (stage.complete())
+        {
+            player.displayClientMessage(Component.translatable("terravera.butchery.finished"), true);
+            return false;
+        }
+
+        final ButcheryTool tool = ButcheryTool.of(toolStack);
+        if (!tool.canPerform(stage))
+        {
+            player.displayClientMessage(Component.translatable("terravera.butchery.need_blade"), true);
+            return false;
+        }
+
+        final Freshness freshness;
+        if (TerraVeraConfig.SERVER.enableCarcassFreshness.get())
+        {
+            final float ambient = TemperatureSystem.ambientTemperature(level, rack.getBlockPos());
+            final float hours = data.hoursDead(level.getGameTime())
+                * TerraVeraConfig.SERVER.carcassSpoilageMultiplier.get().floatValue();
+            freshness = Freshness.of(hours, ambient);
+        }
+        else
+        {
+            freshness = Freshness.COOL;
+        }
+
+        final float proficiency = SkillSystem.proficiency(player, SkillType.BUTCHERY);
+        final float variance = level.getRandom().nextFloat() * 2f - 1f;
+
+        final ButcheryYield.Result result = ButcheryYield.perform(data, tool, proficiency, freshness, variance);
+
+        int given = 0;
+        final BlockPos dropPos = rack.getBlockPos().below();
+        for (Map.Entry<String, Integer> entry : result.products().entrySet())
+        {
+            final ItemStack product = ButcheryProducts.stackFor(entry.getKey(), entry.getValue(), data.species());
+            if (product.isEmpty()) continue;
+            given += product.getCount();
+            final net.minecraft.world.entity.item.ItemEntity entity = new net.minecraft.world.entity.item.ItemEntity(
+                level,
+                dropPos.getX() + 0.5,
+                dropPos.getY() + 0.3,
+                dropPos.getZ() + 0.5,
+                product
+            );
+            entity.setDeltaMovement(
+                (level.random.nextFloat() - 0.5f) * 0.1f,
+                0.08f,
+                (level.random.nextFloat() - 0.5f) * 0.1f
+            );
+            level.addFreshEntity(entity);
+        }
+
+        final CarcassData advanced = data.advanced(result.cutQuality(), result.wasted() * 0.2f);
+        carcassStack.set(TerraVeraDataComponents.CARCASS.get(), advanced);
+
+        if (advanced.stage().complete())
+        {
+            rack.removeCarcass();
+        }
+        else
+        {
+            rack.setCarcassStack(carcassStack);
+        }
+
+        if (!player.isCreative() && tool.isBlade() && !toolStack.isEmpty())
+        {
+            final int wear = Math.max(1, Math.round(data.species().carcassMass() / 40f));
+            final EquipmentSlot slot = toolHand == InteractionHand.MAIN_HAND
+                ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+            toolStack.hurtAndBreak(wear, player, slot);
+        }
+
+        SkillSystem.award(player, SkillType.BUTCHERY,
+            ButcheryYield.experienceFor(stage, data.species(), result.cutQuality()));
+
+        player.getCooldowns().addCooldown(toolStack.getItem(), result.workTicks());
+        level.playSound(null, rack.getBlockPos(), SoundEvents.PLAYER_ATTACK_SWEEP,
+            SoundSource.PLAYERS, 0.7f, 0.9f + level.getRandom().nextFloat() * 0.2f);
+
+        player.displayClientMessage(Component.translatable("terravera.butchery.performed_rack",
             stage.displayName(), given, Math.round(result.wasted() * 100f)), true);
         return true;
     }

@@ -202,5 +202,15 @@ public final class TerraVeraBlocks
             .sound(SoundType.WOOD)
             .noOcclusion()));
 
+    // ----- Butchery -----------------------------------------------------------------------------------------
+
+    /** Dedicated rack for hanging animal carcasses to butcher with a Butcher's Knife. */
+    public static final DeferredHolder<Block, com.terravera.common.butchery.CarcassRackBlock> CARCASS_RACK = BLOCKS.register("carcass_rack",
+        () -> new com.terravera.common.butchery.CarcassRackBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD)
+            .strength(2.5f, 3.0f)
+            .sound(SoundType.WOOD)
+            .noOcclusion()));
+
     private TerraVeraBlocks() {}
 }

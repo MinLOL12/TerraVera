@@ -191,7 +191,7 @@ not an automatic farm.
 Killing an animal does not produce steaks. It produces a **carcass**, and a carcass is a job of work.
 
 The carcass is an item, not a block, so a deer shot on a mountainside can be carried home rather than butchered
-where it fell. Hold it in one hand and a blade in the other, and each right-click performs the next stage:
+where it fell. Once home, hang the animal on a **Carcass Rack** (`carcass_rack`), which displays a 3D model of the animal hanging from its hook. Hold a **Butcher's Knife** (or any blade) and right-click the hanging carcass to perform each stage:
 
 | Stage | Products |
 | --- | --- |
@@ -204,6 +204,11 @@ where it fell. Hold it in one hand and a blade in the other, and each right-clic
 The order is fixed because it is fixed in reality. You cannot skin an animal you have already quartered, and if you
 break the primals before drawing the guts you have opened the stomach into the meat. You can stop after the primal
 cuts if all you want is dinner — at the cost of the fat, bone, and sinew everything else is made from.
+
+### Carcass Rack, Realistic Pixel Wear, and the Butcher's Knife
+
+- **Carcass Rack**: Right-click an empty rack with a carcass item to hang the animal. Every time you use the Butcher's Knife on it, the 3D animal model visually sheds its anatomical layers — hide and fur pixels are stripped away when skinned, the belly opens when drawn, thick primal muscle cuts wear off when broken down, and remaining fat/sinew wears away until only the bare skeletal frame remains. Each cut drops the stage's loot directly below the rack. Sneak right-click with an empty hand to remove a carcass at any stage.
+- **Butcher's Knife Tiers**: Specialized butchering knives come in five TerraFirmaCraft metal tiers: **Wrought Iron**, **Steel**, **Black Steel**, **Blue Steel**, and **Red Steel**. Using a Butcher's Knife on a hanging carcass provides a **+15% cut quality bonus**, **30% faster butchering speed**, and killing an animal with one yields a cleaner carcass with higher initial workmanship (`0.75` instead of `0.50`).
 
 ### Everything comes off an animal for a reason
 

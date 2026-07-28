@@ -23,10 +23,10 @@ import net.minecraft.world.item.ItemStack;
  * a fresh copper one. TFC's tool tiers map straight onto keenness, so a player's butchering improves as their
  * metalworking does without any separate progression.
  */
-public record ButcheryTool(float keenness, float edge, boolean isBlade, boolean isSaw)
+public record ButcheryTool(float keenness, float edge, boolean isBlade, boolean isSaw, boolean isButchersKnife)
 {
     /** Bare hands. You can pull a hide half off a rabbit and that is about it. */
-    public static final ButcheryTool BARE_HANDS = new ButcheryTool(0.10f, 1.0f, false, false);
+    public static final ButcheryTool BARE_HANDS = new ButcheryTool(0.10f, 1.0f, false, false, false);
 
     private static final TagKey<Item> KNIVES = TagKey.create(
         net.minecraft.core.registries.Registries.ITEM,
@@ -64,7 +64,9 @@ public record ButcheryTool(float keenness, float edge, boolean isBlade, boolean 
 
         final float keenness = keennessOf(path);
         final float edge = edgeOf(stack);
-        return new ButcheryTool(keenness, edge, true, saw);
+        final boolean isButchersKnife = stack.getItem() instanceof ButchersKnifeItem
+            || (path.contains("butcher") && path.contains("knife"));
+        return new ButcheryTool(keenness, edge, true, saw, isButchersKnife);
     }
 
     /**
@@ -81,9 +83,10 @@ public record ButcheryTool(float keenness, float edge, boolean isBlade, boolean 
         if (path.contains("obsidian")) return 0.60f;
         if (path.contains("copper")) return 0.50f;
         if (path.contains("bronze")) return 0.65f;
-        if (path.contains("wrought_iron") || path.contains("iron")) return 0.80f;
-        if (path.contains("steel")) return 0.92f;
         if (path.contains("red_steel") || path.contains("blue_steel")) return 1.00f;
+        if (path.contains("black_steel")) return 0.96f;
+        if (path.contains("steel")) return 0.92f;
+        if (path.contains("wrought_iron") || path.contains("iron")) return 0.80f;
         if (path.contains("bone")) return 0.30f;
         return 0.55f;
     }

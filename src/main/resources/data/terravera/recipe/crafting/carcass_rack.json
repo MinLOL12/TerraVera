@@ -1,0 +1,25 @@
+{
+  "__comment__": "A sturdy hanging rack for animal carcasses. Hang a carcass here and butcher it with a Butcher's Knife so that its anatomical layers wear off realistically and drop loot.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PCP",
+    "S S",
+    "S S"
+  ],
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "tag": "terravera:cordage"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "id": "terravera:carcass_rack",
+    "count": 1
+  }
+}

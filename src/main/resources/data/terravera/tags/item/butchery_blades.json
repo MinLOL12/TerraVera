@@ -9,6 +9,11 @@
     {
       "id": "#minecraft:swords",
       "required": false
-    }
+    },
+    "terravera:wrought_iron_butchers_knife",
+    "terravera:steel_butchers_knife",
+    "terravera:black_steel_butchers_knife",
+    "terravera:blue_steel_butchers_knife",
+    "terravera:red_steel_butchers_knife"
   ]
 }

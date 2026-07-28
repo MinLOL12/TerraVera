@@ -65,6 +65,8 @@ public class CarcassItem extends Item
         tooltip.add(data.species().displayName().copy().withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("terravera.butchery.tooltip.stage", data.stage().displayName())
             .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("terravera.butchery.tooltip.rack_hint")
+            .withStyle(ChatFormatting.DARK_GREEN));
 
         // Freshness is shown as the band the carcass would be in at a temperate 15 C. The real band is resolved
         // server-side against the actual climate; showing an estimate here keeps the tooltip honest without
