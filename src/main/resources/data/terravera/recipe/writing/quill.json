@@ -1,0 +1,13 @@
+{
+  "__comment": "A feather trimmed and cut to a nib with a knife. The universal writing instrument before steel pens.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:feather" },
+    { "tag": "tfc:knives" }
+  ],
+  "result": {
+    "id": "terravera:quill",
+    "count": 1
+  }
+}

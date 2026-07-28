@@ -101,7 +101,6 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.MEDICINE.get());
 
         // Vinegar varieties and derived preparations, in rough progression order.
-        event.accept(TerraVeraItems.GENERIC_VINEGAR.get());
         event.accept(TerraVeraItems.CIDER_VINEGAR.get());
         event.accept(TerraVeraItems.WINE_VINEGAR.get());
         event.accept(TerraVeraItems.BEER_VINEGAR.get());
@@ -132,6 +131,15 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.FIRE_TONIC.get());
         event.accept(TerraVeraItems.DIGESTIVE_TONIC.get());
         event.accept(TerraVeraItems.SLEEP_INFUSION.get());
+
+        // Writing: inks, instruments, and written records.
+        event.accept(TerraVeraItems.IRON_GALL_INK.get());
+        event.accept(TerraVeraItems.CHARCOAL_INK.get());
+        event.accept(TerraVeraItems.QUILL.get());
+        event.accept(TerraVeraItems.WRITTEN_PAPER.get());
+        event.accept(TerraVeraItems.WRITTEN_PARCHMENT.get());
+        event.accept(TerraVeraItems.WRITTEN_BARK.get());
+        event.accept(TerraVeraItems.WRITTEN_STONE.get());
 
         // Household vinegar uses.
         event.accept(TerraVeraItems.CLEANING_VINEGAR.get());

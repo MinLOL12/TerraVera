@@ -1,5 +1,5 @@
 {
-  "__comment": "Wine vinegar: wine acetified in barrel with oxygen exposure. Produces generic vinegar fluid and a specific vinegar item.",
+  "__comment": "Wine vinegar: wine acetified in barrel with a glass bottle starter. Produces vinegar fluid and a bottled wine vinegar item.",
   "type": "tfc:barrel_sealed",
   "duration": 48000,
   "input_fluid": {
@@ -8,7 +8,7 @@
   },
   "input_item": {
     "count": 1,
-    "item": "terravera:vinegar"
+    "item": "minecraft:glass_bottle"
   },
   "output_fluid": {
     "amount": 1000,

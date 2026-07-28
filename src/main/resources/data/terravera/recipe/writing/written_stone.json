@@ -1,0 +1,14 @@
+{
+  "__comment": "Writing on stone: ink painted onto a flat stone slab for permanent records and markers.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "tfc:rock/smooth/granite" },
+    { "item": "terravera:iron_gall_ink" },
+    { "item": "terravera:quill" }
+  ],
+  "result": {
+    "id": "terravera:written_stone",
+    "count": 1
+  }
+}

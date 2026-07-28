@@ -1,0 +1,14 @@
+{
+  "__comment": "Writing on bark: ink applied to birch bark, the traditional writing surface of northern cultures.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "tag": "terravera:dry_bark" },
+    { "item": "terravera:iron_gall_ink" },
+    { "item": "terravera:quill" }
+  ],
+  "result": {
+    "id": "terravera:written_bark",
+    "count": 1
+  }
+}

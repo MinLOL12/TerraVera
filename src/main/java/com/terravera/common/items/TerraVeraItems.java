@@ -425,8 +425,6 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> BEER_VINEGAR = ITEMS.registerSimpleItem("beer_vinegar");
     public static final DeferredHolder<Item, Item> MEAD_VINEGAR = ITEMS.registerSimpleItem("mead_vinegar");
     public static final DeferredHolder<Item, Item> RICE_MASH_VINEGAR = ITEMS.registerSimpleItem("rice_mash_vinegar");
-    public static final DeferredHolder<Item, Item> GENERIC_VINEGAR = ITEMS.registerSimpleItem("vinegar");
-
     // ----- Pickled and preserved foods ----------------------------------------------------------------------
     public static final DeferredHolder<Item, Item> PICKLED_CABBAGE = ITEMS.registerSimpleItem("pickled_cabbage");
     public static final DeferredHolder<Item, Item> PICKLED_CUCUMBER = ITEMS.registerSimpleItem("pickled_cucumber");
@@ -469,6 +467,23 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> POLISH_PASTE = ITEMS.registerSimpleItem("polish_paste");
     public static final DeferredHolder<Item, Item> LEATHER_CONDITIONER = ITEMS.registerSimpleItem("leather_conditioner");
     public static final DeferredHolder<Item, Item> WOOD_STAIN = ITEMS.registerSimpleItem("wood_stain");
+
+    // ----- Writing system -----------------------------------------------------------------------------------
+    // Historically accurate iron gall ink: tannic acid from oak galls reacts with iron(II) sulfate to produce
+    // a near-permanent black pigment, bound with gum arabic. The dominant writing ink from ~500 CE to ~1900 CE.
+    // Charcoal ink is the simpler alternative: soot ground with a gum binder.
+    public static final DeferredHolder<Item, Item> IRON_GALL_INK = ITEMS.registerSimpleItem("iron_gall_ink");
+    public static final DeferredHolder<Item, Item> CHARCOAL_INK = ITEMS.registerSimpleItem("charcoal_ink");
+    /** A feather trimmed and cut to a nib; the universal writing instrument before steel pens. */
+    public static final DeferredHolder<Item, Item> QUILL = ITEMS.registerSimpleItem("quill");
+    /** Writing on paper (bast fiber sheet). */
+    public static final DeferredHolder<Item, Item> WRITTEN_PAPER = ITEMS.registerSimpleItem("written_paper");
+    /** Writing on scraped and stretched hide. */
+    public static final DeferredHolder<Item, Item> WRITTEN_PARCHMENT = ITEMS.registerSimpleItem("written_parchment");
+    /** Writing painted or carved onto birch bark, the writing surface of northern cultures. */
+    public static final DeferredHolder<Item, Item> WRITTEN_BARK = ITEMS.registerSimpleItem("written_bark");
+    /** Writing painted onto a flat stone slab; the most durable record, used for markers and monuments. */
+    public static final DeferredHolder<Item, Item> WRITTEN_STONE = ITEMS.registerSimpleItem("written_stone");
 
     private static DeferredHolder<Item, Item> driedBark(String id, BarkProperties properties)
     {
