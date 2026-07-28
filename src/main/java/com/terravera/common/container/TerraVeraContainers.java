@@ -31,5 +31,8 @@ public final class TerraVeraContainers
     public static final DeferredHolder<MenuType<?>, MenuType<ClimateControllerMenu>> CLIMATE_CONTROLLER =
         CONTAINERS.register("climate_controller", () -> IMenuTypeExtension.create(ClimateControllerMenu::fromNetwork));
 
+    public static final DeferredHolder<MenuType<?>, MenuType<GreenhouseMenu>> GREENHOUSE =
+        CONTAINERS.register("greenhouse", () -> IMenuTypeExtension.create(GreenhouseMenu::fromNetwork));
+
     private TerraVeraContainers() {}
 }

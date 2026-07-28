@@ -22,6 +22,7 @@ import com.terravera.common.water.CollectorType;
 import com.terravera.common.water.WaterCollectorBlock;
 import com.terravera.common.farming.DripIrrigationBlock;
 import com.terravera.common.farming.PreparedFarmlandBlock;
+import com.terravera.common.farming.TerraVeraCropBlock;
 import com.terravera.common.greenhouse.GreenhouseBlock;
 import com.terravera.common.greenhouse.GreenhouseTier;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -179,6 +180,15 @@ public final class TerraVeraBlocks
             .mapColor(MapColor.DIRT)
             .strength(0.6f)
             .sound(SoundType.GRAVEL)));
+
+    /** Generic planted crop for TerraVera's quality-bearing seeds. */
+    public static final DeferredHolder<Block, TerraVeraCropBlock> CROP = BLOCKS.register("crop",
+        () -> new TerraVeraCropBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.PLANT)
+            .noCollission()
+            .randomTicks()
+            .instabreak()
+            .sound(SoundType.CROP)));
 
     // ----- Irrigation ---------------------------------------------------------------------------------------
 
