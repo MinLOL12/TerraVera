@@ -1,0 +1,205 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.carcass_rack",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3,
+        "visible_bounds_offset": [0, 1.5, 0]
+      },
+      "bones": [
+        {
+          "name": "rack_frame",
+          "pivot": [0, 0, 0],
+          "cubes": [
+            {
+              "origin": [-7, 0, -1],
+              "size": [2, 28, 2],
+              "uv": [0, 0]
+            },
+            {
+              "origin": [5, 0, -1],
+              "size": [2, 28, 2],
+              "uv": [8, 0]
+            },
+            {
+              "origin": [-8, 26, -1],
+              "size": [16, 2, 2],
+              "uv": [0, 32]
+            },
+            {
+              "origin": [-8, 0, -3],
+              "size": [4, 1, 6],
+              "uv": [0, 38]
+            },
+            {
+              "origin": [4, 0, -3],
+              "size": [4, 1, 6],
+              "uv": [20, 38]
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "parent": "rack_frame",
+          "pivot": [0, 26, 0],
+          "cubes": [
+            {
+              "origin": [-1, 21, -1],
+              "size": [2, 5, 2],
+              "uv": [40, 0]
+            }
+          ]
+        },
+        {
+          "name": "carcass_body",
+          "parent": "hook",
+          "pivot": [0, 21, 0]
+        },
+        {
+          "name": "carcass_skeleton",
+          "parent": "carcass_body",
+          "pivot": [0, 14, 0],
+          "cubes": [
+            {
+              "origin": [-1, 6, -1],
+              "size": [2, 14, 2],
+              "uv": [36, 12]
+            },
+            {
+              "origin": [-3, 10, -2],
+              "size": [6, 8, 4],
+              "uv": [36, 28]
+            },
+            {
+              "origin": [-3, 19, -1],
+              "size": [2, 3, 2],
+              "uv": [44, 12]
+            },
+            {
+              "origin": [1, 19, -1],
+              "size": [2, 3, 2],
+              "uv": [52, 12]
+            }
+          ]
+        },
+        {
+          "name": "carcass_fat_sinew",
+          "parent": "carcass_body",
+          "pivot": [0, 14, 0],
+          "cubes": [
+            {
+              "origin": [-3.5, 9.5, -2.5],
+              "size": [7, 9, 5],
+              "uv": [0, 46]
+            }
+          ]
+        },
+        {
+          "name": "carcass_meat_shoulder",
+          "parent": "carcass_body",
+          "pivot": [0, 9, 0],
+          "cubes": [
+            {
+              "origin": [-4, 7, -3],
+              "size": [8, 4, 6],
+              "uv": [24, 46]
+            }
+          ]
+        },
+        {
+          "name": "carcass_meat_ribs",
+          "parent": "carcass_body",
+          "pivot": [0, 13, 0],
+          "cubes": [
+            {
+              "origin": [-4.5, 11, -3.5],
+              "size": [9, 5, 7],
+              "uv": [0, 12]
+            }
+          ]
+        },
+        {
+          "name": "carcass_meat_loin",
+          "parent": "carcass_body",
+          "pivot": [0, 16, 0],
+          "cubes": [
+            {
+              "origin": [-4, 16, -3],
+              "size": [8, 3, 6],
+              "uv": [24, 12]
+            }
+          ]
+        },
+        {
+          "name": "carcass_meat_leg",
+          "parent": "carcass_body",
+          "pivot": [0, 19, 0],
+          "cubes": [
+            {
+              "origin": [-3.5, 19, -2],
+              "size": [7, 3, 4],
+              "uv": [24, 21]
+            }
+          ]
+        },
+        {
+          "name": "carcass_organs",
+          "parent": "carcass_body",
+          "pivot": [0, 12, 0],
+          "cubes": [
+            {
+              "origin": [-2.5, 10, -3.2],
+              "size": [5, 6, 3],
+              "uv": [44, 40]
+            }
+          ]
+        },
+        {
+          "name": "carcass_head",
+          "parent": "carcass_body",
+          "pivot": [0, 5, 0],
+          "cubes": [
+            {
+              "origin": [-2.5, 2, -3.5],
+              "size": [5, 5, 7],
+              "uv": [0, 20]
+            }
+          ]
+        },
+        {
+          "name": "carcass_hide",
+          "parent": "carcass_body",
+          "pivot": [0, 14, 0],
+          "cubes": [
+            {
+              "origin": [-5, 7, -4],
+              "size": [10, 12, 8],
+              "uv": [0, 36]
+            },
+            {
+              "origin": [-4, 19, -2.5],
+              "size": [8, 3, 5],
+              "uv": [28, 36]
+            }
+          ]
+        },
+        {
+          "name": "carcass_blood_marks",
+          "parent": "carcass_body",
+          "pivot": [0, 7, 0],
+          "cubes": [
+            {
+              "origin": [-1, 6.5, -4.2],
+              "size": [2, 3, 1],
+              "uv": [56, 48]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

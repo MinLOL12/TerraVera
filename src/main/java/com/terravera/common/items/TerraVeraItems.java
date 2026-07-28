@@ -300,6 +300,23 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> CARCASS = ITEMS.register("carcass",
         () -> new com.terravera.common.butchery.CarcassItem(new Item.Properties()));
 
+    /** Dedicated Carcass Rack block item. Renders as a 3D model in inventory and places a hanging carcass rack block. */
+    public static final DeferredHolder<Item, BlockItem> CARCASS_RACK = ITEMS.register("carcass_rack",
+        () -> new GeoMachineItem(TerraVeraBlocks.CARCASS_RACK.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.CarcassRackModel<>()));
+
+    /** Specialized Butcher's Knives for butchering hanging carcasses on a rack, from wrought iron to red steel. */
+    public static final DeferredHolder<Item, com.terravera.common.butchery.ButchersKnifeItem> WROUGHT_IRON_BUTCHERS_KNIFE = ITEMS.register("wrought_iron_butchers_knife",
+        () -> new com.terravera.common.butchery.ButchersKnifeItem(com.terravera.common.butchery.ButchersKnifeItem.Tier.WROUGHT_IRON, new Item.Properties()));
+    public static final DeferredHolder<Item, com.terravera.common.butchery.ButchersKnifeItem> STEEL_BUTCHERS_KNIFE = ITEMS.register("steel_butchers_knife",
+        () -> new com.terravera.common.butchery.ButchersKnifeItem(com.terravera.common.butchery.ButchersKnifeItem.Tier.STEEL, new Item.Properties()));
+    public static final DeferredHolder<Item, com.terravera.common.butchery.ButchersKnifeItem> BLACK_STEEL_BUTCHERS_KNIFE = ITEMS.register("black_steel_butchers_knife",
+        () -> new com.terravera.common.butchery.ButchersKnifeItem(com.terravera.common.butchery.ButchersKnifeItem.Tier.BLACK_STEEL, new Item.Properties()));
+    public static final DeferredHolder<Item, com.terravera.common.butchery.ButchersKnifeItem> BLUE_STEEL_BUTCHERS_KNIFE = ITEMS.register("blue_steel_butchers_knife",
+        () -> new com.terravera.common.butchery.ButchersKnifeItem(com.terravera.common.butchery.ButchersKnifeItem.Tier.BLUE_STEEL, new Item.Properties()));
+    public static final DeferredHolder<Item, com.terravera.common.butchery.ButchersKnifeItem> RED_STEEL_BUTCHERS_KNIFE = ITEMS.register("red_steel_butchers_knife",
+        () -> new com.terravera.common.butchery.ButchersKnifeItem(com.terravera.common.butchery.ButchersKnifeItem.Tier.RED_STEEL, new Item.Properties()));
+
     /** Primal cuts. Named for where they came off the animal, because that is what determines how to cook them. */
     public static final DeferredHolder<Item, Item> SHOULDER_CUT = ITEMS.registerSimpleItem("shoulder_cut");
     public static final DeferredHolder<Item, Item> RIB_CUT = ITEMS.registerSimpleItem("rib_cut");

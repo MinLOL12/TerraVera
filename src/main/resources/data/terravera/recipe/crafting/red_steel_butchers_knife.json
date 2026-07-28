@@ -1,0 +1,22 @@
+{
+  "__comment__": "Red Steel Butcher's Knife, specialized for butchering animal carcasses on a Carcass Rack.",
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "  M",
+    " M ",
+    "H  "
+  ],
+  "key": {
+    "M": {
+      "tag": "c:sheets/red_steel"
+    },
+    "H": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "id": "terravera:red_steel_butchers_knife",
+    "count": 1
+  }
+}

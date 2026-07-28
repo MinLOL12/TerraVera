@@ -69,7 +69,7 @@ public final class ButcheryYield
         // Difficulty scales how much a bad tool or an unpracticed hand costs you. Bleeding is nearly foolproof;
         // drawing the guts without opening them is not.
         final float difficulty = stage.difficulty();
-        final float base = 0.35f + 0.40f * toolTerm + 0.35f * skillTerm;
+        final float base = 0.35f + 0.40f * toolTerm + 0.35f * skillTerm + (tool.isButchersKnife() ? 0.15f : 0f);
         final float penalty = difficulty * 0.22f * (1f - toolTerm) * (1.3f - skillTerm);
 
         // A carcass that was already mangled cannot be recovered by careful later work, only partly compensated.
@@ -97,7 +97,7 @@ public final class ButcheryYield
         // A saw or cleaver is the wrong tool for skinning and drawing, but it is the right one for going through
         // bone, so it pays for its clumsiness on exactly the stage that needs it.
         final float toolFit = tool.isSaw() && stage == ButcheryStage.RENDERED ? 0.65f : 1f;
-        final float speed = tool.workTimeMultiplier() * (1.35f - 0.45f * proficiency) * toolFit;
+        final float speed = tool.workTimeMultiplier() * (1.35f - 0.45f * proficiency) * toolFit * (tool.isButchersKnife() ? 0.70f : 1f);
         return Math.max(10, Math.round(sizeTerm * stageTerm * speed));
     }
 

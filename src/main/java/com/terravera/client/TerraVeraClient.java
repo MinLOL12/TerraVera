@@ -49,6 +49,8 @@ public final class TerraVeraClient
             context -> new GeoBlockRenderer<>(new com.terravera.client.model.GreenhouseModel<>()));
         event.registerBlockEntityRenderer(TerraVeraBlockEntities.IRRIGATION_TANK.get(),
             context -> new GeoBlockRenderer<>(new com.terravera.client.model.IrrigationTankModel<>()));
+        event.registerBlockEntityRenderer(TerraVeraBlockEntities.CARCASS_RACK.get(),
+            context -> new GeoBlockRenderer<>(new com.terravera.client.model.CarcassRackModel<>()));
     }
 
     private static void registerScreens(RegisterMenuScreensEvent event)

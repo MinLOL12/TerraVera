@@ -141,6 +141,12 @@ public final class TerraVeraCreativeTab
 
         // Butchering: the carcass, the parts that come off it, and what those parts become.
         event.accept(TerraVeraItems.CARCASS.get());
+        event.accept(TerraVeraItems.CARCASS_RACK.get());
+        event.accept(TerraVeraItems.WROUGHT_IRON_BUTCHERS_KNIFE.get());
+        event.accept(TerraVeraItems.STEEL_BUTCHERS_KNIFE.get());
+        event.accept(TerraVeraItems.BLACK_STEEL_BUTCHERS_KNIFE.get());
+        event.accept(TerraVeraItems.BLUE_STEEL_BUTCHERS_KNIFE.get());
+        event.accept(TerraVeraItems.RED_STEEL_BUTCHERS_KNIFE.get());
         event.accept(TerraVeraItems.SHOULDER_CUT.get());
         event.accept(TerraVeraItems.RIB_CUT.get());
         event.accept(TerraVeraItems.LOIN_CUT.get());

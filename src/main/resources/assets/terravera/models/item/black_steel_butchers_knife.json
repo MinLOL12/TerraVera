@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "terravera:item/black_steel_butchers_knife"
+  }
+}

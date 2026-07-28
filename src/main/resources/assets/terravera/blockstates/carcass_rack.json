@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "terravera:block/carcass_rack"
+    },
+    "facing=east": {
+      "model": "terravera:block/carcass_rack",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "terravera:block/carcass_rack",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "terravera:block/carcass_rack",
+      "y": 270
+    }
+  }
+}
