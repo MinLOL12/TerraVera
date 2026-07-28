@@ -1,0 +1,15 @@
+{
+  "__comment": "Iron gall ink: oak galls (tannic acid) + iron(II) sulfate (copperas) + gum arabic binder. The dominant writing ink from 500 CE to 1900 CE, used for manuscripts and documents.",
+  "type": "tfc:pot",
+  "duration": 6000,
+  "fluid_ingredient": { "amount": 200, "fluid": "minecraft:water" },
+  "ingredients": [
+    { "tag": "terravera:dry_bark" },
+    { "item": "tfc:metal/ingot/iron" },
+    { "item": "terravera:bast_fiber" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:iron_gall_ink" }
+  ],
+  "temperature": 300.0
+}

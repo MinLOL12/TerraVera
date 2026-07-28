@@ -1,5 +1,5 @@
 {
-  "__comment": "Cider vinegar: hard cider exposed to oxygen in a sealed barrel produces acetified cider vinegar over time. Produces generic vinegar fluid and a specific vinegar item.",
+  "__comment": "Cider vinegar: hard cider acetified in a sealed barrel with a glass bottle as a starter culture. Produces vinegar fluid and a bottled cider vinegar item.",
   "type": "tfc:barrel_sealed",
   "duration": 48000,
   "input_fluid": {
@@ -8,7 +8,7 @@
   },
   "input_item": {
     "count": 1,
-    "item": "terravera:vinegar"
+    "item": "minecraft:glass_bottle"
   },
   "output_fluid": {
     "amount": 1000,

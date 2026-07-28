@@ -1,0 +1,14 @@
+{
+  "__comment": "Charcoal ink: soot or charcoal ground with gum arabic binder and water. A simpler alternative to iron gall ink, used for less permanent writing.",
+  "type": "tfc:pot",
+  "duration": 3000,
+  "fluid_ingredient": { "amount": 100, "fluid": "minecraft:water" },
+  "ingredients": [
+    { "item": "minecraft:charcoal" },
+    { "item": "terravera:bast_fiber" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:charcoal_ink" }
+  ],
+  "temperature": 200.0
+}

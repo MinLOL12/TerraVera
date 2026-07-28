@@ -1,0 +1,14 @@
+{
+  "__comment": "Writing on paper: ink and quill applied to a bast fiber sheet (paper).",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "terravera:plant_fiber_cloth" },
+    { "item": "terravera:iron_gall_ink" },
+    { "item": "terravera:quill" }
+  ],
+  "result": {
+    "id": "terravera:written_paper",
+    "count": 1
+  }
+}

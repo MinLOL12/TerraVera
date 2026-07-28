@@ -1,0 +1,14 @@
+{
+  "__comment": "Writing on parchment: ink and quill applied to a stretched hide surface.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "tfc:leather" },
+    { "item": "terravera:iron_gall_ink" },
+    { "item": "terravera:quill" }
+  ],
+  "result": {
+    "id": "terravera:written_parchment",
+    "count": 1
+  }
+}

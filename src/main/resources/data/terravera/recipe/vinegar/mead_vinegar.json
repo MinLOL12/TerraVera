@@ -1,5 +1,5 @@
 {
-  "__comment": "Mead vinegar: fermented honey wine acetified produces sweet sharp mead vinegar. Produces generic vinegar fluid and a specific vinegar item.",
+  "__comment": "Mead vinegar: fermented honey wine acetified in barrel with a glass bottle starter. Produces vinegar fluid and a bottled mead vinegar item.",
   "type": "tfc:barrel_sealed",
   "duration": 42000,
   "input_fluid": {
@@ -8,7 +8,7 @@
   },
   "input_item": {
     "count": 1,
-    "item": "terravera:vinegar"
+    "item": "minecraft:glass_bottle"
   },
   "output_fluid": {
     "amount": 1000,

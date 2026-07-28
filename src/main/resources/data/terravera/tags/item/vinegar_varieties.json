@@ -1,7 +1,6 @@
 {
-  "__comment__": "All vinegar varieties. Generic vinegar is the base; specific types are derived from different alcohol sources via barrel acetification.",
+  "__comment__": "All vinegar varieties. Specific types are derived from different alcohol sources via barrel acetification. Generic vinegar is provided by TFC.",
   "values": [
-    "terravera:vinegar",
     "terravera:cider_vinegar",
     "terravera:wine_vinegar",
     "terravera:beer_vinegar",

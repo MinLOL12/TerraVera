@@ -438,7 +438,7 @@ public class TasteSystem {
         tastes.put("terravera:beer_vinegar", 20);
         tastes.put("terravera:mead_vinegar", 45);
         tastes.put("terravera:rice_mash_vinegar", 30);
-        tastes.put("terravera:vinegar", 25);
+        // Generic vinegar removed; TFC provides its own vinegar bottle.
 
         // ---- TerraVera: pickled foods ----------------------------------------------------------------------
         tastes.put("terravera:pickled_cabbage", 50);

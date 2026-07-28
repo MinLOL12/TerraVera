@@ -624,5 +624,15 @@
   "terravera.workplate.gui.shape": "Shape L/W/T %s/%s/%s, bend %s, edge %s, strain %s",
   "terravera.workplate.gui.strike": "Strike",
   "terravera.workplate.gui.title": "Workplate",
-  "terravera.workplate.gui.weld_requires": "Requires welding heat, flux, and matching hot stock"
+  "terravera.workplate.gui.weld_requires": "Requires welding heat, flux, and matching hot stock",
+  "item.terravera.iron_gall_ink": "Iron Gall Ink",
+  "item.terravera.charcoal_ink": "Charcoal Ink",
+  "item.terravera.quill": "Quill",
+  "item.terravera.written_paper": "Written Paper",
+  "item.terravera.written_parchment": "Written Parchment",
+  "item.terravera.written_bark": "Written Bark",
+  "item.terravera.written_stone": "Written Stone",
+  "terravera.tooltip.iron_gall_ink": "Oak gall tannins + iron sulfate + gum arabic. The dominant writing ink from ~500 CE to ~1900 CE.",
+  "terravera.tooltip.charcoal_ink": "Soot bound with gum arabic. A simpler, less permanent alternative to iron gall ink.",
+  "terravera.tooltip.quill": "A feather cut to a nib. Dip in ink to write."
 }
