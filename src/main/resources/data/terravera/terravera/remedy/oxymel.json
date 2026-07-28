@@ -1,0 +1,10 @@
+{
+  "__comment__": "Oxymel: vinegar, honey, and herbs. Traditional preparation for respiratory and digestive ailments. Tier: prepared.",
+  "ingredient": "terravera:remedies/prepared_vinegar",
+  "treats": ["terravera:illness/common_cold", "terravera:illness/influenza"],
+  "treats_symptoms": ["cough", "sore_throat"],
+  "shorten_ticks": 12000,
+  "severity_reduction": 0.25,
+  "cures": false,
+  "tier": "prepared"
+}

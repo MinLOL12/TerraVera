@@ -1,0 +1,8 @@
+{
+  "__comment": "Beer vinegar: beer exposed to oxygen produces a sharp malt vinegar.",
+  "type": "tfc:barrel_sealed",
+  "duration": 36000,
+  "input_fluid": { "amount": 1000, "fluid": "tfc:beer" },
+  "input_item": { "count": 1, "item": "terravera:vinegar" },
+  "output_fluid": { "amount": 1000, "id": "terravera:beer_vinegar" }
+}

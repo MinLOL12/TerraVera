@@ -1,0 +1,9 @@
+{
+  "__comment__": "Vinegar-based medicinal preparations including oxymels and herbal infusions.",
+  "values": [
+    "terravera:oxymel",
+    "terravera:herbal_vinegar_infusion",
+    "terravera:fire_tonic",
+    "terravera:sleep_infusion"
+  ]
+}

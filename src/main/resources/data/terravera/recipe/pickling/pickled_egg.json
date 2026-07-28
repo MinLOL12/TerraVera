@@ -1,0 +1,15 @@
+{
+  "__comment": "Pickled egg: boiled egg preserved in spiced vinegar brine.",
+  "type": "tfc:pot",
+  "duration": 12000,
+  "fluid_ingredient": { "amount": 500, "fluid": "terravera:mead_vinegar" },
+  "ingredients": [
+    { "item": "tfc:food/boiled_egg" },
+    { "item": "tfc:powder/salt" },
+    { "item": "terravera:bitter_herbs" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:pickled_egg" }
+  ],
+  "temperature": 240.0
+}

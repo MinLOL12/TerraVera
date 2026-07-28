@@ -1,0 +1,10 @@
+{
+  "__comment__": "Herbal vinegar infusion: botanicals steeped in vinegar for digestive and tonic benefits. Tier: herbal.",
+  "ingredient": "terravera:remedies/herbal",
+  "treats": [],
+  "treats_symptoms": ["nausea", "digestive_discomfort"],
+  "shorten_ticks": 6000,
+  "severity_reduction": 0.15,
+  "cures": false,
+  "tier": "herbal"
+}

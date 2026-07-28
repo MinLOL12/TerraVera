@@ -418,6 +418,58 @@ public final class TerraVeraItems
     /** Straw or bark spread over soil to reduce evaporation, suppress weeds, and regulate soil temperature. */
     public static final DeferredHolder<Item, Item> MULCH_LAYER = ITEMS.registerSimpleItem("mulch_layer");
 
+    // ----- Vinegar expansion ------------------------------------------------------------------------------
+    // Vinegar varieties derived from fermented products through acetification or oxygen exposure.
+    public static final DeferredHolder<Item, Item> CIDER_VINEGAR = ITEMS.registerSimpleItem("cider_vinegar");
+    public static final DeferredHolder<Item, Item> WINE_VINEGAR = ITEMS.registerSimpleItem("wine_vinegar");
+    public static final DeferredHolder<Item, Item> BEER_VINEGAR = ITEMS.registerSimpleItem("beer_vinegar");
+    public static final DeferredHolder<Item, Item> MEAD_VINEGAR = ITEMS.registerSimpleItem("mead_vinegar");
+    public static final DeferredHolder<Item, Item> RICE_MASH_VINEGAR = ITEMS.registerSimpleItem("rice_mash_vinegar");
+    public static final DeferredHolder<Item, Item> GENERIC_VINEGAR = ITEMS.registerSimpleItem("vinegar");
+
+    // ----- Pickled and preserved foods ----------------------------------------------------------------------
+    public static final DeferredHolder<Item, Item> PICKLED_CABBAGE = ITEMS.registerSimpleItem("pickled_cabbage");
+    public static final DeferredHolder<Item, Item> PICKLED_CUCUMBER = ITEMS.registerSimpleItem("pickled_cucumber");
+    public static final DeferredHolder<Item, Item> PICKLED_MUSHROOM = ITEMS.registerSimpleItem("pickled_mushroom");
+    public static final DeferredHolder<Item, Item> PICKLED_EGG = ITEMS.registerSimpleItem("pickled_egg");
+
+    // ----- Brined preparations ------------------------------------------------------------------------------
+    public static final DeferredHolder<Item, Item> BRINED_MEAT = ITEMS.registerSimpleItem("brined_meat");
+    public static final DeferredHolder<Item, Item> BRINED_VEGETABLE = ITEMS.registerSimpleItem("brined_vegetable");
+
+    // ----- Medicinal vinegar preparations ------------------------------------------------------------------
+    public static final DeferredHolder<Item, Item> OXYMEL = ITEMS.registerSimpleItem("oxymel");
+    public static final DeferredHolder<Item, Item> HERBAL_VINEGAR_INFUSION = ITEMS.registerSimpleItem("herbal_vinegar_infusion");
+
+    // ----- Household vinegar uses ----------------------------------------------------------------------------
+    public static final DeferredHolder<Item, Item> CLEANING_VINEGAR = ITEMS.registerSimpleItem("cleaning_vinegar");
+    public static final DeferredHolder<Item, Item> DESCALING_SOLUTION = ITEMS.registerSimpleItem("descaling_solution");
+    public static final DeferredHolder<Item, Item> VINEGAR_SAUCE = ITEMS.registerSimpleItem("vinegar_sauce");
+    public static final DeferredHolder<Item, Item> VINEGAR_MARINADE = ITEMS.registerSimpleItem("vinegar_marinade");
+    public static final DeferredHolder<Item, Item> VINEGAR_DRESSING = ITEMS.registerSimpleItem("vinegar_dressing");
+
+    // ----- Expanded pickled foods ---------------------------------------------------------------------------
+    public static final DeferredHolder<Item, Item> PICKLED_ONION = ITEMS.registerSimpleItem("pickled_onion");
+    public static final DeferredHolder<Item, Item> PICKLED_BEET = ITEMS.registerSimpleItem("pickled_beet");
+    public static final DeferredHolder<Item, Item> PICKLED_PEPPER = ITEMS.registerSimpleItem("pickled_pepper");
+    public static final DeferredHolder<Item, Item> PICKLED_GARLIC = ITEMS.registerSimpleItem("pickled_garlic");
+    public static final DeferredHolder<Item, Item> PICKLED_CARROT = ITEMS.registerSimpleItem("pickled_carrot");
+
+    // ----- Expanded brined preparations --------------------------------------------------------------------
+    public static final DeferredHolder<Item, Item> BRINED_CHICKEN = ITEMS.registerSimpleItem("brined_chicken");
+    public static final DeferredHolder<Item, Item> BRINED_FISH = ITEMS.registerSimpleItem("brined_fish");
+    public static final DeferredHolder<Item, Item> BRINED_MUSHROOM = ITEMS.registerSimpleItem("brined_mushroom");
+
+    // ----- Expanded medicinal vinegar ----------------------------------------------------------------------
+    public static final DeferredHolder<Item, Item> FIRE_TONIC = ITEMS.registerSimpleItem("fire_tonic");
+    public static final DeferredHolder<Item, Item> DIGESTIVE_TONIC = ITEMS.registerSimpleItem("digestive_tonic");
+    public static final DeferredHolder<Item, Item> SLEEP_INFUSION = ITEMS.registerSimpleItem("sleep_infusion");
+
+    // ----- Expanded household vinegar -----------------------------------------------------------------------
+    public static final DeferredHolder<Item, Item> POLISH_PASTE = ITEMS.registerSimpleItem("polish_paste");
+    public static final DeferredHolder<Item, Item> LEATHER_CONDITIONER = ITEMS.registerSimpleItem("leather_conditioner");
+    public static final DeferredHolder<Item, Item> WOOD_STAIN = ITEMS.registerSimpleItem("wood_stain");
+
     private static DeferredHolder<Item, Item> driedBark(String id, BarkProperties properties)
     {
         return ITEMS.register(id, () -> new BarkItem(properties.dried(), true, null, new Item.Properties()));
