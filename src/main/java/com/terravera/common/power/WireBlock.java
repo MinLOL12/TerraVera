@@ -60,6 +60,11 @@ public abstract class WireBlock extends Block {
             .setValue(POWERED, false));
     }
 
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN, POWERED);
+    }
+
     /** Maximum continuous throughput of this conductor, in watts. Exceeding it heats the wire until it fails. */
     public abstract int capacity();
 
