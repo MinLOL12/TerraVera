@@ -43,14 +43,15 @@ public final class GriddleFoods
             float lightness = switch (leavening) { case "yeast" -> .82f; case "sourdough_starter" -> .78f; case "baking_powder" -> .72f; case "baking_soda" -> .63f; case "whipped_egg_white" -> .86f; case "fermented_batter" -> .70f; default -> .34f; };
             for (int t = 0; t < TOPPINGS.length; t++)
             {
-                String id = base + "_griddle_" + TOPPINGS[t];
+                final int toppingIndex = t;
+                String id = base + "_griddle_" + TOPPINGS[toppingIndex];
                 // Some plain, unleavened foods are deliberately merely serviceable; long-fermented sweet meals shine.
-                int taste = Math.max(12, Math.min(96, 26 + b * 2 + new int[] {-14, 5, 20, 23, 18, 16, 24, 19}[t] + Math.round(lightness * 12)));
-                Entry entry = new Entry(base, TOPPINGS[t], leavening, rest, lightness, taste);
+                int taste = Math.max(12, Math.min(96, 26 + b * 2 + new int[] {-14, 5, 20, 23, 18, 16, 24, 19}[toppingIndex] + Math.round(lightness * 12)));
+                Entry entry = new Entry(base, TOPPINGS[toppingIndex], leavening, rest, lightness, taste);
                 ENTRIES.put(id, entry);
                 BATTERS.put(id, items.register(id + "_batter", () -> new Item(new Item.Properties().stacksTo(16))));
                 FOODS.put(id, items.register(id, () -> new Item(new Item.Properties()
-                    .food(new FoodProperties.Builder().nutrition(5 + Math.max(0, t - 1)).saturationModifier(.42f + lightness * .42f).build())
+                    .food(new FoodProperties.Builder().nutrition(5 + Math.max(0, toppingIndex - 1)).saturationModifier(.42f + lightness * .42f).build())
                     .component(TerraVeraDataComponents.CULINARY_QUALITY.get(), new CulinaryQuality(leavening, rest, lightness, taste)))));
             }
         }
