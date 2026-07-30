@@ -51,7 +51,7 @@ public final class GriddleFoods
                 BATTERS.put(id, items.register(id + "_batter", () -> new Item(new Item.Properties().stacksTo(16))));
                 FOODS.put(id, items.register(id, () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder().nutrition(5 + Math.max(0, t - 1)).saturationModifier(.42f + lightness * .42f).build())
-                    .component(TerraVeraDataComponents.CULINARY_QUALITY.get(), new CulinaryQuality(leavening, rest, lightness, taste))));
+                    .component(TerraVeraDataComponents.CULINARY_QUALITY.get(), new CulinaryQuality(leavening, rest, lightness, taste)))));
             }
         }
     }
