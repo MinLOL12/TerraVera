@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:flatbread_dough"
+  },
+  "result": {
+    "id": "terravera:griddle_flatbread"
+  },
+  "experience": 0.35,
+  "cookingtime": 160
+}

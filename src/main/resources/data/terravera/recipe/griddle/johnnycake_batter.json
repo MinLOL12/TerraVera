@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "tag": "terravera:batter_flours"
+    },
+    {
+      "tag": "terravera:batter_liquids"
+    },
+    {
+      "tag": "terravera:batter_fats"
+    }
+  ],
+  "result": {
+    "id": "terravera:johnnycake_batter"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:pancake_batter"
+  },
+  "result": {
+    "id": "terravera:pancakes"
+  },
+  "experience": 0.35,
+  "cookingtime": 160
+}

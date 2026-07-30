@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "tag": "terravera:batter_flours"
+    },
+    {
+      "tag": "terravera:batter_eggs"
+    },
+    {
+      "tag": "terravera:batter_fruits"
+    },
+    {
+      "tag": "terravera:batter_sweeteners"
+    }
+  ],
+  "result": {
+    "id": "terravera:fritter_batter"
+  }
+}

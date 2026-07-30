@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:fritter_batter"
+  },
+  "result": {
+    "id": "terravera:apple_fritters"
+  },
+  "experience": 0.35,
+  "cookingtime": 160
+}

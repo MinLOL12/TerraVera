@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.food.FoodProperties;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -25,6 +26,9 @@ import com.terravera.common.TerraVeraDataComponents;
 public final class TerraVeraItems
 {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TerraVera.MOD_ID);
+
+    // 112 batter-and-finish combinations, retained separately from the introductory eight recipes below.
+    static { GriddleFoods.register(ITEMS); }
 
     // ----- Smithing stations ---------------------------------------------------------------------------------
 
@@ -122,6 +126,43 @@ public final class TerraVeraItems
 
     /** A light folded vessel for dry food and supplies; it is deliberately not a sealed fluid container. */
     public static final DeferredHolder<Item, Item> BIRCH_BARK_CONTAINER = ITEMS.registerSimpleItem("birch_bark_container");
+
+    // ----- Natural adhesives --------------------------------------------------------------------
+    // These are batches, not interchangeable "glue". Their components travel into a hafted tool so a player can
+    // inspect why a wet-weather axe behaves differently from a hide-glued indoor joint.
+    public static final DeferredHolder<Item, AdhesiveItem> PINE_PITCH = adhesive("pine_pitch", .78f, .92f, .72f, "hafting");
+    public static final DeferredHolder<Item, AdhesiveItem> BIRCH_TAR = adhesive("birch_tar", .70f, .98f, .55f, "waterproof");
+    public static final DeferredHolder<Item, AdhesiveItem> HIDE_GLUE = adhesive("hide_glue", .90f, .22f, .18f, "woodwork");
+    public static final DeferredHolder<Item, AdhesiveItem> FISH_GLUE = adhesive("fish_glue", .82f, .35f, .38f, "fine_joinery");
+    public static final DeferredHolder<Item, AdhesiveItem> CASEIN_GLUE = adhesive("casein_glue", .94f, .62f, .12f, "rigid_joinery");
+
+    // ----- Griddle batters and hot-surface foods ------------------------------------------------
+    /** Leavening is a material progression: flat batter first, then chemical, whipped, and fermented lift. */
+    public static final DeferredHolder<Item, Item> YEAST = ITEMS.registerSimpleItem("yeast");
+    public static final DeferredHolder<Item, Item> SOURDOUGH_STARTER = ITEMS.registerSimpleItem("sourdough_starter");
+    public static final DeferredHolder<Item, Item> BAKING_SODA = ITEMS.registerSimpleItem("baking_soda");
+    public static final DeferredHolder<Item, Item> BAKING_POWDER = ITEMS.registerSimpleItem("baking_powder");
+    public static final DeferredHolder<Item, Item> WHIPPED_EGG_WHITES = ITEMS.registerSimpleItem("whipped_egg_whites");
+    public static final DeferredHolder<Item, Item> FERMENTED_BATTER = ITEMS.registerSimpleItem("fermented_batter");
+
+    // Batter is deliberately an intermediate: cook it on a campfire or smoker (a hot griddle surface) rather than
+    // receiving a finished meal straight from a crafting grid.
+    public static final DeferredHolder<Item, Item> PANCAKE_BATTER = batter("pancake_batter");
+    public static final DeferredHolder<Item, Item> WAFFLE_BATTER = batter("waffle_batter");
+    public static final DeferredHolder<Item, Item> CREPE_BATTER = batter("crepe_batter");
+    public static final DeferredHolder<Item, Item> FLATBREAD_DOUGH = batter("flatbread_dough");
+    public static final DeferredHolder<Item, Item> BISCUIT_DOUGH = batter("biscuit_dough");
+    public static final DeferredHolder<Item, Item> FRITTER_BATTER = batter("fritter_batter");
+    public static final DeferredHolder<Item, Item> JOHNNYCAKE_BATTER = batter("johnnycake_batter");
+    public static final DeferredHolder<Item, Item> HONEYBERRY_BATTER = batter("honeyberry_batter");
+    public static final DeferredHolder<Item, Item> PANCAKES = food("pancakes", 8, .8f);
+    public static final DeferredHolder<Item, Item> WAFFLES = food("waffles", 9, .85f);
+    public static final DeferredHolder<Item, Item> CREPES = food("crepes", 7, .75f);
+    public static final DeferredHolder<Item, Item> GRIDDLE_FLATBREAD = food("griddle_flatbread", 7, .7f);
+    public static final DeferredHolder<Item, Item> BUTTERMILK_BISCUITS = food("buttermilk_biscuits", 8, .8f);
+    public static final DeferredHolder<Item, Item> APPLE_FRITTERS = food("apple_fritters", 9, .85f);
+    public static final DeferredHolder<Item, Item> JOHNNYCAKES = food("johnnycakes", 8, .75f);
+    public static final DeferredHolder<Item, Item> HONEYBERRY_CAKES = food("honeyberry_cakes", 10, .9f);
 
     // ----- Cordage chain -------------------------------------------------------------------------------------
     // Raw fibre -> retted fibre -> cordage -> lashing on a tool.
@@ -434,6 +475,22 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, Item> WRITTEN_BARK = ITEMS.registerSimpleItem("written_bark");
     /** Writing painted onto a flat stone slab; the most durable record, used for markers and monuments. */
     public static final DeferredHolder<Item, Item> WRITTEN_STONE = ITEMS.registerSimpleItem("written_stone");
+
+    private static DeferredHolder<Item, AdhesiveItem> adhesive(String id, float strength, float moisture, float flexibility, String application)
+    {
+        return ITEMS.register(id, () -> new AdhesiveItem(new com.terravera.common.component.Adhesive(strength, moisture, flexibility, application), new Item.Properties()));
+    }
+
+    private static DeferredHolder<Item, Item> batter(String id)
+    {
+        return ITEMS.register(id, () -> new Item(new Item.Properties().stacksTo(16)));
+    }
+
+    private static DeferredHolder<Item, Item> food(String id, int nutrition, float saturation)
+    {
+        return ITEMS.register(id, () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
+            .nutrition(nutrition).saturationModifier(saturation).build())));
+    }
 
     private static DeferredHolder<Item, Item> driedBark(String id, BarkProperties properties)
     {

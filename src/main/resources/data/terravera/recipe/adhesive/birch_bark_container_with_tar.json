@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["B B", "BTB", "BBB"],
+  "key": {
+    "B": {"item": "terravera:dried_birch_bark"},
+    "T": {"item": "terravera:birch_tar"}
+  },
+  "result": {"id": "terravera:birch_bark_container"}
+}

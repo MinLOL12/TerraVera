@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:barley_griddle_preserve_batter"
+  },
+  "result": {
+    "id": "terravera:barley_griddle_preserve"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

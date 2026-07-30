@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:oat_griddle_preserve_batter"
+  },
+  "result": {
+    "id": "terravera:oat_griddle_preserve"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

@@ -85,6 +85,36 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.CORDAGE.get());
         event.accept(TerraVeraItems.HEAVY_CORDAGE.get());
 
+        // Natural glue is an alternative to a lashing where a joint needs bonding rather than tying.
+        event.accept(TerraVeraItems.PINE_PITCH.get());
+        event.accept(TerraVeraItems.BIRCH_TAR.get());
+        event.accept(TerraVeraItems.HIDE_GLUE.get());
+        event.accept(TerraVeraItems.FISH_GLUE.get());
+        event.accept(TerraVeraItems.CASEIN_GLUE.get());
+        event.accept(TerraVeraItems.PANCAKE_BATTER.get());
+        event.accept(TerraVeraItems.WAFFLE_BATTER.get());
+        event.accept(TerraVeraItems.CREPE_BATTER.get());
+        event.accept(TerraVeraItems.FLATBREAD_DOUGH.get());
+        event.accept(TerraVeraItems.BISCUIT_DOUGH.get());
+        event.accept(TerraVeraItems.FRITTER_BATTER.get());
+        event.accept(TerraVeraItems.JOHNNYCAKE_BATTER.get());
+        event.accept(TerraVeraItems.HONEYBERRY_BATTER.get());
+        event.accept(TerraVeraItems.PANCAKES.get());
+        event.accept(TerraVeraItems.WAFFLES.get());
+        event.accept(TerraVeraItems.CREPES.get());
+        event.accept(TerraVeraItems.GRIDDLE_FLATBREAD.get());
+        event.accept(TerraVeraItems.BUTTERMILK_BISCUITS.get());
+        event.accept(TerraVeraItems.APPLE_FRITTERS.get());
+        event.accept(TerraVeraItems.JOHNNYCAKES.get());
+        event.accept(TerraVeraItems.HONEYBERRY_CAKES.get());
+        event.accept(TerraVeraItems.YEAST.get());
+        event.accept(TerraVeraItems.SOURDOUGH_STARTER.get());
+        event.accept(TerraVeraItems.BAKING_SODA.get());
+        event.accept(TerraVeraItems.BAKING_POWDER.get());
+        event.accept(TerraVeraItems.WHIPPED_EGG_WHITES.get());
+        event.accept(TerraVeraItems.FERMENTED_BATTER.get());
+        com.terravera.common.items.GriddleFoods.FOODS.values().forEach(food -> event.accept(food.get()));
+
         // Health, hygiene, and water treatment, in rough progression order.
         event.accept(TerraVeraItems.BITTER_HERBS.get());
         event.accept(TerraVeraItems.WORMWOOD.get());

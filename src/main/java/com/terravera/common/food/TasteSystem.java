@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import com.terravera.common.items.GriddleFoods;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -171,6 +172,18 @@ public class TasteSystem {
         tastes.put("minecraft:mushroom_stew", 50);
         tastes.put("minecraft:beetroot_soup", 48);
         tastes.put("minecraft:rabbit_stew", 70);
+
+        // ---- TerraVera: griddle cooking ------------------------------------------------------------------
+        // Recipe ingredients are intentionally varied (dairy, egg, fat, fruit and spice) so cooked meals earn
+        // both a higher taste score and an escape from the monotony of plain grain.
+        tastes.put("terravera:pancakes", 72);
+        tastes.put("terravera:waffles", 82);
+        tastes.put("terravera:crepes", 74);
+        tastes.put("terravera:griddle_flatbread", 62);
+        tastes.put("terravera:buttermilk_biscuits", 77);
+        tastes.put("terravera:apple_fritters", 84);
+        tastes.put("terravera:johnnycakes", 70);
+        tastes.put("terravera:honeyberry_cakes", 88);
 
         // ---- Vanilla: high end / rare -------------------------------------------------------------------
         tastes.put("minecraft:golden_carrot", 85);
@@ -429,6 +442,9 @@ public class TasteSystem {
         tastes.put("properly_cooked_steak", 70);
         tastes.put("raw_steak", -15);
 
+        // Extended catalogue: flavour is per finished dish, not a universal bonus for "griddle food".
+        // This makes plain unleavened cakes merely adequate while rested, well-topped products are exceptional.
+        GriddleFoods.ENTRIES.forEach((id, preparation) -> tastes.put("terravera:" + id, preparation.taste()));
         return tastes;
     }
 

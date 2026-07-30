@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:soda_griddle_honey_batter"
+  },
+  "result": {
+    "id": "terravera:soda_griddle_honey"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

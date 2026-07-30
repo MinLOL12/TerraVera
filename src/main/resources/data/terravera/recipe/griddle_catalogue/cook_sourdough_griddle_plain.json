@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:sourdough_griddle_plain_batter"
+  },
+  "result": {
+    "id": "terravera:sourdough_griddle_plain"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

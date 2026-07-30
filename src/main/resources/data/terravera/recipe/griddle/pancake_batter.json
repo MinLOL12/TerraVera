@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "tag": "terravera:batter_flours"
+    },
+    {
+      "tag": "terravera:batter_eggs"
+    },
+    {
+      "tag": "terravera:batter_liquids"
+    },
+    {
+      "tag": "terravera:batter_fats"
+    }
+  ],
+  "result": {
+    "id": "terravera:pancake_batter"
+  }
+}

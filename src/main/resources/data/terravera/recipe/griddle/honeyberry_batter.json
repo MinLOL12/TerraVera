@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "tag": "terravera:batter_flours"
+    },
+    {
+      "tag": "terravera:batter_eggs"
+    },
+    {
+      "tag": "terravera:batter_fruits"
+    },
+    {
+      "tag": "terravera:batter_sweeteners"
+    },
+    {
+      "tag": "terravera:batter_spices"
+    }
+  ],
+  "result": {
+    "id": "terravera:honeyberry_batter"
+  }
+}

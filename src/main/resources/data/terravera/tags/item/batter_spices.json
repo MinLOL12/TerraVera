@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cocoa_beans",
+    "minecraft:glow_berries",
+    "tfc:food/cinnamon",
+    "tfc:food/vanilla"
+  ]
+}
