@@ -21,6 +21,7 @@ import com.terravera.TerraVera;
 import com.terravera.common.component.BarkProperties;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.component.Adhesive;
+import com.terravera.common.component.CulinaryQuality;
 import com.terravera.common.component.KnappedHead;
 import com.terravera.common.component.ToolMetalState;
 import com.terravera.common.component.ToolGrip;
@@ -50,6 +51,10 @@ public final class TerraVeraDataComponents
     /** Prepared glue carried by a batch and retained by a glued tool joint. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Adhesive>> ADHESIVE =
         register("adhesive", builder -> builder.persistent(Adhesive.CODEC).networkSynchronized(Adhesive.STREAM_CODEC));
+
+    /** Leavening, rest, and lightness information for prepared food-quality and taste integrations. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CulinaryQuality>> CULINARY_QUALITY =
+        register("culinary_quality", builder -> builder.persistent(CulinaryQuality.CODEC).networkSynchronized(CulinaryQuality.STREAM_CODEC));
 
     /** Attached to repaired metal tools. Tracks remaining metal mass and the current smithing operation. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ToolMetalState>> TOOL_METAL_STATE =

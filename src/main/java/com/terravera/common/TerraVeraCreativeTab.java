@@ -107,6 +107,13 @@ public final class TerraVeraCreativeTab
         event.accept(TerraVeraItems.APPLE_FRITTERS.get());
         event.accept(TerraVeraItems.JOHNNYCAKES.get());
         event.accept(TerraVeraItems.HONEYBERRY_CAKES.get());
+        event.accept(TerraVeraItems.YEAST.get());
+        event.accept(TerraVeraItems.SOURDOUGH_STARTER.get());
+        event.accept(TerraVeraItems.BAKING_SODA.get());
+        event.accept(TerraVeraItems.BAKING_POWDER.get());
+        event.accept(TerraVeraItems.WHIPPED_EGG_WHITES.get());
+        event.accept(TerraVeraItems.FERMENTED_BATTER.get());
+        com.terravera.common.items.GriddleFoods.FOODS.values().forEach(food -> event.accept(food.get()));
 
         // Health, hygiene, and water treatment, in rough progression order.
         event.accept(TerraVeraItems.BITTER_HERBS.get());

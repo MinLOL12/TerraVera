@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:corn_griddle_nut_spice_batter"
+  },
+  "result": {
+    "id": "terravera:corn_griddle_nut_spice"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

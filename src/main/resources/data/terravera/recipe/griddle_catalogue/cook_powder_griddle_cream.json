@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:powder_griddle_cream_batter"
+  },
+  "result": {
+    "id": "terravera:powder_griddle_cream"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "tag": "terravera:batter_flours"
+    },
+    {
+      "tag": "terravera:batter_liquids"
+    },
+    {
+      "tag": "terravera:batter_eggs"
+    },
+    {
+      "tag": "terravera:batter_fats"
+    },
+    {
+      "tag": "terravera:griddle_topping_honey"
+    },
+    {
+      "item": "terravera:whipped_egg_whites"
+    }
+  ],
+  "result": {
+    "id": "terravera:whipped_white_griddle_honey_batter"
+  }
+}

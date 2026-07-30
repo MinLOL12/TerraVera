@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:corn_griddle_butter_batter"
+  },
+  "result": {
+    "id": "terravera:corn_griddle_butter"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

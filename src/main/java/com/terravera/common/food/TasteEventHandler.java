@@ -12,6 +12,8 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
 import com.terravera.TerraVera;
+import com.terravera.common.TerraVeraDataComponents;
+import com.terravera.common.component.CulinaryQuality;
 import com.terravera.common.skill.SkillSystem;
 import com.terravera.common.skill.SkillType;
 import com.terravera.config.TerraVeraConfig;
@@ -66,6 +68,11 @@ public final class TasteEventHandler {
         event.getToolTip().add(Component.translatable("terravera.tooltip.flavor",
                 Component.translatable(TasteSystem.getTasteDescriptorKey(taste)))
             .withStyle(TasteSystem.getTasteColor(taste)));
+        CulinaryQuality quality = stack.get(TerraVeraDataComponents.CULINARY_QUALITY.get());
+        if (quality != null) {
+            event.getToolTip().add(Component.translatable("tooltip.terravera.culinary_quality", quality.leavening(),
+                quality.restingMinutes(), Math.round(quality.lightness() * 100)).withStyle(net.minecraft.ChatFormatting.GRAY));
+        }
     }
 
     @SubscribeEvent

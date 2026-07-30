@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:yeast_griddle_cream_batter"
+  },
+  "result": {
+    "id": "terravera:yeast_griddle_cream"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

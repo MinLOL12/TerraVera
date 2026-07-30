@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:rye_griddle_honey_batter"
+  },
+  "result": {
+    "id": "terravera:rye_griddle_honey"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

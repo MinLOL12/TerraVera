@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import com.terravera.common.items.GriddleFoods;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -441,6 +442,9 @@ public class TasteSystem {
         tastes.put("properly_cooked_steak", 70);
         tastes.put("raw_steak", -15);
 
+        // Extended catalogue: flavour is per finished dish, not a universal bonus for "griddle food".
+        // This makes plain unleavened cakes merely adequate while rested, well-topped products are exceptional.
+        GriddleFoods.ENTRIES.forEach((id, preparation) -> tastes.put("terravera:" + id, preparation.taste()));
         return tastes;
     }
 

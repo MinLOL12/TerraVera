@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:rye_griddle_maple_batter"
+  },
+  "result": {
+    "id": "terravera:rye_griddle_maple"
+  },
+  "experience": 0.25,
+  "cookingtime": 180
+}

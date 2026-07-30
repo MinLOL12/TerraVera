@@ -27,6 +27,9 @@ public final class TerraVeraItems
 {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TerraVera.MOD_ID);
 
+    // 112 batter-and-finish combinations, retained separately from the introductory eight recipes below.
+    static { GriddleFoods.register(ITEMS); }
+
     // ----- Smithing stations ---------------------------------------------------------------------------------
 
     /** Portable maintenance surface for hot-work repairs. Use with a metal hammer; flux is reserved for welds. */
@@ -134,6 +137,14 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, AdhesiveItem> CASEIN_GLUE = adhesive("casein_glue", .94f, .62f, .12f, "rigid_joinery");
 
     // ----- Griddle batters and hot-surface foods ------------------------------------------------
+    /** Leavening is a material progression: flat batter first, then chemical, whipped, and fermented lift. */
+    public static final DeferredHolder<Item, Item> YEAST = ITEMS.registerSimpleItem("yeast");
+    public static final DeferredHolder<Item, Item> SOURDOUGH_STARTER = ITEMS.registerSimpleItem("sourdough_starter");
+    public static final DeferredHolder<Item, Item> BAKING_SODA = ITEMS.registerSimpleItem("baking_soda");
+    public static final DeferredHolder<Item, Item> BAKING_POWDER = ITEMS.registerSimpleItem("baking_powder");
+    public static final DeferredHolder<Item, Item> WHIPPED_EGG_WHITES = ITEMS.registerSimpleItem("whipped_egg_whites");
+    public static final DeferredHolder<Item, Item> FERMENTED_BATTER = ITEMS.registerSimpleItem("fermented_batter");
+
     // Batter is deliberately an intermediate: cook it on a campfire or smoker (a hot griddle surface) rather than
     // receiving a finished meal straight from a crafting grid.
     public static final DeferredHolder<Item, Item> PANCAKE_BATTER = batter("pancake_batter");
