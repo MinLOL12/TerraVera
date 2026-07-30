@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "terravera:rendered_tallow",
+    "minecraft:slime_ball",
+    "tfc:food/butter",
+    "tfc:food/lard"
+  ]
+}

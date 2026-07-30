@@ -172,6 +172,18 @@ public class TasteSystem {
         tastes.put("minecraft:beetroot_soup", 48);
         tastes.put("minecraft:rabbit_stew", 70);
 
+        // ---- TerraVera: griddle cooking ------------------------------------------------------------------
+        // Recipe ingredients are intentionally varied (dairy, egg, fat, fruit and spice) so cooked meals earn
+        // both a higher taste score and an escape from the monotony of plain grain.
+        tastes.put("terravera:pancakes", 72);
+        tastes.put("terravera:waffles", 82);
+        tastes.put("terravera:crepes", 74);
+        tastes.put("terravera:griddle_flatbread", 62);
+        tastes.put("terravera:buttermilk_biscuits", 77);
+        tastes.put("terravera:apple_fritters", 84);
+        tastes.put("terravera:johnnycakes", 70);
+        tastes.put("terravera:honeyberry_cakes", 88);
+
         // ---- Vanilla: high end / rare -------------------------------------------------------------------
         tastes.put("minecraft:golden_carrot", 85);
         tastes.put("minecraft:golden_apple", 90);

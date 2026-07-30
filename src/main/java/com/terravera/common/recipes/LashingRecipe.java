@@ -28,6 +28,7 @@ import com.terravera.common.TerraVeraDataComponents;
 import com.terravera.common.TerraVeraDataComponents.BindingBonus;
 import com.terravera.common.TerraVeraDataComponents.DamageBonus;
 import com.terravera.common.component.Cordage;
+import com.terravera.common.component.Adhesive;
 import com.terravera.common.component.KnappedHead;
 import com.terravera.common.items.HeadItem;
 import com.terravera.config.TerraVeraConfig;
@@ -178,6 +179,8 @@ public record LashingRecipe(
             (int)(match.cordages.stream().mapToInt(Cordage::lengthMM).average().orElse(300))
         );
         result.set(TerraVeraDataComponents.CORDAGE.get(), avgCordage);
+        // A glued haft is a distinct joint: retain its wet resistance/flexibility for tooltips and future wear logic.
+        if (match.adhesive != null) result.set(TerraVeraDataComponents.ADHESIVE.get(), match.adhesive);
         return result;
     }
 
@@ -241,6 +244,7 @@ public record LashingRecipe(
         List<Cordage> cordages = new ArrayList<>();
         int normalCordageSlots = 0;
         int heavyCordageSlots = 0;
+        Adhesive adhesive = null;
         int hafts = 0, other = 0;
 
         for (int i = 0; i < input.size(); i++)
@@ -253,6 +257,14 @@ public record LashingRecipe(
             {
                 if (head != null) return null; // Two heads - no
                 head = candidate;
+            }
+            else if (stack.has(TerraVeraDataComponents.ADHESIVE.get()))
+            {
+                // One batch is enough to bed a stone head. Glue is accepted only as a complete alternative to a tie.
+                if (adhesive != null) return null;
+                adhesive = stack.get(TerraVeraDataComponents.ADHESIVE.get());
+                // Reuse the binding-quality calculation while retaining the actual glue component on the result.
+                cordages.add(new Cordage(adhesive.strength(), "glued", 100 + Math.round(500f * (0.5f + adhesive.flexibility()))));
             }
             else if (this.cordageHeavy.test(stack))
             {
@@ -282,21 +294,22 @@ public record LashingRecipe(
         // This both prevents mixing types and guarantees every required length is consumed by the crafting grid.
         if (TerraVeraConfig.SERVER.requireCordageForHafting.get())
         {
-            final boolean hasCorrectNormal = normalCordageSlots == cordageCount && heavyCordageSlots == 0;
-            final boolean hasCorrectHeavy = heavyCordageSlots == cordageCount && normalCordageSlots == 0;
+            final boolean hasCorrectNormal = normalCordageSlots == cordageCount && heavyCordageSlots == 0 && adhesive == null;
+            final boolean hasCorrectHeavy = heavyCordageSlots == cordageCount && normalCordageSlots == 0 && adhesive == null;
+            final boolean hasGlueJoint = adhesive != null && normalCordageSlots == 0 && heavyCordageSlots == 0;
 
-            if (!hasCorrectNormal && !hasCorrectHeavy) return null;
+            if (!hasCorrectNormal && !hasCorrectHeavy && !hasGlueJoint) return null;
         }
 
         for (MaterialResult result : results)
         {
             if (result.material().equals(head.material()))
             {
-                return new Match(head, cordages, result.result());
+                return new Match(head, cordages, adhesive, result.result());
             }
         }
         return null;
     }
 
-    private record Match(KnappedHead head, List<Cordage> cordages, ItemStack result) {}
+    private record Match(KnappedHead head, List<Cordage> cordages, Adhesive adhesive, ItemStack result) {}
 }

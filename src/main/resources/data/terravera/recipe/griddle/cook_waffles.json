@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:waffle_batter"
+  },
+  "result": {
+    "id": "terravera:waffles"
+  },
+  "experience": 0.35,
+  "cookingtime": 160
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "terravera:biscuit_dough"
+  },
+  "result": {
+    "id": "terravera:buttermilk_biscuits"
+  },
+  "experience": 0.35,
+  "cookingtime": 160
+}

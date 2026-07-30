@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": ["BBB", " P ", "BBB"],
+  "key": {
+    "B": {"tag": "terravera:dry_bark"},
+    "P": {"item": "terravera:pine_pitch"}
+  },
+  "result": {"id": "terravera:bark_roofing", "count": 3}
+}

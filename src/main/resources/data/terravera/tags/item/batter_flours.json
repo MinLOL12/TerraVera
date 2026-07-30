@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:wheat",
+    "tfc:food/wheat_flour",
+    "tfc:food/barley_flour",
+    "tfc:food/rye_flour"
+  ]
+}
