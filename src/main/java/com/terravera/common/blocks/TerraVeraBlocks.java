@@ -20,6 +20,8 @@ import com.terravera.common.power.WindTurbineBlock;
 import com.terravera.common.power.WireIntersectionBlock;
 import com.terravera.common.water.CollectorType;
 import com.terravera.common.water.WaterCollectorBlock;
+import com.terravera.common.sterilization.SterilizerBlock;
+import com.terravera.common.sterilization.SterilizerType;
 import com.terravera.common.farming.DripIrrigationBlock;
 import com.terravera.common.farming.PreparedFarmlandBlock;
 import com.terravera.common.greenhouse.GreenhouseBlock;
@@ -94,6 +96,35 @@ public final class TerraVeraBlocks
     public static final DeferredHolder<Block, WaterCollectorBlock> SOLAR_STILL = BLOCKS.register("solar_still",
         () -> new WaterCollectorBlock(CollectorType.SOLAR_STILL, BlockBehaviour.Properties.of()
             .mapColor(MapColor.STONE).strength(1.5f, 2f).sound(SoundType.GLASS).noOcclusion()));
+
+    // ----- Water sterilization ------------------------------------------------------------------------------
+    // Five animated machines that treat water rather than collecting it. They share one block entity type and one
+    // GeckoLib renderer; see com.terravera.common.sterilization.
+
+    /** Glass bottles on a wooden rack, tilted into the sun. A quarter day of clear daylight disinfects the batch. */
+    public static final DeferredHolder<Block, SterilizerBlock> SODIS_RACK = BLOCKS.register("sodis_rack",
+        () -> new SterilizerBlock(SterilizerType.SODIS_RACK, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD).strength(1.2f).sound(SoundType.WOOD).noOcclusion()));
+
+    /** A barrel of graded sand and gravel with a living biological layer on top. Gravity-fed and always on. */
+    public static final DeferredHolder<Block, SterilizerBlock> BIO_SAND_FILTER = BLOCKS.register("bio_sand_filter",
+        () -> new SterilizerBlock(SterilizerType.BIO_SAND_FILTER, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.STONE).strength(2.0f, 4.0f).sound(SoundType.STONE).noOcclusion()));
+
+    /** Copper pot, dome, and condenser arm. Boil it off, condense it back; nothing survives the trip. */
+    public static final DeferredHolder<Block, SterilizerBlock> DISTILLATION_STILL = BLOCKS.register("distillation_still",
+        () -> new SterilizerBlock(SterilizerType.DISTILLATION_STILL, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_ORANGE).strength(3.0f, 5.0f).sound(SoundType.COPPER).noOcclusion()));
+
+    /** A glass chamber with a UV lamp. Almost nothing survives the radiation dose. */
+    public static final DeferredHolder<Block, SterilizerBlock> UV_STERILIZER = BLOCKS.register("uv_sterilizer",
+        () -> new SterilizerBlock(SterilizerType.UV_STERILIZER, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL).strength(3.5f, 6.0f).sound(SoundType.METAL).noOcclusion()));
+
+    /** A settling tank with a slow stirring paddle. Let the mud fall out; the mud takes the load with it. */
+    public static final DeferredHolder<Block, SterilizerBlock> CLARIFIER = BLOCKS.register("clarifier",
+        () -> new SterilizerBlock(SterilizerType.CLARIFIER, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.WOOD).strength(1.8f, 2.5f).sound(SoundType.WOOD).noOcclusion()));
 
     /** Overlapping bark sheets used as a temporary rain skin, roof covering, or primitive insulation. */
     public static final DeferredHolder<Block, BarkRoofBlock> BARK_ROOFING = BLOCKS.register("bark_roofing",

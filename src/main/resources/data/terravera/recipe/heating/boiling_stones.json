@@ -1,0 +1,11 @@
+{
+  "__comment__": "River stones heated until they glow in a TFC firepit or forge. Dropped into a container of water they carry the boil to the water - the classic no-pot method.",
+  "type": "tfc:heating",
+  "ingredient": {
+    "tag": "c:stones"
+  },
+  "result_item": {
+    "item": "terravera:boiling_stones"
+  },
+  "temperature": 350
+}

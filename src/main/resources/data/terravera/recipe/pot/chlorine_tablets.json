@@ -1,0 +1,19 @@
+{
+  "__comment__": "Chlorine from a pot: brine, lye, and charcoal boiled together. This is the same chemistry - electrolysis of brine is how the real world makes chlorine - with a cooking pot standing in for the cell.",
+  "type": "tfc:pot",
+  "duration": 1600,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    { "item": "tfc:powder/salt" },
+    { "item": "tfc:powder/salt" },
+    { "item": "terravera:lye_concentrate" },
+    { "item": "tfc:powder/charcoal" }
+  ],
+  "item_output": [
+    { "count": 4, "id": "terravera:chlorine_tablets" }
+  ],
+  "temperature": 300.0
+}

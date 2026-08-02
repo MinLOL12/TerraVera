@@ -51,6 +51,50 @@ Each is a real fluid handler, so TFC jugs and other compatible containers can dr
 written onto the filled container for TerraVera's disease system. Their frames, cloth layers, stone courses, covers,
 and animated water surfaces use GeckoLib geometry rather than flat block textures.
 
+### Sterilizing water: twenty-two real methods
+
+The disease system only makes sense if the *cure* is real too, so TerraVera ships a full catalogue of water
+sterilization methods - twenty-two of them, every one a technique an actual field guide teaches, and almost all of
+them live in-game. They are anchored to TerraFirmaCraft's own devices and materials rather than to a parallel
+"purifier" tech tree:
+
+| Method | How it works in-game | Treatment tier |
+| --- | --- | --- |
+| **Boiling** | Hold a filled container against a TFC firepit pot ≥100°C | kills everything |
+| **Rolling boil (5 min)** | The sustained version - same pot interaction | kills everything |
+| **Pasteurization** | The same pot at 63–99°C | kills most bacteria/viruses, not cysts |
+| **Stone boiling** | Fire-heated `boiling_stones` (TFC heating recipe) dropped into a container | pasteurizes |
+| **SODIS** | `sodis_rack` - glass bottles in clear daylight, one quarter of a day | kills most, not cysts |
+| **Solar still** | The passive `solar_still` collector now produces distilled water | distilled |
+| **Distillation** | `distillation_still` - copper pot, dome, condenser | distilled |
+| **Cloth filtration** | Single-use `cloth_filter` (burlap + cordage) | grit + some parasites |
+| **Charcoal filter** | The existing `water_filter` item | removes protozoa, not bacteria |
+| **Bio-sand filter** | `bio_sand_filter` block - gravity-fed sand and gravel | most bacteria, not viruses |
+| **Ceramic candle** | `ceramic_filter_candle`, fired from clay in a TFC kiln | strains out bacteria |
+| **Settling** | `clarifier` block - let the mud fall out | mild |
+| **Flocculation (alum)** | `alum_crystals` (pot recipe: salt + wood ash) | clumps and settles the load |
+| **Moringa seed** | `moringa_seed_powder` - the traditional seed flocculant | clumps and settles the load |
+| **Chlorination** | `chlorine_tablets` (pot recipe: salt + lye + charcoal) | kills bacteria/viruses, not *Cryptosporidium* |
+| **Iodination** | `iodine_drops` (pot recipe: wood ash + salt) | kills bacteria/viruses |
+| **Permanganate** | `permanganate_crystals` (pot recipe) | strong oxidiser |
+| **Acidification** | `citrus_juice` from TFC lemons (or vinegar) - the emergency trick | buys time, not safety |
+| **Colloidal silver** | `colloidal_silver` (pot recipe: silver ingot + salt) - mild, persistent | mild |
+| **UV sterilization** | `uv_sterilizer` block with a UV lamp | nearly everything |
+| **Reverse osmosis** | `ro_membrane` hand-pump cartridge (also the UV sterilizer's pre-filter) | nearly everything |
+| **Freezing** | Documented in the catalogue; cold water is already modelled as cleaner | — |
+
+Treatments form a strict ladder on every water container: settle → cloth → acid → flocculate → charcoal filter →
+bio-sand → ceramic → silver → pasteurize → SODIS → iodine → permanganate → chlorine → UV → RO → distill → boil.
+Treating water twice always upgrades to the stronger treatment and never wastes the weaker one; every treatment keeps
+the original source contamination attached, so a jug of "chlorinated swamp water" tells you exactly what it is and
+what boiling it would make it.
+
+The five machines are all real GeckoLib models with their own hand-laid-out 64×64 textures and two animation loops
+each - an idle shimmer and a working cycle (bottles tilting in the sun, water dripping through the sand column,
+steam rising from the still, the UV lamp pulsing, the clarifier paddle turning). They share one block entity, tank
+the water, and stamp the treatment onto whatever container draws from them, so TFC jugs, bottles, and buckets work
+with them out of the box.
+
 ### 2. Knapping by function, not by silhouette
 
 TerraFirmaCraft's knapping asks you to reproduce an exact picture. Miss a square and you get nothing, with no

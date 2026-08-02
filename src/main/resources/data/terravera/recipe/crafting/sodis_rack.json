@@ -1,0 +1,18 @@
+{
+  "__comment__": "Two glass bottles on a wooden A-frame. The frame is sticks and cordage; the magic is free sunlight.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "G G",
+    "P P",
+    "PPP"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass_bottle" },
+    "P": { "tag": "minecraft:planks" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:sodis_rack"
+  }
+}

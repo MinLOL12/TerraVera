@@ -1,0 +1,18 @@
+{
+  "__comment__": "A copper pot, a dome lid, and a condenser arm. Copper conducts heat beautifully and does not poison you the way lead would - this is exactly the material history used real stills.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "S S",
+    "SCS",
+    "S S"
+  ],
+  "key": {
+    "S": { "tag": "c:sheets/copper" },
+    "C": { "tag": "terravera:cordage" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:distillation_still"
+  }
+}

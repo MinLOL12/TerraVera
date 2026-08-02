@@ -1,0 +1,17 @@
+{
+  "__comment__": "A silver ingot simmered in salted water. Silver ions leach out slowly and keep working for days - which is exactly why silver-treated water stays good in storage.",
+  "type": "tfc:pot",
+  "duration": 2400,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    { "item": "tfc:metal/ingot/silver" },
+    { "item": "tfc:powder/salt" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:colloidal_silver" }
+  ],
+  "temperature": 300.0
+}

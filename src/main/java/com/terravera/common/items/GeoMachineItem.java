@@ -46,6 +46,15 @@ public class GeoMachineItem extends BlockItem implements GeoItem {
             tooltip.add(Component.translatable("terravera.water_collector.capacity", collector.collectorType().capacity())
                 .withStyle(ChatFormatting.DARK_AQUA));
         }
+        if (getBlock() instanceof com.terravera.common.sterilization.SterilizerBlock sterilizer) {
+            final com.terravera.common.sterilization.SterilizerType type = sterilizer.sterilizerType();
+            tooltip.add(Component.translatable("terravera.sterilizer." + type.id() + "_hint")
+                .withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("terravera.sterilizer.capacity", type.capacity())
+                .withStyle(ChatFormatting.DARK_AQUA));
+            tooltip.add(Component.translatable("terravera.sterilizer.process", type.processTicks() / 20)
+                .withStyle(ChatFormatting.DARK_AQUA));
+        }
     }
 
     @Override

@@ -1,0 +1,18 @@
+{
+  "__comment__": "A wooden settling tank with a TFC wooden bucket as the working tank insert and a slow stirring paddle.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "P P",
+    "PBP",
+    "PPP"
+  ],
+  "key": {
+    "P": { "tag": "minecraft:planks" },
+    "B": { "item": "tfc:wooden_bucket" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:clarifier"
+  }
+}

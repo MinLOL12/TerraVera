@@ -1,0 +1,17 @@
+{
+  "__comment__": "Real citrus, from a TFC lemon. The acid emergency treatment: sour the water hard and give it time. It buys you hours on the trail, never safety.",
+  "type": "tfc:pot",
+  "duration": 1000,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    { "item": "tfc:food/lemon" },
+    { "item": "tfc:food/lemon" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:citrus_juice" }
+  ],
+  "temperature": 120.0
+}

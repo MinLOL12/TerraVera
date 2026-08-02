@@ -4,6 +4,9 @@
     "terravera:rubble_foundation",
     "terravera:wrought_iron_support_beam",
     "terravera:rock_basin",
-    "terravera:solar_still"
+    "terravera:solar_still",
+    "terravera:bio_sand_filter",
+    "terravera:distillation_still",
+    "terravera:uv_sterilizer"
   ]
 }

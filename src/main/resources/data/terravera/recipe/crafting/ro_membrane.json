@@ -1,0 +1,18 @@
+{
+  "__comment__": "Burlap and wrought-iron sheet wound into a spiral-wound cartridge. A real RO membrane is plastic; this is the best a forge world can honestly do - and it genuinely works, one container at a time.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "S S",
+    " B ",
+    "S S"
+  ],
+  "key": {
+    "S": { "tag": "c:sheets/wrought_iron" },
+    "B": { "item": "tfc:burlap_cloth" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:ro_membrane"
+  }
+}

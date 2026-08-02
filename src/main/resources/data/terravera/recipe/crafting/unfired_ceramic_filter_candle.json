@@ -1,0 +1,16 @@
+{
+  "__comment__": "The candle starts as plain clay. It has to go through a TFC kiln before its pores are small and strong enough to strain out bacteria.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": { "item": "minecraft:clay_ball" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:unfired_ceramic_filter_candle"
+  }
+}

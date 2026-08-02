@@ -1,0 +1,18 @@
+{
+  "__comment__": "A square of burlap folded over and tied with cordage. One container per filter - cloth filtration is the cheapest method there is, and exactly as good as that suggests.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "C",
+    "B",
+    "C"
+  ],
+  "key": {
+    "C": { "tag": "terravera:cordage" },
+    "B": { "item": "tfc:burlap_cloth" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:cloth_filter"
+  }
+}
