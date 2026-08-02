@@ -1,0 +1,18 @@
+{
+  "__comment__": "Permanganate from charcoal, salt, and strong heat. The deep-purple crystals are a standard field disinfectant - a few grains turn a litre of water pink and most of its pathogens dead.",
+  "type": "tfc:pot",
+  "duration": 2200,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "ingredients": [
+    { "item": "tfc:powder/charcoal" },
+    { "item": "tfc:powder/salt" },
+    { "item": "tfc:powder/salt" }
+  ],
+  "item_output": [
+    { "count": 2, "id": "terravera:permanganate_crystals" }
+  ],
+  "temperature": 300.0
+}

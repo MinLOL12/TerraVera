@@ -44,6 +44,8 @@ public final class TerraVeraClient
             context -> new GeoBlockRenderer<>(new HandCrankModel<>()));
         event.registerBlockEntityRenderer(TerraVeraBlockEntities.WATER_COLLECTOR.get(),
             context -> new GeoBlockRenderer<>(new WaterCollectorModel<>()));
+        event.registerBlockEntityRenderer(TerraVeraBlockEntities.STERILIZER.get(),
+            context -> new GeoBlockRenderer<>(new com.terravera.client.model.SterilizerModel<>()));
         // Greenhouse tiers: each has its own model variant with distinct vent animations.
         event.registerBlockEntityRenderer(TerraVeraBlockEntities.GREENHOUSE.get(),
             context -> new GeoBlockRenderer<>(new com.terravera.client.model.GreenhouseModel<>()));

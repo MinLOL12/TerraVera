@@ -1,0 +1,20 @@
+{
+  "__comment__": "A burlap-lined barrel of graded sand and gravel. The living layer on top of the sand is what makes it a bio-sand filter rather than a sand filter.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "B B",
+    "GSG",
+    "C C"
+  ],
+  "key": {
+    "B": { "item": "tfc:burlap_cloth" },
+    "G": { "item": "minecraft:gravel" },
+    "S": { "tag": "c:sands" },
+    "C": { "tag": "terravera:cordage" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:bio_sand_filter"
+  }
+}

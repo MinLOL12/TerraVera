@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=north,water_level=0,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=0,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=1,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=1,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=2,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=2,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=3,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=3,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=4,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=north,water_level=4,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=0,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=0,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=1,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=1,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=2,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=2,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=3,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=3,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=4,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=south,water_level=4,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=0,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=0,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=1,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=1,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=2,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=2,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=3,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=3,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=4,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=east,water_level=4,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=0,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=0,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=1,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=1,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=2,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=2,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=3,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=3,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=4,active=false": {
+      "model": "terravera:block/uv_sterilizer"
+    },
+    "facing=west,water_level=4,active=true": {
+      "model": "terravera:block/uv_sterilizer"
+    }
+  }
+}

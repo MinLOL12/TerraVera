@@ -1,0 +1,19 @@
+{
+  "__comment__": "An iron-and-glass chamber wrapped around a UV lamp, with a reverse-osmosis membrane as its pre-filter. The industrial end of the water tree.",
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "IGI",
+    "RGR",
+    "GIG"
+  ],
+  "key": {
+    "I": { "tag": "c:ingots/iron" },
+    "G": { "tag": "c:glass_panes" },
+    "R": { "item": "terravera:ro_membrane" }
+  },
+  "result": {
+    "count": 1,
+    "id": "terravera:uv_sterilizer"
+  }
+}

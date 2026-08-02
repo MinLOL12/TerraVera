@@ -55,6 +55,14 @@ public final class TerraVeraBlockEntities
                 TerraVeraBlocks.COLD_FRAME.get(), TerraVeraBlocks.HOOP_HOUSE.get(),
                 TerraVeraBlocks.GLASS_GREENHOUSE.get(), TerraVeraBlocks.MODERN_GREENHOUSE.get()).build(null));
 
+    /** Block entity shared by all five animated water-sterilization machines. */
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.terravera.common.sterilization.SterilizerBlockEntity>> STERILIZER =
+        TYPES.register("sterilizer", () -> BlockEntityType.Builder
+            .of(com.terravera.common.sterilization.SterilizerBlockEntity::new,
+                TerraVeraBlocks.SODIS_RACK.get(), TerraVeraBlocks.BIO_SAND_FILTER.get(),
+                TerraVeraBlocks.DISTILLATION_STILL.get(), TerraVeraBlocks.UV_STERILIZER.get(),
+                TerraVeraBlocks.CLARIFIER.get()).build(null));
+
     /** Stores soil condition data on prepared farmland blocks. */
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PreparedFarmlandBlockEntity>> PREPARED_FARMLAND =
         TYPES.register("prepared_farmland", () -> BlockEntityType.Builder
@@ -74,6 +82,8 @@ public final class TerraVeraBlockEntities
     {
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
             WATER_COLLECTOR.get(), (collector, side) -> collector.fluidHandler());
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+            STERILIZER.get(), (sterilizer, side) -> sterilizer.fluidHandler());
     }
 
     private TerraVeraBlockEntities() {}

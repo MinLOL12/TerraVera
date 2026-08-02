@@ -127,8 +127,18 @@ public class WaterCollectorBlock extends HorizontalDirectionalBlock implements E
             final ItemStack filled = player.getItemInHand(hand);
             if (!filled.isEmpty())
             {
-                WaterTreatment.set(filled, new WaterTreatment(WaterTreatment.Treatment.UNTREATED,
-                    collectorType.contamination()));
+                if (collectorType == CollectorType.SOLAR_STILL)
+                {
+                    // A solar still condenses vapour - the water that comes out of it has been distilled, and is as
+                    // clean as the sky. This is the collector's whole point, and it is the one collector that
+                    // genuinely sterilizes rather than merely collecting.
+                    WaterTreatment.set(filled, new WaterTreatment(WaterTreatment.Treatment.DISTILLED, 0f));
+                }
+                else
+                {
+                    WaterTreatment.set(filled, new WaterTreatment(WaterTreatment.Treatment.UNTREATED,
+                        collectorType.contamination()));
+                }
             }
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide());

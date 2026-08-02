@@ -1,0 +1,11 @@
+{
+  "__comment__": "Fired in a TerraFirmaCraft kiln alongside the rest of your pottery. High fire, long soak - the clay has to vitrify just enough.",
+  "type": "tfc:firing",
+  "ingredient": {
+    "item": "terravera:unfired_ceramic_filter_candle"
+  },
+  "result": {
+    "item": "terravera:ceramic_filter_candle"
+  },
+  "temperature": 1199
+}

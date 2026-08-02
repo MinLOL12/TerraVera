@@ -22,6 +22,7 @@ import com.terravera.common.blocks.TerraVeraBlocks;
 import com.terravera.common.component.BarkProperties;
 import com.terravera.common.component.Cordage;
 import com.terravera.common.TerraVeraDataComponents;
+import com.terravera.common.sterilization.SterilizerType;
 
 public final class TerraVeraItems
 {
@@ -73,6 +74,75 @@ public final class TerraVeraItems
     public static final DeferredHolder<Item, BlockItem> SOLAR_STILL = ITEMS.register("solar_still",
         () -> new GeoMachineItem(TerraVeraBlocks.SOLAR_STILL.get(), new Item.Properties(),
             () -> new com.terravera.client.model.WaterCollectorModel<>(com.terravera.common.water.CollectorType.SOLAR_STILL)));
+
+    // ----- Water sterilization machines ---------------------------------------------------------------------
+    // Held-item renderers show the full animated model, matching the in-world blocks.
+
+    public static final DeferredHolder<Item, BlockItem> SODIS_RACK = ITEMS.register("sodis_rack",
+        () -> new GeoMachineItem(TerraVeraBlocks.SODIS_RACK.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.SterilizerModel<>(SterilizerType.SODIS_RACK)));
+    public static final DeferredHolder<Item, BlockItem> BIO_SAND_FILTER = ITEMS.register("bio_sand_filter",
+        () -> new GeoMachineItem(TerraVeraBlocks.BIO_SAND_FILTER.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.SterilizerModel<>(SterilizerType.BIO_SAND_FILTER)));
+    public static final DeferredHolder<Item, BlockItem> DISTILLATION_STILL = ITEMS.register("distillation_still",
+        () -> new GeoMachineItem(TerraVeraBlocks.DISTILLATION_STILL.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.SterilizerModel<>(SterilizerType.DISTILLATION_STILL)));
+    public static final DeferredHolder<Item, BlockItem> UV_STERILIZER = ITEMS.register("uv_sterilizer",
+        () -> new GeoMachineItem(TerraVeraBlocks.UV_STERILIZER.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.SterilizerModel<>(SterilizerType.UV_STERILIZER)));
+    public static final DeferredHolder<Item, BlockItem> CLARIFIER = ITEMS.register("clarifier",
+        () -> new GeoMachineItem(TerraVeraBlocks.CLARIFIER.get(), new Item.Properties(),
+            () -> new com.terravera.client.model.SterilizerModel<>(SterilizerType.CLARIFIER)));
+
+    // ----- Water treatment consumables ----------------------------------------------------------------------
+    // One reusable item per chemical or field method. Durability is the use count.
+
+    /** Fire-heated stones dropped into a container; the classic no-pot boiling trick. */
+    public static final DeferredHolder<Item, Item> BOILING_STONES = ITEMS.register("boiling_stones",
+        () -> new TreatmentItem(new Item.Properties().durability(8),
+            com.terravera.common.health.WaterTreatment.Treatment.PASTEURIZED, net.minecraft.sounds.SoundEvents.LAVA_EXTINGUISH));
+    /** A square of burlap. Better than nothing - which is exactly what it is worth. */
+    public static final DeferredHolder<Item, Item> CLOTH_FILTER = ITEMS.register("cloth_filter",
+        () -> new TreatmentItem(new Item.Properties().durability(1),
+            com.terravera.common.health.WaterTreatment.Treatment.CLOTH_FILTERED, net.minecraft.sounds.SoundEvents.SAND_BREAK));
+    /** Fired clay candle that strains out bacteria. Fragile; rinse it clean between uses. */
+    public static final DeferredHolder<Item, Item> CERAMIC_FILTER_CANDLE = ITEMS.register("ceramic_filter_candle",
+        () -> new TreatmentItem(new Item.Properties().durability(32),
+            com.terravera.common.health.WaterTreatment.Treatment.CERAMIC_FILTERED, net.minecraft.sounds.SoundEvents.STONE_BREAK));
+    /** The unfired clay candle; must go through a TFC kiln before it will filter anything. */
+    public static final DeferredHolder<Item, Item> UNFIRED_CERAMIC_FILTER_CANDLE = ITEMS.registerSimpleItem("unfired_ceramic_filter_candle");
+    /** Standard chlorine tablets - the world's default answer to bad water. */
+    public static final DeferredHolder<Item, Item> CHLORINE_TABLETS = ITEMS.register("chlorine_tablets",
+        () -> new TreatmentItem(new Item.Properties().durability(16),
+            com.terravera.common.health.WaterTreatment.Treatment.CHLORINATED, net.minecraft.sounds.SoundEvents.BOTTLE_FILL));
+    /** Iodine tincture in a dropper bottle; the backpacker's classic. */
+    public static final DeferredHolder<Item, Item> IODINE_DROPS = ITEMS.register("iodine_drops",
+        () -> new TreatmentItem(new Item.Properties().durability(8),
+            com.terravera.common.health.WaterTreatment.Treatment.IODIZED, net.minecraft.sounds.SoundEvents.BOTTLE_FILL));
+    /** Potassium permanganate crystals. Violently pink, violently oxidative. */
+    public static final DeferredHolder<Item, Item> PERMANGANATE_CRYSTALS = ITEMS.register("permanganate_crystals",
+        () -> new TreatmentItem(new Item.Properties().durability(8),
+            com.terravera.common.health.WaterTreatment.Treatment.PERMANGANATE, net.minecraft.sounds.SoundEvents.BOTTLE_FILL));
+    /** Sour fruit juice - the emergency field acidification trick. Buys time, not safety. */
+    public static final DeferredHolder<Item, Item> CITRUS_JUICE = ITEMS.register("citrus_juice",
+        () -> new TreatmentItem(new Item.Properties().durability(4),
+            com.terravera.common.health.WaterTreatment.Treatment.ACIDIFIED, net.minecraft.sounds.SoundEvents.BOTTLE_FILL));
+    /** Colloidal silver. Mild and slow, but it keeps working while the water sits. */
+    public static final DeferredHolder<Item, Item> COLLOIDAL_SILVER = ITEMS.register("colloidal_silver",
+        () -> new TreatmentItem(new Item.Properties().durability(8),
+            com.terravera.common.health.WaterTreatment.Treatment.SILVERED, net.minecraft.sounds.SoundEvents.BOTTLE_FILL));
+    /** Crushed moringa seed - a centuries-old flocculant that drags the load out of suspension. */
+    public static final DeferredHolder<Item, Item> MORINGA_SEED_POWDER = ITEMS.register("moringa_seed_powder",
+        () -> new TreatmentItem(new Item.Properties().durability(8),
+            com.terravera.common.health.WaterTreatment.Treatment.FLOCCULATED, net.minecraft.sounds.SoundEvents.SAND_BREAK));
+    /** Alum crystals - the industrial flocculant, and the one water-treatment plants actually use. */
+    public static final DeferredHolder<Item, Item> ALUM_CRYSTALS = ITEMS.register("alum_crystals",
+        () -> new TreatmentItem(new Item.Properties().durability(8),
+            com.terravera.common.health.WaterTreatment.Treatment.FLOCCULATED, net.minecraft.sounds.SoundEvents.SAND_BREAK));
+    /** A hand-pumped reverse-osmosis membrane. The most thorough portable filter there is. */
+    public static final DeferredHolder<Item, Item> RO_MEMBRANE = ITEMS.register("ro_membrane",
+        () -> new TreatmentItem(new Item.Properties().durability(8),
+            com.terravera.common.health.WaterTreatment.Treatment.RO_PURIFIED, net.minecraft.sounds.SoundEvents.BUCKET_FILL));
 
     // ----- Structural construction ---------------------------------------------------------------------------
 

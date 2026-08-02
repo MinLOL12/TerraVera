@@ -1,0 +1,1089 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.terravera.distillation_still",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 2.5,
+        "visible_bounds_height": 2.8,
+        "visible_bounds_offset": [
+          0,
+          1.4,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "pot",
+          "pivot": [
+            0,
+            6,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "pot_body",
+              "origin": [
+                -6,
+                0,
+                -6
+              ],
+              "size": [
+                12,
+                6,
+                12
+              ],
+              "uv": [
+                0,
+                0
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    0,
+                    12
+                  ],
+                  "texture_size": [
+                    12,
+                    6
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    12,
+                    12
+                  ],
+                  "texture_size": [
+                    12,
+                    6
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    24,
+                    12
+                  ],
+                  "texture_size": [
+                    12,
+                    6
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    36,
+                    12
+                  ],
+                  "texture_size": [
+                    12,
+                    6
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "texture_size": [
+                    12,
+                    12
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    24,
+                    0
+                  ],
+                  "texture_size": [
+                    12,
+                    12
+                  ]
+                }
+              }
+            },
+            {
+              "name": "pot_rim",
+              "origin": [
+                -6,
+                6,
+                -6
+              ],
+              "size": [
+                12,
+                1,
+                12
+              ],
+              "uv": [
+                0,
+                20
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    0,
+                    32
+                  ],
+                  "texture_size": [
+                    12,
+                    1
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    12,
+                    32
+                  ],
+                  "texture_size": [
+                    12,
+                    1
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    24,
+                    32
+                  ],
+                  "texture_size": [
+                    12,
+                    1
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    36,
+                    32
+                  ],
+                  "texture_size": [
+                    12,
+                    1
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    20
+                  ],
+                  "texture_size": [
+                    12,
+                    12
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    24,
+                    20
+                  ],
+                  "texture_size": [
+                    12,
+                    12
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "dome",
+          "pivot": [
+            0,
+            7,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "dome_low",
+              "origin": [
+                -5,
+                7,
+                -5
+              ],
+              "size": [
+                10,
+                2,
+                10
+              ],
+              "uv": [
+                0,
+                26
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    0,
+                    36
+                  ],
+                  "texture_size": [
+                    10,
+                    2
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    10,
+                    36
+                  ],
+                  "texture_size": [
+                    10,
+                    2
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    20,
+                    36
+                  ],
+                  "texture_size": [
+                    10,
+                    2
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    30,
+                    36
+                  ],
+                  "texture_size": [
+                    10,
+                    2
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    10,
+                    26
+                  ],
+                  "texture_size": [
+                    10,
+                    10
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    20,
+                    26
+                  ],
+                  "texture_size": [
+                    10,
+                    10
+                  ]
+                }
+              }
+            },
+            {
+              "name": "dome_high",
+              "origin": [
+                -4,
+                9,
+                -4
+              ],
+              "size": [
+                8,
+                3,
+                8
+              ],
+              "uv": [
+                0,
+                38
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    0,
+                    46
+                  ],
+                  "texture_size": [
+                    8,
+                    3
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    8,
+                    46
+                  ],
+                  "texture_size": [
+                    8,
+                    3
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    16,
+                    46
+                  ],
+                  "texture_size": [
+                    8,
+                    3
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    24,
+                    46
+                  ],
+                  "texture_size": [
+                    8,
+                    3
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    8,
+                    38
+                  ],
+                  "texture_size": [
+                    8,
+                    8
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    38
+                  ],
+                  "texture_size": [
+                    8,
+                    8
+                  ]
+                }
+              }
+            },
+            {
+              "name": "pipe",
+              "origin": [
+                -1,
+                11,
+                -1
+              ],
+              "size": [
+                2,
+                3,
+                2
+              ],
+              "uv": [
+                0,
+                48
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    0,
+                    50
+                  ],
+                  "texture_size": [
+                    2,
+                    3
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    2,
+                    50
+                  ],
+                  "texture_size": [
+                    2,
+                    3
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    4,
+                    50
+                  ],
+                  "texture_size": [
+                    2,
+                    3
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    6,
+                    50
+                  ],
+                  "texture_size": [
+                    2,
+                    3
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    2,
+                    48
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    4,
+                    48
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "arm",
+          "pivot": [
+            0,
+            12,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "tube",
+              "origin": [
+                -1,
+                12,
+                3
+              ],
+              "size": [
+                2,
+                2,
+                7
+              ],
+              "uv": [
+                16,
+                48
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    16,
+                    55
+                  ],
+                  "texture_size": [
+                    7,
+                    2
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    23,
+                    55
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    25,
+                    55
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    27,
+                    55
+                  ],
+                  "texture_size": [
+                    7,
+                    2
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    23,
+                    48
+                  ],
+                  "texture_size": [
+                    2,
+                    7
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    25,
+                    48
+                  ],
+                  "texture_size": [
+                    2,
+                    7
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "receiver",
+          "pivot": [
+            6,
+            8,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "jug",
+              "origin": [
+                3,
+                4,
+                10
+              ],
+              "size": [
+                4,
+                8,
+                4
+              ],
+              "uv": [
+                24,
+                48
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    24,
+                    52
+                  ],
+                  "texture_size": [
+                    4,
+                    8
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    28,
+                    52
+                  ],
+                  "texture_size": [
+                    4,
+                    8
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    32,
+                    52
+                  ],
+                  "texture_size": [
+                    4,
+                    8
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    36,
+                    52
+                  ],
+                  "texture_size": [
+                    4,
+                    8
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    28,
+                    48
+                  ],
+                  "texture_size": [
+                    4,
+                    4
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    32,
+                    48
+                  ],
+                  "texture_size": [
+                    4,
+                    4
+                  ]
+                }
+              }
+            },
+            {
+              "name": "jug_water",
+              "origin": [
+                4,
+                5,
+                11
+              ],
+              "size": [
+                2,
+                5,
+                2
+              ],
+              "uv": [
+                36,
+                48
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    36,
+                    50
+                  ],
+                  "texture_size": [
+                    2,
+                    5
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    38,
+                    50
+                  ],
+                  "texture_size": [
+                    2,
+                    5
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    40,
+                    50
+                  ],
+                  "texture_size": [
+                    2,
+                    5
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    42,
+                    50
+                  ],
+                  "texture_size": [
+                    2,
+                    5
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    38,
+                    48
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    40,
+                    48
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "water",
+          "pivot": [
+            0,
+            5,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "water",
+              "origin": [
+                -5,
+                1,
+                -5
+              ],
+              "size": [
+                10,
+                2,
+                10
+              ],
+              "uv": [
+                0,
+                52
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    0,
+                    62
+                  ],
+                  "texture_size": [
+                    10,
+                    2
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    10,
+                    62
+                  ],
+                  "texture_size": [
+                    10,
+                    2
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    20,
+                    62
+                  ],
+                  "texture_size": [
+                    10,
+                    2
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    30,
+                    62
+                  ],
+                  "texture_size": [
+                    10,
+                    2
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    10,
+                    52
+                  ],
+                  "texture_size": [
+                    10,
+                    10
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    20,
+                    52
+                  ],
+                  "texture_size": [
+                    10,
+                    10
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "steam1",
+          "pivot": [
+            -3,
+            13,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "steam1",
+              "origin": [
+                -4,
+                12,
+                -1
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                0,
+                52
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    0,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    2,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    4,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    6,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    2,
+                    52
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    4,
+                    52
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "steam2",
+          "pivot": [
+            3,
+            13,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "steam2",
+              "origin": [
+                3,
+                12,
+                -1
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                4,
+                52
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    4,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    6,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    8,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    10,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    6,
+                    52
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    8,
+                    52
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "steam3",
+          "pivot": [
+            0,
+            14,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "name": "steam3",
+              "origin": [
+                -1,
+                13,
+                -1
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                8,
+                52
+              ],
+              "faces": {
+                "west": {
+                  "uv": [
+                    8,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "north": {
+                  "uv": [
+                    10,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    12,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    14,
+                    54
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    10,
+                    52
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    52
+                  ],
+                  "texture_size": [
+                    2,
+                    2
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
